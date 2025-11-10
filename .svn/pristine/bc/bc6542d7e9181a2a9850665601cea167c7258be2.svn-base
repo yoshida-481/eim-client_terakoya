@@ -1,0 +1,33 @@
+::ng-deep .ag-bl-full-height {
+	overflow: hidden;
+}
+::ng-deep split > split-area:nth-child(1) > div > div.eim-object-search-left-panel.eim-object-search-left-footer > button.p-button-primary.p-button.p-component/*.ui-state-default*//*.ui-corner-all*/.ui-button-text-icon-left > span.p-button-icon-left.ui-clickable.eim-icon-search{
+	top:40%;
+}
+
+::ng-deep div > div.eim-menu-box > eim-menubar > p-menubar > div > p-menubarsub > ul > li> a > .p-menubar-item-icon.ng-star-inserted{
+    width: 20px;
+	margin: auto;
+	font-size: 20px;
+}
+
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-item-link {
+	display: block;
+}
+
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-root-list > .p-menubar-item:not(.p-menubar-item-active) > .p-menubar-item-content > .p-menubar-item-link .p-menubar-item-icon {
+	color: #ffffff !important;
+}
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-root-list > .p-menubar-item:not(.p-menubar-item-active) > .p-menubar-item-content > .p-menubar-item-link .p-menubar-item-label {
+	padding: 3px;
+	color: #ffffff !important;
+}
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-root-list > .p-menubar-item:not(.p-menubar-item-active) > .p-menubar-item-content > .p-menubar-item-link .p-menubar-submenu-icon {
+	color: #ffffff !important;
+}
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-submenu .p-menubar-item-link {
+  display: flex;
+}
+::ng-deep .eim-menu-box-objecteditor .p-menubar p-menubarsub .p-menubar-item-link .p-menubar-item-icon {
+  display: flex;
+}

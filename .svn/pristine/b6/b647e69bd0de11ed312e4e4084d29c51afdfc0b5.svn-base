@@ -1,0 +1,58 @@
+::ng-deep .eim-panel-containing-grid .p-panel {
+	height: calc(100% - 4px);
+}
+
+::ng-deep .eim-panel-containing-grid .p-panel-content-container.ng-trigger-panelContent {
+	height: calc(100% - 30px);
+	padding-bottom: 5px;
+}
+
+::ng-deep .eim-panel-containing-grid-security .p-panel-content-container.ng-trigger-panelContent {
+	height: calc(100% - 30px);
+	padding-bottom: 0px;
+}
+
+::ng-deep .eim-panel-containing-grid .p-panel-content {
+	height: 100%;
+}
+
+.eim-workspace-overflow-hidden {
+	overflow-y: hidden !important;
+}
+
+::ng-deep .eim-workspace-panel .p-tabpanel  {
+	padding-bottom: 0px !important;
+	overflow-y: hidden !important;
+}
+
+/* 2022.01 新規 */
+.p-grid > .p-col-3 {
+	height: 100%;
+}
+/* 2022.01 新規 */
+.p-grid > .p-col-6 {
+	height: 100%;
+}
+/* 2022.01 新規 */
+.p-grid > .p-col-9 {
+	height: 100%;
+}
+/* 2022.01 新規 (名前欄用) */
+.p-grid.ng-star-inserted {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+/* 2022.01 新規 */
+::ng-deep .eim-panel-containing-grid-security {
+	border: none;
+}
+/* 2022.01 新規 */
+::ng-deep .p-tabs .p-tabpanels {
+	padding: 0px;
+}
+/* 2022.01 新規 */
+::ng-deep .p-tabs .p-tabpanels .eim-workspace-tab-panel  {
+	border: none;
+}

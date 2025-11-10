@@ -1,0 +1,17 @@
+
+<eim-template-data-grid-single-selector #template
+		[componentService]="entryListSingleSelectorComponentService" [(condition)]="userSearchCondition"
+		[multiple]="multiple" [filterFlag]="true" >
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%; display: block !important;">
+				<input pInputText type="text" style="width: 100%;" name="userName" maxlength="{{inputMaxLength}}"
+					[(ngModel)]="userSearchCondition.userName" />
+			</div>
+		</div>
+	<div class="eim-form-item">
+		<div class="eim-form-input" *ngIf="!mailFlag">
+			<eim-checkbox name="showOnlySuperior" value="true" [(ngModel)]="userSearchCondition.showOnlySuperior" binary="true"
+					(onChange)="onChangeSuperiorFlag()" label="{{ 'EIM_FORMS.LABEL_02031' | translate }}"></eim-checkbox>
+		</div>
+	</div>
+</eim-template-data-grid-single-selector>

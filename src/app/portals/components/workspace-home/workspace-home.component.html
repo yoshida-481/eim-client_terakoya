@@ -1,0 +1,86 @@
+<div style="height: 100%; padding: 2px 4px;" class="eim-workspace-home-panel-wrapper">
+	<!-- <p-panel class="eim-panel-flat" header="{{ 'EIM_TASKS.LABEL_02001' | translate }}"> -->
+	<!-- 基本情報 -->
+	<p-panel class="eim-stretched-panel" header="{{ 'EIM_TASKS.LABEL_02064' | translate }}">
+		<ng-template pTemplate="icons">
+			<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+		</ng-template>
+
+		<div style="display: grid; grid-template-rows: auto 1fr; height: 100%;">
+			<div class="eim-menubar-button">
+				<eim-menubar [model]="projectFormMenuItems"></eim-menubar>
+			</div>
+			<eim-project-updator [hidden]="!projectUpdatorComponentInitialized"
+				#projectUpdator
+				[projectId]="workspaceId" [disabled]="!isProjectEditMode"
+				(initialized)="onInitializedProject($event)" (changed)="onChangedProjectAttribute($event)" (updated)="onUpdatedProject($event)">
+			</eim-project-updator>
+		</div>
+	</p-panel>
+	<ng-template #widgetContainer></ng-template>
+<!-- 
+	<p-panel class="eim-stretched-panel" header="お気に入りフォルダ">
+		<ng-template pTemplate="icons">
+			<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+		</ng-template>
+
+		<eim-data-grid #favoriteDataGrid class="eim-data-grid">
+		</eim-data-grid>
+	</p-panel>
+	<p-panel class="eim-stretched-panel" header="ドキュメント回付状況">
+		<ng-template pTemplate="icons">
+			<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+		</ng-template>
+
+		<eim-data-grid class="eim-data-grid">
+		</eim-data-grid>
+	</p-panel>
+	<p-panel class="eim-stretched-panel" header="最近登録・更新されたドキュメント">
+		<ng-template pTemplate="icons">
+			<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+		</ng-template>
+
+		<eim-data-grid class="eim-data-grid">
+		</eim-data-grid>
+	</p-panel>
+	<p-panel class="eim-stretched-panel" header="ダウンロード回数上位ドキュメント">
+		<ng-template pTemplate="icons">
+			<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+		</ng-template>
+
+		<eim-data-grid class="eim-data-grid">
+		</eim-data-grid>
+	</p-panel> -->
+</div>
+
+<!-- タスク詳細 -->
+<ng-container *ngIf="viewDialogName === 'taskUpdator'" novalidate>
+	<eim-dialog *ngIf="viewDialogName === 'taskUpdator'" header="{{ 'EIM_TASKS.LABEL_01006' | translate }}" modal="true" width="1145" height="870"
+		[visible]="viewDialogName === 'taskUpdator'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-task-updator #taskUpdator
+				[taskId]="taskId" [parentDTO]="parent" (updated)="onUpdateTask($event)">
+		</eim-task-updator>
+		<footer>
+			<div class="p-rtl" dir="rtl" *ngIf="taskUpdator?.taskDTO?.status !== null">
+				<!-- 次へ進む -->
+				<button *ngIf="taskUpdator.forwardEventTypes.length > 0"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-forward" label="{{'EIM_FORMS.LABEL_03015' | translate}}"
+						(click)="taskUpdator.onClickStatusChange($event, true)"
+				></button>
+				<!-- 前へ戻る -->
+				<button *ngIf="taskUpdator.backwordEventTypes.length > 0"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-backward" label="{{'EIM_FORMS.LABEL_03016' | translate}}"
+						(click)="taskUpdator.onClickStatusChange($event, false)"
+				></button>
+				<!-- 取戻し -->
+				<button *ngIf="taskUpdator.regainEventType != null"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-reply" label="{{'EIM_FORMS.LABEL_03017' | translate}}"
+						(click)="taskUpdator.onClickStatusRegain($event)"
+				></button>
+			</div>
+		</footer>
+	</eim-dialog>
+</ng-container>

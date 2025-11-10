@@ -1,0 +1,54 @@
+#cy {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.eim-ui-widget {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #d6d6d6;
+	background: linear-gradient(to bottom, #9ccc84, #c4e5a0);
+}
+
+.eim-diagram-title {
+	position: absolute;
+	margin: 6px;
+}
+
+.eim-diagram-action {
+	padding-top: 6px;
+	padding-right: 6px;
+	float: right;
+}
+
+.eim-diagram-action > button {
+	margin-left: 5px;
+	margin-right: 0px;
+}
+
+.eim-diagram-action-show-history {
+	clear:both;
+	padding-bottom: 6px;
+	padding-right: 6px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+::ng-deep eim-workflow-diagram .eim-diagram-action button.p-button.p-button-icon-only {
+	padding: 0px;
+	width: 25px;
+	overflow-x: visible;
+	overflow-y: visible;
+}
+
+::ng-deep eim-workflow-diagram .eim-diagram-action button.p-button.p-button-icon-only span.p-button-label {
+	padding: 3px;
+}

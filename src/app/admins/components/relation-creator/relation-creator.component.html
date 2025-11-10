@@ -1,0 +1,30 @@
+<div style="height: 100%;">
+	<form class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label" style="width: 40%;">{{'EIM_ADMINS.LABEL_02050' | translate}}</label>
+					<div class="eim-form-input">
+						<eim-radio-button name="revup" label="{{'EIM_ADMINS.LABEL_02261' | translate}}" value="1" [(ngModel)]="revup"></eim-radio-button>
+						<eim-radio-button name="revup" label="{{'EIM_ADMINS.LABEL_02262' | translate}}" value="2" [(ngModel)]="revup"></eim-radio-button>
+						<eim-radio-button name="revup" label="{{'EIM_ADMINS.LABEL_02268' | translate}}" value="4" [(ngModel)]="revup"></eim-radio-button>
+						<eim-radio-button name="revup" label="{{'EIM_ADMINS.LABEL_02263' | translate}}" value="3" [(ngModel)]="revup"></eim-radio-button>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label" style="width: 40%;">{{'EIM_ADMINS.LABEL_02054' | translate}}</label>
+					<div class="eim-form-input">
+						<eim-radio-button name="mutual" label="{{'EIM_ADMINS.LABEL_02264' | translate}}" value="0" [(ngModel)]="mutual"></eim-radio-button>
+						<eim-radio-button name="mutual" label="{{'EIM_ADMINS.LABEL_02265' | translate}}" value="1" [(ngModel)]="mutual"></eim-radio-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,90 @@
+p-select {
+	width: 80%;
+}
+
+p-select .p-select {
+	width: 100%;
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker {
+	width: calc(100%);
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker .p-datepicker {
+	width: calc(100%);
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker input {
+	width: calc(100%);
+}
+
+.eim-form-input .p-inputtext {
+	height: 26px;
+}
+
+.center {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	height: 26px;
+	width: 12px;
+}
+
+.basic-condition .p-col-6 {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.eim-contents-search-top-area {
+	overflow-x: visible !important;
+	overflow-y: visible !important;
+	min-height: 0px;
+}
+
+::ng-deep .eim-contents-search split split-gutter {
+	z-index: 1001;
+}
+
+.eim-contents-search-bottom-area {
+	background-color: #FFFFFF;
+	z-index: 1001;
+}
+
+.eim-contents-search-detail-panel-outer {
+	height: calc(100% - 145px);
+	min-height: 0px;
+	border-style: solid;
+	border-color: #57bbed;
+	background-color: #e0f6fe;
+	border-width: 1px;
+}
+
+.eim-contents-search-detail-panel-inner {
+	height: calc(100% - 38px);
+	min-height: 0px;
+	overflow-y: scroll;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.eim-contents-search-detail-condition-attribute .detail-condition-row {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.eim-contents-search-detail-condition-attribute > div {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.search-path-target-folder {
+	background-color: #FFFFFF !important;
+}
+
+::ng-deep .eim-contents-search-btn .p-button-icon-left {
+	margin-left: 3px;
+}
+

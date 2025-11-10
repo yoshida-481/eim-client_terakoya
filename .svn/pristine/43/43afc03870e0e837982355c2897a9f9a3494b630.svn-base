@@ -1,0 +1,11 @@
+.mail-condition {
+	display: flex;
+	vertical-align: middle;
+}
+/* 2022.05 新規 ラジオボタン用*/
+::ng-deep eim-status-change eim-radio-button {
+	display: block;
+}
+::ng-deep eim-status-change eim-radio-button .p-radiobutton.p-component {
+	width: 22px;
+}

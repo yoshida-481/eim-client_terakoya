@@ -1,0 +1,44 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}">{{label}}</label>
+	<ng-container *ngIf="!multiple && value">
+		<div class="eim-form-input" style ="display:block;">
+			<div style="display: flex; width: 100%;">
+				<div class="eim-form-input-default eim-form-input-for-search-and-clear" style="width: calc(100% - 20px); height:26px; align-items: center;">
+					<div class="eim-form-input-text-for-search-and-clear">
+						{{itemsForLoop[0]}}　<!-- 空白を入れないと削除時に1pxずれる -->
+					</div>
+					<div *ngIf="itemsForLoop[0]" align="right">
+						<i class="fa fa-times" style="padding-right:5px;"  (click)="onClickDelete(0)"></i>
+					</div>
+				</div>
+				<button pButton type="button" severity="info" class="eim-form-input-multi-button icon-only-button" icon="eim-icon-search"
+					pTooltip="{{ 'EIM.LABEL_03007' | translate }}"
+					(click)="onClickContentsSingleSelector(0)"></button>
+			</div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="multiple">
+		<div class="eim-form-input">
+			<div *ngFor="let item of itemsForLoop; let i = index" style="display: flex;" class="eim-form-input-multi">
+				<div class="eim-form-input-default eim-form-input-for-search-and-clear" style="height:26px; align-items: center; width: 100%;">
+					<div class="eim-form-input-text-for-search-and-clear">
+						{{item}}　<!-- 空白を入れないと削除時に1pxずれる -->
+					</div>
+					<div *ngIf="item" align="right">
+						<i class="fa fa-times" style="padding-right:5px;"  (click)="onClickDelete(i)"></i>
+					</div>
+				</div>
+				<button pButton type="button" severity="info" class="eim-form-input-multi-button icon-only-button" icon="eim-icon-search"
+					pTooltip="{{ 'EIM.LABEL_03007' | translate }}"
+					(click)="onClickContentsSingleSelector(i)"></button>
+				<button pButton type="button" severity="info" class="icon-only-button eim-form-input-multi-button" icon="fa fa-plus"
+					pTooltip="{{ 'EIM.LABEL_03010' | translate }}"
+					(click)="onPlusClick(i)"></button>
+				<button pButton type="button" class="p-button-danger eim-form-input-multi-button icon-only-button" icon="fa fa-minus"
+					pTooltip="{{ 'EIM.LABEL_03003' | translate }}"
+					(click)="onMinusClick(i)"></button>
+			</div>
+		</div>
+	</ng-container>
+</div>
+

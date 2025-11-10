@@ -1,0 +1,111 @@
+<div style="height: 100%;">
+	<as-split direction="horizontal">
+		<as-split-area size="25" [ngStyle]="{'overflow': 'hidden'}">
+			<div class="eim-admin-left-panel">
+				<p-panel name="classPanel" class="eim-panel-containing-grid"
+						header="{{classPanelHeader}}">
+					<div style="height: 100%;" eim-vertical-container>
+						<div class="eim-data-grid-menu" >
+							<eim-menubar [model]="classTreeMenuItems"></eim-menubar>
+						</div>
+						<div class="eim-flexible-height">
+							<eim-tree #classTree [contextMenuItems]="classTreeContextMenuItems" (selected)="onSelectTreeNode($event)"
+								[equals]="equalsClass"></eim-tree>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+
+		<as-split-area size="75">
+			<div style="height: 100%; width: 100%;">
+				<as-split direction="vertical">
+					<as-split-area size="50">
+						<div class="eim-admin-right-panel">
+							<p-panel class="eim-panel-containing-grid" header="{{attributePanelHeader}}" [style]="{'height': '100%'}">
+								<p-tabs #entryTabView [value]="tabIndex()" (valueChange)="onChangeTab($event)">
+									<p-tablist>
+										<p-tab [value]="0">{{ 'EIM.LABEL_02053' | translate }}</p-tab>
+										<p-tab [value]="1">{{ 'EIM_ADMINS.LABEL_02023' | translate }}</p-tab>
+										<p-tab [value]="2" *ngIf="visibleFormListColumn">{{ 'EIM_ADMINS.LABEL_02276' | translate }}</p-tab>
+									</p-tablist>
+									<p-tabpanels>
+										<p-tabpanel [value]="0">
+											<div style="padding:5px; height: 100%">
+												<div class="eim-admin-right-panel">
+													<div class="eim-data-grid-menu">
+														<eim-menubar [model]="attributeMenuItems"></eim-menubar>
+													</div>
+													<div style="height: calc(100% - 25px);">
+														<eim-data-grid #attributeList [contextMenuItems]="attributeContextMenuItems"
+															(selected)="onSelectAttribute()" [equals]="equalsAttribute">
+														</eim-data-grid>
+													</div>
+												</div>
+											</div>
+										</p-tabpanel>
+										<p-tabpanel [value]="1">
+											<div style="padding:5px; height: 100%">
+												<div class="eim-admin-right-panel">
+													<div class="eim-data-grid-menu">
+														<eim-menubar [model]="formatMenuItems"></eim-menubar>
+													</div>
+													<div style="height: calc(100% - 25px);">
+														<eim-data-grid #formatList [contextMenuItems]="formatContextMenuItems"
+															(selected)="onSelectFormat()" [equals]="equalsFormat">
+														</eim-data-grid>
+													</div>
+												</div>
+											</div>
+										</p-tabpanel>
+										<p-tabpanel [value]="2">
+											<div style="padding:5px; height: 100%">
+												<div class="eim-admin-right-panel">
+													<div class="eim-data-grid-menu">
+														<eim-menubar [model]="formColumnListMenuItems"></eim-menubar>
+													</div>
+													<div style="height: calc(100% - 25px);">
+														<eim-data-grid #formListColumnList [multiple]="false" [equals]="equalsFormListColumn">
+														</eim-data-grid>
+													</div>
+												</div>
+											</div>
+										</p-tabpanel>
+									</p-tabpanels>
+								</p-tabs>
+							</p-panel>
+						</div>
+					</as-split-area>
+					<as-split-area size="50">
+						<as-split direction="horizontal" style="display: flex;">
+							<div class="eim-admin-right-panel eim-form-wide"  style="width: 100%; float: left;">
+								<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02057' | translate }}" [style]="{'height': '100%'}">
+									<div style="height: 100%;" eim-vertical-container>
+										<div class="eim-data-grid-menu" >
+											<eim-menubar [model]="workflowMenuItems"></eim-menubar>
+										</div>
+										<div class="eim-flexible-height">
+											<eim-master-contents-approve-workflow-diagram #workflowDiagram
+												(changed)="onChangeDiagram()"
+												[zoom]="1.3"
+												[contextMenuItems]="">
+											</eim-master-contents-approve-workflow-diagram>
+										</div>
+									</div>
+
+								</p-panel>
+							</div>
+							<div class="eim-admin-right-panel eim-form-wide" style="width: 40%; float: right;" *ngIf="visibleStatusDataGrid">
+								<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02277' | translate }}" [style]="{'height': '100%'}">
+									<div style="height: 100%;">
+										<eim-data-grid #statusAttributeList [showAllSelectButton]="false" [equals]="equalsAttribute"></eim-data-grid>
+									</div>
+								</p-panel>
+							</div>
+						</as-split>
+					</as-split-area>
+				</as-split>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>

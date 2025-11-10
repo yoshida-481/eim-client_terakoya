@@ -1,0 +1,39 @@
+<div class="container" style="height: 100%;">
+	<div style="width: 100%; height: 100%; overflow: hidden; padding-left: 3px;" eim-vertical-container>
+		<div class="eim-flexible-height">
+			<eim-data-grid #processingWaitingListDataGrid></eim-data-grid>
+		</div>
+	</div>
+</div>
+
+<!-- タスク詳細 -->
+<ng-container *ngIf="viewDialogName === 'taskUpdator'" novalidate>
+	<eim-dialog *ngIf="viewDialogName === 'taskUpdator'" header="{{ 'EIM_TASKS.LABEL_01006' | translate }}" modal="true" width="1145" height="870"
+		[visible]="viewDialogName === 'taskUpdator'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-task-updator #taskUpdator
+				[taskId]="taskId" [parentDTO]="parent" (updated)="onUpdateTask($event)">
+		</eim-task-updator>
+		<footer>
+			<div class="p-rtl" dir="rtl" *ngIf="taskUpdator?.taskDTO?.status !== null">
+				<!-- 次へ進む -->
+				<button *ngIf="taskUpdator.forwardEventTypes.length > 0"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-forward" label="{{'EIM_FORMS.LABEL_03015' | translate}}"
+						(click)="taskUpdator.onClickStatusChange($event, true)"
+				></button>
+				<!-- 前へ戻る -->
+				<button *ngIf="taskUpdator.backwordEventTypes.length > 0"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-backward" label="{{'EIM_FORMS.LABEL_03016' | translate}}"
+						(click)="taskUpdator.onClickStatusChange($event, false)"
+				></button>
+				<!-- 取戻し -->
+				<button *ngIf="taskUpdator.regainEventType != null"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-reply" label="{{'EIM_FORMS.LABEL_03017' | translate}}"
+						(click)="taskUpdator.onClickStatusRegain($event)"
+				></button>
+			</div>
+		</footer>
+	</eim-dialog>
+</ng-container>

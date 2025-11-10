@@ -1,0 +1,53 @@
+:host ::ng-deep form > eim-workflow-diagram > div > div:nth-child(3) > div > button:nth-child(6) > span.p-button-icon-left.ui-clickable.eim-icon-trash {
+    margin-top: -.7em;
+}
+:host ::ng-deep div > div.p-treetable-scrollable-wrapper.ng-star-inserted > div > div.p-treetable-scrollable-body > table > tbody > tr > td:nth-child(2) > div {
+    float: right;
+}
+/* 2022.05 新規 ダイアグラムの上へボタン用 */
+::ng-deep form > eim-workflow-diagram .p-button .p-button-icon.fa-arrow-up {
+    width: 1em;
+    margin-left: -0.5em;
+    color: #FFFFFF;
+}
+/* 2022.05 新規 ダイアグラムの左に移動ボタン用 */
+::ng-deep form > eim-workflow-diagram .p-button .p-button-icon.fa-caret-left {
+    width: 1em;
+}
+/* 2022.05 新規 ダイアグラムの右に移動ボタン用 */
+::ng-deep form > eim-workflow-diagram .p-button .p-button-icon.fa-caret-right {
+    width: 1em;
+}
+/* 2022.05 新規 登録ボタン用(汎用) */
+::ng-deep eim-workflow .p-rtl.eim-admin-footer .p-button span.p-button-icon.fa-check {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 登録ボタン用(汎用) */
+::ng-deep eim-workflow .p-rtl.eim-admin-footer .p-button span.p-button-label {
+	margin-left: 1.5em;
+}
+/* 2022.05 新規 登録ボタン用(ドキュメント) */
+::ng-deep eim-document-workflow .p-rtl.eim-admin-footer .p-button span.p-button-icon.fa-check {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 登録ボタン用(ドキュメント) */
+::ng-deep eim-document-workflow .p-rtl.eim-admin-footer .p-button span.p-button-label {
+	margin-left: 1.5em;
+}
+/* 2022.05 新規 登録ボタン用(帳票) */
+::ng-deep eim-form-workflow .p-rtl.eim-admin-footer .p-button span.p-button-icon.fa-check {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 登録ボタン用(帳票) */
+::ng-deep eim-form-workflow .p-rtl.eim-admin-footer .p-button span.p-button-label {
+	margin-left: 1.5em;
+}

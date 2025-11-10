@@ -1,0 +1,107 @@
+<eim-text-input-form-item *ngIf="attribute && uiControlId == 'uIControlTextInput'
+		&& (attributeTypeLayout.valueType !== 'LONG' && attributeTypeLayout.valueType !== 'DOUBLE')
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required" [maxlength]="maxLength" [pattern]="pattern" 
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" (changed)="onChange($event)" 
+>
+</eim-text-input-form-item>
+
+<eim-number-input-form-item *ngIf="attribute && uiControlId == 'uIControlTextInput'
+		&& ( attributeTypeLayout.valueType === 'LONG' || attributeTypeLayout.valueType === 'DOUBLE' )
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label" [valueType]="valueType"
+		[required]="required" [maxlength]="maxLength" [pattern]="pattern" [restriction]="restriction"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		[enableSeparate]="enableSeparate"
+		(changed)="onChange($event)"
+>
+</eim-number-input-form-item>
+
+<eim-text-area-input-form-item *ngIf="attribute && uiControlId == 'uIControlTextArea'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required" [maxlength]="maxLength"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" (changed)="onChange($event)" 
+>
+</eim-text-area-input-form-item>
+
+<eim-rich-text-input-form-item *ngIf="attribute && uiControlId == 'uIControlRichText'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+>
+</eim-rich-text-input-form-item>
+
+<eim-attachement-file-input-form-item *ngIf="attribute && uiControlId == 'uIControlFile'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		
+>
+</eim-attachement-file-input-form-item>
+
+<eim-combo-box-input-form-item *ngIf="attribute && uiControlId == 'uIControlComboBox'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value" [options]="options"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		(changed)="onChange($event)">
+</eim-combo-box-input-form-item>
+
+<eim-check-box-input-form-item *ngIf="attribute && uiControlId == 'uIControlCheckBox'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value" [options]="options"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		(changed)="onChange($event)">
+</eim-check-box-input-form-item>
+
+<eim-radio-button-input-form-item *ngIf="attribute && uiControlId == 'uIControlRadioButton'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value" [options]="options"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		(changed)="onChange($event)">
+</eim-radio-button-input-form-item>
+
+<eim-calendar-input-form-item *ngIf="attribute && uiControlId == 'uIControlDateField'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required" [maxlength]="maxLength"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage"
+		[showTime]="showTimeAttributeDefinitionNameSet.has(attribute.attributeType.definitionName)" 
+		(changed)="onChange($event)">
+</eim-calendar-input-form-item>
+
+<eim-master-input-form-item *ngIf="attribute && uiControlId == 'uIControlSearchField'
+		&& uiControlType == 'ObjectSearch'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+		[searchMasterDisplayConfig]="searchMasterDisplayConfig">
+</eim-master-input-form-item>
+
+<eim-user-input-form-item *ngIf="attribute && uiControlId == 'uIControlSearchField'
+		&& uiControlType == 'UserSearch'
+		&& !attributeTypeLayoutOption.unvisibleAttributeTypeDefinitionNameSet.has(attribute.attributeType.definitionName)"
+		[form]="form" [name]="name" [label]="label"
+		[required]="required"
+		[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value"
+		[topMessage]="topMessage" [bottomMessage]="bottomMessage" [leftMessage]="leftMessage" [rightMessage]="rightMessage" 
+>
+</eim-user-input-form-item>
+

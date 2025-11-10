@@ -1,0 +1,34 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}" pTooltip="{{pTooltipLabel}}">{{label}}</label>
+
+	<ng-container>
+		<div class="eim-form-input" style="display: block !important;"
+				[ngClass]="{'eim-form-no-label': label === null || label === ''}">
+			<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+			<div class="eim-form-input-surround">
+				<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+				<input name="{{name}}" pInputText style="width:100%;"
+				[type]="inputType" [ngModel]="value[0]" [disabled]="disabled" [maxlength]="maxlength"
+				[class.ng-invalid]="formControls[0] && formControls[0].invalid" [class.ng-dirty]="formControls[0] && formControls[0].dirty"
+				(paste)="onPaste($event, 0)" (keypress)="onKeyPress($event, 0)" (keydown)="onKeyDown($event, 0)" (compositionstart)="onCompositionStart($event, 0)"
+				(change)="onChange($event, 0)" (focusout)="onFocusOut($event, 0)" />
+			
+				<button pButton 
+						type="button" 
+						class="p-button-info icon-only-button eim-form-input-multi-button" 
+						icon="fa fa-clipboard" 
+						style="margin-left: 2px; margin-right: 0px; float: right;"
+						pTooltip="{{ 'EIM.LABEL_03026' | translate }}"
+						(click)="copyToClipboard()">
+				</button>
+				<button pButton type="button" class="p-button-info icon-only-button" icon="fa fa-external-link" style="margin-left: 3px; float: right;"
+					pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03097' | translate }}"
+					(click)="downLoadUrlLinkFile(value[0], 1)">
+				</button>
+				<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+			</div>
+			<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+		</div>
+	</ng-container>
+
+</div>

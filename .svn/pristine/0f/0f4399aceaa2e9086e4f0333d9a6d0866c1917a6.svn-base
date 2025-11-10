@@ -1,0 +1,47 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}" pTooltip="{{pTooltipLabel}}">{{label}}</label>
+
+	<ng-container *ngIf="!multiple && value">
+		<div class="eim-form-input" style="display: block !important;"
+				[ngClass]="{'eim-form-no-label': label === null || label === ''}">
+			<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+			<div class="eim-form-input-surround" style="display: flex;">
+				<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+				<textarea name="{{name}}" pTextarea class="textarea p-inputtext"
+						[ngModel]="value[0]" [disabled]="disabled" [maxlength]="maxlength" style="margin-bottom: 1px; width : calc(100% - 1px); word-break: break-all; max-width : calc(100% - 1px);"
+						[class.ng-invalid]="formControls[0] && formControls[0].invalid" [class.ng-dirty]="formControls[0] && formControls[0].dirty"
+						(paste)="onPaste($event, 0)" (keypress)="onKeyPress($event, 0)" (keydown)="onKeyDown($event, 0)" (compositionstart)="onCompositionStart($event, 0)"
+						(change)="onChange($event, 0)" (focusout)="onFocusOut($event, 0)"></textarea>
+						<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+			</div>
+			<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+		</div>
+	</ng-container>
+
+	<ng-container *ngIf="multiple">
+		<div class="eim-form-input" [ngClass]="{'eim-form-no-label': label === null || label === ''}">
+			<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+			<span class="eim-form-input-multi-surround">
+				<div *ngFor="let item of itemsForLoop; let i = index" class="eim-form-input-multi">
+					<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+					<textarea name="{{name}}_{{i}}" pTextarea class="textarea eim-form-input-multi-input-area p-inputtext"
+							[ngModel]="value[i]" [disabled]="disabled" [maxlength]="maxlength" style="margin-bottom: 1px; max-width:100%; word-break: break-all;"
+							[class.ng-invalid]="formControls[i] && formControls[i].invalid" [class.ng-dirty]="formControls[i] && formControls[i].dirty"
+							(paste)="onPaste($event, i)" (keypress)="onKeyPress($event, i)" (keydown)="onKeyDown($event, i)" (compositionstart)="onCompositionStart($event, 0)"
+							(change)="onChange($event, i)" (focusout)="onFocusOut($event, i)"></textarea>
+							<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+					<div *ngIf="!disabled" class="eim-form-input-multi-button-area">
+						<button pButton type="button" severity="info" class="icon-only-button eim-form-input-multi-button" icon="fa fa-plus"
+								pTooltip="{{ 'EIM.LABEL_03010' | translate }}"
+								(click)="onPlusClick(i)"></button>
+						<button pButton type="button" class="p-button-danger eim-form-input-multi-button icon-only-button" icon="fa fa-minus"
+								pTooltip="{{ 'EIM.LABEL_03003' | translate }}"
+								(click)="onMinusClick(i)"></button>
+					</div>
+				</div>
+			</span>
+			<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+		</div>
+	</ng-container>
+
+</div>

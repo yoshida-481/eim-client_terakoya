@@ -1,0 +1,183 @@
+
+<ng-container *ngIf="display[DialogName.OBJECT_CREATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01001' | translate }}" modal="true" width="900"
+			[name]="DialogName.OBJECT_CREATOR"
+			[visible]="display[DialogName.OBJECT_CREATOR]"
+			(close)="display[DialogName.OBJECT_CREATOR] = false;">
+		<eim-object-creator
+			[selectedObjTypeId]="data[DialogName.OBJECT_CREATOR].selectedObjTypeId">
+		</eim-object-creator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OBJECT_UPDATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01002' | translate }}" modal="true" width="800"
+			[name]="DialogName.OBJECT_UPDATOR"
+			[visible]="display[DialogName.OBJECT_UPDATOR]"
+			(close)="display[DialogName.OBJECT_UPDATOR] = false;">
+
+		<eim-object-updator
+			[objectId]="data[DialogName.OBJECT_UPDATOR].id">
+		</eim-object-updator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.EVENT_UPDATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01009' | translate }}" modal="true" width="800"
+			[name]="DialogName.EVENT_UPDATOR"
+			[visible]="display[DialogName.EVENT_UPDATOR]"
+			(close)="display[DialogName.EVENT_UPDATOR] = false;">
+
+		<eim-event-updator
+			[eventId]="data[DialogName.EVENT_UPDATOR].id"
+			[objectId]="data[DialogName.EVENT_UPDATOR].objId">
+		</eim-event-updator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.STATUS_UPDATOR]">
+	<eim-dialog [header]="data[DialogName.STATUS_UPDATOR].title" modal="true" width="800"
+			[name]="DialogName.STATUS_UPDATOR"
+			[visible]="display[DialogName.STATUS_UPDATOR]"
+			(close)="display[DialogName.STATUS_UPDATOR] = false;">
+
+		<eim-status-updator
+			[statusId]="data[DialogName.STATUS_UPDATOR].id"
+			[objectId]="data[DialogName.STATUS_UPDATOR].objId"
+			[title]="data[DialogName.STATUS_UPDATOR].title">
+		</eim-status-updator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.SECURITY_SELECTOR]">
+  <eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01013' | translate }}"  modal="true" width="1050" height="625"
+      [name]="DialogName.SECURITY_SELECTOR"
+      [visible]="display[DialogName.SECURITY_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.SECURITY_SELECTOR] = false;">
+    <eim-object-editors-security-selector
+      [secId]="data[DialogName.SECURITY_SELECTOR].secId">
+    </eim-object-editors-security-selector>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ASSIGN_UPDATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01011' | translate }} - {{data[DialogName.ASSIGN_UPDATOR].objName}}" modal="true" width="600" height="500"
+			[name]="DialogName.ASSIGN_UPDATOR"
+			[visible]="display[DialogName.ASSIGN_UPDATOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.ASSIGN_UPDATOR] = false;">
+		<eim-assign-updator
+			[objData]="data[DialogName.ASSIGN_UPDATOR].objData">
+		</eim-assign-updator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.RELATION_CREATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01006' | translate }}" modal="false"  width="700" height="430"
+			[name]="DialogName.RELATION_CREATOR"
+			[visible]="display[DialogName.RELATION_CREATOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.RELATION_CREATOR] = false;">
+		<eim-relation-creator
+			[selectedData]="data[DialogName.RELATION_CREATOR].selectedData">
+		</eim-relation-creator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.RELATION_CREATOR_MODAL]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01006' | translate }}" modal="true"  width="700" height="430"
+			[name]="DialogName.RELATION_CREATOR_MODAL"
+			[visible]="display[DialogName.RELATION_CREATOR_MODAL]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.RELATION_CREATOR_MODAL] = false;">
+		<eim-relation-creator
+			[selectedData]="data[DialogName.RELATION_CREATOR_MODAL].selectedData">
+		</eim-relation-creator>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ASSIGN_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01015' | translate }}" modal="true" width="1300" height="600"
+		[name]="DialogName.ASSIGN_SELECTOR"
+		[visible]="display[DialogName.ASSIGN_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.ASSIGN_SELECTOR] = false;">
+		<eim-multiple-entry-selector
+			[documentId]="data[DialogName.ASSIGN_SELECTOR].documentId"
+			[selectTarget]="data[DialogName.ASSIGN_SELECTOR].selectTarget"
+			[destination]="data[DialogName.ASSIGN_SELECTOR].destination">
+		</eim-multiple-entry-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.EVENT_HISTORY]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01014' | translate }} - {{data[DialogName.EVENT_HISTORY].objName}}" modal="true" width="880" height="600"
+			[name]="DialogName.EVENT_HISTORY"
+			[visible]="display[DialogName.EVENT_HISTORY]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.EVENT_HISTORY] = false;">
+		<eim-event-history-list
+				[objData]="data[DialogName.EVENT_HISTORY].objData">
+		</eim-event-history-list>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.LOCK]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01005' | translate }}" modal="true" width="410" [fitHeight]="true"
+			[name]="DialogName.LOCK"
+			[visible]="display[DialogName.LOCK]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.LOCK] = false;">
+		<eim-lock
+				[objData]="data[DialogName.LOCK].objData">
+		</eim-lock>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FILE_UPLOADER]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01003' | translate }} - {{data[DialogName.FILE_UPLOADER].objName}}" modal="true" width="600" height="500"
+			[name]="DialogName.FILE_UPLOADER"
+			[visible]="display[DialogName.FILE_UPLOADER]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.FILE_UPLOADER] = false;">
+		<eim-file-uploader
+				[objData]="data[DialogName.FILE_UPLOADER].objData">
+		</eim-file-uploader>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OBJECT_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01016' | translate }}" modal="true" width="650"
+			[name]="DialogName.OBJECT_SELECTOR"
+			[visible]="display[DialogName.OBJECT_SELECTOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.OBJECT_SELECTOR] = false;">
+		<eim-object-selector>
+		</eim-object-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OBJECT_TYPE_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01017' | translate }}" modal="true" width="400" height="500"
+			[name]="DialogName.OBJECT_TYPE_SELECTOR"
+			[visible]="display[DialogName.OBJECT_TYPE_SELECTOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.OBJECT_TYPE_SELECTOR] = false;">
+		<eim-object-type-selector>
+		</eim-object-type-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.RELATION_UPDATOR]">
+	<eim-dialog header="{{ 'EIM_OBJECT_EDITORS.LABEL_01007' | translate }}" modal="true" width="800" height="600"
+			[name]="DialogName.RELATION_UPDATOR"
+			[visible]="display[DialogName.RELATION_UPDATOR]"
+			(close)="display[DialogName.RELATION_UPDATOR] = false;">
+		<eim-relation-updator
+			[relId]="data[DialogName.RELATION_UPDATOR].relId"
+			[parentObjId]="data[DialogName.RELATION_UPDATOR].parentObjId"
+			[childObjId]="data[DialogName.RELATION_UPDATOR].childObjId">
+		</eim-relation-updator>
+	</eim-dialog>
+</ng-container>

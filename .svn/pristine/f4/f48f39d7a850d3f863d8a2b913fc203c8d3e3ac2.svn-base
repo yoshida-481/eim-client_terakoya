@@ -1,0 +1,38 @@
+<div #gridContainer class="eim-p-grid" class="ag-theme-fresh eim-grid-container" #contextMenuDiv (contextmenu)="onContextMenu($event)">
+	<ag-grid-angular #grid style="width: 100%; height: 100%;" class="ag-fresh" [gridOptions]="info.gridOptions"
+		[headerHeight]="headerHeight" [rowHeight]="rowHeight" [theme]="'legacy'"
+		(selectionChanged)="onSelect($event)" (cellContextMenu)="onCellContextMenu($event)"
+		(cellEditingStarted)="onCellEditingStarted($event)" (cellEditingStopped)="onCellEditingStopped($event)" (gridSizeChanged)="onGridSizeChanged($event)"
+		(rowDoubleClicked)="onRowDoubleClicked($event)" (cellClicked)="onCellClicked($event)" (columnResized)="onColumnResized($event)" (columnMoved)="onColumnMoved($event)"
+		(gridReady)="onGridReady($event)" (sortChanged)="onSortChanged($event)" (filterChanged)="onFilterChanged($event)"></ag-grid-angular>
+</div>
+<div class="eim-data-grid-footer">
+	<div *ngIf="multiple && showAllSelectButton" style="width: 100%; margin-left: auto; text-align: left;">
+		<span style="margin-left: 5px;">
+			<a style="cursor: pointer; text-decoration: underline; margin-right: 4px;" (click)="allSelect()">{{'EIM.LABEL_03032' | translate}}</a>
+			<a style="cursor: pointer; text-decoration: underline;" (click)="allNotSelect()">{{'EIM.LABEL_03033' | translate}}</a>
+		</span>
+	</div>
+	<div *ngIf="accordionActiveIndex===1; else hiddenContent" class="p-rtl" dir="rtl" style="width: 100%; text-align: right;">
+		<div style="margin-left: 3px; margin-right: 5px; text-align: right;">
+			<span *ngIf="info.selectedRowCount > 0" style="margin-right: 4px;">{{ 'EIM.LABEL_02009' | translate }}: {{info.selectedRowCount}} {{ 'EIM.LABEL_02011' | translate }}</span>
+			<span style>{{ 'EIM.LABEL_02048' | translate }}: {{info.rowCount}} / {{info.hitCount}} {{ 'EIM.LABEL_02011' | translate }}</span>
+		</div>
+	</div>
+
+	<ng-template #hiddenContent>
+		<div class="p-rtl" dir="rtl" style="width: 100%; text-align: right;">
+			<div style="margin-left: 3px; margin-right: 5px; text-align: right;">
+				<span *ngIf="info.selectedRowCount > 0" style="margin-right: 4px;">{{ 'EIM.LABEL_02009' | translate }}: {{info.selectedRowCount}} {{ 'EIM.LABEL_02011' | translate }}</span>
+				<span>{{ 'EIM.LABEL_02010' | translate }}: {{info.rowCount}} {{ 'EIM.LABEL_02011' | translate }}</span>
+			</div>
+		</div>
+	</ng-template>
+	
+<div *ngIf="showRowMoveButton">
+	<!--<button pButton type="button" icon="fa-angle-double-up"></button>-->
+	<button pButton type="button" class="p-button-primary" icon="fa fa-angle-up" (click)="onRowUp($event)"></button>
+	<button pButton type="button" class="p-button-primary" icon="fa fa-angle-down" (click)="onRowDown($event)"></button>
+	<!--<button pButton type="button" icon="fa-angle-double-down"></button>-->
+</div>
+<p-contextMenu #contextMenu *ngIf="showContextMenu" [target]="contextMenuDiv" [model]="contextMenuItems" appendTo="body"></p-contextMenu>

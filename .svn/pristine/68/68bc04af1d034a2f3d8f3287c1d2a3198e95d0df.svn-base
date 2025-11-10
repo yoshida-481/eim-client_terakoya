@@ -1,0 +1,195 @@
+// ==========================================================================
+//	eim-data-grid
+//
+//    EIMDataGridのスタイル
+//
+//    <eim-data-grid class="eim-data-grid"></eim-data-grid>
+//
+//
+// ==========================================================================
+@use '_variables' as *;
+
+$eim-data-grid-icon-only-button-size: $eim-table-row-renderer-height;
+
+::ng-deep eim-data-grid.eim-data-grid {
+
+	ag-grid-angular {
+		width: 100%;
+		height: 100%;
+
+		> .ag-root-wrapper {
+			border: $eim-table-border;
+			border-radius: $eim-table-border-radius;
+		}
+		// ヘッダ
+		.ag-header {
+			color: $eim-table-header-color;
+			font-weight: $eim-table-header-font-weight;
+			// height: $eim-table-header-height;
+			width: $eim-table-header-width;
+			background: $eim-table-header-background;
+			// .ag-header-row {
+			// 	// height: $eim-table-header-height!important;
+			// }
+			border-bottom: $eim-table-header-row-separator-border;
+
+			.ag-header-cell::after, .ag-header-group-cell::after {
+				background: none; // 既存のボーダーを非表示にする
+			}
+			.ag-header-cell {
+				border: none;
+				border-right: $eim-table-header-cell-separator-border;
+			}
+			// ★last-childの指定はできない
+			// AG Gridのセルは画面表示分のみ動的に生成するため、必ず右端のセルがlast-childとならない
+		}
+
+		// 行
+		.ag-row.ag-row-even:not(.ag-row-selected) {
+			background: $eim-table-odd-row-background; // AG Gridではeven/oddが逆転している
+		}
+		.ag-row.ag-row-odd:not(.ag-row-selected) {
+			background: $eim-table-even-row-background; // AG Gridではeven/oddが逆転している
+		}
+		.ag-row {
+			// height: $eim-table-row-height!important;
+			border: none;
+			border-bottom: $eim-table-row-separator-border;
+			.ag-cell {
+				border: none;
+				border-right: $eim-table-cell-separator-border;
+			}
+			// ★last-childの指定はできない
+			// AG Gridのセルは画面表示分のみ動的に生成するため、必ず右端のセルがlast-childとならない
+		}
+
+		// 行 選択
+		.ag-row.ag-row-selected {
+			color: $eim-selected-table-row-color;
+			font-weight: $eim-selected-table-row-font-weight;
+			background: $eim-selected-table-row-background!important;
+		}
+		// 行 マウスオーバー、有効（編集可）
+		.ag-row.ag-row-hover:not(.ag-row-selected) {
+			color: $eim-hovered-enabled-table-row-color;
+			font-weight: $eim-hovered-enabled-table-row-font-weight;
+			background: $eim-hovered-enabled-table-row-background;
+		}
+
+		// セル（ピン固定のセル）
+		.ag-theme-fresh .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(.ag-cell-range-single-cell) {
+			border: none;
+		}
+		.eim-label-icon {
+			padding-right: 0px;
+			padding-left: 0px;
+			margin: $eim-label-icon-margin;
+		}
+		// セル
+		.ag-cell > *:first-child {
+			width: 100%;
+			height: 100%;
+		}
+		.ag-cell.ag-cell-value {
+			display: flex;
+			align-items: center;
+		}
+		.ag-cell {
+			padding: $eim-cell-padding;
+			// アイコンのみのボタン
+			.eim-icon-only-button {
+				display: inline-flex;
+				width: $eim-data-grid-icon-only-button-size;
+				height: $eim-data-grid-icon-only-button-size;
+				min-width: $eim-data-grid-icon-only-button-size;
+				margin: 0px;
+				margin-left: $eim-gap!important;
+			}
+		}
+	}
+
+	// フッター
+	.eim-grid-container {
+		width: 100%;
+		height: calc(100% - #{$eim-table-footer-height});
+	}
+	.eim-data-grid-footer {
+		height: $eim-table-footer-height;
+	}
+
+	// ツリー
+	// 開閉ボタン
+	.eim-data-grid-tree-toggle {
+		display: flex;
+		width: $eim-tree-toggle-button-width;
+		height: $eim-tree-toggle-button-height;
+		padding: 0px;
+		margin: $eim-label-icon-margin;
+	    border-radius: 50%;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
+		.eim-icon-open {
+			width: $eim-tree-toggle-button-width;
+			line-height: $eim-tree-toggle-button-height;
+		}
+		.eim-icon-close {
+			width: $eim-tree-toggle-button-width;
+			line-height: $eim-tree-toggle-button-height;
+		}
+	}
+	.eim-data-grid-tree-toggle:focus {
+		// TODO:共通化
+		outline: 0 none;
+		outline-offset: 0;
+		box-shadow: 0 0 0 0.2rem #8dcdff;
+
+	}
+	.eim-data-grid-tree-no-toggle {
+		width: $eim-tree-toggle-button-width;
+		height: $eim-tree-toggle-button-height;
+		border-radius: 50%;
+		padding: 0px;
+		margin: $eim-label-icon-margin;
+		border: none;
+		background: transparent;
+	}
+
+	.eim-data-grid-tree-level_0x {
+		padding-left: 0;
+	}
+	.eim-data-grid-tree-level_1x {
+		padding-left: $eim-tree-level-width * 1;
+	}
+	.eim-data-grid-tree-level_2x {
+		padding-left: $eim-tree-level-width * 2;
+	}
+	.eim-data-grid-tree-level_3x {
+		padding-left: $eim-tree-level-width * 3;
+	}
+	.eim-data-grid-tree-level_4x {
+		padding-left: $eim-tree-level-width * 4;
+	}
+	.eim-data-grid-tree-level_5x {
+		padding-left: $eim-tree-level-width * 5;
+	}
+	.eim-data-grid-tree-level_6x {
+		padding-left: $eim-tree-level-width * 6;
+	}
+	.eim-data-grid-tree-level_7x {
+		padding-left: $eim-tree-level-width * 7;
+	}
+	.eim-data-grid-tree-level_8x {
+		padding-left: $eim-tree-level-width * 8;
+	}
+	.eim-data-grid-tree-level_9x {
+		padding-left: $eim-tree-level-width * 9;
+	}
+	.eim-data-grid-tree-level_10x {
+		padding-left: $eim-tree-level-width * 10;
+	}
+}

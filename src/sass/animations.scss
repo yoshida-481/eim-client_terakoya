@@ -1,0 +1,10 @@
+// ==========================================================================
+//	animation
+// ==========================================================================
+@mixin show-rows() {
+	transition: grid-template-rows 0.3s ease-out;
+}
+
+@mixin hide-rows() {
+	transition: grid-template-rows 0.1s ease-out;
+}

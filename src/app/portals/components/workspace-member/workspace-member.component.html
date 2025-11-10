@@ -1,0 +1,11 @@
+<div class="eim-members" [ngClass]="{'editable': isMemberEditMode}" style="height: 100%; display: grid; grid-template-rows: auto 1fr;">
+	<div class="eim-menubar-button" [ngClass]="{'editable': isMemberEditMode}">
+		<eim-menubar [model]="memberFormMenuItems"></eim-menubar>
+	</div>
+
+	<!-- メンバ入力欄 -->
+	<eim-project-member-applier #projectMemberApplier
+			[projectId]="workspaceId" [isMemberEditMode]="isMemberEditMode"
+			(initialized)="onInitializedMembers($event)" (changed)="onChangedMembers($event)" (applied)="onAppliedMembers($event)">
+	</eim-project-member-applier>
+</div>

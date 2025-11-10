@@ -1,0 +1,5 @@
+<div class="p-root-container">
+	<p-radioButton [name]="name" [value]="value" [inputId]="inputId" [disabled]="disabled"
+		(onClick)="onClickHandler($event)" (onBlur)="onTouched()" [(ngModel)]="innerValue"></p-radioButton>
+	<label class="p-radiobutton-label" [for]="inputId">{{ label }}</label>
+</div>

@@ -1,0 +1,64 @@
+<form #eventUpdator="ngForm" class="eim-form-wide" style="height: 100%;" autocomplete="off" novalidate>
+	<as-split direction="vertical">
+		<as-split-area [size]="splitAreaFirstSize" style="overflow-y: hidden;">
+			<div *ngIf="event" style="overflow-y: auto; height: calc(100% - 5px);" class="eim-narrow-margin-bottom eim-narrow-margin-right">
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM.LABEL_02027' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="id" type="text" pInputText [ngModel]="event.id" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM.LABEL_02019' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="_type" type="text" pInputText [ngModel]="event.type.name" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02025' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="creationUser" type="text" pInputText [ngModel]="event.creationUser.name" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02026' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="creationDate" type="text" pInputText [ngModel]="event.creationDate" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02073' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="base" type="text" pInputText [ngModel]="event.type.base.name" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02027' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="fromStatusType" type="text" pInputText [ngModel]="event.fromStatus.type.name" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02028' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="toStatusType" type="text" pInputText [ngModel]="event.toStatus.type.name" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="eim-form-item">
+					<label class="eim-form-label">{{ 'EIM_OBJECT_EDITORS.LABEL_02074' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="priority" type="text" pInputText [ngModel]="event.type.priority" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+			</div>
+		</as-split-area>
+		<as-split-area [size]="100 - splitAreaFirstSize" style="overflow-y: hidden;">
+			<div style="overflow-y: auto; height: calc(100% - 5px);" class="eim-narrow-margin-top eim-narrow-margin-right">
+				<eim-attribute-list *ngIf="event"
+					[form]="eventUpdator.form"
+					[(attributes)]="event.attributeList">
+				</eim-attribute-list>
+			</div>
+		</as-split-area>
+	</as-split>
+</form>

@@ -1,0 +1,73 @@
+<div class="container form-main" style="height:100%">
+	<as-split direction="horizontal">
+		<as-split-area [size]="25" style="background: #ffffff;">
+			<p-accordion [value]="info.accordionActiveIndex" (onOpen)="onChangeAccordionTab($event)">
+				<!-- ワークスペース -->
+				<p-accordion-panel [value]="0" class="eim-form-main-workspace">
+					<p-accordion-header [ngStyle]="{ 'pointer-events': (info.accordionActiveIndex == 0 || disabledAccordion) ? 'none' : 'auto' }">
+						<ng-template #toggleicon let-active="active">
+							@if (active) {
+							<i class="pi pi-chevron-down p-accordionheader-toggle-icon"></i>
+							} @else {
+							<i class="pi pi-chevron-right  p-accordionheader-toggle-icon"></i>
+							}
+						</ng-template>
+						{{ 'EIM_FORMS.LABEL_02017' | translate }}
+					</p-accordion-header>
+					<p-accordion-content>
+						<eim-tree #workspaceTree [componentService]="workspaceTreeComponentService"
+							[selectedData]="workspaceTreeSelectedData" enableOpenOnSelect="true"
+							(selected)="onSelectTreeNode($event)" (errored)="onTreeError($event)"></eim-tree>
+					</p-accordion-content>
+				</p-accordion-panel>
+				<!-- 処理待ち -->
+				<p-accordion-panel [value]="1" class="eim-form-main-processing">
+					<p-accordion-header [ngStyle]="{ 'pointer-events': (info.accordionActiveIndex == 1 || disabledAccordion) ? 'none' : 'auto' }">
+						<ng-template #toggleicon let-active="active">
+							@if (active) {
+							<i class="pi pi-chevron-down p-accordionheader-toggle-icon"></i>
+							} @else {
+							<i class="pi pi-chevron-right  p-accordionheader-toggle-icon"></i>
+							}
+						</ng-template>
+						{{ 'EIM_FORMS.LABEL_02018' | translate }}
+					</p-accordion-header>
+					<p-accordion-content>
+						<eim-tree #processingTree [componentService]="processingTreeComponentService"
+							[selectedData]="processingTreeSelectedData" enableOpenOnSelect="true"
+							(selected)="onSelectTreeNode($event)"></eim-tree>
+					</p-accordion-content>
+				</p-accordion-panel>
+				<!-- 検索 -->
+				<p-accordion-panel [value]="2" class="eim-form-main-search">
+					<p-accordion-header [ngStyle]="{ 'pointer-events': (info.accordionActiveIndex == 2 || disabledAccordion) ? 'none' : 'auto' }">
+						<ng-template #toggleicon let-active="active">
+							@if (active) {
+							<i class="pi pi-chevron-down p-accordionheader-toggle-icon"></i>
+							} @else {
+							<i class="pi pi-chevron-right  p-accordionheader-toggle-icon"></i>
+							}
+						</ng-template>
+						{{ 'EIM_FORMS.LABEL_02019' | translate }}
+					</p-accordion-header>
+					<p-accordion-content>
+						<eim-form-search-condition #searchConditionAccordion></eim-form-search-condition>
+					</p-accordion-content>
+				</p-accordion-panel>
+			</p-accordion>
+		</as-split-area>
+		<as-split-area [size]="75" eim-vertical-container adjustedValue="5">
+			<div class="eim-menu-box eim-menu-box-form">
+				<eim-menubar [model]="menuItems"></eim-menubar>
+			</div>
+			<div class="eim-flexible-height">
+				<eim-data-grid #contentsList [componentService]="formListComponentService" [contextMenuItems]="contentsListMenuItems" [suppressClickEdit]="false"
+					(contextmenu)="onContextMenuContentsList($event)" (initialized)="onInitializeContentsList($event)" (sortChanged)="onSortChanged($event)"
+					(rowDoubleClicked)="onRowDoubleClicked($event)" (columnResized)="onColumnResized($event)" (columnMoved)="onColumnMoved($event)">
+				</eim-data-grid>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>
+
+<eim-form-dialog-manager></eim-form-dialog-manager>

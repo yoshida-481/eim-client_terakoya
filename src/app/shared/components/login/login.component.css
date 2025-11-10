@@ -1,0 +1,109 @@
+.eim-login {
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(#00ABFF, #003DD9);
+
+	/* 上下左右中央寄せ指定 */
+	position: relative;
+}
+
+.eim-login label {
+	font-size: 20px;
+}
+
+.eim-login i {
+	padding-right: 10px;
+}
+
+.eim-login-form {
+	width: 400px;
+	height: 500px;
+
+	background-color: #FFFFFF;
+
+	/* 上下左右中央寄せ指定 */
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+::ng-deep .eim-login-form .eim-form-item {
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+.eim-login-logo {
+	width: 100%;
+	height: 150px;
+
+	/* 上下左右中央寄せ指定 */
+	position: relative;
+}
+
+.eim-login-logo-icon {
+	/* 上下左右中央寄せ指定 */
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	width: 75%;
+	height: auto;
+}
+
+/* テキストインプット */
+::ng-deep .eim-login .eim-form-item input {
+	font-size: 16px;
+}
+
+/* ボタン */
+.eim-login-form .eim-login-button {
+	background: linear-gradient(#00B3FF, #00C9FF);
+	border: #FFFFFF;
+}
+
+/* ログインボタン */
+.eim-login-button {
+	font-size: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	border-radius: 20px;
+	width: 100%;
+}
+/* 2022.03 新規 */
+::ng-deep .eim-login-button > .p-button-label {
+	text-align: right;
+	color: #FFFFFF;
+}
+/* 2022.03 新規 */
+::ng-deep .eim-login-button > .p-button-icon {
+	color: #FFFFFF;
+}
+/* ::ng-deep .eim-login-button > .p-button-icon-right {
+	margin-right: 100px;
+} */
+
+/* ドロップダウン */
+p-select {
+	width: 100%;
+}
+
+p-select .p-select {
+	width: 100%;
+}
+
+::ng-deep .eim-login .eim-form-item p-select .p-select {
+	font-size: 16px;
+}
+
+::ng-deep .eim-login .eim-form-item p-select .p-select-label {
+	font-size: 16px;
+}
+
+::ng-deep .eim-login .eim-form-item p-select .p-component {
+	font-size: 16px;
+}

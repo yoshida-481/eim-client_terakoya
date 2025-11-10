@@ -1,0 +1,56 @@
+// ==========================================================================
+//	eim-panel-flat
+//
+//    PrimeNGのパネルのフラット表示用スタイル
+//
+//    <p-panel class="eim-panel-flat" header="{{ 'EIM_XXXX.LABEL_02000' | translate }}">
+//
+// ==========================================================================
+@use '_variables' as *;
+
+::ng-deep p-panel.eim-panel-flat {
+	// height: calc(100% - 1px);
+	display: block;
+	margin-top: -1px;
+}
+
+::ng-deep p-panel.eim-panel-flat .p-panel.p-component {
+	border-style: none;
+}
+
+::ng-deep p-panel.eim-panel-flat .p-panel-header {
+	height: $eim-header-height;
+	width: 	$eim-header-width;
+
+	background: transparent;
+}
+
+::ng-deep p-panel.eim-panel-flat .p-panel-title {
+	color: #3F48FF;
+	white-space: nowrap;
+}
+
+::ng-deep p-panel.eim-panel-flat .p-panel.p-component .p-panel-header {
+	padding-bottom: 1px;
+	border-bottom-color: #82d9ff;
+	border-width: 0 0 2px 0;
+	padding: 6px 0px 1px 0px;
+}
+
+::ng-deep p-panel.eim-panel-flat .p-panel.p-component .p-panel-content {
+	padding: 6px 0px 0px 0px;
+	border: none;
+}
+
+::ng-deep .eim-panel-flat .p-panel {
+	height: 100%;
+}
+
+::ng-deep .eim-panel-flat .p-panel-content-container.ng-trigger-panelContent {
+	height: calc(100% - #{$eim-header-height});
+}
+
+::ng-deep .eim-panel-flat .p-panel-content {
+	height: 100%;
+}
+

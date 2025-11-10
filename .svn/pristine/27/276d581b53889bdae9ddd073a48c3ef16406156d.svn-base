@@ -1,0 +1,259 @@
+<form #propertyForm="ngForm" class="eim-form-wide" style="height: 100%; margin-right: -2px;" autocomplete="off"
+	novalidate>
+	<p-tabs [value]="0">
+		<p-tablist>
+			<p-tab [value]="0">{{ 'EIM_DOCUMENTS.LABEL_02028' | translate }}</p-tab>
+			<p-tab [value]="1" *ngIf="tagTabDisplayFlg">{{ 'EIM_DOCUMENTS.LABEL_02135' | translate }}</p-tab>
+			<p-tab [value]="2" *ngIf="settingTabDisplayFlg">{{ 'EIM_DOCUMENTS.LABEL_02138' | translate }}</p-tab>
+		</p-tablist>
+		<p-tabpanels>
+			<p-tabpanel [value]="0">
+				<div style="padding:5px; height: 100%">
+					<div style="height: calc(100% - 30px); width: 100%;">
+						<as-split direction="vertical">
+							<as-split-area [size]="splitAreaFirstSize" style="display: block; margin-bottom: 3px;">
+								<div *ngIf="visibleAttributeComponentSet.valueUrl" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">URL</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueUrl" type="text" pInputText [ngModel]="valueUrl"
+											disabled="true" style="width: 100%;" />
+										<button pButton type="button" severity="info" class="icon-only-button"
+											ngxClipboard icon="fa fa-clipboard" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03005' | translate }}"
+											[cbContent]="docAccessUrl"></button>
+										<button pButton type="button" severity="info" class="icon-only-button"
+											icon="fa fa-external-link" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03097' | translate }}"
+											(click)="downLoadUrlLinkFile(valueUrl, 1)"></button>
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueUrlForOriginal && contentDetail.privateLatestURL"
+									class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02055' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueUrlForOriginal" type="text" pInputText
+											[ngModel]="valueUrlForOriginal" disabled="true" style="width: 100%;" />
+										<button pButton type="button" severity="info" class="icon-only-button"
+											ngxClipboard icon="fa fa-clipboard" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03005' | translate }}"
+											[cbContent]="orgDocAccessUrl"></button>
+										<button pButton type="button" severity="info" class="icon-only-button"
+											icon="fa fa-external-link" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03097' | translate }}"
+											(click)="downLoadUrlLinkFile(valueUrlForOriginal, 2)"></button>
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueUrlForPublic && contentDetail.publicLatestURL"
+									class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02056' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueUrlForPublic" type="text" pInputText
+											[ngModel]="valueUrlForPublic" disabled="true" style="width: 100%;" />
+										<button pButton type="button" severity="info" class="icon-only-button"
+											ngxClipboard icon="fa fa-clipboard" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03005' | translate }}"
+											[cbContent]="publicDocAccessUrl"></button>
+										<button pButton type="button" severity="info" class="icon-only-button"
+											icon="fa fa-external-link" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03097' | translate }}"
+											(click)="downLoadUrlLinkFile(valueUrlForPublic, 3)"></button>
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueLinkUrl" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_03108' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueLinkUrl" type="text" pInputText [ngModel]="valueLinkUrl"
+											disabled="true" style="width: 100%;" />
+										<button pButton type="button" class="icon-only-button" ngxClipboard
+											icon="fa fa-clipboard" style="margin-left: 3px; float: right;"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03005' | translate }}"
+											[cbContent]="valueLinkUrl"></button>
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valuePath" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02051' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valuePath" type="text" pInputText [ngModel]="contentDetail.path"
+											disabled="true" style="width: 100%;" />
+										<button pButton type="button" severity="info" class="icon-only-button"
+											(click)="pathClick($event)" ngxClipboard icon="fa fa-arrow-circle-right"
+											pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03117' | translate }}"
+											style="margin-left: 5px; float: right;"
+											[cbContent]="contentDetail.path"></button>
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueLinkPath" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_03109' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueLinkPath" type="text" pInputText [ngModel]="valueLinkPath"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02002' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueName" type="text" pInputText [ngModel]="contentDetail.objName"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueTypeName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02001' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueTypeName" type="text" pInputText
+											[ngModel]="contentDetail.dspObjTypeName" disabled="true"
+											style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueRev" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02037' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueRev" type="text" pInputText [ngModel]="contentDetail.rev"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueCreateUserName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02030' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueCreateUserName" type="text" pInputText
+											[ngModel]="contentDetail.createUserName" disabled="true"
+											style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueCreateDate" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02031' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueCreateDate" type="text" pInputText [ngModel]="valueCreateDate"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueModifyUserName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02032' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueModifyUserName" type="text" pInputText
+											[ngModel]="contentDetail.modifyUserName" disabled="true"
+											style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueModifyDate" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02033' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueModifyDate" type="text" pInputText [ngModel]="valueModifyDate"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueStatusTypeName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM.LABEL_02008' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueStatus" type="text" pInputText [ngModel]="valueStatus"
+											disabled="true" style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueSecurityName" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02003' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueSecurityName" type="text" pInputText
+											[ngModel]="contentDetail.securityName" disabled="true"
+											style="width: 100%;" />
+									</div>
+								</div>
+								<div *ngIf="visibleAttributeComponentSet.valueFileSize" class="eim-form-item">
+									<label class="eim-form-label" style="width:191px; margin-left:36px;">{{
+										'EIM_DOCUMENTS.LABEL_02054' | translate }}</label>
+									<div class="eim-form-input" style="display: flex;">
+										<input name="valueFileSize" type="text" pInputText
+											[ngModel]="contentDetail._commaSeparatedfileSize" disabled="true"
+											style="width: 100%;" />
+									</div>
+								</div>
+							</as-split-area>
+							<as-split-area style="margin-top: 3px; overflow: hidden;">
+								<span style="display: block; height: calc(100% - 5px); overflow-y: auto;">
+									<eim-contents-attribute-list-input-form-item #attributeListInputForm
+										[form]="propertyForm.form" [attributeTypeLayoutList]="attributeTypeLayoutList"
+										[attributeList]="attributeList" [disabled]="disabled"
+										[enableSuccessionSetting]="enableSuccessionSetting"
+										(attrCheckBoxClicked)="onClickAttributeCheckBox()">
+									</eim-contents-attribute-list-input-form-item>
+								</span>
+							</as-split-area>
+						</as-split>
+					</div>
+					<div width="100%"
+						style="height: 30px; text-align: left; display: flex; margin-left:17px; padding-top: 5px;">
+						<eim-checkbox name="propertyAllCheck" class="eim-form-item"
+							label="{{'EIM_DOCUMENTS.LABEL_03057' | translate}}" binary="true"
+							[(ngModel)]="propertyAllCheckFlag" [ngModelOptions]="{standalone: true}"
+							(onChange)="onChangePropertyAllCheckFlag($event)"></eim-checkbox>
+						<button pButton type="button" class="p-button-secondary" style="margin-left:10px;"
+							icon="eim-icon-copy" label="{{'EIM_DOCUMENTS.LABEL_03034' | translate}}"
+							[disabled]="propertyCopyPeastDisabled" (click)="onClickPropertyCopy($event)"></button>
+						<button pButton type="button" class="p-button-secondary" style="margin-left:5px;"
+							icon="eim-icon-paste" label="{{'EIM_DOCUMENTS.LABEL_03036' | translate}}"
+							[disabled]="propertyCopyPeastDisabled || disabled || !propertyPeastTargetExist"
+							(click)="onClickPropertyPaste($event)"></button>
+					</div>
+				</div>
+			</p-tabpanel>
+
+			<p-tabpanel [value]="1">
+				<div style="padding:5px; height: 100%">
+					<div style="padding:20px; width: 100%; height: 100%">
+						<div style="height: 100%; width: 100%">
+							<eim-data-grid #tagGrid></eim-data-grid>
+						</div>
+					</div>
+				</div>
+			</p-tabpanel>
+
+			<p-tabpanel [value]="2">
+				<div style="padding:5px; height: 100%">
+					<div style="padding:20px; width: 100%; height: 100%" eim-vertical-container>
+						<div class="eim-form-item">
+							<label class="eim-form-label">{{'EIM_DOCUMENTS.LABEL_02136' | translate}}</label>
+							<div class="eim-form-input" style="display: block !important;">
+								<p-select name="assignedAttributeType" placeholder="　"
+									[options]="nameAllocationSelectItems" [(ngModel)]="nameAllocationAttributeTypeId"
+									[style]="{'width':'100%'}" [disabled]="disabled || disableNameAllocation"
+									appendTo="body"></p-select>
+							</div>
+						</div>
+						<div class="eim-form-item">
+							<div style="display: flex;">
+								<div style="width: 185px">
+									<label class="eim-form-label">{{'EIM_DOCUMENTS.LABEL_02137' | translate}}</label>
+								</div>
+								<div style="margin-left:51px;">
+									<eim-checkbox name="SettingAllCheck" class="eim-form-item padding-top-set"
+										label="{{'EIM_DOCUMENTS.LABEL_03057' | translate}}"
+										[disabled]="disabled || disableLowSuccession" binary="true"
+										[(ngModel)]="lowSuccessionAllCheckFlag"
+										(onChange)="settingAllCheck($event)"></eim-checkbox>
+								</div>
+							</div>
+						</div>
+						<div class="eim-form-item eim-flexible-height" style="height: 100%;">
+							<label class="eim-form-label"></label>
+							<div class="eim-form-input">
+								<eim-data-grid #lowSuccessionDataGrid></eim-data-grid>
+							</div>
+						</div>
+					</div>
+				</div>
+			</p-tabpanel>
+		</p-tabpanels>
+	</p-tabs>
+</form>

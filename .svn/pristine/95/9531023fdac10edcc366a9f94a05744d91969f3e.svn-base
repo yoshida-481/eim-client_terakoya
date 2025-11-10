@@ -1,0 +1,42 @@
+<div class="eim-object-editor-main">
+	<mat-tab-group style="height: 100%; width: 100%;"
+			[(selectedIndex)]="selectedTabIndex" [disableRipple]="true" mat-stretch-tabs="false" mat-align-tabs="start"
+			(selectedTabChange)="onChangeSelectedTab($event)" (selectedIndexChange)="onChangeSelectedTabIndex($event)" [@.disabled]="isDisabledAnimation">
+		<mat-tab *ngFor="let tab of tabs; let i = index" label="{{tab.name}}">
+
+			<ng-template mat-tab-label>
+				<div *ngIf="tabs?.length !== (i + 1)" class="test">
+					<span pTooltip="{{tab.tooltip}}">
+						<span [class]="tab.icon"></span>
+						<em>{{tab.name}}</em>
+					</span>
+					<button mat-button (click)="onClickRemoveTab(i)" [disabled]="tabs.length < 3" pTooltip="{{'EIM.LABEL_03000' | translate }}"><span class="fa fa-fw fa fa-times"></span></button>
+				</div>
+				<div *ngIf="tabs?.length === (i + 1)">
+					<span class="fa fa-plus" pTooltip="{{'EIM.LABEL_03010' | translate }}"></span>
+				</div>
+			</ng-template>
+
+			<div *ngIf="tab.type === TAB_TYPE_SEARCH_OBJECT" style="height: 100%; width: 100%;">
+				<eim-object-search #tabComponents></eim-object-search>
+			</div>
+
+			<div *ngIf="tab.type === TAB_TYPE_SHOW_REVISION_LIST" style="height: 100%; width: 100%;">
+				<eim-revision-list #tabComponents [objId]="tab.data.id"></eim-revision-list>
+			</div>
+
+			<div *ngIf="tab.type === TAB_TYPE_EXPAND_RELATION" style="height: 100%; width: 100%;">
+				<eim-relation-object-tree #tabComponents [objId]="tab.data.id"></eim-relation-object-tree>
+			</div>
+
+			<div *ngIf="tab.type === TAB_TYPE_REVERSE_EXPAND_RELATION" style="height: 100%; width: 100%;">
+				<eim-relation-object-tree #tabComponents [objId]="tab.data.id" [isReverse]="true"></eim-relation-object-tree>
+			</div>
+
+			<div *ngIf="tab.type === TAB_TYPE_NEW_OBJECT" style="height: 100%; width: 100%;">
+				<eim-new-object-list #tabComponents [objId]="tab.data.id"></eim-new-object-list>
+			</div>
+
+		</mat-tab>
+	</mat-tab-group>
+</div>

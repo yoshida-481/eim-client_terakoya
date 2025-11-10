@@ -1,0 +1,45 @@
+.eim-dialog-header {
+  float: right;
+  text-decoration: none;
+  color: #ffffff;
+  
+  border-radius: 3px;
+  cursor: pointer;
+  
+  border: 1px solid transparent;
+}
+
+.eim-dialog-header:hover {
+   border-color: #aaaaaa;
+}
+
+.eim-dialog-header-container {
+  width: 100%;
+}
+
+.eim-dialog-container {
+  height: calc(100%);
+}
+.eim-dialog-contents {
+	height: calc(100% - 30px);
+	overflow: hidden;
+	padding-bottom: 1px;
+}
+
+.eim-dialog-footer {
+	height: 30px;
+	
+	vertical-align: bottom;
+	display: inline-flex;
+	
+	float: right;
+
+	padding-top: 5px;
+}
+
+::ng-deep .p-dialog-content {
+	height: 100% !important;
+}
+::ng-deep .ui-dialog .ui-dialog-content {
+	position: static;
+}

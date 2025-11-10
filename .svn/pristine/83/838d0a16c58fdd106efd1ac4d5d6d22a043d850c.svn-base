@@ -1,0 +1,82 @@
+<div style="height: 100%;">
+	<p-tabs [value]="tabIndex()" (valueChange)="onChangeTab($event)">
+		<p-tablist>
+			<p-tab [value]="0">{{ 'EIM.LABEL_02053' | translate }}</p-tab>
+			<p-tab [value]="1">{{ 'EIM_ADMINS.LABEL_02119' | translate }}</p-tab>
+		</p-tablist>
+		<p-tabpanels>
+			<!-- 属性タブ -->
+			<p-tabpanel [value]="0">
+				<div style="padding:5px; height: 100%">
+					<form (ngSubmit)="onSearch($event)" style="height: calc(100% - 5px);" autocomplete="off">
+						<div eim-vertical-container style="height: 100%">
+							<div class="eim-form-item">
+								<div class="eim-form-item" style="height: 30px; min-width: 300px;">
+									<div style="width: 700px;">
+										<label class="eim-form-label" style="width: 140px;">{{'EIM_ADMINS.LABEL_02004' |
+											translate}}</label>
+										<input type="text" pInputText name="attributeName" [(ngModel)]="attributeName"
+											maxlength="{{inputMaxLength}}" style="width: calc(100% - 260px);" />
+										<button pButton type="button" label="{{ 'EIM.LABEL_03007' | translate }}"
+											class="p-button-primary" icon="eim-icon-search"
+											style="margin-left: 3px; margin-top: 3px; width: 120px;"
+											(click)="onSearch($event)">
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="eim-data-grid-menu">
+								<eim-menubar [model]="attributeMenuItems"></eim-menubar>
+							</div>
+							<div class="eim-flexible-height">
+								<eim-data-grid class="eim-user-list" #attributeDataGrid
+									(selected)="onSelectAttribute($event)" [multiple]="false" [equals]="equalsAttribute"
+									[contextMenuItems]="attributeContext">
+								</eim-data-grid>
+							</div>
+						</div>
+					</form>
+				</div>
+			</p-tabpanel>
+			<!-- コードタブ -->
+			<p-tabpanel [value]="1">
+				<div style="padding:5px; height: 100%">
+					<as-split direction="horizontal" style="display: flex">
+						<div style="width: 50%; height: 100%; padding: 2px;">
+							<p-panel class="eim-panel-containing-grid"
+								header="{{'EIM_ADMINS.LABEL_02007' | translate}}">
+								<div eim-vertical-container style="height: 100%">
+									<div class="eim-data-grid-menu">
+										<eim-menubar [model]="codeTypeMenuItems"></eim-menubar>
+									</div>
+									<div class="eim-flexible-height">
+										<eim-data-grid class="eim-code-list" #codeTypeDataGrid [multiple]="false"
+											[equals]="equalsCode" (selected)="onSelectCodeType($event)"
+											[contextMenuItems]="codeTypeContext">
+										</eim-data-grid>
+									</div>
+								</div>
+							</p-panel>
+						</div>
+						<div style="width:50%; padding: 2px;">
+							<p-panel class="eim-panel-containing-grid"
+								header="{{'EIM_ADMINS.LABEL_02119' | translate}}">
+								<div eim-vertical-container style="height: 100%">
+									<div class="eim-data-grid-menu">
+										<eim-menubar [model]="codeMenuItems"></eim-menubar>
+									</div>
+									<div class="eim-flexible-height">
+										<eim-data-grid class="eim-user-list" #codeDataGrid [multiple]="false"
+											(selected)="onSelectCode($event)" [equals]="equalsCode"
+											[contextMenuItems]="codeContext">
+										</eim-data-grid>
+									</div>
+								</div>
+							</p-panel>
+						</div>
+					</as-split>
+				</div>
+			</p-tabpanel>
+		</p-tabpanels>
+	</p-tabs>
+</div>

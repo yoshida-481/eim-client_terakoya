@@ -1,0 +1,21 @@
+<form #workflowAttrCopySettingForm="ngForm" style="width: 100%; height: 100%;" autocomplete="off" (ngSubmit)="onClickFilter($event)">
+	<div style="height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;">
+		<div style="margin-bottom: 10px;">
+			<div class="eim-form-item">
+				<div class="eim-form-input" style="display: inline-block; _display: inline; width: 100% ;">
+					<input name="keyword" type="text" pInputText [(ngModel)]="keyword" maxlength="{{inputMaxLength}}" style="width: calc(100% - 35px);"/>
+					<button pButton type="button" icon="fa-fw fa fa-filter" severity="info" class="icon-only-button" style="margin-left: 5px; float: right;" pTooltip="{{ 'EIM.LABEL_03031' | translate }}"
+							(click)="onClickFilter($event)" [disabled]="state != STATE.EDITING">
+					</button>
+				</div>
+			</div>
+			<div>
+				<eim-checkbox  name="allCheckFlag" label="{{ 'EIM_DOCUMENTS.LABEL_03057' | translate }}" binary="true" [(ngModel)]="allCheckFlg" (onChange)="onChange($event)"></eim-checkbox>
+			</div>
+		</div>
+		<div style="height: 82%; width: 100%;">
+			<eim-data-grid #attributeTypeList [equals]="dataGridEquals" [multiple]="false">
+			</eim-data-grid>
+		</div>
+	</div>
+</form>

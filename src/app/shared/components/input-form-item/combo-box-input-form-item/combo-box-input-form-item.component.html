@@ -1,0 +1,47 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}">{{label}}</label>
+
+	<ng-container *ngIf="!multiple && value">
+		<div class="eim-form-input" style="display: block !important;"
+				[ngClass]="{'eim-form-no-label': label === null || label === ''}">
+			<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+				<div class="eim-form-input-surround">
+					<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+						<p-select  name="{{name}}" appendTo="body" placeholder="{{ 'EIM.INFO_00002' | translate }}"
+								[class.ng-invalid]="formControls[0] && formControls[0].invalid"
+								[class.ng-dirty]="formControls[0] && formControls[0].dirty"
+								[options]="options" [ngModel]="value[0]" [style]="{'width':'100%'}" [disabled]="disabled"
+								(onChange)="onChange($event, 0)"></p-select>
+					<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+				</div>
+			<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+		</div>
+	</ng-container>
+
+	<ng-container *ngIf="multiple">
+		<div class="eim-form-input" [ngClass]="{'eim-form-no-label': label === null || label === ''}">
+			<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+				<span class="eim-form-input-multi-surround">
+					<div *ngFor="let item of itemsForLoop; let i = index" class="eim-form-input-multi">
+						<div *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></div>
+							<p-select name="{{name}}_{{i}}" appendTo="body" placeholder="{{ 'EIM.INFO_00002' | translate }}"
+									[ngClass]="{'eim-form-input-multi-dropdown': true, 'eim-form-input-multi-input-area': !disabled, 'eim-form-input-multi-input-area-disabled': disabled}" 
+									[class.ng-invalid]="formControls[i] && formControls[i].invalid"
+									[class.ng-dirty]="formControls[i] && formControls[i].dirty"
+									[options]="options" [ngModel]="value[i]" [style]="{'width':'100%'}" [disabled]="disabled"
+									(onChange)="onChange($event, i)"></p-select>
+						<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+						<div *ngIf="!disabled" class="eim-form-input-multi-button-area">
+							<button pButton type="button" severity="info" class="icon-only-button eim-form-input-multi-button" icon="fa fa-plus"
+									pTooltip="{{ 'EIM.LABEL_03010' | translate }}"
+									(click)="onPlusClick(i)"></button>
+							<button pButton type="button" class="p-button-danger eim-form-input-multi-button icon-only-button" icon="fa fa-minus"
+									pTooltip="{{ 'EIM.LABEL_03003' | translate }}"
+									(click)="onMinusClick(i)"></button>
+						</div>
+					</div>
+				</span>
+			<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+		</div>
+	</ng-container>
+</div>

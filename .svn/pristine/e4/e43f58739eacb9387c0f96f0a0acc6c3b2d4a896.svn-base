@@ -1,0 +1,15 @@
+<div style="height: 100%;">
+	<form #workspaceFormCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<!-- 名前-->
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 30%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" required="true" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 95%;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

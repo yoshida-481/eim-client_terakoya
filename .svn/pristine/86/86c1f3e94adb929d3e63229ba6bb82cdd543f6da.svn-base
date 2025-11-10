@@ -1,0 +1,82 @@
+<form #propertyForm="ngForm" class="eim-form-wide" style="height: 100%;"
+	eim-vertical-container autocomplete="off">
+	<div style="width: 100%; height: 170px;">
+		<eim-workflow-diagram #workflowDiagram
+			[multiple]="false"
+			[componentService]="statusChangeWorkflowDiagramComponentService"
+			(changed)="onChangeDiagram($event)"></eim-workflow-diagram>
+	</div>
+
+	<div style="width: 100%; height: 60px; display: flex; padding-top:10px; padding-bottom:10px;">
+
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="display: flex; width: 100%;">
+				<label  class="eim-form-label-required" style="width: 120px;">{{ 'EIM_FORMS.LABEL_02026' | translate }}</label>
+				<p-select name="eventType" [options]="eventTypeSelectTypeList" [(ngModel)]="selectedEventType" [style]="{'width':'200px'}" (onChange)="onChangeEvent($event)"></p-select>
+			</div>
+		</div>
+
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="display: flex; width: 100%; padding-left:10px;">
+				<label   class="eim-form-label-required" style="width: 120px;">{{ 'EIM_FORMS.LABEL_02027' | translate }}</label>
+				<eim-radio-button [style]="{'padding-left': '8px'}" [disabled]="!canChangeNotify" label="{{ 'EIM.LABEL_02034' | translate }}" name="notifyCondition" [(ngModel)]="notifyCondition" value="0" (keydown)="onKeyDown($event)"></eim-radio-button>
+				<eim-radio-button [style]="{'padding-left': '8px'}" [disabled]="!canChangeNotify" label="{{ 'EIM.LABEL_02035' | translate }}" name="notifyCondition" [(ngModel)]="notifyCondition" value="1" (keydown)="onKeyDown($event)"></eim-radio-button>
+				<eim-radio-button [style]="{'padding-left': '8px'}" [disabled]="!canChangeNotify" label="{{ 'EIM.LABEL_02036' | translate }}" name="notifyCondition" [(ngModel)]="notifyCondition" value="2" (keydown)="onKeyDown($event)"></eim-radio-button>
+			</div>
+		</div>
+	</div>
+	<div class="eim-flexible-height" style="width: 100%; height:50%; display: flex; padding-bottom:10px;">
+		<div style="height: 100%; width: 50%; padding-right:10px;">
+			<div style="display: inline-flex; width: 100%;">
+				<label class="eim-form-label-required" style="width: 100%;">{{ 'EIM_FORMS.LABEL_02024' | translate }}</label>
+				<div dir="rtl">
+					<button pButton severity="info" class="icon-only-button eim-form-input-multi-button" type="button"
+						(click)="onClickSearchAssignmentUser($event)" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+						icon="eim-icon-search" [disabled]="!canSearch"
+						style="width: 25px; height: 25px; margin-bottom: 4px;">
+					</button>
+				</div>
+				<div dir="rtl">
+					<button pButton class="p-button-danger eim-form-input-multi-button icon-only-button" type="button"
+						(click)="onClickDeleteAssignmentUser($event)" pTooltip="{{ 'EIM_FORMS.LABEL_03005' | translate }}"
+						icon="fa fa-remove" [disabled]="!canDeleteRequest"
+						style="width: 25px; height: 25px; margin-bottom: 4px;">
+					</button>
+				</div>
+			</div>
+			<eim-data-grid #requestUserList
+				(selected)="onSelectRequest($event)"></eim-data-grid>
+		</div>
+		<div style="height: 100%; width: 50%; padding-left:10px;" >
+			<div style="display: inline-flex; width: 100%;">
+				<label style="width: 100%;">{{ 'EIM_FORMS.LABEL_02025' | translate }}</label>
+				<div dir="rtl">
+					<button pButton severity="info" class="icon-only-button eim-form-input-multi-button" type="button" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+						(click)="onClickSearchNotifyUser($event)"
+						icon="eim-icon-search"
+						style="width: 25px; height: 25px; margin-bottom: 4px;">
+					</button>
+				</div>
+				<div dir="rtl">
+					<button pButton severity="info" class="p-button-danger eim-form-input-multi-button icon-only-button" type="button"
+						(click)="onClickDeleteNotifyUser($event)" pTooltip="{{ 'EIM_FORMS.LABEL_03005' | translate }}"
+						icon="fa fa-remove" [disabled]="!canDeleteNotify"
+						style="width: 25px; height: 25px; margin-bottom: 4px;">
+					</button>
+				</div>
+			</div>
+			<eim-data-grid #notifyUserList
+				(selected)="onSelectNotify($event)"></eim-data-grid>
+		</div>
+	</div>
+
+
+		<div class="eim-form-item" style="width: 100%; height: 130px; padding-top: 10px;">
+			<div class="eim-form-input" style="width: 100%;">
+				<label class="eim-form-label" style="width: 120px;">{{ 'EIM.LABEL_02026' | translate }}</label>
+				<textarea id="comment" name="comment" [(ngModel)]="comment" style="width: 100%; max-width: 100%; min-width: 100%;
+					height: 90%; max-height: 90%; min-height: 90%;" class="p-inputtext" pTextarea></textarea>
+			</div>
+		</div>
+
+</form>

@@ -1,0 +1,10 @@
+<eim-template-data-grid-single-selector #template
+		[componentService]="formListColumnSingleSelectorComponentService" [(condition)]="formTypeSearchCondition" 
+		[multiple]="multiple" [filterFlag]="true" >
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%; display: block !important;">
+				<input pInputText type="text" style="width: 100%;" name="formTypeName" maxlength="{{inputMaxLength}}"
+							[(ngModel)]="formTypeSearchCondition.formTypeName" />
+			</div>
+		</div>
+</eim-template-data-grid-single-selector>

@@ -1,0 +1,136 @@
+// ==========================================================================
+//	eim-form
+//
+//    フォーム表示用スタイル
+//
+//    <eim-form class="eim-form">
+//    </eim-form>
+// ==========================================================================
+@use "sass:math";
+@use '_variables' as *;
+
+$eim-form-wide-label: 180px;
+$eim-form-icon-only-button-size: $eim-row-height;
+
+::ng-deep .eim-form {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+	overflow: hidden;
+
+	@mixin setGridWidth($breakpoint) {
+		.eim-#{$breakpoint}-1 {
+			width: math.div(100%, 12 / 1);
+		}
+		.eim-#{$breakpoint}-2 {
+			width: math.div(100%, 12 / 2);
+		}
+		.eim-#{$breakpoint}-3 {
+			width: math.div(100%, 12 / 3);
+		}
+		.eim-#{$breakpoint}-4 {
+			width: math.div(100%, 12 / 4);
+		}
+		.eim-#{$breakpoint}-5 {
+			width: math.div(100%, 12 / 5);
+		}
+		.eim-#{$breakpoint}-6 {
+			width: math.div(100%, 12 / 6);
+		}
+		.eim-#{$breakpoint}-7 {
+			width: math.div(100%, 12 / 7);
+		}
+		.eim-#{$breakpoint}-8 {
+			width: math.div(100%, 12 / 8);
+		}
+		.eim-#{$breakpoint}-9 {
+			width: math.div(100%, 12 / 9);
+		}
+		.eim-#{$breakpoint}-10 {
+			width: math.div(100%, 12 / 10);
+		}
+		.eim-#{$breakpoint}-11 {
+			width: math.div(100%, 12 / 11);
+		}
+		.eim-#{$breakpoint}-12 {
+			width: math.div(100%, 12 / 12);
+		}
+	}
+
+	.eim-input-form-item-resolver {
+		width: 100%;
+	}
+	
+	@include responsive(xs) {
+		@include setGridWidth('xs');
+	}
+
+	@include responsive(sm) {
+		@include setGridWidth('sm');
+	}
+
+	@include responsive(md) {
+		@include setGridWidth('md');
+	}
+
+	@include responsive(lg) {
+		@include setGridWidth('lg');
+	}
+
+	@include responsive(xl) {
+		@include setGridWidth('xl');
+	}
+
+	@include responsive(xxl) {
+		@include setGridWidth('xxl');
+	}
+}
+
+// 入力アイテム
+::ng-deep .eim-form-wide .eim-form .eim-form-item {
+
+	width: 100%;
+
+	.eim-form-label {
+		width: $eim-form-wide-label;
+	}
+	.eim-form-input {
+		width: calc(100% - #{$eim-form-wide-label});
+		padding: 0px;
+
+		// 複数行の入力欄
+		.eim-form-input-multi-input {
+
+			width: calc(100% - (#{$eim-gap} + #{$eim-form-icon-only-button-size}) * 2 - 1px);
+		}
+		.eim-form-input-multi-input.eim-disabled {
+			width: 100%;
+		}
+		.eim-form-input-multi-button-container {
+			margin: 1px;
+			width: calc((#{$eim-gap} + #{$eim-form-icon-only-button-size}) * 2 + 1px);
+
+			.eim-form-input-multi-button-row {
+				padding-bottom: $eim-gap;
+				.eim-icon-only-button {
+					display: inline-flex;
+					width: $eim-form-icon-only-button-size;
+					height: $eim-form-icon-only-button-size;
+					min-width: $eim-form-icon-only-button-size;
+					margin: 0px;
+					margin-left: $eim-gap!important;
+				}
+				.eim-icon-only-button.eim-upload-btn {
+					padding-top: 6px;
+				}
+			}
+			.eim-form-input-multi-button-row:last-child {
+				padding-bottom: 0px;
+			}
+		}
+	}
+	.eim-form-input.eim-form-no-label {
+		width: 100%;
+	}
+}

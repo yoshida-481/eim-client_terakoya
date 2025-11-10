@@ -1,0 +1,13 @@
+<div *ngIf="sessionReadFlg" style="height: 100%;">
+	<eim-header #header class="header"
+			[user]="user" [(font-size)]="fontSize" [version]="version"
+			[authenticationService]="authenticationService" [headerLabel]="headerLabel"
+			[versionDisableFlag]=true
+			(changeFontSize)="onChangeFontSize($event)"></eim-header>
+	<div class="body">
+		<eim-object-editor-main></eim-object-editor-main>
+		<eim-message></eim-message>
+		<eim-shared-dialog-manager></eim-shared-dialog-manager>
+		<eim-object-editor-dialog-manager></eim-object-editor-dialog-manager>
+	</div>
+</div>

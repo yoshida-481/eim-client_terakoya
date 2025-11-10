@@ -1,0 +1,7 @@
+::ng-deep .column-bottom-plus {
+	/* margin-top: -12px; */
+	height: 38px;
+}
+::ng-deep .ag-pinned-left-cols-viewport{
+	background-color: #FFFFFF
+}

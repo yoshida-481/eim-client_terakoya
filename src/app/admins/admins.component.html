@@ -1,0 +1,17 @@
+<div *ngIf="completeReadResource" style="height: 100%;">
+	<eim-header class="header"
+			[user]="user" [(font-size)]="fontSize" [version]="version"
+			(changeFontSize)="onChangeFontSize($event)"
+			[authenticationService]="adminsAuthenticationService"
+			[headerLabel]="headerLabel"></eim-header>
+	<div class="eim-menu-box eim-menu-box-admin">
+		<eim-menubar [model]="generalMenuItems"></eim-menubar>
+	</div>
+	<div class="body" style="background-color: #fff; padding: 0px 5px 5px 5px;">
+		<router-outlet (activate)="onActivateMain($event)"></router-outlet>
+		<eim-message></eim-message>
+		<eim-document-dialog-manager></eim-document-dialog-manager>
+		<eim-admin-dialog-manager></eim-admin-dialog-manager>
+		<eim-shared-dialog-manager></eim-shared-dialog-manager>
+	</div>
+</div>

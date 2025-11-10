@@ -1,0 +1,28 @@
+<div style="height: 100%;">
+	<as-split direction="horizontal">
+		<as-split-area [size]="splitAreaLeftSize" >
+			<div class="eim-admin-left-panel">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02301' | translate }}">
+					<div style="height: 100%;" eim-vertical-container>
+						<div class="eim-data-grid-menu" >
+							<eim-menubar [model]="workspaceMenuItems"></eim-menubar>
+						</div>
+						<div class="eim-flexible-height">
+							<eim-data-grid #workspaceDataGrid [equals]="workspaceDataGridEquals" (selected)="onSelectedWorkspace()"
+								[contextMenuItems]="workspaceContentsMenuItems">
+							</eim-data-grid>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+		<as-split-area [size]="100 - splitAreaLeftSize">
+			<div class="eim-admin-right-panel" style="width: 100%">
+				<div style="height: 100%;" eim-vertical-container>
+					<eim-workspace-creator #workspaceInfoList [objId]="wsId" [readOnly]="true" >
+					</eim-workspace-creator>
+				</div>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>

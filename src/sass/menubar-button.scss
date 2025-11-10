@@ -1,0 +1,88 @@
+// ==========================================================================
+//	eim-menubar-button
+//
+//    EimMenubarのボタン表示用スタイル
+//
+//    <div class="eim-menubar-button">
+//      <eim-menubar [model]="mainMenuItems"></eim-menubar>
+//    </div>
+// ==========================================================================
+@use '_variables' as *;
+
+::ng-deep .eim-menubar-button {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+::ng-deep .eim-menubar-button p-menubar > .p-menubar.p-component {
+	background: none;
+}
+
+::ng-deep .eim-menubar-button p-menubar > .p-menubar {
+	padding: 0px;
+	border: none;
+}
+
+// ::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list {
+// 	display: grid;
+// 	grid-auto-flow: column;
+// 	> * {
+// 		overflow: hidden;
+// 	}
+// 	> .p-menubar-item-active {
+// 		overflow: initial;
+// 	}
+// }
+
+// 有効（押下可）
+::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list > .p-menubar-item {
+	color: $eim-enabled-button-color;
+	font-weight: $eim-enabled-button-font-weight;
+	background: $eim-enabled-button-background;
+	border: $eim-enabled-button-border;
+	border-radius: $eim-enabled-button-border-radius;
+	transition-property: none;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+// マウスオーバー、有効（編集可）
+::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list > .p-menubar-item-active {
+	color: $eim-hovered-enabled-button-color;
+	font-weight: $eim-hovered-enabled-button-font-weight;
+	background: $eim-hovered-enabled-button-background;
+	border: $eim-hovered-enabled-button-border;
+	border-radius: $eim-hovered-enabled-button-border-radius;
+}
+
+::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list > .p-menubar-item-active > .p-menubar-item-content > .p-menubar-item-link {
+	color: $eim-hovered-enabled-button-color;
+}
+::ng-deep .eim-menubar-button .p-menubar > p-menubarsub p-menubarsub .p-menubar-item .p-menubar-item-link:hover {
+	background: $eim-hovered-enabled-button-background;
+	border-radius: 0px;
+	color: $eim-hovered-enabled-button-color;
+}
+::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list > .p-menubar-item > a {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-color: #e5e5e5;
+	border-width: 0.5px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	min-width: 100px;
+}
+
+// フォーカス
+::ng-deep .eim-menubar-button .p-menubar .p-menubar-root-list > .p-menubar-item > a:focus {
+	background: $eim-focused-button-background;
+	border: $eim-focused-button-border;
+	border-radius: $eim-focused-button-border-radius;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	outline: none;
+}
+
+::ng-deep .eim-menubar-button	.p-menubar .p-menubar-root-list > .p-menubar-end {
+	border: none!important;
+}
+
+

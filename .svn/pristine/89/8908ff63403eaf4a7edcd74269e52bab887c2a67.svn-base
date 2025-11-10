@@ -1,0 +1,6 @@
+<div style="height: calc(100% - 10px);" eim-vertical-container>
+	<div class="eim-flexible-height" >
+		<eim-tree-data-grid #formFolderTreeGrid [contextMenuItems]="contentsTreeMenuItems" (selected)="onSelectedTreeNode($event)" [multiple]="false">
+		</eim-tree-data-grid>
+	</div>
+</div>

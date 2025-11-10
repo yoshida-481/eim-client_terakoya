@@ -1,0 +1,3 @@
+<div *ngFor="let item of attributeList; let i = index">
+	<eim-user-attribute-input-form-item [form]="form" [(attribute)]="attributeList[i]" [pTooltipLabelFlg]="pTooltipLabelFlg"></eim-user-attribute-input-form-item>
+</div>

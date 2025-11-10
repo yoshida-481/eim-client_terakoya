@@ -1,0 +1,12 @@
+<label [ngClass]="{'eim-form-label': true}" style="margin-left: 10px;white-space: nowrap;">{{label}}</label>
+<div class="eim-form-item" style="margin-top: 3px;">
+	<ng-container *ngIf="value">
+		<div class="eim-form-input" style="display: block !important; margin-right: 10px;">
+			<p-select  name="{{name}}" appendTo="body"
+					[options]="options" [(ngModel)]="value[0]" [style]="{'width': '83px', 'margin-left': '2px', 'padding-top': '2px','padding-bottom': '1px','background-color': '#ffffcc', 'border-radius': '0px'}"
+					(onChange)="onChange($event, 0)" ngDefaultControl></p-select>
+		</div>
+	</ng-container>
+</div>
+
+

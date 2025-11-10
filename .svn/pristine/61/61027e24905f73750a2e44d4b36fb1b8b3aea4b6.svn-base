@@ -1,0 +1,36 @@
+<div style="height: 100%; width: 100%; display: flex;">
+  <div style="height: 100%; width: calc(50% - 20px);">
+	  <p-panel class="eim-panel-containing-grid" header="{{leftLabel}}">
+	  <div style="height: 100%;">
+	  	<ng-content #searchResultList></ng-content>
+	  	</div>
+	  </p-panel>
+	</div>
+  <div style="height: 100%; width: 40px; display: table;">
+    <div style="vertical-align: middle; float: none; display: table-cell;">
+      <button pButton type="button" class="p-button-success eim-multiple-selector-add-button"
+	  		icon="fa fa-arrow-right" (click)="onClickAdd($event)"
+			pTooltip="{{ 'EIM.LABEL_03010' | translate }}" appendTo="body"
+			positionStyle="fixed"
+			style="width: 30px; height: 30px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px;"></button>
+      <button pButton type="button" class="p-button-success eim-multiple-selector-delete-button"
+			icon="fa fa-arrow-left" (click)="onClickDelete($event)"
+			pTooltip="{{ 'EIM.LABEL_03003' | translate }}" appendTo="body"
+			positionStyle="fixed"
+			style="width: 30px; height: 30px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px;"></button>
+    </div>
+  </div>
+	<div style="height: 100%; width: calc(50% - 20px);">
+		<p-panel class="eim-panel-containing-grid" header="{{rightLabel}}">
+			<div eim-vertical-container style="height: 100%;">
+				<div style="vertical-align: right; float: none; text-align: right;">
+					{{ 'EIM_DOCUMENTS.LABEL_02106' | translate }}
+					{{through}}
+				</div>
+				<div class="eim-flexible-height" style="height: 100%">
+					<eim-data-grid #selectedList></eim-data-grid>
+				</div>
+			</div>
+		</p-panel>
+	</div>
+</div>

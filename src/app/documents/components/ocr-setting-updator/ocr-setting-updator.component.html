@@ -1,0 +1,18 @@
+<div style="height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+	<div style="margin-bottom: 10px;">
+		<div class="eim-form-item">
+			<label class="eim-form-label eim-form-label-required" style="width: 120px;">{{ 'EIM_DOCUMENTS.LABEL_02093' | translate }}</label>
+			<div class="eim-form-input" style="width: 70px;">
+				<div>
+					<eim-radio-button name="ocrSettingValue" label="{{ 'EIM.LABEL_02044' | translate }}" value="1"
+					(ngModelChange)="onChange()" [(ngModel)]="ocrSettingValue"></eim-radio-button>
+				</div>
+				<div>
+					<eim-radio-button name="ocrSettingValue" label="{{ 'EIM.LABEL_02045' | translate }}" value="0"
+					(ngModelChange)="onChange()" [(ngModel)]="ocrSettingValue" ></eim-radio-button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,60 @@
+
+<form #relationCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+	<div style="display: flex; width: 100%; height: 100%;">
+		<div style="display: block; width: 40%;">
+			<label class="eim-form-label eim-form-label-required" style="white-space: nowrap;">{{ 'EIM_OBJECT_EDITORS.LABEL_02011' | translate }}</label>
+			<div style="height: calc(100% - 25px);">
+				<eim-tree #relationTypeTree
+					[componentService]="relationTypeTreeComponentService" (selected)="onSelectRelationType()" >
+				</eim-tree>
+			</div>
+		</div>
+
+		<div style="display: block; width: 60%; margin-top: -5px; margin-left: 10px;">
+			<div style="height: 40%">
+				<p-panel class="eim-panel-containing-grid" header="{{'EIM_OBJECT_EDITORS.LABEL_02078' | translate }}">
+					<div style="margin-left: 10px; width: 100%; height: 100%">
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02027' | translate }}</label>
+							<input class="disableInput" [ngClass]="parentChangeable ? 'changeable': ''" pInputText style="width: 95%;" name="parentId" [ngModel]="parentObject.id" [disabled]="true" required="true"/>
+						</div>
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02019' | translate }}</label>
+							<input class="disableInput" [ngClass]="parentChangeable ? 'changeable': ''" pInputText style="width: 95%;" name="parentTypeName" [ngModel]="parentObject.typeName" [disabled]="true" required="true"/>
+						</div>
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02002' | translate }}</label>
+							<input class="disable-input" [class.changeable]="parentChangeable" pInputText style="width: 95%;" name="parentName" [ngModel]="parentObject.name" [disabled]="true" required="true"/>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+
+			<div style="height: 8%;">
+				<button pButton class="p-button-primary" type="button" icon="fa fa-fw fa fa-arrows-v" style="margin: auto; margin-top: 20px; margin-bottom: 20px; display: flex;"
+					label="{{'EIM_DOCUMENTS.LABEL_03058' | translate }}"
+					(click)="onClickReplacement()">
+				</button>
+			</div>
+
+			<div style="height: 40%;">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_OBJECT_EDITORS.LABEL_02079' | translate }}">
+					<div style="margin-left: 10px; width: 100%;">
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02027' | translate }}</label>
+							<input class="disableInput" [ngClass]="childChangeable ? 'changeable': ''" pInputText style="width: 95%;" name="childId" [ngModel]="childObject.id" [disabled]="true" required="true"/>
+						</div>
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02019' | translate }}</label>
+							<input class="disableInput" [ngClass]="childChangeable ? 'changeable': ''" pInputText style="width: 95%;" name="childTypeName" [ngModel]="childObject.typeName" [disabled]="true" required="true"/>
+						</div>
+						<div class="eim-form-item" style="display: flex; margin-right: 10px;">
+							<label class="eim-form-label eim-form-label-required" style="width: 20%;">{{ 'EIM.LABEL_02002' | translate }}</label>
+							<input class="disableInput" [ngClass]="childChangeable ? 'changeable': ''" pInputText style="width: 95%;" name="childName" [ngModel]="childObject.name" [disabled]="true" required="true"/>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</div>
+	</div>
+</form>

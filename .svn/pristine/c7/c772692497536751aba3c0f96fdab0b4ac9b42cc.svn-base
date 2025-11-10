@@ -1,0 +1,140 @@
+.header {
+	height: 50px;
+}
+.body {
+	height: calc(100% - 45px);
+	background-color: #ffffff;
+}
+
+/* ==========================================================================
+   アイコン
+   ========================================================================== */
+::ng-deep .eim-icon-document:before {
+	content: "\f15b";
+}
+
+::ng-deep .eim-icon-object-color {
+	color: #970808!important;
+}
+
+::ng-deep .eim-icon-tag:before {
+	content: '\f02b';
+}
+::ng-deep .eim-icon-tag-color {
+  color: #426ef4!important;
+}
+
+::ng-deep .eim-icon-folder-color {
+	color: #DBAD4A !important;
+}
+
+/* ==========================================================================
+   PrimeNG MenuBar
+   ========================================================================== */
+::ng-deep .eim-menu-box-objecteditor .p-menubar .p-menubar-root-list {
+	background:linear-gradient(to bottom, #585858, #373737);
+}
+
+::ng-deep .eim-menu-box .p-menubar {
+	padding: 0px;
+	border-radius: 0;
+}
+::ng-deep .eim-menu-box a.p-menubar-item-link/*.ui-corner-all*/ {
+	padding: 3px;
+	color: #ffffff;
+}
+::ng-deep .eim-menu-box .p-menubar > p-menubarsub p-menubarsub a.p-menubar-item-link/*.ui-corner-all*/ {
+	padding: 3px;
+	color: #555555;
+}
+::ng-deep .eim-menu-box .p-menubar p-menubarsub .p-menubar-item-link .p-menubar-item-icon {
+	display: flex;
+}
+
+::ng-deep .eim-menu-box .p-menubar > p-menubarsub p-menubarsub .p-menubar-item-link .p-menubar-item-icon {
+	display: inline-block;
+}
+
+::ng-deep eim-object-editors .eim-menu-box .p-menubar {
+	background:linear-gradient(to bottom, #585858, #373737);
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list .p-menubar-item {
+	text-align: center;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list .p-menubar-submenu{
+	background: #ffffff;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list .p-menubar-submenu .p-menubar-item {
+	text-align: left!important;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon {
+	color: inherit!important;
+	margin: auto;
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+::ng-deep .eim-menu-box .p-menubar > p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	color: inherit!important;
+	vertical-align: bottom;
+	line-height: 1em;
+}
+
+::ng-deep .eim-menu-box .p-menubar > p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	color: inherit!important;
+	vertical-align: bottom;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item {
+	margin: 0px;
+}
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item .p-menubar-item-link {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+::ng-deep .eim-menu-box .p-menubar .ui-menu-parent .p-menubar-submenu {
+	padding: 0px;
+}
+
+/** マウスオーバー、クリック */
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link,
+          .eim-menu-box .p-menubar .p-menubar-item .p-menubar-item-link:hover {
+	background: #e8e8e8!important;
+	color: #000000!important;
+	border-radius: 0px;
+	border-color: #ffffff;
+}
+/** マウスオーバー、クリックなし */
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item:not(.p-menubar-item-active) > .p-menubar-item-content > .p-menubar-item-link,
+          .eim-menu-box .p-menubar .p-menubar-item .p-menubar-item-link:not(:hover) {
+	color: #FFFFFF;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list>.p-menubar-item {
+	border-right: thin solid #dddddd;
+	border-radius: 0px;
+}
+::ng-deep .p-menubar-submenu-icon {
+	margin-left: 0px;
+}
+
+::ng-deep a.p-menubar-item-link/*.ui-corner-all*/ {
+	min-width: 100px;
+}
+
+::ng-deep .eim-menu-box a.p-menubar-item-link:focus {
+	outline-width: 0px;
+}
+
+::ng-deep .p-menubar-root-list {
+	white-space: nowrap;
+}
+::ng-deep .p-menubar-submenu-icon {
+	margin-left: 6px;
+}

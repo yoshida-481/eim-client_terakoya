@@ -1,0 +1,15 @@
+<div *ngFor="let item of layoutAndAttributeList; let i = index">
+	<div style="display: flex;">
+		<div class="eim-form-item" style="margin-left: 17px; width:18px;">
+			<eim-checkbox name="successionFlag" class="padding-top-set" *ngIf="item.attribute._enableCopy"
+					[(ngModel)]="item.attribute._copyTarget" binary="true" (onChange)="onClick(item)" >
+			</eim-checkbox>
+		</div>
+		<div style="width: calc(100% - 35px);">
+			<eim-documents-attribute-input-form-item
+				[form]="form" [attributeTypeLayout]="item.attributeTypeLayout" [attribute]="item.attribute"
+				[disabled]="disabled || item.attributeTypeLayout._disabled" [dirty]="item.attribute._dirty">
+			</eim-documents-attribute-input-form-item>
+		</div>
+	</div>
+</div>

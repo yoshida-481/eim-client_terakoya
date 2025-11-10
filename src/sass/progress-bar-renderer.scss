@@ -1,0 +1,19 @@
+// ==========================================================================
+//	eim-progress-bar-renderer
+//
+//    進捗バーの表示用スタイル
+//
+// ==========================================================================
+@use '_variables' as *; 
+
+::ng-deep eim-progress-bar-renderer {
+	.eim-progress-bar-container {
+		background: $eim-gantt-chart-task-bar-background;
+		opacity: $eim-gantt-chart-task-bar-opacity;
+		border: $eim-gantt-chart-task-bar-border;
+		.eim-progress-bar-progress {
+			background: $eim-gantt-chart-task-bar-complete-background;
+			opacity: $eim-gantt-chart-task-bar-complete-opacity;
+		}
+	}
+}

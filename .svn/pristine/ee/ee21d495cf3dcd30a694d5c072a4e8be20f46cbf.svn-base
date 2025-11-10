@@ -1,0 +1,6 @@
+<form #ngForm="ngForm" class="eim-form-wide" style="height: 100%; overflow-y: auto; overflow-x: hidden;" autocomplete="off" novalidate>
+		<eim-task-form #propertyForm [form]="ngForm.form" [disabled]="componentDisabled" (changed)="onChangeAttribute($event)">
+		</eim-task-form>
+		<eim-task-form #projectForm [form]="ngForm.form" [disabled]="componentDisabled" (changed)="onChangeAttribute($event)">
+		</eim-task-form>
+</form>

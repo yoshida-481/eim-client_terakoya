@@ -1,0 +1,75 @@
+// ==========================================================================
+//	eim-panel
+//
+//    PrimeNGのパネル表示用スタイル
+//
+//    <p-panel class="eim-panel" header="{{ 'EIM_XXXX.LABEL_02000' | translate }}">
+//
+//		パネルのコンテントの余白をなくす場合、eim-panel-content-fitを指定する
+//    <p-panel class="eim-panel eim-panel-content-fit" header="{{ 'EIM_XXXX.LABEL_02000' | translate }}">
+//
+// ==========================================================================
+@use '_variables' as *;
+
+::ng-deep p-panel.eim-panel, ::ng-deep p-panel.eim-stretched-panel {
+	height: auto;
+	display: block;
+	.p-panel.p-component {
+		border-style: none;
+	}
+
+	.p-panel-title {
+		white-space: nowrap;
+	}
+
+	.p-panel.p-component .p-panel-header {
+		color: $eim-panel-header-color;
+		font-weight: $eim-panel-header-font-weight;
+		height: $eim-panel-header-height;
+		width: $eim-panel-header-width;
+		padding: $eim-panel-header-padding;
+		margin: $eim-panel-header-margin;
+		background: $eim-panel-header-background;
+		border: $eim-panel-header-border;
+		border-radius: $eim-panel-header-border-radius;
+		.p-panel-title {
+			color: $eim-header-color;
+			font-weight: $eim-header-font-weight;
+		}
+
+	}
+
+	.p-panel.p-component .p-panel-content {
+		color: $eim-panel-content-color;
+		font-weight: $eim-panel-content-font-weight;
+		height: $eim-panel-content-height;
+		width: $eim-panel-content-width;
+		padding: $eim-panel-content-padding;
+		margin: $eim-panel-content-margin;
+		background: $eim-panel-content-background;
+		border: $eim-panel-content-border;
+		border-radius: $eim-panel-content-border-radius;
+
+		border-top-width: 0px;
+	}
+
+	.p-panel {
+		height: 100%;
+	}
+
+	.p-panel-content-container.ng-trigger-panelContent {
+		height: calc(100% - #{$eim-header-height});
+	}
+
+	.p-panel-content {
+		height: 100%;
+	}
+
+}
+
+::ng-deep p-panel.eim-panel.eim-panel-content-fit, ::ng-deep p-panel.eim-stretched-panel.eim-panel-content-fit {
+	.p-panel.p-component .p-panel-content {
+		padding: 0px;
+		margin: 0px;
+	}
+}

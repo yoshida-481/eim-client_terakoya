@@ -1,0 +1,9 @@
+<eim-header class="header" [user]="user" [version]="version" [(font-size)]="fontSize" (changeFontSize)="onChangeFontSize($event)" [authenticationService]="authenticationService"></eim-header>
+<div class="body">
+  <eim-form-main style="height:100%;" jumpTargetId="{{jumpTargetId}}" openAccordion="{{openAccordion}}"></eim-form-main>
+
+	<eim-message></eim-message>
+	<eim-shared-dialog-manager></eim-shared-dialog-manager>
+
+</div>
+

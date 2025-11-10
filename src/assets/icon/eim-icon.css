@@ -1,0 +1,499 @@
+@font-face {
+  font-family: 'eim-icon';
+  src:  url('eim-icon.eot?ntvfgv');
+  src:  url('eim-icon.eot?ntvfgv#iefix') format('embedded-opentype'),
+    url('eim-icon.ttf?ntvfgv') format('truetype'),
+    url('eim-icon.woff?ntvfgv') format('woff'),
+    url('eim-icon.svg?ntvfgv#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.eim-icon-group:before {
+	font-family: 'eim-icon' !important;
+	content: "\e905";
+}
+.eim-icon-rename:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91b";
+}
+.eim-icon-security:before {
+	font-family: 'eim-icon' !important;
+	content: "\e925";
+}
+
+.eim-icon-copy:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91c";
+}
+
+.eim-icon-access-history:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91d";
+}
+
+.eim-icon-pencil:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91e";
+}
+
+.eim-icon-revision-history:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91f";
+}
+.eim-icon-checkout_back:before {
+	font-family: 'eim-icon' !important;
+	content: "\e920";
+}
+.eim-icon-table:before {
+	font-family: 'eim-icon' !important;
+	content: "\e921";
+}
+.eim-icon-list:before {
+	font-family: 'eim-icon' !important;
+	content: "\e922";
+}
+.eim-icon-checkout:before {
+	font-family: 'eim-icon' !important;
+	content: "\e90e";
+}
+.eim-icon-checkin:before {
+	font-family: 'eim-icon' !important;
+	content: "\e90f";
+}
+.eim-icon-iconmonstr-x-mark-11:before {
+	font-family: 'eim-icon' !important;
+	content: "\e910";
+}
+.eim-icon-iconmonstr-x-mark-9:before {
+	font-family: 'eim-icon' !important;
+	content: "\e911";
+}
+.eim-icon-refresh:before {
+	font-family: 'eim-icon' !important;
+	content: "\e912";
+}
+.eim-icon-plus:before {
+	font-family: 'eim-icon' !important;
+	content: "\e913";
+}
+.eim-icon-info:before {
+	font-family: 'eim-icon' !important;
+	content: "\e914";
+}
+.eim-icon-iconmonstr-gear-1:before {
+	font-family: 'eim-icon' !important;
+	content: "\e915";
+}
+.eim-icon-iconmonstr-folder-20:before {
+	font-family: 'eim-icon' !important;
+	content: "\e916";
+}
+.eim-icon-folder:before {
+	font-family: 'eim-icon' !important;
+	content: "\e917";
+}
+
+.eim-icon-folder-color {
+ 	font-family: 'eim-icon' !important;
+ 	color: #DBAD4A !important;
+}
+.eim-icon-collaboration-folder-color {
+	font-family: 'eim-icon' !important;
+	color: rgb(145, 194, 253);
+}
+
+.eim-icon-wf-folder:before {
+	font-family: 'eim-icon' !important;
+	content: "\e947";
+}
+
+.eim-icon-wf-folder-color {
+	color: rgb(121, 83, 1);
+}
+
+.eim-icon-paste:before {
+	font-family: 'eim-icon' !important;
+	content: "\e923";
+}
+
+.eim-icon-branch-copy:before {
+	font-family: 'eim-icon' !important;
+	content: "\e924";
+}
+
+/*
+.eim-icon-check-mark:before {
+	font-family: 'eim-icon' !important;
+	content: "\e919";
+}
+*/
+.eim-icon-check:before {
+	font-family: 'eim-icon' !important;
+	content: "\e906";
+}
+
+.eim-icon-none:before {
+	font-family: 'eim-icon' !important;
+	content: "\e906";
+	opacity: 0;
+}
+
+.eim-icon-file:before {
+	font-family: 'eim-icon' !important;
+	content: "\e900";
+}
+.eim-icon-old-file:before {
+	font-family: 'eim-icon' !important;
+	content: "\e935";
+}
+
+.eim-icon-file-color {
+	color: #A5A7A9;
+}
+
+.eim-icon-word:before {
+	font-family: 'eim-icon' !important;
+	content: "\e901";
+	color: #1200BF;
+}
+.eim-icon-old-word:before {
+	font-family: 'eim-icon' !important;
+	content: "\e931";
+	color: #1200BF;
+}
+.eim-icon-powerpoint:before {
+	font-family: 'eim-icon' !important;
+	content: "\e902";
+	color: #FF8017;
+}
+.eim-icon-old-powerpoint:before {
+	font-family: 'eim-icon' !important;
+	content: "\e933";
+	color: #FF8017;
+}
+.eim-icon-excel:before {
+	font-family: 'eim-icon' !important;
+	content: "\e903";
+	color: #4AB500;
+}
+.eim-icon-old-excel:before {
+	font-family: 'eim-icon' !important;
+	content: "\e936";
+	color: #4AB500;
+}
+.eim-icon-pdf:before {
+	font-family: 'eim-icon' !important;
+	content: "\e904";
+	color: #FF402F;
+}
+.eim-icon-old-pdf:before {
+	font-family: 'eim-icon' !important;
+	content: "\e934";
+	color: #FF402F;
+}
+.eim-icon-pre-regist-pdf:before {
+	font-family: 'eim-icon' !important;
+	content: url('eim-pre-regist-pdf-icon.svg');
+	vertical-align: -32%;
+}
+.eim-icon-pre-regist-old-pdf:before {
+	font-family: 'eim-icon' !important;
+	content: url('eim-pre-regist-old-pdf-icon.svg');
+	vertical-align: -32%;
+}
+.eim-icon-pdf-menu:before {
+	font-family: 'eim-icon' !important;
+	content: "\e904";
+	color: #000000;
+}
+.eim-icon-csv:before {
+	font-family: 'eim-icon' !important;
+	content: "\e926";
+	color: #007F04;
+}
+.eim-icon-old-csv:before {
+	font-family: 'eim-icon' !important;
+	content: "\e937";
+	color: #007F04;
+}
+.eim-icon-tiff:before {
+	font-family: 'eim-icon' !important;
+	content: "\e927";
+	color: #0094f7;
+}
+.eim-icon-old-tiff:before {
+	font-family: 'eim-icon' !important;
+	content: "\e932";
+	color: #0094f7;
+}
+
+.eim-icon-cancel:before {
+	font-family: 'eim-icon' !important;
+	content: "\e907";
+}
+.eim-icon-eye:before {
+	font-family: 'eim-icon' !important;
+	content: "\e908";
+}
+.eim-icon-download:before {
+	font-family: 'eim-icon' !important;
+	content: "\e909";
+}
+.eim-icon-pencil:before {
+	font-family: 'eim-icon' !important;
+	content: "\e90a";
+}
+.eim-icon-backward:before {
+	font-family: 'eim-icon' !important;
+	content: "\e92d";
+}
+.eim-icon-forward:before {
+	font-family: 'eim-icon' !important;
+	content: "\e92e";
+}
+.eim-icon-reply:before {
+	font-family: 'eim-icon' !important;
+	content: "\e92f";
+}
+.eim-icon-spinner:before {
+	font-family: 'eim-icon' !important;
+	content: "\e930";
+}
+.eim-icon-user:before {
+	font-family: 'eim-icon' !important;
+	content: "\e90c";
+}
+.eim-icon-role:before {
+	font-family: 'eim-icon' !important;
+	content: "\e929";
+}
+.eim-icon-complex-group:before {
+	font-family: 'eim-icon' !important;
+	content: "\e928";
+}
+.eim-icon-lock:before {
+	font-family: 'eim-icon' !important;
+	content: "\e90d";
+}
+.eim-icon-lock-color {
+	color: #ffd700;
+}
+.eim-icon-search:before {
+	font-family: 'eim-icon' !important;
+	content: "\e986";
+}
+.eim-icon-filter:before {
+ 	font-family: 'eim-icon' !important;
+	content: "\e92a";
+}
+
+.eim-icon-trash:before {
+	font-family: 'eim-icon' !important;
+	content: "\e9ac";
+}
+.eim-icon-enter:before {
+	font-family: 'eim-icon' !important;
+	content: "\ea13";
+}
+
+.eim-icon-logout:before {
+	font-family: 'eim-icon' !important;
+	content: "\ea14";
+}
+
+.eim-icon-key:before {
+	font-family: 'eim-icon' !important;
+	content: "\e918";
+}
+
+.eim-icon-thumb-up:before {
+	font-family: 'eim-icon' !important;
+	content: "\e91a";
+}
+.eim-icon-first:before {
+	font-family: 'eim-icon' !important;
+	content: "\ea21";
+}
+.eim-icon-scissors:before {
+	font-family: 'eim-icon' !important;
+	content: "\ea5a";
+}
+
+.eim-icon-workspace:before {
+    content: "\f1c0";
+}
+
+.eim-icon-workspace-color {
+    color: #848484;
+}
+
+.eim-icon-form-workspace:before {
+	font-family: 'eim-icon' !important;
+	content: "\e92c";
+}
+.eim-icon-form-workspace-color {
+	color: #1c2ea0;
+}
+
+
+.eim-icon-form-type:before {
+ 	font-family: 'eim-icon' !important;
+	content: "\e92b";
+}
+
+.eim-icon-form-type-color {
+ 	color: #1c2ea0;
+}
+
+.eim-icon-link-auto:before {
+	font-family: 'eim-icon' !important;
+	content: "\e938";
+	color: #0021ff;
+}
+
+.eim-icon-link-manual:before {
+	font-family: 'eim-icon' !important;
+	content: "\e939";
+	color: #0021ff;
+}
+
+.eim-icon-type:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93a";
+}
+
+.eim-icon-relation:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93b";
+}
+
+.eim-icon-printer:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93c";
+}
+
+.eim-icon-format:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93d";
+}
+
+.eim-icon-attribute-tree:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93e";
+}
+
+.eim-icon-attribute:before {
+	font-family: 'eim-icon' !important;
+	content: "\e93f";
+}
+
+.eim-icon-public-file:before {
+	font-family: 'eim-icon' !important;
+	content: "\e940";
+}
+
+.eim-icon-folder-tree:before {
+	font-family: 'eim-icon' !important;
+	content: "\e941";
+}
+
+.eim-icon-cad-dxf:before {
+	font-family: 'eim-icon' !important;
+	color: #000000;
+	content: "\e942";
+}
+
+.eim-icon-old-cad-dxf:before {
+	font-family: 'eim-icon' !important;
+	color: #000000;
+	content: "\e944";
+}
+
+.eim-icon-cad-dwg:before {
+	font-family: 'eim-icon' !important;
+	color: #2F649F;
+	content: "\e943";
+}
+
+.eim-icon-old-cad-dwg:before {
+	font-family: 'eim-icon' !important;
+	color: #2F649F;
+	content: "\e945";
+}
+
+.eim-icon-ocr-success:before {
+	font-family: 'eim-icon' !important;
+	content: "\e946";
+	color: #FF402F;
+}
+
+.eim-icon-ocr-success:after {
+	font-family: 'eim-icon' !important;
+	content: "\e946";
+	width: 100%;
+	height: 100%;
+	margin-left: -1em;
+	position: absolute;
+	top: 6px;
+	clip: rect(7.5px 13.7px 13px 2.5px);
+	color:cyan;
+}
+
+.eim-icon-old-ocr-success:before {
+	font-family: 'eim-icon' !important;
+	content: "\e934";
+	color: #FF402F;
+}
+
+.eim-icon-page-download:before {
+	font-family: 'eim-icon' !important;
+	content: "\e909";
+	font-size:1.7em;
+	color: #0021ff;
+}
+
+/** 設定 */
+.eim-icon-setting:before {
+	font-family: 'FontAwesome' !important;
+	content: "\f013";
+}
+
+/** グリッド */
+.eim-icon-grid:before {
+	font-family: 'FontAwesome' !important;
+	content: "\f009";
+}
+
+/** ガントチャート */
+.eim-icon-gantt-chart {
+	transform: rotate( 90deg );
+}
+.eim-icon-gantt-chart:before {
+	font-family: 'FontAwesome' !important;
+	content: "\f080";
+	font-weight: 400;
+}
+
+/** ツリーオープン時 */
+.eim-icon-open:before {
+	font-family: 'primeicons';
+	font-size: 8px;
+	text-align: center;
+	content: "\e902";
+}
+
+/** ツリークローズ時 */
+.eim-icon-close:before {
+	font-family: 'primeicons';
+	font-size: 8px;
+	text-align: center;
+	content: "\e901";
+}
+
+/** メール */
+.eim-icon-mail:before {
+	font-family: 'FontAwesome' !important;
+	content: "\f0e0";
+	font-weight: 400;
+}

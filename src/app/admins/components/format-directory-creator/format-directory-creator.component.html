@@ -1,0 +1,31 @@
+<div style="height: 100%;">
+	<form #directoryCreatorForm="ngForm" class="p-grid" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<!-- フォーマット名称-->
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02023' | translate }}</label>
+					<div class="eim-form-input">
+						<input type="text" name = "formatLabel" pInputText [(ngModel)]="formatLabel" [disabled]="true" style="width: 95%;"/>
+					</div>
+				</div>
+				<!-- ディレクトリ-->
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02025' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="path" type="text" required="true" pInputText [(ngModel)]="path" maxlength="{{inputMaxLength}}" style="width: 95%;"/>
+					</div>
+				</div>
+				<!-- ステータス-->
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02026' | translate }}</label>
+					<div class="eim-form-input">
+						<eim-radio-button name="status" label="{{onlineLabel}}" value="{{onlineValue}}" [(ngModel)]="status" class="eim-dir-status-online"></eim-radio-button>
+						<eim-radio-button name="status" label="{{offlineLabel}}" value="{{offlineValue}}" [(ngModel)]="status" class="eim-dir-status-offline"></eim-radio-button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,23 @@
+<div ng2FileDrop [uploader]="uploader" style="height: 100%;">
+	<form #userImportExecutorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 15%;">{{ 'EIM_ADMINS.LABEL_02303' | translate }}</label>
+					<div class="eim-form-input" style="display: flex; width: 100%;">
+						<div class="eim-form-input-default" style="display: flex; width: 99%; padding: .25em; margin-right: 5px;">
+							<div style="display: flex; width: 100%; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">
+								<label style="float: left; white-space: nowrap;">{{file}}</label>　<!-- 空白を入れないと削除時に1pxずれる -->
+							</div>
+						</div>
+						<label [ngClass]="(state != STATE.EDITING) ? 'eim-upload-menu-btn-disabled' : 'eim-upload-menu-btn'" pTooltip="{{ 'EIM_ADMINS.LABEL_02158' | translate }}">
+							<i aria-hidden="true" class="fa fa-upload eim-upload-menu-btn-icon"></i>
+							<input type="file" ng2FileSelect
+									[uploader]="uploader" single [ngStyle]="{'display': 'none'}"/>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,33 @@
+<div style="height: 100%;">
+	<form #statusSecurityCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02056' | translate }}</label>
+					<div class="eim-form-input">
+						<input type="text" name = "secLabel" pInputText [(ngModel)]="secLabel" [disabled]="true" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02057' | translate }}</label>
+					<div class="eim-form-input eim-form-input-selected-list" style="display: flex;">
+						<input type="text" name = "workflowLabel" pInputText [(ngModel)]="workflowLabel" [disabled]="true" style="width: calc(100% - 30px); margin-right: 5px;"/>
+						<button pButton type="button" icon="fa-fw fa fa-external-link" severity="info" class="icon-only-button" style="float: right;" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+							(click)="onClickShowWorkflowSelector($event)">
+						</button>
+					</div>
+				</div>
+
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 33%;">{{ 'EIM_ADMINS.LABEL_02058' | translate }}</label>
+					<div class="eim-form-input" style="width: 66%;">
+						<p-select name="stTypeId" appendTo="body" [options]="statusTypeItemList" placeholder="{{ 'EIM_ADMINS.LABEL_02066' | translate }}" required="true"
+								[(ngModel)]="stTypeId" [autoWidth]="true" [style]="{'width':'100%'}"></p-select>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>

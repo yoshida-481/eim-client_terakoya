@@ -1,0 +1,44 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}">{{label}}</label>
+
+	<div class="eim-form-input" style="display: flex;">
+		<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+		<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+		<ng-container *ngIf="disabled">
+			<div>{{editedValueString}}</div>
+		</ng-container>
+		<ng-container *ngIf="!disabled">
+			<p-select name="objType" class="eim-dropdown"
+				[options]="options" appendTo="body"
+				placeholder="{{ 'EIM.INFO_00002' | translate }}" required="true"
+				[(ngModel)]="value[0]" (onChange)="onChange($event)"
+				[filter]="true" [autoWidth]="true">
+			</p-select>
+		</ng-container>
+		<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+
+		<div *ngIf="!disabled" class="eim-form-input-button-container">
+			<button pButton type="button" icon="fa-fw fa fa-external-link" class="p-button-info eim-icon-only-button"
+				style="float: right;" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+				[disabled]="disabled"
+				(click)="onClickSearch($event)"></button>
+		</div>
+		<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+	</div>
+</div>
+
+<!-- オブジェクトタイプツリー選択単数画面 -->
+<ng-container *ngIf="viewDialogName === 'objectTypeTreeSelector'" novalidate>
+
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01012' | translate }}" modal="true" width="350"
+		[visible]="viewDialogName === 'objectTypeTreeSelector'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-object-type-tree-selector
+			[typeName]="'ドキュメント'"
+			[workspaceObjId]="0"
+			(selected)="onSelectedObjectTypeTree($event)">
+		</eim-object-type-tree-selector>
+	</eim-dialog>
+</ng-container>

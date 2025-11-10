@@ -1,0 +1,62 @@
+<div style="height: 100%;">
+	<form #userExportExecutorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+
+				<div class="p-grid basic-condition" style="height: 120px;">
+					<div style="width: 50%; padding-left: 0px; padding-right: 0px;">
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 25%;">{{ 'EIM_ADMINS.LABEL_02074' | translate }}</label>
+							<div class="eim-form-input">
+								<input name="userCode" type="text" pInputText [(ngModel)]="userCode"  style="width: 95%;"/>
+							</div>
+						</div>
+
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 25%;">{{ 'EIM_ADMINS.LABEL_02016' | translate }}</label>
+							<div class="eim-form-input">
+								<input name="userName" type="text" pInputText [(ngModel)]="userName" style="width: 95%;"/>
+							</div>
+						</div>
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 25%;">{{ 'EIM_ADMINS.LABEL_02076' | translate }}</label>
+							<div class="eim-form-input">
+								<input name="userMail" type="text" pInputText [(ngModel)]="userMail" style="width: 95%;"/>
+							</div>
+						</div>
+					</div>
+
+					<div style="width: 50%; padding-left: 0px; padding-right: 0px;">
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 25%;">{{ 'EIM_ADMINS.LABEL_02077' | translate }}</label>
+							<div class="eim-form-input">
+								<input name="belongingGroupName" type="text" pInputText [(ngModel)]="belongingGroupName" style="width: 95%;"/>
+							</div>
+						</div>
+
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 25%;"></label>
+							<div class="eim-form-input">
+								<eim-checkbox name="includingChildGroup" value="true" [(ngModel)]="includingChildGroup" binary="true" label="{{ 'EIM_ADMINS.LABEL_02079' | translate }}"></eim-checkbox>
+							</div>
+						</div>
+
+						<div class="eim-form-item" style="padding-top: 10px;">
+							<label class="eim-form-label" style="width: 25%;">{{ 'EIM_ADMINS.LABEL_02080' | translate }}</label>
+							<div class="eim-form-input">
+								<eim-radio-button name="dispFlag" label="{{ 'EIM_ADMINS.LABEL_02082' | translate }}" value="0" [(ngModel)]="dispFlag"></eim-radio-button>
+								<eim-radio-button name="dispFlag" label="{{ 'EIM_ADMINS.LABEL_02083' | translate }}" value="1" [(ngModel)]="dispFlag"></eim-radio-button>
+								<eim-radio-button name="dispFlag" label="{{ 'EIM_ADMINS.LABEL_02084' | translate }}" value="2" [(ngModel)]="dispFlag"></eim-radio-button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<label><i class="fa eim-icon-info"></i>{{ 'EIM_ADMINS.CONFIRM_00014' | translate}}</label>
+
+		</div>
+	</form>
+</div>

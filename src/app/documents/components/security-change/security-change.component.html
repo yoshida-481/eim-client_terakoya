@@ -1,0 +1,35 @@
+<div style = "height: calc(100% - 40px); margin-right: -2px;">
+	<!-- 選択対象ラベル -->
+	<p>[{{this.selectContentName}}] {{this.selectContentType}} {{ 'EIM_DOCUMENTS.LABEL_02215' | translate }}</p>
+
+	<p-tabs [value]="0">
+		<p-tablist>
+			<!-- アクセスセキュリティ　タブ画面 -->
+			<p-tab [value]="0">{{ 'EIM_DOCUMENTS.LABEL_02150' | translate }}</p-tab>
+			<!-- フォルダ構成管理セキュリティ　タブ画面 -->
+			<p-tab [value]="1">{{ 'EIM_DOCUMENTS.LABEL_02151' | translate }}</p-tab>
+		</p-tablist>
+		<p-tabpanels>
+			<!-- アクセスセキュリティ　タブ画面 -->
+			<p-tabpanel [value]="0">
+				<div style="padding:5px; height: 100%">
+					<div class="eim-flexible-height" style="height: 100%;">
+						<eim-access-security-applicable #accessSecurityApplicable [content]="content"
+							[entryNameWidth]="entryNameWidth">
+						</eim-access-security-applicable>
+					</div>
+				</div>
+			</p-tabpanel>
+			<!-- フォルダ構成管理セキュリティ　タブ画面 -->
+			<p-tabpanel [value]="1">
+				<div style="padding:5px; height: 100%">
+					<div class="eim-flexible-height" style="height: 100%;">
+						<eim-folder-configuration-security-applicable #folderConfigurationSecurityApplicable
+							[content]="content" [entryNameWidth]="entryNameWidth">
+						</eim-folder-configuration-security-applicable>
+					</div>
+				</div>
+			</p-tabpanel>
+		</p-tabpanels>
+	</p-tabs>
+</div>

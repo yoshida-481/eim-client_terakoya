@@ -1,0 +1,39 @@
+<div style="height: 100%;">
+	<!-- <eim-header #header class="header" [user]="user" [(font-size)]="fontSize" [version]="version" (changeFontSize)="onChangeFontSize($event)" [authenticationService]="documentAuthenticationService"></eim-header> -->
+
+	<div class="header">
+		<div class="left-section">
+            <div class="header-page-info-text" title="{{fileName}}"><span>{{fileName}}</span></div>
+		</div>
+		<div class="center-section">
+			<button pButton type="button" icon="fa fa-backward" (click)="prevPage()" [disabled]="prevPageDisabled"
+				class="header-button" style="float: right; margin-right: 5px;">
+			</button>
+            <input  class="header-current-page-info" type="text" [(ngModel)]="currentPageNoString" (blur)="validateCurrentPageNo()" (keydown.enter)="validateCurrentPageNo()" />
+            <div class="header-page-info-text" style="margin-right: 5px;">{{"/ " + pageCount}}</div>
+
+			<button pButton type="button" icon="fa fa-forward" (click)="nextPage()" [disabled]="nextPageDisabled"
+				class="header-button" style="float: right; margin-right: 5px;">
+			</button>
+			<div class="separator"></div>
+			<button pButton type="button" icon="fa fa-minus" (click)="zoomOut()" [disabled]="zoomOutDisabled"
+				class="header-button" style="float: right; margin-right: 5px;">
+			</button>
+			<button pButton type="button" icon="fa fa-plus" (click)="zoomIn()" [disabled]="zoomInDisabled"
+				class="header-button" style="float: right; margin-right: 5px;">
+			</button>
+		</div>
+		<div class="right-section">
+			<button pButton type="button" icon="fa fa-download" (click)="downloadFile()" [disabled]="downloadDisabled"
+				class="header-button" style="float: right; margin-right: 5px;" >
+			</button>
+		</div>
+
+
+	</div>
+	<div class="body no_print">
+		<eim-pdf-viewer
+			[pdf]="pdf" [currentPageNo]="currentPageNo" [scale]="scale" (pageCount)="handlePageCount($event)">
+		</eim-pdf-viewer>
+	</div>
+</div>

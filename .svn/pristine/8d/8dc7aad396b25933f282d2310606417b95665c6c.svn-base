@@ -1,0 +1,65 @@
+<div class="eim-portals" style="height: 100%; width: 100%; display: grid;grid-template-rows: auto 1fr;">
+	<!-- <eim-header class="header" [user]="user" [version]="version" [(font-size)]="fontSize" (changeFontSize)="onChangeFontSize($event)" [authenticationService]="authenticationService"></eim-header> -->
+	<eim-portal-header #portalHeader class="header"
+			[user]="user" [version]="version" [(font-size)]="fontSize" [authenticationService]="authenticationService"
+			(changeFontSize)="onChangeFontSize($event)" (clickLogout)="onClickLogout($event)" (updatedTask)="onUpdatedTask($event)">
+	</eim-portal-header>
+	<div class="body" style="height: 100%;">
+		<div style="height: 100%;">
+			<div style="display: flex; height: 100%;">
+				<span class="eim-sidebar-space"></span>
+				<span class="eim-sidebar">
+					<ul>
+						<!-- ワークスペース -->
+						<li [ngClass]="{'eim-sidebar-selected': selectedSideMenu === portalsSideMenu.WORKSPACES}"
+								(click)="onClickSideMenu(portalsSideMenu.WORKSPACES)">
+							<a class="cursor-pointer">
+								<i class="fa eim-icon-workspace"></i>
+								<div class="eim-sidebar-label">{{ 'EIM_TASKS.LABEL_03032' | translate }}</div>
+							</a>
+						</li>
+						<!-- <li [ngClass]="{'eim-sidebar-selected': selectedSideMenu === portalsSideMenu.SEARCH}"
+								(click)="onClickSideMenu(portalsSideMenu.SEARCH)">
+							<a class="cursor-pointer">
+								<i class="fa eim-icon-search"></i>
+								<div class="eim-sidebar-label">検索</div>
+							</a>
+						</li> -->
+						<!-- ドキュメント -->
+						<li [ngClass]="{'eim-sidebar-selected': selectedSideMenu === portalsSideMenu.DOCUMENTS}"
+								(click)="onClickSideMenu(portalsSideMenu.DOCUMENTS)">
+							<a class="cursor-pointer">
+								<i class="fa eim-icon-file"></i>
+								<div class="eim-sidebar-label">{{ 'EIM_TASKS.LABEL_03033' | translate }}</div>
+							</a>
+						</li>
+						<!-- タスク -->
+						<li [ngClass]="{'eim-sidebar-selected': selectedSideMenu === portalsSideMenu.TASKS}"
+								(click)="onClickSideMenu(portalsSideMenu.TASKS)">
+							<a class="cursor-pointer">
+								<i class="fa eim-icon-task"></i>
+								<div class="eim-sidebar-label">{{ 'EIM_TASKS.LABEL_03009' | translate }}</div>
+							</a>
+						</li>
+						<!-- タスクマスタ -->
+						<li [ngClass]="{
+								'eim-sidebar-selected': selectedSideMenu === portalsSideMenu.PROJECT_MASTERS,
+								'eim-sidebar-disabled': !hasTaskMasterAuthId['bizMaster']}"
+								(click)="onClickSideMenu(portalsSideMenu.PROJECT_MASTERS, hasTaskMasterAuthId['bizMaster'])">
+							<a class="cursor-pointer">
+								<i class="fa eim-icon-project"></i>
+								<div class="eim-sidebar-label">{{ 'EIM_TASKS.LABEL_03026' | translate }}</div>
+							</a>
+						</li>
+					</ul>
+				</span>
+				<span style="width: 100%; height: 100%;">
+					<router-outlet (activate)="onActivateChildComponent($event)"></router-outlet>
+				</span>
+			</div>
+		</div>
+
+		<eim-message></eim-message>
+		<eim-shared-dialog-manager></eim-shared-dialog-manager>
+	</div>
+</div>

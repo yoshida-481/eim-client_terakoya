@@ -1,0 +1,23 @@
+::ng-deep eim-task-updator {
+	.p-tabpanel  {
+		height: unset;
+	}
+}
+
+// メモ
+::ng-deep eim-task-updator .eim-task-updator-tab-panel-memo {
+	> div {
+		height: 100%!important;
+		.eim-task-updator-form-memo {
+			height: 100%;
+			> span {
+				height: 100%!important;
+				textarea {
+					height: 100%;
+					resize: none;
+				}
+			}
+
+		}
+	}
+}

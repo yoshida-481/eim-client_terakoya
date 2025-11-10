@@ -1,0 +1,3 @@
+::ng-deeop .eim-form-wide eim-text-input-form-item .eim-input-form-item {
+    display: flex;
+}

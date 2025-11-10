@@ -1,0 +1,8 @@
+::ng-deep .eim-attribute-detail .eim-form-item {
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+::ng-deep .eim-attribute-detail eim-attribute-default .eim-form-label {
+	width: calc(20% - 1px);
+}

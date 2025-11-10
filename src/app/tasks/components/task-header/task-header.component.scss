@@ -1,0 +1,299 @@
+@use '_variables' as *;
+@use 'tasks-theme' as *;
+
+/* ==========================================================================
+
+   ========================================================================== */
+div.container {
+  width: 100%;
+  background-color: #ffffff;
+  color: #dddddd;
+}
+
+/** ヘッダ上部区切り線 */
+div.eim-header-separator-line {
+	height: 5px;
+	background: linear-gradient(135deg, #325EE8, #00D9FF, #A8EB4A, #339E00, #00D9FF, #325EE8);
+}
+
+div.contents {
+  float: right;
+  font-size: 12px;
+  padding-top: 6px;
+  color: #000000;
+  width: calc(100% - 270px);
+}
+
+div.clear {
+  clear:both;
+}
+
+/* ==========================================================================
+   ロゴ
+   ========================================================================== */
+div.logo {
+  float: left;
+  height: 35px;
+  padding-left: 8px;
+  padding-top: 3px;
+}
+
+.logo-icon {
+  background-size: contain;
+  height: 35px;
+}
+
+/* ==========================================================================
+   ヘッダー
+   ========================================================================== */
+.eim-header-label {
+	position: fixed;
+	padding-left: 180px;
+	padding-top: 10px;
+	color: #333;
+}
+
+.eim-group-path {
+  margin-top: 2.5px;
+	margin-bottom: 2.5px;
+  padding-top: 3px;
+  border-top: 1px;
+  border-bottom: 1px;
+  vertical-align: middle;
+  float: right;
+	width: calc(100% - 170px - 140px - 35px	);
+}
+
+.eim-group-path-inner {
+	display: inline-block;
+	overflow: hidden;
+	max-width: calc(100% - 25px);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/** メニュー共通 */
+::ng-deep .eim-header-flex-menu .p-menubar .p-submenu-list .p-menubar-item{
+	margin: .125em 0;
+}
+
+::ng-deep .eim-header-flex-menu .p-menubar .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link {
+	padding: 3px;
+}
+
+::ng-deep .eim-header-flex-menu .p-menubar .p-menubar-item.p-menubar-item-active > .p-menubar-item-content > .p-menubar-item-link {
+	background: #a8e8fd;
+	border-radius: 0px;
+	min-width: 30px;
+}
+::ng-deep .eim-header-flex-menu .p-menubar .p-menubar-item.p-menubar-item-active > p-menubarsub .p-menubar-item-link {
+	color: #555555;
+}
+
+/** 個人メニュー */
+/* .eim-header-personal-menu {
+	width: auto;
+	padding-top: 3px;
+} */
+
+::ng-deep .eim-header-personal-menu eim-menubar p-menubar p-menubarsub  span.p-menubar-item-label {
+	overflow: hidden;
+	max-width: 120px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: inline-block;
+}
+
+
+/** 設定メニュー */
+.eim-header-flex-menu-setting {
+	padding-top: 7px;
+	margin-top: -3px;
+}
+
+/** メニュー */
+::ng-deep .eim-header-flex-menu p-menubar > .p-component {
+  background: none;
+}
+
+::ng-deep .eim-header-flex-menu p-menubar > .p-menubar {
+  padding: 0px;
+  border: none;
+}
+
+::ng-deep .eim-header-flex-menu  .p-menubar .p-menubar-root-list > .p-menubar-item{
+  border: none;
+}
+
+::ng-deep .eim-header-flex-menu  .p-menubar .p-menubar-root-list > .p-menubar-item> a {
+  color: #000000;
+  min-width: 30px;
+}
+
+/** フォントサイズ */
+::ng-deep .eim-header {
+  font-size: 12px!important;
+  height: 45px;
+}
+::ng-deep .eim-header .p-component {
+  font-size: 12px!important;
+}
+::ng-deep .eim-header .ag-fresh {
+  font-size: 12px!important;
+}
+
+/** リフレッシュボタン */
+.eim-refresh-button.p-button.p-component {
+	width: 24px;
+	height: 24px;
+	color: #dddddd;
+	padding: 3px 6px;
+}
+
+/** メディアクエリ */
+@media screen and (min-width: 1px) and (max-width: 650px) {
+	.eim-header .contents .info {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 1px) and (max-width: 450px) {
+	.eim-header .contents .menu {
+		display: none;
+	}
+}
+
+/** 設定メニューを右寄せで表示 */
+.eim-header-configuration-menu ::ng-deep p-menubarSub .p-menubar-submenu {
+	max-width: 100vw;
+	right: 0 !important;
+	left: auto !important;
+}
+
+.eim-header-configuration-menu ::ng-deep p-menubarSub .p-menubar-submenu .p-menubar-submenu {
+	right: 100% !important;
+	left: auto !important;
+}
+
+
+/* ==================================================================
+   サイドバー
+   ========================================================================== */
+::ng-deep .eim-sidebar .p-drawer-content {
+	padding: 0px;
+}
+::ng-deep .p-drawer-header {
+	padding: var(--eim-drawer-header-padding)!important;
+	--p-icon-size: 12px;
+}
+::ng-deep .p-drawer-header .p-button-secondary {
+	background: transparent!important;
+	border-color: transparent!important;
+	color: #a6a6a6!important;
+}
+//app.compoment.cssのp-componentへのスタイルの打ち消し
+::ng-deep .p-drawer-header timesicon.p-component {
+	color: inherit;
+}
+
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link {
+	padding: 0.857rem;
+}
+::ng-deep .eim-menubar-vertical .p-menubar {
+	display: contents;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list {
+	display: block;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list {
+	background: $eim-menubar-block-background;
+}
+::ng-deep .eim-menubar-vertical .p-menubar {
+	padding: 0px;
+	border-radius: 0;
+}
+// ::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link {
+// 	display: block;
+// }
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon  {
+	color: inherit!important;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	color: inherit!important;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	color: inherit!important;
+	font-size: 12px;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-submenu-list > .p-menubar-item > .p-menubar-item-content > a.p-menubar-item-link {
+	padding: 3px;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-submenu-list > .p-menubar-item > .p-menubar-item-content > a.p-menubar-item-link > .p-menubar-item-icon  {
+	color: #555555;
+}
+// ::ng-deep .eim-menubar-vertical .p-menubar p-menubarsub .p-menubar-item-link .p-menubar-item-icon  {
+// 	display: flex;
+// }
+// ::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list .p-menubar-item {
+// 	text-align: center;
+// }
+::ng-deep .eim-menubar-vertical .p-menubar > p-menubarsub p-menubarsub .p-menubar-root-list {
+	background: #ffffff;
+}
+::ng-deep .eim-menubar-vertical .p-menubar > p-menubarsub p-menubarsub .p-menubar-root-list .p-menubar-item {
+	text-align: left!important;
+}
+
+::ng-deep .eim-menubar-vertical p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon  {
+	// margin: auto;
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+::ng-deep .eim-menubar-vertical p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	vertical-align: bottom;
+	line-height: 1em;
+}
+
+::ng-deep .eim-menubar-vertical .p-menubar > p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	vertical-align: bottom;
+}
+
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-item {
+	margin: 0px;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-item .p-menubar-item-link {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+::ng-deep .eim-menubar-vertical .p-menubar .ui-menu-parent .p-submenu-list {
+	padding: 0px;
+}
+
+/** マウスオーバー、クリック */
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link, .eim-menubar-vertical .p-menubar .p-menubar-item .p-menubar-item-link:hover {
+	background: $eim-menubar-block-hover-background-color;
+	color: $eim-menubar-block-hover-color;
+	border-radius: 0px;
+	border-color: #d1fcb6;
+}
+
+/** マウスオーバー、クリックなし */
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item:not(.p-menubar-item-active) > .p-menubar-item-content > .p-menubar-item-link,
+ .eim-menubar-vertical .p-menubar .p-menubar-item .p-menubar-item-link:not(:hover) {
+	color: $eim-menubar-block-color;
+}
+
+::ng-deep .eim-menubar-vertical .p-menubar .p-menubar-root-list > .p-menubar-item {
+	border-top: thin solid #dddddd;
+	border-radius: 0px;
+}
+::ng-deep .p-menubar-submenu-icon {
+	margin-left: 0px;
+}
+
+::ng-deep a.p-menubar-item-link {
+	min-width: 100px;
+}

@@ -1,0 +1,111 @@
+.header {
+	height: 50px;
+}
+.body {
+	height: calc(100% - 45px);
+}
+
+/** メニュー */
+::ng-deep .p-menu {
+	width: initial;
+}
+
+::ng-deep .p-menu .ui-menu-parent .ui-menu-child {
+  width: initial;
+}
+
+/** アコーディオン開 */
+::ng-deep .p-accordion .p-accordionpanel-active .p-accordionheader {
+	background: linear-gradient(to bottom, #f2f2f2, #d7d7d7)!important;
+	border-width: 0.5px!important;;
+	border-radius: 3px!important;;
+	border-color: rgb(214, 214, 214)!important;;
+	border-top-left-radius: 3px!important;;
+	border-top-right-radius: 3px!important;;
+	border-bottom-right-radius: 0px !important;;
+	border-bottom-left-radius: 0px !important;;
+}
+::ng-deep .p-accordion .p-accordionheader {
+	background: linear-gradient(to bottom, #f2f2f2, #d7d7d7);
+	border-width: 0.5px;
+}
+::ng-deep .p-accordion .p-accordionheader.p-highlight:hover {
+	border-color: rgb(192, 192, 192);
+}
+/** アコーディオン閉 */
+::ng-deep .p-accordion .p-accordionheader:not(.p-highlight):not(.p-disabled):hover {
+	background: linear-gradient(to bottom, #f2f2f2, #d7d7d7);
+	border-width: 0.5px;
+}
+/** 帳票詳細アコーディオン */
+::ng-deep .eim-form-detail .p-accordion .ui-accordion-content-wrapper {
+	border-style: solid;
+	border-color: #d6d6d6;
+	border-width: .5px 1px 1px 1px;
+	background-color: #fff;
+	padding-top: 3px;
+}
+
+::ng-deep .eim-form-detail .eim-form-detail-accordion-margin {
+	margin-top: 5px;
+}
+
+::ng-deep .eim-form-detail .p-accordion .p-accordioncontent .p-accordioncontent-content {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+::ng-deep .eim-form-detail .eim-hierarchical-attribute-list-input-form-group > p-fieldset > .p-fieldset {
+	border: .5px solid #1847ca;
+	border-radius: 0px;
+	min-width: 100%;
+}
+
+::ng-deep .eim-form-detail .eim-hierarchical-attribute-list-input-form-group > p-fieldset > .p-fieldset > .p-fieldset-legend {
+	border: none;
+}
+
+::ng-deep .pi-plus:before {
+	content: "\e901";
+}
+::ng-deep .pi-minus:before {
+	content: "\e902";
+}
+/* 2022.04 新規 */
+::ng-deep .eim-icon-form-workspace-color {
+	color: #1c2ea0 !important;
+}
+/* 2022.04 新規 */
+::ng-deep .eim-icon-form-type-color {
+	color: #1c2ea0 !important;
+}
+/* 2022.04 新規 */
+::ng-deep .eim-icon-folder-color {
+	color: #DBAD4A !important;
+}
+/* 2022.05 新規 フッタボタン用（次へ進むボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.eim-icon-forward {
+	position: absolute;
+	left: 0.5em;
+}
+/* 2022.05 新規 フッタボタン用（前へ戻るボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.eim-icon-backward {
+	position: absolute;
+	left: 0.5em;
+}
+/* 2022.05 新規 フッタボタン用（取戻しボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.eim-icon-reply {
+	position: absolute;
+	left: 0.5em;
+}
+/* 2022.05 新規 フッタボタン用（帳票出力ボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.fa-download {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 フッタボタン用 */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-label {
+	margin-left: 1.5em;
+}

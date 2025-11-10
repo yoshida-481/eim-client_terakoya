@@ -1,0 +1,24 @@
+<label [ngClass]="{'eim-form-label': true}" style="margin-left: 10px;white-space: nowrap;">{{label}}</label>
+<div class="eim-form-item" style="width: 580px">
+	<ng-container *ngIf="value">
+			<div class="eim-form-input" style="display: flex; margin-left: 10px; margin-right: 10px">
+				<div style="width: 120px; margin-right: 12px;">
+					<p-datepicker #fromCalendar name="{{name + 'From'}}"
+						dateFormat="{{ 'EIM.CALENDAR.DATE_FORMAT' | translate }}" appendTo="body" selectOtherMonths="true"
+						[showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="CALENDAR_YEAR_RANGE"
+						[(ngModel)]="value[0]" [showIcon]="!disabled" [inputStyle]="{'width': '100px'}"  [showOnFocus]=false
+						(onClearClick)="onClickClear($event, fromCalendar, 0)" (onSelect)="onSelect($event, 0)" 
+						(onInput)="onInput($event, 0)" (onTodayClick)="onClickToday($event, fromCalendar, 0)"></p-datepicker>
+				</div>
+				<div class="center" style="margin-right: 10px;height:100%; display: initial;"><label class="eim-form-label">{{DELIMITER_TIDE}}</label></div>
+				<div style="width: 120px;">
+					<p-datepicker #toCalendar name="{{name + 'To'}}"
+						dateFormat="{{ 'EIM.CALENDAR.DATE_FORMAT' | translate }}" appendTo="body" selectOtherMonths="true"
+						[showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="CALENDAR_YEAR_RANGE"
+						[(ngModel)]="value[1]" [showIcon]="!disabled" [inputStyle]="{'width': '100px'}"  [showOnFocus]=false
+						(onClearClick)="onClickClear($event, toCalendar, 1)" (onSelect)="onSelect($event, 1)" 
+						(onInput)="onInput($event, 1)" (onTodayClick)="onClickToday($event, toCalendar, 1)"></p-datepicker>
+				</div>
+			</div>
+	</ng-container>
+</div>

@@ -1,0 +1,4 @@
+/* 2022.05 新規 更新ボタン用 */
+::ng-deep eim-access-security-edit .p-rtl.eim-admin-footer .p-button {
+	padding: .25em 1em;
+}

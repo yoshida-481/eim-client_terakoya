@@ -1,0 +1,30 @@
+<div style="height: 100%;">
+	<form #codeTypeSelectorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off" >
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+
+				<as-split direction="horizontal">
+					<div>
+					<div style="width: 50%; padding: 2px; float: left;">
+						<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02007' | translate }}">
+							<div style="height: 280px;">
+								<eim-data-grid class="eim-user-list" #codeTypeDataGrid [multiple]="false" (selected)="onSelectCodeType($event)"></eim-data-grid>
+							</div>
+						</p-panel>
+					</div>
+					<div style="width:50%; padding: 2px; float: left;">
+						<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02119' | translate }}">
+							<div class="eim-data-grid-menu" >
+							</div>
+							<div style="height: 280px;">
+								<eim-data-grid class="eim-user-list" #codeDataGrid [multiple]="false"></eim-data-grid>
+							</div>
+						</p-panel>
+						</div>
+					</div>
+				</as-split>
+
+			</div>
+		</div>
+	</form>
+</div>

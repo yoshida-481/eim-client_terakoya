@@ -1,0 +1,22 @@
+::ng-deep eim-attachement-file-input-form-item .p-listbox-list .p-highlight {
+	background: #c4eefc;
+	color: #555555;
+}
+
+/** disableでマウスオーバー時の背景色 */
+::ng-deep eim-attachement-file-input-form-item .p-listbox-list li.p-listbox-option:hover {
+	background: #FFFFFF;
+	border-radius: 0px;
+}
+
+::ng-deep eim-attachement-file-input-form-item p-listbox .p-listbox {
+	padding: 0px;
+}
+
+::ng-deep eim-attachement-file-input-form-item .p-listbox .p-listbox-option {
+	cursor: initial;
+}
+
+.eim-form-input-multi-button {
+	margin-left: 3px;
+}

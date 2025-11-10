@@ -1,0 +1,9 @@
+<div *ngIf="info && info.length" [style.display]="dragging ? 'flex' : 'none'">
+  <i class="fa fa-lg fa-arrows"></i>
+  <ul>
+    <li *ngFor="let i of info">
+      <i class="fa fa-lg {{ i.icon }}"></i>
+      <pre>{{ i.name }}</pre>
+    </li>
+  </ul>
+</div>

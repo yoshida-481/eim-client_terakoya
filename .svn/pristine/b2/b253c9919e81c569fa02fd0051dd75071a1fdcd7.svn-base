@@ -1,0 +1,40 @@
+<div style="height: 100%;">
+	<as-split #split id="split" direction="horizontal">
+		<as-split-area id="splitLeft" [size]="splitSetting.splitLeft.size">
+			<div class="eim-admin-left-panel">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02022' | translate }}">
+					<div style="height: 100%;" eim-vertical-container>
+						<!-- メニューバー-->
+						<div class="eim-data-grid-menu">
+							<eim-menubar [model]="menubarItemsFormat"></eim-menubar>
+						</div>
+						<!-- フォーマット一覧-->
+						<div class="eim-flexible-height">
+							<eim-data-grid #formatDataGrid [equals]="dataGridEquals" (selected)="onSelectedFormat($event)"
+								[contextMenuItems]="contentsMenuItemsFormat">
+							</eim-data-grid>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+		<as-split-area [size]="100 - splitSetting.splitLeft.size">
+			<div class="eim-admin-right-panel">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02024' | translate }}">
+					<div style="height: 100%;" eim-vertical-container>
+						<!-- メニューバー-->
+						<div class="eim-data-grid-menu">
+							<eim-menubar [model]="menubarItemsFormatDir"></eim-menubar>
+						</div>
+						<!-- ディレクトリ一覧-->
+						<div class="eim-flexible-height">
+							<eim-data-grid #directoryDataGrid [equals]="dataGridEquals" (selected)="onSelectedDirectory($event)"
+								[contextMenuItems]="contentsMenuItemsFormatDir">
+							</eim-data-grid>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>

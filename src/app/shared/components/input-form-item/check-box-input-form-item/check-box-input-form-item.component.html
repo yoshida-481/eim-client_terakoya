@@ -1,0 +1,22 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}">{{label}}</label>
+
+	<div class="eim-form-input" style="display: initial;"
+			[ngClass]="{'eim-form-no-label': label === null || label === ''}">
+		<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+			<div class="eim-form-input-surround"
+					[class.ng-dirty]="formControls[0] && formControls[0].dirty" [class.ng-invalid]="formControls[0] && formControls[0].invalid">
+				<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+					<div>
+						<div *ngFor="let option of options; let i = index">
+							<eim-checkbox name="{{name}}_{{i}}" [(ngModel)]="selectedValues" 
+									label="{{option.label}}" [value]="option.value" [disabled]="disabled"
+									(onChange)="onChange($event, 0)"></eim-checkbox>
+						</div>
+					</div>
+				<span class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+			</div>
+		<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+	</div>
+</div>
+

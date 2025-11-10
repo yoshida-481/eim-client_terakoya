@@ -1,0 +1,69 @@
+<ng-container *ngFor="let item of inputFormItems">
+	<!-- <eim-text-input-form-item *ngIf="item.uiControlId == 'uIControlTextInput'"
+			[form]="item.form" [name]="item.name" [label]="item.label"
+			[required]="required" [maxlength]="maxLength" [pattern]="pattern"
+			[disabled]="disabled" [multiple]="multiple" [dirty]="dirty" [ngModel]="value">
+	</eim-text-input-form-item> -->
+
+	<eim-text-input-form-item *ngIf="item.uiControlId == 'uIControlTextInput'"
+		[form]="item.form" [name]="item.name" [label]="item.label"
+		[required]="item.required" [maxlength]="item.maxLength" [pattern]="item.pattern"
+		[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-text-input-form-item>
+
+	<eim-text-area-input-form-item *ngIf="item.uiControlId == 'uIControlTextArea'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required" [maxlength]="item.maxLength"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-text-area-input-form-item>
+
+	<eim-rich-text-input-form-item *ngIf="item.uiControlId == 'uIControlRichText'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-rich-text-input-form-item>
+
+	<eim-attachement-file-input-form-item *ngIf="item.uiControlId == 'uIControlFile'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-attachement-file-input-form-item>
+
+	<eim-combo-box-input-form-item *ngIf="item.uiControlId == 'uIControlComboBox'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value" [options]="item.options">
+	</eim-combo-box-input-form-item>
+
+	<eim-check-box-input-form-item *ngIf="item.uiControlId == 'uIControlCheckBox'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value" [options]="item.options">
+	</eim-check-box-input-form-item>
+
+	<eim-radio-button-input-form-item *ngIf="item.uiControlId == 'uIControlRadioButton'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value" [options]="item.options">
+	</eim-radio-button-input-form-item>
+
+	<eim-calendar-input-form-item *ngIf="item.uiControlId == 'uIControlDateField'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required" [maxlength]="item.maxLength"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-calendar-input-form-item>
+
+	<eim-master-input-form-item *ngIf="item.uiControlId == 'uIControlSearchField' && item.uiControlType == 'ObjectSearch'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value"
+			[searchMasterDisplayConfig]="item.searchMasterDisplayConfig">
+	</eim-master-input-form-item>
+
+	<eim-user-input-form-item *ngIf="item.uiControlId == 'uIControlSearchField' && item.uiControlType == 'UserSearch'"
+			[form]="form" [name]="item.name" [label]="item.label"
+			[required]="item.required"
+			[disabled]="item.disabled" [multiple]="item.multiple" [dirty]="item.dirty" [ngModel]="item.value">
+	</eim-user-input-form-item>
+
+</ng-container>

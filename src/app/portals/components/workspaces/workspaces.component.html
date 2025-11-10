@@ -1,0 +1,84 @@
+<div style="display: flex; height: 100%;">
+	<as-split direction="horizontal">
+		<as-split-area [size]="25" style="background: #ffffff;">
+			<!-- ワークスペース -->
+			<p-panel class="eim-stretched-panel eim-panel-content-fit" header="{{ 'EIM_TASKS.LABEL_03032' | translate }}">
+				<ng-template pTemplate="icons">
+					<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="panelMenuItems"></eim-menubar>
+				</ng-template>
+				<eim-tree
+						#workspaceTree class="eim-tree eim-tree-no-border"
+						[setAdditionalPropertiesToTreeNodeFunction]="setAdditionalPropertiesToTreeNodeFunction"
+						[setAdditionalTreeNodeRelationFunction]="setAdditionalTreeNodeRelationFunction"
+						[contextMenuItems]="workspaceContextMenuItems" [filter]="true"
+						[visibleMouseOverMenuFunction]="isVisibleMouseOverMenu"
+						isDispMouseOverMenu="true"
+						(contextmenu)="onContextMenu($event)"
+						(selected)="onSelectedWorkspace($event)">
+				</eim-tree>
+			</p-panel>
+		</as-split-area>
+		<as-split-area [size]="75" style="background: #ffffff;">
+
+			<div style="height: 100%; width: 100%; display: grid;grid-template-rows: auto 1fr;">
+				<!-- <p-tabMenu class="eim-activable-menu" [model]="mainMenuItems" [activeItem]="selectedMainMenuItem"></p-tabMenu> -->
+				<p-tabs class="eim-activable-menu" [value]="selectedMainMenuItem()" (valueChange)="onChangeTab($event)">
+					<p-tablist>
+						@for(menu of mainMenuItems; track menu.name){
+							<p-tab [value]="menu.name" [disable]="menu.disabled" *ngIf="menu.visible">
+								<i [class]="menu.icon" style="font-style: normal;"></i>
+								<span>{{ menu.label }}</span>
+							</p-tab>
+        }
+					</p-tablist>
+				</p-tabs>
+
+				<div class="eim-workspace-contents">
+					<router-outlet (activate)="onActivateChildComponent($event)"></router-outlet>
+				</div>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>
+
+<!-- ワークスペース登録 -->
+<ng-container *ngIf="viewDialogName === 'workspaceCreator'" novalidate>
+	<eim-dialog header="{{ 'EIM_TASKS.LABEL_01023' | translate }}" modal="true" width="675" contentMaxHeight="280"
+		[fitHeight]="true"
+		[visible]="viewDialogName === 'workspaceCreator'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-project-creator *ngIf="viewDialogName === 'workspaceCreator'" (created)="onCreatedWorkspace($event)">
+
+		</eim-project-creator>
+	</eim-dialog>
+</ng-container>
+
+<!-- ワークスペース流用 -->
+<ng-container *ngIf="viewDialogName === 'workspaceDuplicator'" novalidate>
+	<eim-dialog header="{{ 'EIM_TASKS.LABEL_01024' | translate }}" width="675" height="100%"
+			[enableMaximize]="false"
+			[visible]="viewDialogName === 'workspaceDuplicator'" modal="true" (close)="onCloseDialog()">
+		<form #duplicateWorkspaceForm="ngForm" class="eim-form-wide" autocomplete="off">
+			<!-- コピー元プロジェクト名 -->
+			<div class="eim-form-item">
+				<label class="eim-form-label eim-form-label-required">{{ 'EIM_TASKS.LABEL_02058' | translate }}</label>
+				<div class="eim-form-input" style="display: block !important;" >
+					<input name="copyResourceProjectName" disabled type="text" pInputText [(ngModel)]="originalWorkspaceName" style="width: 100%;">
+				</div>
+			</div>
+			<!-- 新規プロジェクト名 -->
+			<div class="eim-form-item">
+				<label class="eim-form-label eim-form-label-required">{{ 'EIM_TASKS.LABEL_02059' | translate }}</label>
+				<div class="eim-form-input" style="display: block !important;">
+					<input name="createProjectName" type="text" pInputText [(ngModel)]="createWorkspaceName" [required]="true" style="width: 100%;">
+				</div>
+			</div>
+		</form>
+		<footer>
+			<button pButton type="button" class="p-button-primary" (click)="onClickDuplicateWorkspace($event)" icon="fa fa-check"
+					label="{{ 'EIM.LABEL_03005' | translate }}" [disabled]="duplicateWorkspaceForm.invalid"></button>
+		</footer>
+	</eim-dialog>
+</ng-container>

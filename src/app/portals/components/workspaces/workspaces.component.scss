@@ -1,0 +1,12 @@
+::ng-deep .eim-workspace-contents {
+	height: 100%;
+	width: 100%;
+	position: relative;
+
+	> *:last-child {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		overflow: auto;
+	}
+}

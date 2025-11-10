@@ -1,0 +1,7 @@
+.eim-dir-status-online {
+color: red;
+}
+
+.eim-dir-status-offline-disable {
+color:#CCCCCC;
+}

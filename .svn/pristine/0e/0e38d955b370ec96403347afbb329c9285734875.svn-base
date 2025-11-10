@@ -1,0 +1,77 @@
+<div class="container eim-header" style="font-size: 12px;">
+	<div class="eim-header-separator-line"></div>
+
+	<!-- サイドバー表示 -->
+	<button pButton class="p-button-primary eim-refresh-button" style="float: left; margin-top: 10px;	margin-left: 10px;" type="button" icon="fa fa-solid fa-bars" (click)="onClickSidebar($event)"></button>
+
+	<div class="logo">
+		<img [src]="logoSrc" class="logo-icon">
+	</div>
+	<div *ngIf="headerLabel" class="eim-header-label">{{headerLabel}}</div>
+	<div class="contents"  >
+
+		<div class="menu">
+			<!-- 更新ボタン -->
+			<span *ngIf="!headerLabel"  style="float: right; margin-right: 5px; margin-top: 3px;">
+				<button pButton class="p-button-primary eim-refresh-button" type="button" icon="fa fa-lg eim-icon-refresh"
+						[disabled]="reloadDisabled" [pTooltip]="updateLatestTooltip" [tooltipStyleClass]="headerTooltipClass" (click)="onUpdateLatest($event)"></button>
+			</span>
+
+			<!-- 設定メニュー -->
+			<span class="eim-header-flex-menu eim-header-configuration-menu" style="display: inline-block; float: right; margin-right: 5px;">
+				<eim-menubar [model]="configurationMenuItems"></eim-menubar>
+			</span>
+
+		</div>
+
+		<div class="info">
+			<!-- 個人メニュー -->
+			<span *ngIf="user.userName != ''" class="eim-header-flex-menu eim-header-personal-menu" style="display: inline-block; float: right;">
+				<eim-menubar [model]="personalMenuItems"></eim-menubar>
+			</span>
+
+			<!-- グループ -->
+			<span *ngIf="user.groupPath != ''" class="eim-group-path" >
+				<span class="eim-group-path-inner" style="float: right;" [pTooltip]="user.groupPath">
+					{{user.groupPath}}
+				</span>
+				<i class="fa fa-lg eim-icon-group" style="float: right; margin-right: 5px; margin-top: 2px;"></i>
+			</span>
+		</div>
+
+	</div>
+	<div class="clear"></div>
+</div>
+
+<p-drawer class="eim-sidebar" [(visible)]="displaySidebar" header=" " [style]="{'margin-top':'45px',width:'200px','background-color':'#333333'}">
+	<div class="eim-menubar-vertical">
+		<eim-menubar [model]="mainMenuItems"></eim-menubar>
+	</div>
+</p-drawer>
+
+<!-- バージョン -->
+<ng-container *ngIf="viewDialogName === 'version'" novalidate>
+	<eim-dialog header="{{ 'EIM.LABEL_01004' | translate }}" modal="true" position="absolute" width="300" height="200"
+		name="version"
+		class="eim-dialog"
+		[visible]="viewDialogName === 'version'"
+		[enableMaximize]="false"
+		(close)="viewDialogName = '';">
+		<eim-version-display [version]="version">
+		</eim-version-display>
+	</eim-dialog>
+</ng-container>
+
+<!-- 処理待ち一覧 -->
+<ng-container *ngIf="viewDialogName === 'processingWaitingList'" novalidate>
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_03047' | translate }}" modal="true" width="1320" height="400"
+		class="eim-dialog"
+		[visible]="viewDialogName === 'processingWaitingList'" modal="true" (close)="viewDialogName = '';"
+		[name]="name">
+
+		<div class="eim-flexible-height" style="height: 100%;">
+			<eim-task-processing-waiting-list (updatedTask)="onUpdatedTask($event)" (errored)="viewDialogName = '';">
+			</eim-task-processing-waiting-list>
+		</div>
+	</eim-dialog>
+</ng-container>

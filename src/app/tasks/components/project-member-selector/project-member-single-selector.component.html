@@ -1,0 +1,11 @@
+<eim-template-data-grid-single-selector #template
+		[componentService]="projectMemberSingleSelectorComponentService" [(condition)]="condition"
+		[multiple]="multiple"
+		[filterFlag]="true">
+	<div class="eim-form-item" style="width: 100%;">
+		<div class="eim-form-input" style="width: 100%; display: block !important;">
+			<input pInputText type="text" style="width: 100%;" name="userName" maxlength="{{inputMaxLength}}"
+				[(ngModel)]="condition.keyword" />
+		</div>
+	</div>
+</eim-template-data-grid-single-selector>

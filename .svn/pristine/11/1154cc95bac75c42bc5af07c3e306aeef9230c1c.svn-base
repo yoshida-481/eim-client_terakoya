@@ -1,0 +1,45 @@
+<div class="p-grid" style="width: 100%; height: 100%;">
+	<div style="width: calc(50% - 20px); height: 100%">
+		<p-tabs #entryTabView [value]="selectedTab()" (valueChange)="onChangeTab($event)">
+			<p-tablist>
+				<p-tab [value]="0">{{ 'EIM.LABEL_02003' | translate }}</p-tab>
+				<p-tab [value]="1">{{ 'EIM.LABEL_02004' | translate }}</p-tab>
+			</p-tablist>
+			<p-tabpanels>
+				<p-tabpanel [value]="0">
+					<div style="padding:5px; height: 100%">
+						<eim-tree #groupTree (selected)="onSelectTreeNode($event)" [componentService]="treeComponentService" ></eim-tree>
+					</div>
+				</p-tabpanel>
+				<p-tabpanel [value]="1">
+					<div style="padding:5px; height: 100%">
+						<eim-tree #roleTree (selected)="onSelectTreeNode($event)" [componentService]="treeComponentService" ></eim-tree>
+					</div>
+				</p-tabpanel>
+			</p-tabpanels>
+		</p-tabs>
+	</div>
+
+	<div style="height: 100%; width: 40px; display: table;">
+		<div style="vertical-align: middle; float: none; display: table-cell;">
+			<button pButton class="p-button-success" type="button" icon="fa fa-arrow-right" pTooltip="{{ 'EIM.LABEL_03010' | translate }}"
+					appendTo="body" positionStyle="fixed" style="width: 30px; height: 30px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px;"
+					(click)="onSelectEntryAdd($event)">
+			</button>
+			<button pButton class="p-button-success" type="button" icon="fa fa-arrow-left" pTooltip="{{ 'EIM.LABEL_03003' | translate }}"
+					appendTo="body" positionStyle="fixed" style="width: 30px; height: 30px; margin-left: 5px; margin-right: 5px;"
+					(click)="onSelectEntryDelete($event)">
+			</button>
+		</div>
+	</div>
+
+	<div eim-vertical-container style="height: 100%; width: calc(50% - 20px);">
+		<div class="eim-flexible-height">
+			<div class="eim-group-role-selector">
+				<p-panel header="{{ 'EIM.LABEL_02038' | translate }}" class="eim-panel-containing-grid">
+					<eim-data-grid #destinationListGrid></eim-data-grid>
+				</p-panel>
+			</div>
+		</div>
+	</div>
+</div>

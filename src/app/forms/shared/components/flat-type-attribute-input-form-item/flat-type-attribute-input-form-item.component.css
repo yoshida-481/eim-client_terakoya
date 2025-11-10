@@ -1,0 +1,91 @@
+::ng-deep eim-flat-type-attribute-input-form-item .title {
+	font-weight: bold;
+	font-size: 1.30em;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .description {
+	font-size: 0.95em;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item.p-col-6 .eim-form-item{
+	margin-top: 0px;
+	margin-bottom: 4px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .eim-form-item input {
+	height: 26px!important;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .eim-form-item .textarea{
+	height: 60px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .request-dest .eim-form-item .textarea{
+	height: 400px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .request-dest2 .eim-form-item .textarea{
+	height: 570px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .eim-form-item .ui-dropdown-label {
+	height: 26px!important;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-attribute-input-form-item .eim-form-item .ui-dropdown-trigger {
+	height: 26px;
+}
+
+/** 入力項目　左側メッセージ */
+::ng-deep .eim-input-form-item-left-message {
+	word-break: keep-all;
+	white-space: pre;
+	margin-top: 3px;
+	padding-right: 3px;
+}
+
+/** 入力項目　右側メッセージ */
+::ng-deep .eim-input-form-item-right-message {
+	padding-left: 3px;
+	margin-top: 3px;
+	white-space: nowrap;
+}
+
+::ng-deep .eim-input-form-item-right-message a {
+	padding-left: 30px;
+}
+
+::ng-deep .eim-form-item .eim-form-label {
+	padding: 1px 3px 1px 3px;
+}
+
+::ng-deep .attribute-search-input-form-item  {
+	display: flex;
+}
+
+::ng-deep .attribute-search-input-form-item label {
+	padding: 1px 3px 1px 3px;
+	margin-left: 0 !important;
+}
+
+::ng-deep .attribute-search-input-form-item div {
+	margin-left: 0 !important;
+}
+
+::ng-deep .detail-status-input-div .eim-form-input-surround {
+	display: block;
+}
+
+::ng-deep .eim-massage-coler {
+	color: #f00;
+}

@@ -1,0 +1,30 @@
+<div class="container" style="height: 100%;">
+	<as-split direction="horizontal">
+		<as-split-area [size]="40" style="height: 100%;">
+			<div style="height: 100%; width: 100%; padding-right: 3px;" eim-vertical-container>
+				<div style="margin-bottom: 2px;">
+					<p-selectButton class="eim-select-btn" [options]="displayTypes" [(ngModel)]="selectedDisplayTypeId" (onChange)="onChangeDisplayType($event)">
+					</p-selectButton>
+					<eim-checkbox name="link" label="{{'EIM_DOCUMENTS.LABEL_02202' | translate}}"
+						binary="true" [(ngModel)]="linkDisplayFlag" (click)="onChangeLinkDisplayFlag($event)" [style]="{'margin-left': '10px'}">
+					</eim-checkbox>
+				</div>
+				<div class="eim-flexible-height" style="padding-top: 3px">
+					<eim-diagram #revisionHistoryDiagram [componentService]="revisionHistoryDiagramComponentService"
+						[contextMenuItems]="dialogContextMenuItems" (changed)="onChangeDiagram($event)"></eim-diagram>
+				</div>
+			</div>
+		</as-split-area>
+		<as-split-area [size]="60" style="height: 100%;">
+			<div style="width: 100%; height: 100%; overflow: hidden; padding-left: 3px;" eim-vertical-container>
+				<div class="eim-data-grid-menu">
+					<eim-menubar [model]="menuItems"></eim-menubar>
+				</div>
+				<div class="eim-flexible-height">
+					<eim-data-grid #revisionHistoryDataGrid [contextMenuItems]="gridContextMenuItems"
+							(selected)="onChangeDataGrid($event)" (rowDoubleClicked)="onRowDoubleClicked($event)" [equals]="equalsDocument"></eim-data-grid>
+				</div>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>

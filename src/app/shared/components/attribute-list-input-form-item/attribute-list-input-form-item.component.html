@@ -1,0 +1,3 @@
+<div *ngFor="let item of layoutAndAttributeList; let i = index">
+	<eim-attribute-input-form-item [form]="form" [attributeTypeLayout]="item.attributeTypeLayout" [attribute]="item.attribute" [disabled]="disabled" [statusTypeId]="statusTypeId"></eim-attribute-input-form-item>
+</div>

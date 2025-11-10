@@ -1,0 +1,63 @@
+<form #fileCompareForm="ngForm" class="eim-form-wide" style="width: 100%; height: 100%;" autocomplete="off">
+	<div style="height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;">
+		<div style="margin-bottom: 10px;">
+			<div class="eim-form-item">
+				<label class="eim-form-label eim-form-label-required" style="width: 160px">{{ 'EIM_DOCUMENTS.LABEL_02096' | translate }}</label>
+				<div class="eim-form-input" style="display: flex;">
+					<input type="text" name="folderName" pInputText
+							[disabled]="creating" [(ngModel)]="name" style="width: 100%;" required="true"
+							maxlength="{{inputMaxLength}}"/>{{PDF_EX}}
+				</div>
+			</div>
+		</div>
+
+		<div style="width: 100%; margin-bottom: 3px;">
+			<div style="margin-top: 3px;">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_DOCUMENTS.LABEL_02094' | translate }}">
+					<div class="eim-data-grid-menu" style="display: flex;">
+						<eim-menubar [model]="sourceDocumentMenuItems"></eim-menubar>
+					</div>
+					<div style="height: 80px; width: 100%;">
+						<eim-data-grid #sourceDocument
+								[multiple]="false" [suppressHorizontalScroll]="true" (selected)="onSelectFile($event)"></eim-data-grid>
+					</div>
+				</p-panel>
+			</div>
+		</div>
+
+		<div style="width: 100%;">
+			<button pButton type="button" icon="fa-fw fa fa-arrows-v" style="margin: auto; display: flex;" label="{{ 'EIM_DOCUMENTS.LABEL_03058' | translate }}"
+				(click)="onClickReplacement($event)" [disabled]="disabledFlag" >
+			</button>
+		</div>
+
+		<div style="width: 100%; margin-bottom: 3px;">
+			<div style="margin-top: 3px;">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_DOCUMENTS.LABEL_02095' | translate }}">
+					<div class="eim-data-grid-menu" style="display: flex;">
+						<eim-menubar [model]="destinationDocumentMenuItems"></eim-menubar>
+					</div>
+					<div style="height: 80px; width: 100%;">
+						<eim-data-grid #destinationDocument
+								[multiple]="false"  [suppressHorizontalScroll]="true" (selected)="onSelectFile($event)"></eim-data-grid>
+					</div>
+				</p-panel>
+			</div>
+		</div>
+
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="chkMailSending" binary="true" label="{{ 'EIM_DOCUMENTS.LABEL_02181' | translate }}" [(ngModel)]="chkMailSendinglagValue"
+					></eim-checkbox>
+			</div>
+		</div>
+
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="chkLayout" binary="true" label="{{ 'EIM_DOCUMENTS.LABEL_02182' | translate }}" [(ngModel)]="chkDoAnalyzeLayout"
+					></eim-checkbox>
+			</div>
+		</div>
+	</div>
+
+</form>

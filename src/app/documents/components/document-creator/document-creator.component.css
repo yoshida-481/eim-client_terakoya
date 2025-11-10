@@ -1,0 +1,73 @@
+.my-drop-zone { border: dotted 2px white; }
+.nv-file-over { border: dotted 2px red; } /* Default class applied to drop zones on over */
+
+/* 2022.03 削除 未使用 */
+/*::ng-deep .eim-document-creator-property-panel .ui-panel-content-wrapper {
+	height: 100%;
+}*/
+
+::ng-deep .eim-document-creator-property-panel .p-panel-content {
+	height: 100%;
+}
+::ng-deep .eim-document-creator-property-panel .p-tabpanel  {
+	overflow: hidden;
+}
+
+/** ファイル関連 */
+.eim-upload-menu-btn {
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border: solid 1px #e5e5e5;
+	border-radius: 3px;
+	transition-property: none;
+	padding: 3px 6px 0px 6px;
+	margin: 1.5px 0px 0px 0px;
+	cursor: pointer;
+}
+.eim-upload-menu-btn:hover {
+	border: thin solid #3dabff;
+	border-radius: 3px;
+}
+.eim-upload-menu-btn-disabled {
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border: solid 1px #e5e5e5;
+	border-radius: 3px;
+    transition-property: none;
+	padding: 3px 6px 0px 6px;
+	margin: 1.5px 0px 0px 0px;
+}
+/* 追加 */
+.eim-upload-menu-btn-box {
+  background: linear-gradient(to bottom, #f0f1f1, #e5e5e5);
+  border: solid 1px #e5e5e5;
+  border-radius: 3px;
+  transition-property: none;
+  padding: 3px 6px 0px 6px;
+  margin: 1.5px 0px 0px 0px;
+}
+
+.eim-upload-menu-btn-box .eim-upload-menu-btn-icon, 
+.eim-upload-menu-btn-box .eim-upload-menu-btn-label {
+  opacity: 0.35;
+}
+
+.eim-upload-menu-btn-disabled:hover {
+	opacity: 0.35;
+	background: #eeeeee;
+	background-color: #a6a6a6;
+	color: #ffffff;
+}
+.eim-upload-menu-btn-disabled:hover .eim-upload-menu-btn-icon,.eim-upload-menu-btn-disabled:hover .eim-upload-menu-btn-label {
+	opacity: 1;
+}
+/* 2022.03 削除 プロパティタブの右罫線が欠けるため
+::ng-deep .p-tabs.p-component.ui-widget-content.ui-corner-all.ui-tabview-top{
+	margin-right: -5px !important;
+}*/
+/* 2022.01 削除
+::ng-deep .padding-top-set eim-checkbox {
+	padding-top:2px;
+}*/
+/* 2022.03 新規 */
+::ng-deep eim-document-creator > div > form.p-grid {
+	padding: 3px;
+}

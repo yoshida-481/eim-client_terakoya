@@ -1,0 +1,159 @@
+<form #propertyForm="ngForm" class="eim-form-detail eim-form-wide"
+	[ngClass]="{'use-flat-type': USE_FORM_FLAT_LAYOUT === true}" style="height: 100%;" eim-vertical-container
+	autocomplete="off" novalidate>
+	<div *ngIf="form.status" style="width: 100%; margin-bottom: 6px;">
+		<eim-workflow-diagram #workflowDiagram [multiple]="false" [zoomFromViewCenter]="true"
+			[componentService]="workflowDiagramComponentService"
+			(selected)="onSelectDiagram($event)"></eim-workflow-diagram>
+	</div>
+
+	<div class="eim-flexible-height">
+		<div style="height: 100%; padding-left: 0px; overflow: auto; position: relative">
+			<p-accordion [value]="selectedTab()" [multiple]="true" 
+				(onOpen)="onExpandCurrentAccordion($event, true);"
+				(onClose)="onExpandCurrentAccordion($event, false);">
+				<div *ngIf="objectTypeLayout">
+					<!-- 基本情報 -->
+					<p-accordion-panel [value]="0">
+						<p-accordion-header>
+							<ng-template #toggleicon let-active="active">
+								@if (active) {
+								<i class="pi pi-chevron-down p-accordionheader-toggle-icon"></i>
+								} @else {
+								<i class="pi pi-chevron-right  p-accordionheader-toggle-icon"></i>
+								}
+							</ng-template>
+							{{ 'EIM_FORMS.LABEL_02015' | translate }}
+						</p-accordion-header>
+						<p-accordion-content>
+							<div [ngClass]="{'use-flat-type': USE_FORM_FLAT_LAYOUT === true}" class="eim-form-item">
+								<label *ngIf="USE_FORM_FLAT_LAYOUT === false" class="eim-form-label">{{'EIM.LABEL_02027'
+									| translate}}</label>
+								<label *ngIf="USE_FORM_FLAT_LAYOUT === true"
+									class="eim-form-label-flat-type">{{'EIM.LABEL_02027' | translate}}</label>
+								<div class="eim-form-input" style="display: flex;">
+									<input name="name" type="text" pInputText value="{{form.name}}" disabled="true"
+										style="width: 100%;" />
+								</div>
+							</div>
+							<div [ngClass]="{'use-flat-type': USE_FORM_FLAT_LAYOUT === true}" class="eim-form-item">
+								<label *ngIf="USE_FORM_FLAT_LAYOUT === false" class="eim-form-label">{{'EIM.LABEL_02022'
+									| translate}}</label>
+								<label *ngIf="USE_FORM_FLAT_LAYOUT === true"
+									class="eim-form-label-flat-type">{{'EIM.LABEL_02022' | translate}}</label>
+								<div class="eim-form-input" style="display: flex;">
+									<input name="url" type="text" pInputText value="{{url}}" disabled="true"
+										style="width: 100%;" />
+									<button pButton type="button" severity="info"
+										class="icon-only-button eim-form-input-multi-button" ngxClipboard
+										icon="fa fa-clipboard" style="margin-left: 5px; float: right;"
+										pTooltip="{{ 'EIM.LABEL_03026' | translate }}" [cbContent]="url"></button>
+								</div>
+							</div>
+							<eim-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === false"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="objectTypeLayout.attributeTypeLayoutList"
+								[attributeList]="attributeList"
+								[hierarchicalLayoutList]="objectTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"></eim-hierarchical-attribute-list-input-form-item>
+
+							<eim-flat-type-hierarchical-attribute-list-input-form-item
+								*ngIf="USE_FORM_FLAT_LAYOUT === true" [form]="propertyForm.form"
+								[attributeTypeLayoutList]="objectTypeLayout.attributeTypeLayoutList"
+								[attributeList]="attributeList"
+								[hierarchicalLayoutList]="objectTypeLayout.hierarchicalLayoutList" [disabled]="disabled"
+								[attributeTypeLayoutOption]="attributeTypeLayoutOption"></eim-flat-type-hierarchical-attribute-list-input-form-item>
+
+						</p-accordion-content>
+					</p-accordion-panel>
+
+					<!-- <p-accordionTab header="{{'EIM_FORMS.LABEL_02015' | translate}}" [selected]="true">
+						<div [ngClass]="{'use-flat-type': USE_FORM_FLAT_LAYOUT === true}" class="eim-form-item">
+							<label *ngIf="USE_FORM_FLAT_LAYOUT === false" class="eim-form-label">{{'EIM.LABEL_02027' | translate}}</label>
+							<label *ngIf="USE_FORM_FLAT_LAYOUT === true" class="eim-form-label-flat-type">{{'EIM.LABEL_02027' | translate}}</label>
+							<div  class="eim-form-input" style="display: flex;">
+								<input name="name" type="text" pInputText value="{{form.name}}" [disabled]="true" style="width: 100%;"/>
+							</div>
+						</div>
+						<div [ngClass]="{'use-flat-type': USE_FORM_FLAT_LAYOUT === true}" class="eim-form-item">
+							<label *ngIf="USE_FORM_FLAT_LAYOUT === false" class="eim-form-label">{{'EIM.LABEL_02022' | translate}}</label>
+							<label *ngIf="USE_FORM_FLAT_LAYOUT === true" class="eim-form-label-flat-type">{{'EIM.LABEL_02022' | translate}}</label>
+							<div class="eim-form-input" style="display: flex;">
+								<input name="url" type="text" pInputText value="{{url}}" [disabled]="true" style="width: 100%;"/>
+								<button pButton type="button" severity="info" class="icon-only-button eim-form-input-multi-button" ngxClipboard icon="fa fa-clipboard" style="margin-left: 5px; float: right;"
+										pTooltip="{{ 'EIM.LABEL_03026' | translate }}"
+										[cbContent]="url"></button>
+							</div>
+						</div>
+						<eim-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === false"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="objectTypeLayout.attributeTypeLayoutList"
+								[attributeList]="attributeList"
+								[hierarchicalLayoutList]="objectTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"></eim-hierarchical-attribute-list-input-form-item>
+
+						<eim-flat-type-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === true"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="objectTypeLayout.attributeTypeLayoutList"
+								[attributeList]="attributeList"
+								[hierarchicalLayoutList]="objectTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"
+								[attributeTypeLayoutOption]="attributeTypeLayoutOption"></eim-flat-type-hierarchical-attribute-list-input-form-item>
+
+					</p-accordionTab> -->
+				</div>
+				<div *ngIf="currentStatusTypeLayout && currentStatusTypeLayout['_isDisplayable']"
+					class="eim-form-detail-accordion-margin">
+					<!-- ワークスペース -->
+					<p-accordion-panel [value]="1" [id]="currentStatusTypeLayout['_id']">
+						<p-accordion-header>
+							<ng-template #toggleicon let-active="active">
+								@if (active) {
+								<i class="pi pi-chevron-down p-accordionheader-toggle-icon"></i>
+								} @else {
+								<i class="pi pi-chevron-right  p-accordionheader-toggle-icon"></i>
+								}
+							</ng-template>
+							{{currentStatusTypeLayout.name}}
+						</p-accordion-header>
+						<p-accordion-content>
+							<eim-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === false"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="currentStatusTypeLayout.attributeTypeLayoutList"
+								[attributeList]="statusTypeAttributeListMap[currentStatusTypeLayout.id]"
+								[hierarchicalLayoutList]="currentStatusTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"
+								[statusTypeId]="form.status.type.id"></eim-hierarchical-attribute-list-input-form-item>
+
+							<eim-flat-type-hierarchical-attribute-list-input-form-item
+								*ngIf="USE_FORM_FLAT_LAYOUT === true" [form]="propertyForm.form"
+								[attributeTypeLayoutList]="currentStatusTypeLayout.attributeTypeLayoutList"
+								[attributeList]="statusTypeAttributeListMap[currentStatusTypeLayout.id]"
+								[hierarchicalLayoutList]="currentStatusTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled" [statusTypeId]="form.status.type.id"
+								[attributeTypeLayoutOption]="attributeTypeLayoutOption"></eim-flat-type-hierarchical-attribute-list-input-form-item>
+						</p-accordion-content>
+					</p-accordion-panel>
+					<!-- <p-accordionTab [id]="currentStatusTypeLayout['_id']" header="{{currentStatusTypeLayout.name}}" [selected]="expandStatusLayoutIdSet[currentStatusTypeLayout.id]">
+						<eim-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === false"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="currentStatusTypeLayout.attributeTypeLayoutList"
+								[attributeList]="statusTypeAttributeListMap[currentStatusTypeLayout.id]"
+								[hierarchicalLayoutList]="currentStatusTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"
+								[statusTypeId]="form.status.type.id"></eim-hierarchical-attribute-list-input-form-item>
+
+						<eim-flat-type-hierarchical-attribute-list-input-form-item *ngIf="USE_FORM_FLAT_LAYOUT === true"
+								[form]="propertyForm.form"
+								[attributeTypeLayoutList]="currentStatusTypeLayout.attributeTypeLayoutList"
+								[attributeList]="statusTypeAttributeListMap[currentStatusTypeLayout.id]"
+								[hierarchicalLayoutList]="currentStatusTypeLayout.hierarchicalLayoutList"
+								[disabled]="disabled"
+								[statusTypeId]="form.status.type.id"
+								[attributeTypeLayoutOption]="attributeTypeLayoutOption"></eim-flat-type-hierarchical-attribute-list-input-form-item>
+					</p-accordionTab> -->
+				</div>
+			</p-accordion>
+		</div>
+	</div>
+</form>

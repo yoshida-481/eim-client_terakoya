@@ -1,0 +1,107 @@
+::ng-deep .p-tree {
+	height: 100%;
+	width: 100%;
+	border-radius: 0;
+	-ms-user-select: none; /* IE 10+ */
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+::ng-deep .p-tree-node-toggle-button {
+	width: 12px;
+}
+
+/* ツリーノードのマウスオーバーの判定を拡げる場合はコメントアウトを解除する
+::ng-deep .ui-treenode-label {
+	width: calc(100% - 30px);
+}
+*/
+
+::ng-deep .p-highlight {
+	background-color: #c4eefc;
+	color: #555555;
+}
+
+::ng-deep .eim-tree-data-grid thead {
+	
+}
+
+.eim-tree-data-grid-table-header {
+	background-color: #ebedf0;
+	border: 1px solid #d9d9d9;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: left;
+	margin-left: 3px;
+	padding: 0px;
+	font-weight: normal;
+}
+
+::ng-deep eim-tree-data-grid /*.ui-widget-content*/ {
+	border: 0 none;
+}
+
+::ng-deep eim-tree-data-grid .eim-tree-data-grid-body {
+	border: 1px solid #d6d6d6;
+	border-top-width: 0px;
+}
+
+::ng-deep eim-tree-data-grid .p-treetable tbody td {
+	padding: 2px 3px 2px 3px;
+	-ms-user-select: none; /* IE 10+ */
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-wrapper {
+	height: 100%;
+}
+
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-view {
+	height: 100%;
+}
+
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-body {
+	border: 1px;
+	height: calc(100% - 20px)!important;
+	max-height: calc(100% - 20px)!important;
+	overflow-anchor: none;
+}
+
+::ng-deep .p-treetable .p-treetable-tbody > tr.p-treetable-row-selected {
+	background-color: #c4eefc !important;
+	color: #373a3c !important;
+}
+
+::ng-deep .p-treetable .p-treetable-tbody > tr.p-treetable-row-selected .p-treetable-toggler {
+	color: #373a3c;
+}
+
+::ng-deep div > div.p-treetable-scrollable-wrapper.ng-star-inserted > div > div.p-treetable-scrollable-body {
+	border-bottom: 1px solid #d6d6d6;
+	border-left: 1px solid #d6d6d6;
+	border-right: 1px solid #d6d6d6;
+}
+
+::ng-deep eim-tree-data-grid p-columnbodytemplateloader {
+	position: absolute;
+}
+/* 2022.05 新規 一覧の右側スクロールOFF用 */
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-header .p-treetable-scrollable-header-box {
+    padding-right: 0px!important;
+}
+/* 2022.05 新規 一覧の右側スクロールOFF用 */
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-body {
+    overflow-y: auto!important;
+}
+/* 2022.05 新規 一覧のツリー開閉ボタン用 */
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-body .p-treetable-toggler {
+    font-size: 1em;
+}
+/* 2022.05 新規 一覧のツリー開閉ボタン用 */
+::ng-deep eim-tree-data-grid .p-treetable-scrollable-body .p-treetable-toggler .pi {
+    font-size: 1em;
+}

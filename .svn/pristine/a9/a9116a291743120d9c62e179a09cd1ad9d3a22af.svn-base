@@ -1,0 +1,2 @@
+<eim-tree #objectTypeTree [componentService]="objectTypeTreeComponentService">
+</eim-tree>

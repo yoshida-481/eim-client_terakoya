@@ -1,0 +1,144 @@
+// ==========================================================================
+//	eim-activable-menu
+//
+//    PrimeNGのタブメニュー表示用スタイル
+//
+//    <p-tabMenu class="eim-activable-menu" [model]="menuItems" [activeItem]="selectedMenuItem">
+//    </p-tabMenu>
+// ==========================================================================
+@use '_variables' as *;
+
+::ng-deep p-tabs.eim-activable-menu {
+	padding: 0px;
+
+	// メニューアイテム配置先のヘッダ
+	> .p-tablist {
+		color: $eim-header-color;
+		font-weight: $eim-header-font-weight;
+		height: $eim-header-height;
+		width: $eim-header-width;
+		padding: $eim-header-padding;
+		margin: $eim-header-margin;
+		background: $eim-header-background;
+		border: $eim-header-border;
+		border-radius: $eim-header-border-radius;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		overflow-x: auto;
+		overflow-y: hidden;
+
+		--p-tabs-tab-color: $eim-header-color !important;
+		--p-tabs-tab-active-color: $eim-header-color !important;
+		--p-tabs-tab-padding: 0px !important;
+		--p-tabs-tab-font-weight: $eim-header-font-weight !important;
+		--p-tabs-tab-margin: 0px 0px 0px 0px;
+		--p-tabs-tablist-background: $eim-header-background;
+		--p-tabs-tablist-border-width: 0px;
+	}
+
+	> .p-tablist > .p-tablist-content > .p-tablist-tab-list {
+		height: 100%;
+
+		// 共通
+		> .p-tab {
+			min-width: 0px;
+			padding: $eim-button-padding !important;
+			color: inherit;
+			border: 0px;
+			line-height: 1.0;
+		}
+
+		// 有効（編集可）
+		> .p-tab:not(.p-disabled) {
+
+			i,
+			span {
+				color: $eim-enabled-menu-item-color;
+				font-weight: $eim-enabled-menu-item-font-weight;
+			}
+
+			background: $eim-enabled-menu-item-background;
+			border: $eim-enabled-menu-item-border;
+			border-radius: $eim-enabled-menu-item-border-radius;
+		}
+
+		// 無効（編集不可）
+		> .p-tab.p-disabled {
+
+			i,
+			span {
+				color: $eim-disabled-menu-item-color;
+				font-weight: $eim-disabled-menu-item-font-weight;
+			}
+
+			background: $eim-disabled-menu-item-background;
+			border: $eim-disabled-menu-item-border;
+			border-radius: $eim-disabled-menu-item-border-radius;
+		}
+
+		// マウスオーバー、有効（編集可）
+		> .p-tab:not(.p-disabled):hover {
+
+			i,
+			span {
+				color: $eim-hoverd-enabled-menu-item-color;
+				font-weight: $eim-hoverd-enabled-menu-item-font-weight;
+			}
+
+			background: $eim-hoverd-enabled-menu-item-background;
+			border: $eim-hoverd-enabled-menu-item-border;
+			border-radius: $eim-hoverd-enabled-menu-item-border-radius;
+		}
+
+		// マウスオーバー、無効（編集不可）
+		> .p-tab.p-disabled:hover {
+
+			i,
+			span {
+				color: $eim-hoverd-disabled-menu-item-color;
+				font-weight: $eim-hoverd-disabled-menu-item-font-weight;
+			}
+
+			background: $eim-hoverd-enabled-menu-item-background;
+			border: $eim-hoverd-disabled-menu-item-border;
+			border-radius: $eim-hoverd-disabled-menu-item-border-radius;
+		}
+
+		// フォーカス
+		> .p-tab:not(.p-disabled):not(.p-tab.p-tab-active):focus {
+
+			i,
+			span {
+				color: $eim-focused-menu-item-color;
+				font-weight: $eim-focused-menu-item-font-weight;
+			}
+
+			background: $eim-focused-menu-item-background;
+			border: none;
+			border-radius: $eim-focused-menu-item-border-radius;
+			box-shadow: none;
+		}
+	}
+
+	.p-menubar-item-icon {
+		align-items: center;
+		justify-content: center;
+		display: flex;
+	}
+
+	// アクティブメニュー
+	> .p-tablist > .p-tablist-content > .p-tablist-tab-list > .p-tab.p-tab-active {
+		border-color: $eim-enabled-menu-item-color;
+		border-width: 0px 0px 2px 0px;
+		border-style: solid;
+		background-color: transparent;
+	}
+
+	.p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link .p-menubar-item-icon {
+		margin: $eim-label-icon-margin;
+	}
+
+	.p-tabmenu ul {
+		gap: $eim-gap;
+	}
+}
