@@ -2,7 +2,7 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
 
-_ Node.jsバージョン11以上が必要です。後述の”複数バージョンNode.js切り替え”を参照してください。 _
+_ Node.jsバージョン11以上が必要です。後述の"複数バージョンNode.js切り替え"を参照してください。 _
 
 ## 開発サーバ起動
 
@@ -56,5 +56,4 @@ https://ctcbox.ent.box.com/file/844560357170
 `npm audit`にてnpm パッケージのセキュリティチェック結果が一覧表示されます。
 `npm audit fix`にてnpm パッケージのセキュリティ違反が修正されます。
 修正できない場合もあります。手動で修正する場合は、package.json修正後、node_modules、package-lock.jsonを削除後、yarn installし、npm auditを再実行してください。
-
 
