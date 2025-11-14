@@ -1,2 +1,0 @@
-<eim-tree #folderTree [componentService]="contentsTreeComponentService" [contextMenuItems]="contentsTreeMenuItems" [selectedData]="contentsTreeSelectedData"
-		(selected)="onSelectFolderTreeNode($event)" (expanded)="onExpandTreeNode($event)"></eim-tree>

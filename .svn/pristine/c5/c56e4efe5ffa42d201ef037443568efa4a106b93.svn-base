@@ -1,3 +1,0 @@
-::ng-deep .padding-top-set eim-checkbox {
-	padding-top:2px;
-}

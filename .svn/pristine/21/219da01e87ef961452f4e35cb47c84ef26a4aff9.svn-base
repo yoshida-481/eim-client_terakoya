@@ -1,3 +1,0 @@
-<div style="height: 100%;">
-	<eim-data-grid #accessHistoryGrid [showAllSelectButton]="false"></eim-data-grid>
-</div>

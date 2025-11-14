@@ -1,4 +1,0 @@
-::ng-deep .eim-attribute-detail .eim-form-item {
-	margin-left: 6px;
-	margin-right: 6px;
-}

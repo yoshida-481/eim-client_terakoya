@@ -1,5 +1,0 @@
-::ng-deep eim-object-role {
-	.eim-panel-flat {
-		height: 100%;
-	}
-}
