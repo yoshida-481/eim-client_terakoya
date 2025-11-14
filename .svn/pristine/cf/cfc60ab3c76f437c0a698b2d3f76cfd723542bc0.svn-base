@@ -1,0 +1,29 @@
+<form [formGroup]="passwordChangeForm" autocomplete="off" novalidate>
+
+	<div class="eim-form-item">
+		<label style="width: 180px;" class="eim-form-label-required">{{ 'EIM.LABEL_02005' | translate}}</label>
+		<div style="display: flex;">
+			<input pInputText style="width: 450px;" id="currentPassword" name="currentPassword" required="true" type="password"
+					pattern="{{regexpPassword}}" maxlength="{{inputMaxLength}}" [formControl]="passwordChangeForm.controls['currentPassword']"/>
+		</div>
+	</div>
+
+	<div class="eim-form-item">
+		<label style="width: 180px;" class="eim-form-label-required">{{ 'EIM.LABEL_02006' | translate}}</label>
+		<div style="display: flex;">
+			<input pInputText style="width: 450px;" id="newPassword" name="newPassword" required="true" type="password"
+					pattern="{{regexpPassword}}" maxlength="{{inputMaxLength}}" [formControl]="passwordChangeForm.controls['newPassword']"/>
+		</div>
+	</div>
+
+	<div class="eim-form-item">
+		<label style="width: 180px;" class="eim-form-label-required">{{ 'EIM.LABEL_02007' | translate}}</label>
+		<div style="display: flex;">
+			<input pInputText style="width: 450px;" id="confirmPassword" name="confirmPassword" required="true" type="password"
+					pattern="{{regexpPassword}}" maxlength="{{inputMaxLength}}" [formControl]="passwordChangeForm.controls['confirmPassword']"/>
+		</div>
+	</div>
+	<div>
+		<p style="color:red; margin: 0; white-space: pre-line;">{{notesMessage}}</p>
+	</div>
+</form>

@@ -1,0 +1,5 @@
+::ng-deep  eim-number-input-form-item .eim-form-input .p-inputtext {
+    max-width: 155px;
+    text-align: right;
+    width: 100%;
+}

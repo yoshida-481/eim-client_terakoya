@@ -1,0 +1,60 @@
+:host p-panel ::ng-deep .p-panel.p-component {
+	border-style: none;
+}
+
+:host p-panel ::ng-deep .p-panel-header {
+	height: 30px;
+	color: white;
+	background: #0061D5;
+	border-radius: 0;
+	display: flex;
+	align-items: center;
+}
+
+:host p-panel ::ng-deep .p-panel {
+	height: 100%;
+}
+
+:host p-panel ::ng-deep .p-panel .p-panel-content-container.ng-trigger-panelContent {
+	height: calc(100% - 30px);
+}
+
+:host p-panel ::ng-deep .p-panel-content {
+	height: 100%;
+	padding: 0;
+}
+
+:host p-panel ::ng-deep .p-blockui {
+	background-color: rgba(255, 255, 255, 0.7);
+	opacity: 1;
+}
+
+:host p-panel.drag-enter ::ng-deep .p-blockui div {
+	opacity: 0.7;
+}
+
+.login-user {
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+:host p-panel ::ng-deep .p-panel .p-panel-header {
+	padding-right: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+/** リフレッシュボタン */
+.eim-refresh-button.p-button.p-component {
+	width: 24px;
+	height: 24px;
+	color: #dddddd;
+	padding: 3px 6px;
+}
+
+.header-bar {
+	height: 50px;
+	min-height: 50px;
+	align-items: center;
+	background-color: white;
+}

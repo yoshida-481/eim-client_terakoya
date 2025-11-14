@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/modules/es.parse-float.js", "../../../../../../node_modules/core-js/es/parse-float.js"],
+  "sourcesContent": ["'use strict';\n\nvar $ = require('../internals/export');\nvar $parseFloat = require('../internals/number-parse-float');\n\n// `parseFloat` method\n// https://tc39.es/ecma262/#sec-parsefloat-string\n$({\n  global: true,\n  forced: parseFloat !== $parseFloat\n}, {\n  parseFloat: $parseFloat\n});", "'use strict';\n\nrequire('../modules/es.parse-float');\nvar path = require('../internals/path');\nmodule.exports = path.parseFloat;"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,IAAI;AACR,QAAI,cAAc;AAIlB,MAAE;AAAA,MACA,QAAQ;AAAA,MACR,QAAQ,eAAe;AAAA,IACzB,GAAG;AAAA,MACD,YAAY;AAAA,IACd,CAAC;AAAA;AAAA;;;ACZD;AAAA;AAEA;AACA,QAAI,OAAO;AACX,WAAO,UAAU,KAAK;AAAA;AAAA;",
+  "names": []
+}

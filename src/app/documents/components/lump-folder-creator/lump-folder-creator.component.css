@@ -1,0 +1,38 @@
+
+/** ファイル関連 */
+.eim-menu-btn {
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border: solid 1px #e5e5e5;
+	border-radius: 3px;
+	transition-property: none;
+	padding: .25em 1em .25em 1em;
+	margin: 5px 1.5px 5px 1.5px;
+	cursor: pointer;
+}
+.eim-menu-btn:hover {
+	background: #deeaff;
+	border: thin solid #3dabff;
+	border-radius: 3px;
+}
+.eim-menu-btn-disabled {
+	border: solid 1px #ccc;
+	border-radius: 3px;
+	color: #373a3c;
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border-color: #e5e5e5;
+	padding: .25em 1em .25em 1em;
+	margin: 5px 1.5px 5px 1.5px;
+}
+.eim-menu-btn-disabled .eim-enu-btn-icon,.eim-menu-btn-disabled .eim-menu-btn-label {
+	opacity: 0.35;
+}
+
+::ng-deep eim-lump-document-creator .ag-body-viewport {
+	background: #ffffff;
+	overflow-y: hidden !important;
+}
+
+eim-checkbox
+{
+	padding-left: 3em;
+}

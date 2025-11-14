@@ -1,0 +1,61 @@
+<form #propertyForm="ngForm" style="height:100%">
+	<p-blockUI [target]="pnl" [blocked]="blockUiFlag">
+	</p-blockUI>
+	<p-panel #pnl [showHeader]="false" [style]="{'width':'100%', 'height':'100%'}">
+		<div class="eim-form-item" style="width: 100%;">
+			<label class="eim-form-label" style="width: 200px; margin: 0px;">
+			</label>
+			<div style="display: flex; width: calc(100% - 200px);">
+				<label class="eim-form-label" style="width: calc(50% - 10px); margin-top: 1px;">{{ 'EIM_DOCUMENTS.LABEL_02174' | translate }}</label>
+				<div style="padding-left: 20px;"></div>
+				<label class="eim-form-label" style="width: calc(50% - 10px); margin-top: 1px;">{{ 'EIM_DOCUMENTS.LABEL_02175' | translate }}</label>
+			</div>
+		</div>
+
+		<div class="eim-form-item" style="width: 100%; display: flex; height: 100%; align-items: center;">
+			<div class="eim-form-input" style="width: 200px;">
+				<eim-checkbox name="browsePassword" label="{{ 'EIM_DOCUMENTS.LABEL_02172' | translate }}" [disabled]="allDisabled"  binary="true" [(ngModel)]="checkBoxCond.browsePassword"></eim-checkbox>
+			</div>
+			<div class="eim-form-input" style="display: flex; width: calc(100% - 200px);">
+				<input name="browsePassword1st" type="password" pInputText [(ngModel)]="browsePassword1st" pattern="{{regexpPassword}}"
+					maxLength="{{inputMaxLength}}" [disabled]="allDisabled || checkBoxCond.browsePassword != true" style="width: calc(50% - 10px);">
+				<div style="padding-left: 20px;"></div>
+				<input name="browsePassword2nd" type="password" pInputText [(ngModel)]="browsePassword2nd" pattern="{{browsePassword1st}}"
+					maxLength="{{inputMaxLength}}" [disabled]="allDisabled || checkBoxCond.browsePassword != true" style="width: calc(50% - 10px);">
+			</div>
+		</div>
+		<div class="eim-form-item" style="width: 100%; display: flex; height: 100%; align-items: center;">
+			<div class="eim-form-input" style="width: 200px;">
+				<eim-checkbox name="securityPassword" label="{{ 'EIM_DOCUMENTS.LABEL_02173' | translate }}" [disabled]="allDisabled != false" binary="true" [(ngModel)]="checkBoxCond.securityPassword"></eim-checkbox>
+			</div>
+			<div class="eim-form-input" style="display: flex; width: calc(100% - 200px);">
+				<input name="securityPassword1st" type="password" pInputText [(ngModel)]="securityPassword1st" pattern="{{regexpPassword}}"
+					maxLength="{{inputMaxLength}}" [disabled]="allDisabled || checkBoxCond.securityPassword != true" style="width: calc(50% - 10px);">
+				<div style="padding-left: 20px;"></div>
+				<input name="securityPassword2nd" type="password" pInputText [(ngModel)]="securityPassword2nd" pattern="{{securityPassword1st}}"
+					maxLength="{{inputMaxLength}}" [disabled]="allDisabled || checkBoxCond.securityPassword != true" style="width: calc(50% - 10px);">
+			</div>
+		</div>
+
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="checkBoxCond.forbidPrint" label="{{ 'EIM_DOCUMENTS.LABEL_02183' | translate }}" [disabled]="allDisabled != false" binary="true" [(ngModel)]="checkBoxCond.forbidPrint"></eim-checkbox>
+			</div>
+		</div>
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="checkBoxCond.forbidEdit" label="{{ 'EIM_DOCUMENTS.LABEL_02184' | translate }}" [disabled]="allDisabled != false" binary="true" [(ngModel)]="checkBoxCond.forbidEdit"></eim-checkbox>
+			</div>
+		</div>
+		<div class="eim-form-item" style="width: 100%;">
+				<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="checkBoxCond.forbidAnnotate" label="{{ 'EIM_DOCUMENTS.LABEL_02185' | translate }}" [disabled]="allDisabled != false" binary="true" [(ngModel)]="checkBoxCond.forbidAnnotate"></eim-checkbox>
+			</div>
+		</div>
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%;">
+				<eim-checkbox name="checkBoxCond.forbidReproduce" label="{{ 'EIM_DOCUMENTS.LABEL_02186' | translate }}" [disabled]="allDisabled != false" binary="true" [(ngModel)]="checkBoxCond.forbidReproduce"></eim-checkbox>
+			</div>
+		</div>
+	</p-panel>
+</form>

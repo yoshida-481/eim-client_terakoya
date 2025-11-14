@@ -1,0 +1,3 @@
+<div style="height: 100%;">
+	<eim-object-list #objectList [tagType]="objectEditorMainComponent.TAB_TYPE_NEW_OBJECT"></eim-object-list>
+</div>

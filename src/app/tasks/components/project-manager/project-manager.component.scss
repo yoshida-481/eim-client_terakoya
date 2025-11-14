@@ -1,0 +1,10 @@
+::ng-deep eim-project-manager {
+	.eim-members {
+		height: 100%;
+		display: grid;
+		grid-template-rows: auto 1fr;
+	}
+	.eim-panel-flat {
+		height: 100%;
+	}
+}

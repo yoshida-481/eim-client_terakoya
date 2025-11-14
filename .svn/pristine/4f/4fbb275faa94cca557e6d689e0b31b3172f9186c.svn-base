@@ -1,0 +1,12 @@
+::ng-deep .eim-panel-containing-grid .p-panel {
+	height: 100%;
+}
+
+::ng-deep .eim-panel-containing-grid .ui-panel-content-wrapper {
+	height: calc(100% - 20px);
+	padding-bottom: 5px;
+}
+
+::ng-deep .eim-panel-containing-grid .p-panel-content {
+	height: 100%;
+}

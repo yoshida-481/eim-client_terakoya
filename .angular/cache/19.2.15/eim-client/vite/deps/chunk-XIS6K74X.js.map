@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/define-built-in-accessor.js"],
+  "sourcesContent": ["'use strict';\n\nvar makeBuiltIn = require('../internals/make-built-in');\nvar defineProperty = require('../internals/object-define-property');\nmodule.exports = function (target, name, descriptor) {\n  if (descriptor.get) makeBuiltIn(descriptor.get, name, {\n    getter: true\n  });\n  if (descriptor.set) makeBuiltIn(descriptor.set, name, {\n    setter: true\n  });\n  return defineProperty.f(target, name, descriptor);\n};"],
+  "mappings": ";;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,cAAc;AAClB,QAAI,iBAAiB;AACrB,WAAO,UAAU,SAAU,QAAQ,MAAM,YAAY;AACnD,UAAI,WAAW,IAAK,aAAY,WAAW,KAAK,MAAM;AAAA,QACpD,QAAQ;AAAA,MACV,CAAC;AACD,UAAI,WAAW,IAAK,aAAY,WAAW,KAAK,MAAM;AAAA,QACpD,QAAQ;AAAA,MACV,CAAC;AACD,aAAO,eAAe,EAAE,QAAQ,MAAM,UAAU;AAAA,IAClD;AAAA;AAAA;",
+  "names": []
+}

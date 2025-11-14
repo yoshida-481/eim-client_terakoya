@@ -1,0 +1,761 @@
+<ng-container *ngIf="display[DialogName.DOCUMENT_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01000' | translate }}" modal="true" width="1200"
+      [name]="DialogName.DOCUMENT_CREATOR"
+      [visible]="display[DialogName.DOCUMENT_CREATOR]"
+      (close)="display[DialogName.DOCUMENT_CREATOR] = false;">
+      <eim-document-creator
+          [workspaceObjId]="data[DialogName.DOCUMENT_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.DOCUMENT_CREATOR].parentObjId"
+          [addFileList]="data[DialogName.DOCUMENT_CREATOR].addFileList"
+          [path]="data[DialogName.DOCUMENT_CREATOR].path"
+          [documentTypeId]="data[DialogName.DOCUMENT_CREATOR].documentTypeId">
+      </eim-document-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.DOCUMENT_CREATOR_CONFIRMATION]">
+  <eim-dialog
+    header="{{ 'EIM_DOCUMENTS.LABEL_01047' | translate }}"
+    modal="true"
+    width="750"
+    height="750"
+    [name]="DialogName.DOCUMENT_CREATOR_CONFIRMATION"
+    [visible]="display[DialogName.DOCUMENT_CREATOR_CONFIRMATION]"
+    [enableMaximize]="false"
+    (close)="display[DialogName.DOCUMENT_CREATOR_CONFIRMATION] = false"
+  >
+    <eim-document-creator-confirmation
+      [workspaceObjId]="
+        data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].workspaceObjId"
+      [parentObjId]="data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].parentObjId"
+      [objId]="data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].objId"
+      [content]="data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].content"
+      [documentTypeId]="
+        data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].documentTypeId"
+      [path]="data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].path"
+      [addFileList]="data[DialogName.DOCUMENT_CREATOR_CONFIRMATION].addFileList">
+    </eim-document-creator-confirmation>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.LINK_UPDATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01044' | translate }}" modal="true" width="250" height="160"
+      [name]="DialogName.LINK_UPDATOR"
+      [visible]="display[DialogName.LINK_UPDATOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.LINK_UPDATOR] = false;">
+			<eim-link-updator
+					[objId]="data[DialogName.LINK_UPDATOR].objId"
+					[parentObjId]="data[DialogName.LINK_UPDATOR].parentObjId"
+					[isDocumentLink]="data[DialogName.LINK_UPDATOR].isDocumentLink">
+      </eim-link-updator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.CONTENTS_PUBLIC_CANCEL_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01021' | translate }}" modal="true" width="600" height="220"
+      [name]="DialogName.CONTENTS_PUBLIC_CANCEL_EXECUTOR"
+      [visible]="display[DialogName.CONTENTS_PUBLIC_CANCEL_EXECUTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.CONTENTS_PUBLIC_CANCEL_EXECUTOR] = false;">
+      <eim-contents-public-cancel-executor
+          [content]="data[DialogName.CONTENTS_PUBLIC_CANCEL_EXECUTOR].addFileList">
+      </eim-contents-public-cancel-executor>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FOLDER_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01001' | translate }}" modal="true" width="1000"
+      [name]="DialogName.FOLDER_CREATOR"
+      [visible]="display[DialogName.FOLDER_CREATOR]"
+      (close)="display[DialogName.FOLDER_CREATOR] = false;">
+      <eim-folder-creator
+          [workspaceObjId]="data[DialogName.FOLDER_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.FOLDER_CREATOR].parentObjId"
+          [path]="data[DialogName.FOLDER_CREATOR].path">
+      </eim-folder-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.TAG_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01034' | translate }}" modal="true" width="1000"
+      [name]="DialogName.TAG_CREATOR"
+      [visible]="display[DialogName.TAG_CREATOR]"
+      (close)="display[DialogName.TAG_CREATOR] = false;">
+      <eim-tag-creator
+          [workspaceObjId]="data[DialogName.TAG_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.TAG_CREATOR].parentObjId"
+          [path]="data[DialogName.TAG_CREATOR].path">
+      </eim-tag-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.WORKSPACE_CREATOR]">
+  <eim-dialog [header]="data[DialogName.WORKSPACE_CREATOR].title" modal="true" width="1000"
+      [name]="DialogName.WORKSPACE_CREATOR"
+      [visible]="display[DialogName.WORKSPACE_CREATOR]"
+      (close)="display[DialogName.WORKSPACE_CREATOR] = false;">
+      <eim-workspace-creator
+					[objId]="data[DialogName.WORKSPACE_CREATOR].objId">
+      </eim-workspace-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01040' | translate }}" modal="true" width="1200" height="600"
+		[name]="DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR"
+		[visible]="display[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR] = false;">
+		<eim-multiple-entry-selector
+			[documentId]="data[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR].documentId"
+			[selectTarget]="data[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR].selectTarget"
+			[destination]="data[DialogName.WORKSPACE_ADMINISTRATOR_SELECTOR].destination">
+		</eim-multiple-entry-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.SELECTABLE_SECURITY_SELECTOR]">
+		<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01031' | translate }}" modal="true" width="800" height="500"
+				[name]="DialogName.SELECTABLE_SECURITY_SELECTOR"
+				[visible]="display[DialogName.SELECTABLE_SECURITY_SELECTOR]"
+				[enableMaximize]="false"
+				(close)="display[DialogName.SELECTABLE_SECURITY_SELECTOR] = false;">
+				<eim-selectable-security-selector
+					[selectedData]="data[DialogName.SELECTABLE_SECURITY_SELECTOR].selectedData"
+					[searchResult]="data[DialogName.SELECTABLE_SECURITY_SELECTOR].searchResult">
+				</eim-selectable-security-selector>
+		</eim-dialog>
+	</ng-container>
+
+<ng-container *ngIf="display[DialogName.LUMP_DOCUMENT_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01042' | translate }}" modal="true" width="700" height="510"
+      [name]="DialogName.LUMP_DOCUMENT_CREATOR"
+      [visible]="display[DialogName.LUMP_DOCUMENT_CREATOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.LUMP_DOCUMENT_CREATOR] = false;">
+      <eim-lump-document-creator
+          [workspaceObjId]="data[DialogName.LUMP_DOCUMENT_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.LUMP_DOCUMENT_CREATOR].parentObjId"
+          [path]="data[DialogName.LUMP_DOCUMENT_CREATOR].path">
+      </eim-lump-document-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01043' | translate }}" modal="true" width="750" height="470"
+      [name]="DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION"
+      [visible]="display[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION] = false;">
+      <eim-lump-document-creator-confirmation
+          [objId]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].objId"
+					[content]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].content"
+					[property]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].property"
+					[expirationDate]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].expirationDate"
+					[createUserId]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].createUserId"
+					[documentTypeId]="data[DialogName.LUMP_DOCUMENT_CREATOR_CONFIRMATION].documentTypeId"
+          >
+      </eim-lump-document-creator-confirmation>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.LUMP_FOLDER_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01046' | translate }}" modal="true" width="750" height="750"
+      [name]="DialogName.LUMP_FOLDER_CREATOR"
+      [visible]="display[DialogName.LUMP_FOLDER_CREATOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.LUMP_FOLDER_CREATOR] = false;">
+      <eim-lump-folder-creator
+          [workspaceObjId]="data[DialogName.LUMP_FOLDER_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.LUMP_FOLDER_CREATOR].parentObjId"
+          [addFileList]="data[DialogName.LUMP_FOLDER_CREATOR].addFileList"
+          [path]="data[DialogName.LUMP_FOLDER_CREATOR].path">
+      </eim-lump-folder-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FILE_REPLACEMENT_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01027' | translate }}" modal="true" width="500" height="155"
+      [name]="DialogName.FILE_REPLACEMENT_EXECUTOR"
+      [visible]="display[DialogName.FILE_REPLACEMENT_EXECUTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.FILE_REPLACEMENT_EXECUTOR] = false;">
+    <eim-file-replacement-executor
+      [parentObjId]="data[DialogName.FILE_REPLACEMENT_EXECUTOR].parentObjId"
+      [content]="data[DialogName.FILE_REPLACEMENT_EXECUTOR].content">
+    </eim-file-replacement-executor>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.COVER_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01036' | translate }}" modal="true" width="1200"
+      [name]="DialogName.COVER_CREATOR"
+      [visible]="display[DialogName.COVER_CREATOR]"
+      (close)="display[DialogName.COVER_CREATOR] = false;">
+      <eim-cover-creator
+          [workspaceObjId]="data[DialogName.COVER_CREATOR].workspaceObjId"
+          [parentObjId]="data[DialogName.COVER_CREATOR].parentObjId"
+          [addFileList]="data[DialogName.COVER_CREATOR].addFileList"
+          [path]="data[DialogName.COVER_CREATOR].path">
+      </eim-cover-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.CHECK_IN]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01002' | translate }}" modal="true" width="1000" height="600"
+      [name]="DialogName.CHECK_IN"
+      [visible]="display[DialogName.CHECK_IN]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.CHECK_IN] = false;">
+    <eim-document-checkin
+      [contents]="data[DialogName.CHECK_IN].contents"
+      [workspaceObjId]="data[DialogName.CHECK_IN].workspaceObjId">
+    </eim-document-checkin>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.APPROVE_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01019' | translate }}" modal="true" initMaxWidth="1908"
+      [name]="DialogName.APPROVE_EXECUTOR"
+      [visible]="display[DialogName.APPROVE_EXECUTOR]"
+      [enableMaximize]="true"
+      (close)="display[DialogName.APPROVE_EXECUTOR] = false;">
+    <eim-contents-approve-executor
+        [functionType]="data[DialogName.APPROVE_EXECUTOR].functionType"
+        [contentsObjs]="data[DialogName.APPROVE_EXECUTOR].contentsObjs"
+        [workspaceObjId]="data[DialogName.APPROVE_EXECUTOR].workspaceObjId">
+    </eim-contents-approve-executor>
+  </eim-dialog>
+</ng-container>
+
+
+
+<ng-container *ngIf="display[DialogName.APPROVE_REQUEST_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01018' | translate }}" modal="true" initMaxWidth="1503"
+      [name]="DialogName.APPROVE_REQUEST_EXECUTOR"
+      [visible]="display[DialogName.APPROVE_REQUEST_EXECUTOR]"
+      [enableMaximize]="true"
+      (close)="display[DialogName.APPROVE_REQUEST_EXECUTOR] = false;">
+    <eim-contents-approve-request-executor
+        [contentsObjs]="data[DialogName.APPROVE_REQUEST_EXECUTOR].contentsObjs"
+        [workspaceObjId]="data[DialogName.APPROVE_REQUEST_EXECUTOR].workspaceObjId">
+    </eim-contents-approve-request-executor>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.APPROVER_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01020' | translate }}" modal="true" width="1100" height="600"
+		[name]="DialogName.APPROVER_SELECTOR"
+		[visible]="display[DialogName.APPROVER_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.APPROVER_SELECTOR] = false;">
+		<eim-approver-multiple-selector
+			[required]="false"
+			[componentService]="approverMultipleSelectorComponentService"
+			[selectedData]="data[DialogName.APPROVER_SELECTOR].selectedData"
+			[columns]="[
+			{field: 'code', headerName: 'EIM.LABEL_02001' | translate, width: 100, suppressFilter: true},
+			{field: 'name', headerName: 'EIM.LABEL_02002' | translate, width: 100, suppressFilter: true},
+			{field: 'groupNames', headerName: 'EIM.LABEL_02003' | translate, tooltipField: 'groupNames', width: 145, suppressFilter: true},
+			{field: 'roleNames', headerName: 'EIM.LABEL_02004' | translate, tooltipField: 'roleNames', width: 145, suppressFilter: true}]"
+			[statusTypeId]="data[DialogName.APPROVER_SELECTOR].statusTypeId">
+ 			<eim-approver-single-selector
+ 				[allColumns]="data[DialogName.APPROVER_SELECTOR].allColumns"
+				[multiple]='true'
+				[onlyBoss]="data[DialogName.APPROVER_SELECTOR].onlyBoss">
+			</eim-approver-single-selector>
+		</eim-approver-multiple-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01003' | translate }}" modal="true" width="950"
+      [name]="DialogName.PUBLIC"
+      [visible]="display[DialogName.PUBLIC]"
+      (close)="display[DialogName.PUBLIC] = false;">
+    <eim-document-public
+        [documentObjs]="data[DialogName.PUBLIC].documentObjs"
+        [workspaceObjId]="data[DialogName.PUBLIC].workspaceObjId">
+    </eim-document-public>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_DESTINATION_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01017' | translate }}" modal="true" width="900" height="600"
+		[name]="DialogName.PUBLIC_DESTINATION_SELECTOR"
+		[visible]="display[DialogName.PUBLIC_DESTINATION_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.PUBLIC_DESTINATION_SELECTOR] = false;">
+		<eim-document-public-destination-selector
+			[documentId]="data[DialogName.PUBLIC_DESTINATION_SELECTOR].documentId"
+			[destination]="data[DialogName.PUBLIC_DESTINATION_SELECTOR].destination">
+		</eim-document-public-destination-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.SEARCH]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01004' | translate }}" modal="false" width="1000"
+      [name]="DialogName.SEARCH"
+      [visible]="display[DialogName.SEARCH]"
+      (close)="display[DialogName.SEARCH] = false;">
+    <eim-contents-search
+        [parentObjId]="data[DialogName.SEARCH].parentObjId" [selectFlg]="data[DialogName.SEARCH].selectFlg"></eim-contents-search>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.SINGLE_SEARCH_CONTENTS]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01029' | translate }}" modal="true" width="1000"
+      [name]="DialogName.SINGLE_SEARCH_CONTENTS"
+      [visible]="display[DialogName.SINGLE_SEARCH_CONTENTS]"
+      (close)="display[DialogName.SINGLE_SEARCH_CONTENTS] = false;">
+    <eim-contents-search
+        [parentObjId]="data[DialogName.SINGLE_SEARCH_CONTENTS].parentObjId"
+        [multiple]="data[DialogName.SINGLE_SEARCH_CONTENTS].multiple"
+        [selectFlg]="data[DialogName.SINGLE_SEARCH_CONTENTS].selectFlg"
+				[targetObj]="data[DialogName.SINGLE_SEARCH_CONTENTS].targetObj"
+				[visibleDocumentLink]="data[DialogName.SINGLE_SEARCH_CONTENTS].visibleDocumentLink"
+				[disablePropertyFlg]="true">
+    </eim-contents-search>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.SEARCH_CONTENTS]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01029' | translate }}" modal="true" width="1330"
+      [name]="DialogName.SEARCH_CONTENTS"
+      [visible]="display[DialogName.SEARCH_CONTENTS]"
+      (close)="display[DialogName.SEARCH_CONTENTS] = false;">
+		<eim-multiple-selector
+		    [required]="true"
+			[componentService]="contentsMultipleSelectorComponentService"
+			[selectedData]="data[DialogName.SEARCH_CONTENTS].selectedData"
+			[columns]="[
+				{field: 'objName', headerName: 'EIM.LABEL_02002' | translate, width: 270, suppressFilter:true}
+			]"
+			[widthBalance]="data[DialogName.SEARCH_CONTENTS].widthBalance"
+			>
+		    <eim-contents-search
+		        [parentObjId]="data[DialogName.SEARCH_CONTENTS].parentObjId"
+        		[multiple]="data[DialogName.SEARCH_CONTENTS].multiple"
+		        [selectFlg]="data[DialogName.SEARCH_CONTENTS].selectFlg"
+						[targetObj]="data[DialogName.SEARCH_CONTENTS].targetObj"
+						[visibleDocumentLink]="data[DialogName.SEARCH_CONTENTS].visibleDocumentLink"
+						[disablePropertyFlg]="true">
+			</eim-contents-search>
+		</eim-multiple-selector>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.PROPERTY]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01005' | translate }}"  modal="true" width="845"
+      [name]="DialogName.PROPERTY"
+      [visible]="display[DialogName.PROPERTY]"
+      (close)="display[DialogName.PROPERTY] = false;">
+    <eim-contents-property
+        [content]="data[DialogName.PROPERTY].content"
+        [disabled]="data[DialogName.PROPERTY].disabled"
+        [dialogName]="DialogName.PROPERTY"></eim-contents-property>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.RELATION_FILE_PROPERTY]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01005' | translate }}" modal="true" width="845"
+      [name]="DialogName.RELATION_FILE_PROPERTY"
+      [visible]="display[DialogName.RELATION_FILE_PROPERTY]"
+      (close)="display[DialogName.RELATION_FILE_PROPERTY] = false;">
+    <eim-contents-property
+        [content]="data[DialogName.RELATION_FILE_PROPERTY].content"
+        [disabled]="data[DialogName.RELATION_FILE_PROPERTY].disabled"
+        [dialogName]="DialogName.RELATION_FILE_PROPERTY"></eim-contents-property>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.REVISION_HISTORY]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01006' | translate }}" modal="true" width="1300"
+      [name]="DialogName.REVISION_HISTORY"
+      [visible]="display[DialogName.REVISION_HISTORY]"
+      (close)="display[DialogName.REVISION_HISTORY] = false;">
+    <eim-revision-history
+      [content]="data[DialogName.REVISION_HISTORY].content">
+    </eim-revision-history>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ACCESS_HISTORY]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01007' | translate }}" modal="true" width="700" height="500"
+      [name]="DialogName.ACCESS_HISTORY"
+      [visible]="display[DialogName.ACCESS_HISTORY]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.ACCESS_HISTORY] = false;">
+    <eim-access-history
+      [content]="data[DialogName.ACCESS_HISTORY].content">
+    </eim-access-history>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OCR_SETTING_UPDATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_03069' | translate }}" modal="true" width="260" height="130"
+      [name]="DialogName.OCR_SETTING_UPDATOR"
+      [visible]="display[DialogName.OCR_SETTING_UPDATOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.OCR_SETTING_UPDATOR] = false;">
+    <eim-ocr-setting-updator
+      [content]="data[DialogName.OCR_SETTING_UPDATOR].content">
+    </eim-ocr-setting-updator>
+  </eim-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="display[DialogName.SECURITY_CHANGE]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01008' | translate }}"  modal="true" width="790" height="570"
+      [name]="DialogName.SECURITY_CHANGE"
+      [visible]="display[DialogName.SECURITY_CHANGE]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.SECURITY_CHANGE] = false;">
+    <eim-security-change
+      [content]="data[DialogName.SECURITY_CHANGE].content">
+    </eim-security-change>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.TABLE_CREATOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01013' | translate }}" modal="true" width="400" height="130"
+      [name]="DialogName.TABLE_CREATOR"
+      [visible]="display[DialogName.TABLE_CREATOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.TABLE_CREATOR] = false;">
+    <eim-table-creator>
+    </eim-table-creator>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.TABLE_CONFIG]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01014' | translate }}" modal="true" width="720" height="600"
+      [name]="DialogName.TABLE_CONFIG"
+      [visible]="display[DialogName.TABLE_CONFIG]"
+      [enableMaximize]="false"
+      (close)="onClose(DialogName.TABLE_CONFIG)">
+    <eim-table-config>
+    </eim-table-config>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FAVORITE_LIST]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01039' | translate }}" modal="true" width="550" height="350"
+      [name]="DialogName.FAVORITE_LIST"
+      [visible]="display[DialogName.FAVORITE_LIST]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.FAVORITE_LIST] = false;">
+    <eim-favorite-list>
+    </eim-favorite-list>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.CHECKOUT_LIST]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01041' | translate }}" modal="true" width="700" height="500"
+      [name]="DialogName.CHECKOUT_LIST"
+      [visible]="display[DialogName.CHECKOUT_LIST]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.CHECKOUT_LIST] = false;">
+    <eim-checkout-list>
+    </eim-checkout-list>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_FILE_COMPARE_LIST]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01033' | translate }}" modal="true" width="550" height="500"
+      [name]="DialogName.PUBLIC_FILE_COMPARE_LIST"
+      [visible]="display[DialogName.PUBLIC_FILE_COMPARE_LIST]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.PUBLIC_FILE_COMPARE_LIST] = false;">
+		<eim-public-file-compare-list>
+    </eim-public-file-compare-list>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ATTRIBUTE_TYPE_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01015' | translate }}" modal="true" width="800" height="500"
+			[name]="DialogName.ATTRIBUTE_TYPE_SELECTOR"
+			[visible]="display[DialogName.ATTRIBUTE_TYPE_SELECTOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.ATTRIBUTE_TYPE_SELECTOR] = false;">
+
+ 		<eim-multiple-selector #attributeTypeListMultiple
+				[componentService]="attributeTypeMultipleSelectorComponentService"
+				[selectedData]="data[DialogName.ATTRIBUTE_TYPE_SELECTOR].selectedData"
+				>
+ 			<eim-attribute-type-selector #attributeTypeListSingle
+ 					[multiple]='true'>
+			</eim-attribute-type-selector>
+		</eim-multiple-selector>
+
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.SECURITY_SELECTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01011' | translate }}"  modal="true" width="1000" height="570"
+      [name]="DialogName.SECURITY_SELECTOR"
+      [visible]="display[DialogName.SECURITY_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.SECURITY_SELECTOR] = false;">
+    <eim-security-selector
+      [content]="data[DialogName.SECURITY_SELECTOR].content"
+      [displaySearch]="data[DialogName.SECURITY_SELECTOR].displaySearch">
+    </eim-security-selector>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OBJECT_TYPE_TREE_SELECTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01012' | translate }}"  modal="true" width="500" height="500"
+      [name]="DialogName.OBJECT_TYPE_TREE_SELECTOR"
+      [visible]="display[DialogName.OBJECT_TYPE_TREE_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.OBJECT_TYPE_TREE_SELECTOR] = false;">
+    <eim-object-type-tree-selector
+      [content]="data[DialogName.OBJECT_TYPE_TREE_SELECTOR].content"
+      [workspaceObjId]="data[DialogName.OBJECT_TYPE_TREE_SELECTOR].workspaceObjId"
+      [typeName]="data[DialogName.OBJECT_TYPE_TREE_SELECTOR].typeName">
+    </eim-object-type-tree-selector>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FOLDER_TREE_SELECTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01026' | translate }}"  modal="true" width="500" height="500"
+      [name]="DialogName.FOLDER_TREE_SELECTOR"
+      [visible]="display[DialogName.FOLDER_TREE_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.FOLDER_TREE_SELECTOR] = false;">
+    <eim-folder-tree-selector
+      [content]="data[DialogName.FOLDER_TREE_SELECTOR].content"
+      [typeName]="data[DialogName.FOLDER_TREE_SELECTOR].typeName">
+    </eim-folder-tree-selector>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01028' | translate }}"  modal="true" width="1000" height="500"
+      [name]="DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR"
+      [visible]="display[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR] = false;">
+	<eim-multiple-selector
+			[componentService]="objectTypeTreeMultipleSelectorComponentService"
+			[columns]="data[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR].columns"
+			[selectedData]="data[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR].selectedData">
+	    <eim-object-type-tree-selector
+		      [workspaceObjId]="data[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR].workspaceObjId"
+		      [typeName]="data[DialogName.OBJECT_TYPE_MULTIPLE_SELECTOR].typeName"
+		      [selectableParent]="true">
+	    </eim-object-type-tree-selector>
+	</eim-multiple-selector>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.CONTENTS_STATUS_PROPERTY]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_03048' | translate }}" modal="true" width="1093" height="600"
+      [name]="DialogName.CONTENTS_STATUS_PROPERTY"
+      [visible]="display[DialogName.CONTENTS_STATUS_PROPERTY]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.CONTENTS_STATUS_PROPERTY] = false;">
+    <eim-contents-status-property
+      [content]="data[DialogName.CONTENTS_STATUS_PROPERTY].content">
+    </eim-contents-status-property>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01037' | translate }}"  modal="false" width="700" height="650"
+      [name]="DialogName.PUBLIC_FILE_COMBINE_EXECUTOR"
+      [visible]="display[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR]"
+			[enableMaximize]="false"
+      (close)="onClose(DialogName.PUBLIC_FILE_COMBINE_EXECUTOR)">
+      <eim-public-file-combine-executor
+					[contents]="data[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR].contents"
+          [workspaceObjId]="data[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR].workspaceObjId"
+          [parentObjId]="data[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR].parentObjId"
+          [path]="data[DialogName.PUBLIC_FILE_COMBINE_EXECUTOR].path">
+      </eim-public-file-combine-executor>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_FILE_COMPARE_EXECUTOR]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01038' | translate }}" modal="false" width="730" height="540"
+      [name]="DialogName.PUBLIC_FILE_COMPARE_EXECUTOR"
+			[visible]="display[DialogName.PUBLIC_FILE_COMPARE_EXECUTOR]"
+			[enableMaximize]="false"
+      (close)="onClose(DialogName.PUBLIC_FILE_COMPARE_EXECUTOR)">
+      <eim-public-file-compare-executor
+			[contents]="data[DialogName.PUBLIC_FILE_COMPARE_EXECUTOR].contents">
+      </eim-public-file-compare-executor>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_FILE_SECURITY_UPDATER]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01032' | translate }}" modal="true" width="500" height="330"
+			[name]="DialogName.PUBLIC_FILE_SECURITY_UPDATER"
+			[visible]="display[DialogName.PUBLIC_FILE_SECURITY_UPDATER]"
+			[enableMaximize]="false"
+			(close)="onClose(DialogName.PUBLIC_FILE_SECURITY_UPDATER)">
+		<eim-public-file-security-executor
+				[activityFlag]="data[DialogName.PUBLIC_FILE_SECURITY_UPDATER].activityFlag"
+				[objId]="data[DialogName.PUBLIC_FILE_SECURITY_UPDATER].objId"
+				[publicFileSecurity]="data[DialogName.PUBLIC_FILE_SECURITY_UPDATER].publicFileSecurity">
+		</eim-public-file-security-executor>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ACCESS_SECURITY_APPLICABLE]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01024' | translate }}" modal="true" width="790" height="570"
+      [name]="DialogName.ACCESS_SECURITY_APPLICABLE"
+      [visible]="display[DialogName.ACCESS_SECURITY_APPLICABLE]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.ACCESS_SECURITY_APPLICABLE] = false;">
+    <eim-access-security-applicable
+			[content]="data[DialogName.ACCESS_SECURITY_APPLICABLE].content"
+			[accessSecurity]="data[DialogName.ACCESS_SECURITY_APPLICABLE].accessSecurity">
+    </eim-access-security-applicable>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ACCESS_SECURITY_EDIT]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01024' | translate }}" modal="true" width="985" height="570"
+      [name]="DialogName.ACCESS_SECURITY_EDIT"
+      [visible]="display[DialogName.ACCESS_SECURITY_EDIT]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.ACCESS_SECURITY_EDIT] = false;">
+    <eim-access-security-edit
+			[content]="data[DialogName.ACCESS_SECURITY_EDIT].content"
+			[accessSecurity]="data[DialogName.ACCESS_SECURITY_EDIT].accessSecurity"
+      [editable]="data[DialogName.ACCESS_SECURITY_EDIT].editable">
+    </eim-access-security-edit>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01025' | translate }}"  modal="true" width="790" height="570"
+      [name]="DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE"
+      [visible]="display[DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE] = false;">
+    <eim-folder-configuration-security-applicable
+      [content]="data[DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE].content"
+      [folderSecurity]="data[DialogName.FOLDER_CONFIGURATION_SECURITY_APPLICABLE].folderSecurity">
+    </eim-folder-configuration-security-applicable>
+  </eim-dialog>
+</ng-container>
+<ng-container *ngIf="display[DialogName.TAG_ALLOCATION_APPLICANT]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01030' | translate }}" modal="false" width="1000" height="600"
+			[name]="DialogName.TAG_ALLOCATION_APPLICANT"
+			[visible]="display[DialogName.TAG_ALLOCATION_APPLICANT]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.TAG_ALLOCATION_APPLICANT] = false;">
+			<eim-tag-allocation-applicant
+					[content]="data[DialogName.TAG_ALLOCATION_APPLICANT].content"
+          [workspaceObjId]="data[DialogName.TAG_ALLOCATION_APPLICANT].workspaceObjId"
+          [parentObjId]="data[DialogName.TAG_ALLOCATION_APPLICANT].parentObjId"
+          [path]="data[DialogName.TAG_ALLOCATION_APPLICANT].path">
+			</eim-tag-allocation-applicant>
+  </eim-dialog>
+</ng-container>
+<ng-container *ngIf="display[DialogName.PDF_SETTING_UPDATOR]">
+	<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_01035' | translate }}" modal="true" width="500" height="470"
+			[name]="DialogName.PDF_SETTING_UPDATOR"
+			[visible]="display[DialogName.PDF_SETTING_UPDATOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.PDF_SETTING_UPDATOR] = false;">
+			<eim-pdf-setting-updator
+				[activityFlag]="data[DialogName.PDF_SETTING_UPDATOR].activityFlag"
+				[objId]="data[DialogName.PDF_SETTING_UPDATOR].objId"
+				[pdfOutput]="data[DialogName.PDF_SETTING_UPDATOR].pdfOutput">
+			</eim-pdf-setting-updator>
+	</eim-dialog>
+</ng-container>
+<ng-container *ngIf="display[DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE]">
+	<eim-dialog header="電子署名" modal="true" width="500" height="450"
+			[name]="DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE"
+			[visible]="display[DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE] = false;">
+			<eim-pdf-electronic-signature-applicable
+				[activityFlag]="data[DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE].activityFlag"
+				[objId]="data[DialogName.PDF_ELECTRONIC_SIGNATURE_APPLICABLE].objId">
+			</eim-pdf-electronic-signature-applicable>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ACCESS_SECURITY_CHECKED_USER_SELECTOR]">
+	<eim-dialog header="{{ 'EIM.LABEL_01000' | translate }}" modal="true" width="525" height="500"
+			[name]="DialogName.ACCESS_SECURITY_CHECKED_USER_SELECTOR"
+			[visible]="display[DialogName.ACCESS_SECURITY_CHECKED_USER_SELECTOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.ACCESS_SECURITY_CHECKED_USER_SELECTOR] = false;">
+			<eim-user-selector
+				[parentObjId]="data[DialogName.ACCESS_SECURITY_CHECKED_USER_SELECTOR].parentObjId">
+			</eim-user-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.NOTFIED_USER_SELECTOR]">
+		<eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_02213' | translate }}" modal="true" width="420" height="500"
+				[name]="DialogName.NOTFIED_USER_SELECTOR"
+				[visible]="display[DialogName.NOTFIED_USER_SELECTOR]"
+				[enableMaximize]="false"
+				(close)="display[DialogName.NOTFIED_USER_SELECTOR] = false;">
+				<eim-notfied-user-selector
+					[objId]="data[DialogName.NOTFIED_USER_SELECTOR].objId">
+				</eim-notfied-user-selector>
+		</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ENTRY_SELECTOR]">
+	<eim-dialog header="{{ 'EIM_ADMINS.LABEL_01219' | translate }}" modal="true" width="1300" height="600"
+		[name]="DialogName.ENTRY_SELECTOR"
+		[visible]="display[DialogName.ENTRY_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.ENTRY_SELECTOR] = false;">
+		<eim-multiple-entry-selector
+			[documentId]="data[DialogName.ENTRY_SELECTOR].documentId"
+			[selectTarget]="data[DialogName.ENTRY_SELECTOR].selectTarget"
+			[destination]="data[DialogName.ENTRY_SELECTOR].destination"
+			[viewSource]="data[DialogName.ENTRY_SELECTOR].viewSource">
+		</eim-multiple-entry-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_FILE_PRE_SETTER]">
+  <eim-dialog header="{{ 'EIM_DOCUMENTS.LABEL_03092' | translate }}" modal="true" width="500" height="155"
+      [name]="DialogName.PUBLIC_FILE_PRE_SETTER"
+      [visible]="display[DialogName.PUBLIC_FILE_PRE_SETTER]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.PUBLIC_FILE_PRE_SETTER] = false;">
+    <eim-public-file-pre-setter
+      [content]="data[DialogName.PUBLIC_FILE_PRE_SETTER].content">
+    </eim-public-file-pre-setter>
+  </eim-dialog>
+</ng-container>
+
+<!-- 追加 -->
+<!-- Box公開　フォーマット設定 -->
+<ng-container *ngIf="display[DialogName.BOX_SELECTOR]">
+  <eim-dialog
+    header="{{ 'EIM_ADMINS.LABEL_01222' | translate }}"
+    modal="true"
+    width="400"
+    height="300"
+    [name]="DialogName.BOX_SELECTOR"
+    [visible]="display[DialogName.BOX_SELECTOR]"
+    [enableMaximize]="false"
+    (close)="onClose(DialogName.BOX_SELECTOR)"
+  >
+    <eim-box-selector
+      [selectedData]="data[DialogName.BOX_SELECTOR].selectedData"
+      [boxData]="data[DialogName.BOX_SELECTOR].boxData"
+      [content]="data[DialogName.BOX_SELECTOR].content"
+    ></eim-box-selector>
+  </eim-dialog>
+</ng-container>

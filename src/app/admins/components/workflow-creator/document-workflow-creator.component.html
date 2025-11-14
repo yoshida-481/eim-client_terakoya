@@ -1,0 +1,241 @@
+<div style="height: 100%;">
+	<form #workflowCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div *ngIf="useViewConf.basic" [style.display]="selectedViewName === viewName.BASIC ? '' : 'none'" style="height: 100%; width: 100%;">
+			<p-tabs [value]="0" (valueChange)="onChangeTab($event)" [ngStyle]="{'width': '100%'}">
+				<p-tablist>
+					<p-tab [value]="0">{{ 'EIM_ADMINS.LABEL_02242' | translate }}</p-tab>
+					<p-tab [value]="1">{{ 'EIM_ADMINS.LABEL_02230' | translate }}</p-tab>
+					<p-tab [value]="2" class="eim-publish-notify-entry" [disabled]="workflow.publishNotifyMail ? false : true" style="overflow: hidden;">{{ 'EIM_ADMINS.LABEL_02237' | translate }}</p-tab>
+				</p-tablist>
+				<p-tabpanels>
+					<!-- 全般タブ -->
+					<p-tabpanel [value]="0">
+						<div style="padding:5px; height: 100%">
+							<div *ngFor="let lang of languages;" class="eim-form-item">
+								<label class="eim-form-label eim-form-label-required" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+								<div class="eim-form-input">
+									<input name="workflow_name_{{lang.lang}}" required="true" type="text" pInputText [(ngModel)]="workflow.nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 100%;" (ngModelChange)="onWorkFlowNameChange($event)"/>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label eim-form-label-required" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02218' | translate }}</label>
+								<div class="eim-form-input">
+									<eim-radio-button name="defBossApproval" label="{{ 'EIM_ADMINS.LABEL_02219' | translate }}" value="necessary" [(ngModel)]="workflow.defBossApproval" [disabled]="(mode==='updator')" (ngModelChange)="onClickDefBossApproval($event)"></eim-radio-button>
+									<eim-radio-button name="defBossApproval" label="{{ 'EIM_ADMINS.LABEL_02220' | translate }}" value="unnecessary" [(ngModel)]="workflow.defBossApproval" [disabled]="(mode==='updator')" (ngModelChange)="onClickDefBossApproval($event)"></eim-radio-button>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label eim-form-label-required" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02221' | translate }}</label>
+								<div class="eim-form-input">
+									<eim-radio-button name="defNotifyMail" label="{{ 'EIM_ADMINS.LABEL_02222' | translate }}" required="true" value="immediate" [(ngModel)]="workflow.defNotifyMail" (ngModelChange)="onInputChange($event)"></eim-radio-button>
+									<eim-radio-button name="defNotifyMail" label="{{ 'EIM_ADMINS.LABEL_02223' | translate }}" required="true" value="scheduled" [(ngModel)]="workflow.defNotifyMail" (ngModelChange)="onInputChange($event)"></eim-radio-button>
+									<eim-radio-button name="defNotifyMail" label="{{ 'EIM_ADMINS.LABEL_02224' | translate }}" required="true" value="off" [(ngModel)]="workflow.defNotifyMail" (ngModelChange)="onInputChange($event)"></eim-radio-button>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02225' | translate }}
+								</label>
+								<div class="eim-form-input">
+									<eim-checkbox name="defApproveRequest" [disabled]="(workflow.defBossApproval === 'unnecessary') ? true : false " value="true" binary="true" [(ngModel)]="workflow.defApproveRequest"
+											label="{{ 'EIM.LABEL_02044' | translate }}" (onChange)="onInputChange($event)"></eim-checkbox>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02226' | translate }}
+								</label>
+								<div class="eim-form-input">
+									<eim-checkbox name="publishNotifyMail" value="true" binary="true" [(ngModel)]="workflow.publishNotifyMail"
+											label="{{ 'EIM.LABEL_02044' | translate }}" (onChange)="onChangePublishNotifyMail($event)" ></eim-checkbox>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02227' | translate }}
+								</label>
+								<div class="eim-form-input">
+									<eim-checkbox name="processWaitPopup"  [disabled]="(workflow.defBossApproval === 'unnecessary') ? true : false " value="true" binary="true" [(ngModel)]="workflow.processWaitPopup"
+											label="{{ 'EIM.LABEL_02044' | translate }}" (onChange)="onInputChange($event)"></eim-checkbox>
+								</div>
+							</div>
+							<div class="eim-form-item">
+								<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02228' | translate }}
+								</label>
+								<div class="eim-form-input">
+									<eim-checkbox name="backMail"  [disabled]="(workflow.defBossApproval === 'unnecessary') ? true : false " value="true" binary="true" [(ngModel)]="workflow.backMail"
+											label="{{ 'EIM.LABEL_02044' | translate }}" (onChange)="onInputChange($event)"></eim-checkbox>
+								</div>
+							</div>
+							<div class="eim-form-item" *ngIf="serverConfigService.ocrFlg">
+								<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02229' | translate }}
+								</label>
+								<div class="eim-form-input">
+									<eim-checkbox name="defOcr" value="true" binary="true" [(ngModel)]="workflow.defOcr"
+											label="{{ 'EIM.LABEL_02044' | translate }}" (onChange)="onInputChange($event)"></eim-checkbox>
+								</div>
+							</div>
+						</div>
+					</p-tabpanel>
+
+					<!-- 公開処理設定タブ -->
+					<p-tabpanel [value]="1">
+						<div style="padding:5px; height: 100%">
+							<p-accordion [multiple]="true">
+								<p-accordionTab header="{{ 'EIM_ADMINS.LABEL_02231' | translate }}" class="eim-document-main-workspace" [selected]="true">
+									<div class="eim-form-item">
+										<div class="eim-form-input">
+											<eim-checkbox name="publicFilePDF" value="true" binary="true" [(ngModel)]="workflow.publishSettingInfo.doPDFConvert"
+													label="{{ 'EIM_ADMINS.LABEL_02232' | translate }}" (onChange)="onInputChange($event)"></eim-checkbox>
+										</div>
+									</div>
+									<div class="eim-form-item">
+										<div class="eim-form-input" style="display: flex; height: 100%; align-items: center;">
+											<eim-checkbox name="expirationDate" value="true" binary="true" [(ngModel)]="workflow.publishSettingInfo.doSetTerm"
+													label="{{ 'EIM_ADMINS.LABEL_02234' | translate }}"  (onChange)="onExpirationDateChange($event)"></eim-checkbox>
+											<input name="yuukou" [disabled]="workflow.publishSettingInfo.doSetTerm ? false : true " required="true" pInputText [(ngModel)]="workflow.publishSettingInfo.termNumParam" pattern="{{insertionYuukou}}" maxlength="{{inputYuukouMaxLength}}" style="width: 100px; padding: 2px; margin-left: 5px; margin-right: 3px;" (input)="onInputChange($event)"/>
+											<p-select name="saki" appendTo="body" [options]="termUnitList" required="true" [disabled]="workflow.publishSettingInfo.doSetTerm ? false : true " [(ngModel)]="workflow.publishSettingInfo.termUnitParam" placeholder="{{'EIM.INFO_00002' | translate}}" [autoWidth]="true" [style]="{'width': '60px'}" (onChange)="onInputChange($event)"></p-select>
+										</div>
+									</div>
+									<div *ngIf="serverConfigService.insertURL" class="eim-form-item">
+										<div class="eim-form-input">
+											<eim-checkbox name="insertUrl" value="true" binary="true" [(ngModel)]="workflow.publishSettingInfo.doPDFURL"
+													label="{{ 'EIM_ADMINS.LABEL_02258' | translate }}"></eim-checkbox>
+										</div>
+									</div>
+
+								</p-accordionTab>
+								<p-accordionTab *ngIf="serverConfigService.digitalSignatureFlg" header="{{ 'EIM_ADMINS.LABEL_02235' | translate }}" class="eim-document-main-circulation-situation" [selected]="true">
+									<eim-pdf-electronic-signature-applicable #pdfElectronicSignatureApplicable
+										[activityFlag]="true">
+									</eim-pdf-electronic-signature-applicable>
+								</p-accordionTab>
+								<p-accordionTab *ngIf="serverConfigService.pdfOutputConf" header="{{ 'EIM_ADMINS.LABEL_02236' | translate }}" class="eim-document-main-attribute-tree-view" [selected]="true">
+									<as-split direction="horizontal" style="display: flex;">
+										<eim-radio-button class="eim-form-item" name="editable" label="{{ 'EIM.LABEL_02044' | translate }}" [value]="true"
+											[(ngModel)]="workflow.publishSettingInfo.doSetSecurity"
+											(click)="onClickSecurityDoNo($event)"></eim-radio-button>
+										<div style="padding-left: 20px;"></div>
+										<eim-radio-button class="eim-form-item" name="editable" label="{{ 'EIM.LABEL_02045' | translate }}" [value]="false"
+											[(ngModel)]="workflow.publishSettingInfo.doSetSecurity"
+											(click)="onClickSecurityDoNo($event)"></eim-radio-button>
+									</as-split>
+									<eim-public-file-security-executor #publicFileSecurityUpdater
+										[activityFlag]="true" [publicFileSecurity]="workflow.publishSettingInfo">
+									</eim-public-file-security-executor>
+								</p-accordionTab>
+							</p-accordion>
+						</div>
+					</p-tabpanel>
+
+					<!-- 公開通知先選択タブ -->
+					<p-tabpanel [value]="2">
+						<div style="padding:5px; height: 100%">
+							<div style="height: 100%;" eim-vertical-container>
+								<div class="eim-data-grid-menu" >
+									<eim-menubar [model]="publishNotifyEntryDataGridMenuItems"></eim-menubar>
+								</div>
+
+								<div class="eim-flexible-height">
+									<eim-data-grid #publishNotifyEntryDataGrid
+									[contextMenuItems]="publishNotifyEntryContentsMenuItems" (contextmenu)="onPublishNotifyEntryContextMenuWorkflow($event)"
+									(selected)="onSelectedPublishNotifyEntry($event)"></eim-data-grid>
+								</div>
+							</div>
+						</div>
+					</p-tabpanel>
+				</p-tabpanels>
+			</p-tabs>
+		</div>
+
+		
+
+		<div *ngIf="useViewConf.statusType" [style.display]="selectedViewName === viewName.STATUS_TYPE ? '' : 'none'" style="width: 100%; height: 100%;" eim-vertical-container>
+			<div class="eim-form-item">
+				<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_03012' | translate }}</label>
+				<div class="eim-form-input">
+					<input name="workflow_name" [disabled]="true" type="text" pInputText [(ngModel)]="workflow.name" style="width: 100%;" />
+				</div>
+			</div>
+			<div *ngFor="let lang of languages;" class="eim-form-item">
+				<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+				<div class="eim-form-input">
+					<input name="status_type_name_{{lang.lang}}" type="text" pInputText [(ngModel)]="statusNameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 100%;" (input)="onStatusNameChange($event.target.value)"/>
+				</div>
+			</div>
+			<div class="eim-form-item">
+				<label class="eim-form-label" style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02271' | translate }}</label>
+				<div class="eim-form-input">
+					<p-select name="approveThroughTerm" [options]="approveThroughTerm" [(ngModel)]="inputApproveThroughTerm" placeholder="{{'EIM_ADMINS.LABEL_02115' | translate}}" appendTo="body" [autoWidth]="true" [style]="{'width':'100%'}" (onChange)="onInputChangeForAddApprove($event)"></p-select>
+				</div>
+			</div>
+			<div class="eim-data-grid-menu">
+				<eim-menubar [model]="statusTypeDataGridMenuItems"></eim-menubar>
+			</div>
+			<div style="height: 80px; width: calc(100% - 35px);">
+				<eim-data-grid #statusTypeEditDataGrid [rowStyle]="disableRowStyle" [showAllSelectButton]="false"></eim-data-grid>
+			</div>
+			<div class="eim-flexible-height" style="width: 100%; display: flex;">
+				<div style="height: 100%; width: calc(100% - 35px);">
+					<eim-data-grid #statusTypeApproveDataGrid
+					[headerHeight]="0"
+					[multiple]="false"
+					[showAllSelectButton]="false"
+					[contextMenuItems]="statusTypeApproveContentsMenuItems" (contextmenu)="onStatusTypeApproveContextMenuWorkflow($event)"
+					(selected)="onSelectedStatusTypeApprove($event)"
+					[equals]="equalsStatusType"></eim-data-grid>
+				</div>
+				<div style="height: 100%; width: 35px; display: table;">
+					<div style="vertical-align: middle; float: none; display: table-cell;">
+						<button pButton class="p-button-success" type="button"
+								pTooltip="{{ 'EIM.LABEL_03029' | translate }}" icon="fa fa-arrow-up"
+								(click)="onClickStatusTypeUp($event)"
+								style="width: 30px; height: 30px; margin-left: 5px; margin-bottom: 10px;"></button>
+						<button pButton class="p-button-success" type="button"
+								pTooltip="{{ 'EIM.LABEL_03030' | translate }}" icon="fa fa-arrow-down"
+								(click)="onClickStatusTypeDown($event)"
+								style="width: 30px; height: 30px; margin-left: 5px;"></button>
+					</div>
+				</div>
+			</div>
+
+			<div style="height: 80px; width: calc(100% - 35px);">
+				<eim-data-grid #statusTypePublishDataGrid [headerHeight]="0" [rowStyle]="disableRowStyle" [showAllSelectButton]="false"></eim-data-grid>
+			</div>
+		</div>
+
+
+		<div *ngIf="useViewConf.skip" [style.display]="selectedViewName === viewName.SKIP ? '' : 'none'" style="width: 100%; height: 100%;" eim-vertical-container>
+			<div class="eim-form-item" style="display: flex; width: 100%;">
+				<div style="width: calc(55% - 15px);" eim-vertical-container>
+					<label style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02299' | translate }}</label>
+					<div class="eim-form-input" style="width: 100%;" >
+						<p-select name="fromStatusTypes" [options]="fromStatusTypes" [(ngModel)]="inputFromStatusTypes" appendTo="body" (onChange)="onChangeFromStatusTypes($event)" [autoWidth]="true" [style]="{'width':'95%'}"></p-select>
+					</div>
+				</div>
+				<div style="width: 48px;" eim-vertical-container>
+					<label style="width: 50%;">&nbsp;&nbsp;</label>
+					<div class="eim-form-input" style="width: 27px;" >
+						<span class="fa fa-fw fa-caret-right fa-2x"></span>
+					</div>
+				</div>
+				<div style="width: calc(55% - 15px);" eim-vertical-container>
+					<label style="width: 50%;">{{ 'EIM_ADMINS.LABEL_02300' | translate }}</label>
+					<div class="eim-form-input" style="width: 100%;">
+						<p-select name="toStatusTypes" [options]="toStatusTypes" [(ngModel)]="inputToStatusTypes" appendTo="body" (onChange)="onChangeToStatusTypes($event)" [autoWidth]="true" [style]="{'width':'95%'}"></p-select>
+					</div>
+				</div>
+			</div>
+			<div class="eim-data-grid-menu">
+				<eim-menubar [model]="skipEventDataGridMenuItems"></eim-menubar>
+			</div>
+			<div class="eim-flexible-height">
+				<eim-data-grid #skipDataGrid
+					[equals]="dataGridEquals"
+					[contextMenuItems]="skipEventContentsMenuItems" (contextmenu)="onSkipEventContextMenuWorkflow($event)"
+					(selected)="onSelectedSkipData($event)"></eim-data-grid>
+			</div>
+			<div style="height: 200px;">
+				<eim-workflow-diagram #workflowDiagram [editable]="false" ></eim-workflow-diagram>
+			</div>
+		</div>
+	</form>
+</div>
+

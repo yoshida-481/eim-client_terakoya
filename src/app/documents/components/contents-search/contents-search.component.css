@@ -1,0 +1,136 @@
+p-select {
+	width: 50%;
+}
+
+p-select .p-select {
+	width: 100%;
+}
+
+::ng-deep .eim-contents-search p-menubarsub .p-menu-separator {
+	width: 0px!important;
+	border: none;
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker {
+	width: calc(100%);
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker .p-datepicker {
+	width: calc(100%);
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker input {
+	width: calc(100%);
+}
+
+::ng-deep .eim-contents-search-detail-condition-attribute p-datepicker .p-datepicker .p-inputtext {
+	width: calc(100%);
+}
+
+.center {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	height: 26px;
+	width: 12px;
+}
+
+.basic-condition .p-col-6 {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.eim-contents-search-top-area {
+	overflow-x: visible !important;
+	overflow-y: visible !important;
+	min-height: 0px;
+}
+
+::ng-deep .eim-contents-search split split-gutter {
+	z-index: 1001;
+}
+
+.eim-contents-search-bottom-area {
+	background-color: #FFFFFF;
+	z-index: 1001;
+	overflow-y: hidden!important;
+}
+
+.eim-contents-search-detail-panel-outer {
+	min-height: 0px;
+	border-style: solid;
+	border-color: #57bbed;
+	background-color: #e0f6fe;
+	border-width: 1px;
+	margin-top: 3px;
+}
+
+.eim-contents-search-detail-panel-inner {
+	height: calc(100% - 38px);
+	min-height: 0px;
+	overflow-y: scroll;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.eim-contents-search-detail-condition-attribute .detail-condition-row {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.eim-contents-search-detail-condition-attribute > div {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.search-path-target-folder {
+	background-color: #FFFFFF !important;
+}
+::ng-deep .eim-contents-search-btn .p-button-icon-left {
+	margin-left: 3px;
+}
+::ng-deep div.eim-data-grid-menu > eim-menubar > p-menubar > div > p-menubarsub > ul {
+	display: flex !important;
+}
+
+/* 2022.03 新規 検索対象選択ボタン用 */
+::ng-deep .eim-contents-search .p-grid.basic-condition .p-button-info.p-button-icon-only {
+	padding: 0px;
+}
+/* 2022.03 新規 検索対象選択ボタン用 */
+::ng-deep .eim-contents-search .p-grid.basic-condition .p-button-info.p-button-icon-only .p-button-icon.fa-external-link {
+	margin-top: .2em;
+}
+/* 2022.03 新規 ステータスドロップダウン用 */
+::ng-deep .eim-contents-search .p-grid.basic-condition .p-select {
+	width: 102px;
+}
+/* 2022.03 新規 さらに詳細条件を表示ボタン用 */
+::ng-deep .eim-contents-search .p-button.p-component.p-button-info:not(.icon-only-button)  {
+	display: inline-block;
+	padding: 3px 12px 3px 6px;
+}
+/* 2022.03 新規 さらに詳細条件を表示ボタンアイコン用 */
+::ng-deep .eim-contents-search .p-button.p-component.p-button-info .p-button-icon {
+	display: unset;
+}
+/* 2022.03 新規 クリアボタン用 */
+::ng-deep .eim-contents-search .p-button.p-component.p-button-secondary {
+	padding: 3px 12px;
+}
+/* 2022.03 新規 検索ボタン用 */
+::ng-deep .eim-contents-search .eim-contents-search-btn {
+	display: inline-block;
+}
+/* 2022.03 新規 検索ボタンアイコン用 */
+::ng-deep .eim-contents-search .eim-contents-search-btn .p-button-icon {
+	position: absolute;
+	left: 6px;
+}
+/* 2022.03 新規 検索ボタンラベル用 */
+::ng-deep .eim-contents-search .eim-contents-search-btn .p-button-label {
+	margin-left: 20px;
+}

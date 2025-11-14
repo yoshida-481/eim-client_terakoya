@@ -1,0 +1,58 @@
+::ng-deep .eim-publish-notify-entry .p-tabpanel  {
+	overflow: hidden;
+}
+
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep .eim-dialog-contents .p-accordion.p-component .p-accordionheader:not(.p-highlight):not(.p-disabled):hover {
+	background: #ededf0;
+	border-color: silver;
+    color: #212121;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep.p-accordionpanel:not(.p-disabled).p-accordionpanel-active > .p-accordionheader {
+	background: #f4f4f4!important;
+	font-weight: 400;
+	border: 0px;
+	color: #1b1d1f!important;
+	text-decoration: none;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep .eim-dialog-contents .p-accordion.p-component .p-accordionheader:hover {
+	background: transparent;
+	border: 0px;
+	color: #1b1d1f;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep .eim-dialog-contents .p-accordion.p-component .p-accordionheader {
+	text-decoration: underline;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep .eim-dialog-contents .p-accordion.p-component .p-accordionheader .p-accordionheader-toggle-icon {
+	width: 7px !important;
+	height: 7px !important;
+	font-size: 8px;
+	margin-right: 0.5rem;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep .eim-dialog-contents .p-accordion.p-component .p-accordioncontent.ng-trigger-tabContent .p-accordioncontent {
+	border: 0px;
+}
+
+/* 2022.05 新規 フッタボタン用（前へボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.fa-angle-double-left {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 フッタボタン用（次へボタン） */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-icon.fa-angle-double-right {
+	position: absolute;
+	left: 0.5em;
+	top: 50%;
+	margin-top: -0.5em;
+}
+/* 2022.05 新規 フッタボタン用 */
+::ng-deep .eim-dialog-footer .p-rtl .p-button span.p-button-label {
+	margin-left: 1.5em;
+}

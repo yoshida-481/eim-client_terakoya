@@ -1,0 +1,62 @@
+<div style="height: 100%;">
+	<form #classCopyCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02286' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="parentObjTypeName" type="text" pInputText [(ngModel)]="parentObjTypeName" maxlength="{{inputMaxLength}}" style="width: 90%;"
+							disabled="true"/>
+					</div>
+				</div>
+
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02238' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="definitionName" type="text" pInputText [(ngModel)]="definitionName" maxlength="{{inputMaxLength}}" style="width: 90%;" [disabled]="true"/>
+					</div>
+				</div>
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 90%;" [disabled]="true"/>
+					</div>
+				</div>
+
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02239' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="newDefinitionName" type="text" pInputText [(ngModel)]="newDefinitionName" maxlength="{{inputMaxLength}}" style="width: 90%;" required="true"/>
+					</div>
+				</div>
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="newName_{{lang.lang}}" type="text" pInputText [(ngModel)]="newNameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 90%;" required="true"/>
+					</div>
+				</div>
+
+				<div class="eim-extra-item">
+					<div class="eim-form-item">
+						<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02287' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="nameAutoCreateCheck" [disabled]="true" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" [(ngModel)]="nameAutoCreateCheck"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item">
+						<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02288' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="parentSequenceCheck" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" [(ngModel)]="parentSequenceCheck" (onChange)="parentSequenceChangeCheckbox($event);"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item">
+						<label class="eim-form-label" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02289' | translate }}</label>
+						<div class="eim-form-input">
+							<input name="formatString" [disabled]="!nameAutoCreateCheck" type="text" pInputText [(ngModel)]="formatString" maxlength="{{inputMaxLength}}" style="width: 90%;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

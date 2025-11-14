@@ -1,0 +1,46 @@
+::ng-deep .eim-document-creator-property-panel .p-panel .p-panel-content-container.ng-trigger-panelContent {
+	height: 100%;
+}
+
+::ng-deep .eim-document-creator-property-panel .p-panel-content {
+	height: 100%;
+}
+/** ファイル関連 */
+.eim-upload-menu-btn {
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border: solid 1px #e5e5e5;
+	border-radius: 3px;
+	transition-property: none;
+	padding: 3px 6px 0px 6px;
+	margin: 1.5px 0px 1.5px 0px;
+	cursor: pointer;
+}
+.eim-upload-menu-btn:hover {
+	background: #deeaff;
+	border: thin solid #3dabff;
+	border-radius: 3px;
+}
+.eim-upload-menu-btn-disabled {
+	border: solid 1px #ccc;
+	border-radius: 3px;
+	color: #373a3c;
+	background: linear-gradient(to bottom, #F0F1F1, #e5e5e5);
+	border-color: #e5e5e5;
+	padding: 1px 6px 0px 6px;
+	margin: 1.5px 0px 1.5px 0px;
+}
+.eim-upload-menu-btn-disabled .eim-upload-menu-btn-icon,.eim-upload-menu-btn-disabled .eim-upload-menu-btn-label {
+	opacity: 0.35;
+}
+.eim-upload-menu-btn-disabled:hover {
+	opacity: 0.35;
+	background: #eeeeee;
+	background-color: #a6a6a6;
+	color: #ffffff;
+}
+.eim-upload-menu-btn-disabled:hover .eim-upload-menu-btn-icon,.eim-upload-menu-btn-disabled:hover .eim-upload-menu-btn-label {
+	opacity: 1;
+}
+::ng-deep .padding-top-set eim-radio-button  {
+	padding-top:2px;
+}

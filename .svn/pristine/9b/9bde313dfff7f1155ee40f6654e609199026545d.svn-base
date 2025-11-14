@@ -1,0 +1,71 @@
+<div style="height: 100%;">
+	<as-split #split id="split" direction="horizontal">
+		<as-split-area id="splitLeft" [size]="splitSetting.splitLeft.size">
+			<div class="eim-admin-left-panel">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02011' | translate }}">
+					<div style="height: 100%;" eim-vertical-container>
+						<div class="eim-data-grid-menu">
+							<eim-menubar [model]="workspaceFormMenubarItems"></eim-menubar>
+						</div>
+						<!-- 帳票ワークスペース -->
+						<div class="eim-flexible-height">
+							<eim-data-grid #formWorkspaceList [equals]="dataGridEquals" (selected)="onSelectedFormWorkspace($event)" [multiple]="false"
+								[contextMenuItems]="formWorkspaceContentsMenuItems">
+							</eim-data-grid>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+		<as-split-area [size]="100 - splitSetting.splitLeft.size">
+			<div class="eim-admin-right-panel">
+				<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02012' | translate }}">
+					<!-- アクセスセキュリティ-->
+					<div class="eim-form-item" style="height: 26px">
+						<label class="eim-form-label" style="width: 150px; white-space: nowrap;">{{ 'EIM_ADMINS.LABEL_02012' | translate }}</label>
+						<div class="eim-form-input">
+							<input name="accessSecurityName" type="text" pInputText [(ngModel)]="accessSecurityName" readonly="readonly"
+								style="width: 240px; background-color: #ffffff;"/>
+						</div>
+					</div>
+					<div class="p-grid eim-flexible-height" style="height: calc(100% - 26px);">
+						<!-- 帳票タイプ -->
+						<div class="p-col-6" style="height: calc(100% - 30px); display: flex;">
+							<div style="height: 100%; width: 100%;">
+								<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02013' | translate }}">
+									<div class="eim-data-grid-menu" style="overflow: hidden;">
+										<eim-menubar [model]="formTypeMenubarItems"></eim-menubar>
+									</div>
+									<div eim-vertical-container style="width: 100%; height: 100%; ">
+										<div class="eim-flexible-height">
+											<eim-data-grid #formTypeDataGrid [equals]="dataGridEquals" (selected)="onSelectedFormType($event)"
+												[contextMenuItems]="formTypeContensMenuItems">
+											</eim-data-grid>
+										</div>
+									</div>
+								</p-panel>
+							</div>
+						</div>
+						<!-- 帳票フォルダ -->
+						<div class="p-col-6" style="height: calc(100% - 50px); display: flex;">
+							<div style="height: 100%; width: 100%;">
+								<p-panel class="eim-panel-containing-grid" header="{{ 'EIM_ADMINS.LABEL_02014' | translate }}">
+									<div class="eim-data-grid-menu">
+										<eim-menubar [model]="formFolderMenubarItems"></eim-menubar>
+									</div>
+									<div eim-vertical-container style="width: 100%; height: 100%; ">
+										<div class="eim-flexible-height">
+											<eim-tree-data-grid #formFolderTreeGrid (selected)="onSelectedFormFolderNode($event)"
+												[contextMenuItems]="formFolderContensMenuItems" (contextmenu)="onContextMenuFormFolder($event)">
+											</eim-tree-data-grid>
+										</div>
+									</div>
+								</p-panel>
+							</div>
+						</div>
+					</div>
+				</p-panel>
+			</div>
+		</as-split-area>
+	</as-split>
+</div>

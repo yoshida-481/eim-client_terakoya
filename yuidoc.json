@@ -1,0 +1,14 @@
+{
+    "name": "EIMANAGER",
+    "description": "EIMANAGER document",
+    "version": "6.8.0",
+    "url": "http://",
+    "logo": "../src/assets/logo.png",
+    "options": {
+        "linkNatives": "true",
+        "attributesEmit": "true",
+        "selleck": "true",
+        "paths": "./work",
+        "outdir": "./doc"
+    }
+}

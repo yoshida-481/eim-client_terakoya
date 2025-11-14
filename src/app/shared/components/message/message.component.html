@@ -1,0 +1,51 @@
+<p-dialog [header]="info.dialogTitle" [(visible)]="info.displayMessage" width="300" [style]="{width: '300px'}"
+		[resizable]="false" modal="true" [closable]="false" [transitionOptions]="'0ms'" (onShow)="onShow()" (onHide)="onHide()">
+	<div class="p-grid">
+		<div class="p-col-12 p-md-2">
+			<i class="fa {{info.dialogIcon}}" style="font-size: xx-large;"></i>
+		</div>
+		<div class="p-col-12 p-md-10" style="padding-top: 13px; word-break: normal; white-space: pre-line;">
+			{{info.dialogMessage}}
+		</div>
+
+	</div>
+
+	<div *ngIf="isMultipleLines" class="p-grid">
+		<div class="p-col-12 p-md-2">
+		</div>
+		<div class="p-col-12 p-md-10" style="max-height: 150px; height: auto !important; overflow-y: auto;">
+			<div *ngFor="let target of targetList">
+				■{{target}}
+			</div>
+		</div>
+	</div>
+
+	<div *ngIf="isContents" class="p-grid">
+		<div class="p-col-12 p-md-2">
+		</div>
+		<div class="p-col-12 p-md-10">
+			<p *ngFor="let item of contents;" style="margin-top: 3px; margin-bottom: 3px;">
+				{{item}}
+			</p>
+		</div>
+	</div>
+
+	<div *ngIf="isCheckBox" class="p-grid">
+		<div class="p-col-12 p-md-2">
+		</div>
+		<div class="p-col-12 p-md-10">
+			<eim-checkbox #dispConfirmCheckBox class="eim-wide-margin-left" [ngModel]="checked" value="false" [binary]="true" label="{{info.dialogCheckboxMessage}}"></eim-checkbox>
+		</div>
+	</div>
+
+	<footer class="eim-footer ui-helper-clearfix">
+		<div #closeButtons *ngIf="!isConfirm">
+			<button type="button" pButton id="close" class="p-button-primary eim-right-alignment-button" label="{{ 'EIM.LABEL_03000' | translate }}" (click)="dialogAccept()"></button>
+		</div>
+		<div #confirmButtons *ngIf="isConfirm">
+			<button type="button" pButton id="confirmAccept" icon="fa fa-check" class="p-button-primary eim-right-alignment-button" label="{{ 'EIM.LABEL_03019' | translate }}" (click)="dialogAccept()"></button>
+			<button type="button" pButton id="confirmClose" icon="fa fa-close" class="p-button-secondary eim-right-alignment-button" label="{{ 'EIM.LABEL_03020' | translate }}" (click)="dialogReject()"></button>
+		</div>
+	</footer>
+</p-dialog>
+<p-toast></p-toast>

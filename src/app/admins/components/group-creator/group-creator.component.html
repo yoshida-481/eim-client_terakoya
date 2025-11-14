@@ -1,0 +1,52 @@
+<div style="height: 100%;">
+	<form #groupCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<!-- 親グループ -->
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-for-group-create">{{ 'EIM_ADMINS.LABEL_02126' | translate }}</label>
+					<div class="eim-form-input eim-form-input-for-group-create" style="display: flex;">
+						<div class="eim-form-input-default eim-form-input-for-search-and-clear">
+							<div class="eim-form-input-text-for-search-and-clear">
+								{{parentGroupName}}　<!-- 空白を入れないと削除時に1pxずれる -->
+							</div>
+							<div *ngIf="parentGroupName" align="right">
+								<i class="fa fa-times" style="padding-right:5px;"  (click)="onClickDeletePrentGroup($event)"></i>
+							</div>
+						</div>
+						<button pButton type="button" icon="fa-fw fa fa-external-link" severity="info" class="icon-only-button eim-form-input-search-button-for-search-and-clear"
+							pTooltip="{{ 'EIM.LABEL_03006' | translate }}"	(click)="onClickShowGroupSelector($event);"
+							[disabled]="false"></button>
+					</div>
+				</div>
+
+				<!-- 定義名称 -->
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-for-group-create eim-form-label-required" style="width: 40%">{{'EIM_ADMINS.LABEL_02004' | translate}}</label>
+					<div class="eim-form-input eim-form-input-for-group-create">
+						<input name="definitionName" type="text" required="true" pInputText [(ngModel)]="definitionName" maxlength="{{inputMaxLength}}" style="width: 90%;"/>
+					</div>
+				</div>
+
+				<!-- 名前（日本語、英語） -->
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-for-group-create eim-form-label-required" style="width: 40%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input eim-form-input-for-group-create">
+						<input name="name_{{lang.lang}}" type="text" required="true" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 90%;"/>
+					</div>
+				</div>
+
+				<!-- 属性情報 -->
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 50%;"><b>{{ 'EIM_ADMINS.LABEL_02093' | translate }}</b></label>
+				</div>
+				<div class="eim-group-creator-attribute-area">
+					<eim-user-attribute-list-input-form-item
+						[(attributeList)]="attributeList" [form]="groupCreatorForm.form">
+					</eim-user-attribute-list-input-form-item>
+				</div>
+			</div>
+			<label *ngIf="isConvertPaperToPDFFlg"><i class="fa eim-icon-info"></i>{{ 'EIM_ADMINS.CONFIRM_00016' | translate}}</label>
+		</div>
+	</form>
+</div>

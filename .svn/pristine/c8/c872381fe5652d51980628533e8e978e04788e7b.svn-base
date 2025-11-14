@@ -1,0 +1,113 @@
+<ng-container *ngIf="display[DialogName.USER_SELECTOR]">
+	<eim-dialog header="{{ 'EIM.LABEL_01000' | translate }}" modal="true" width="570" height="500"
+      [name]="DialogName.USER_SELECTOR"
+      [visible]="display[DialogName.USER_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.USER_SELECTOR] = false;">
+		<eim-user-selector
+			[disableUserFilter]="data[DialogName.USER_SELECTOR].disableUserFilter"
+			[systemUserFilter]="data[DialogName.USER_SELECTOR].systemUserFilter"
+			[parentObjId]="data[DialogName.USER_SELECTOR].parentObjId"
+			[multiple]="false"></eim-user-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PASSWORD_CHANGE]">
+	<eim-dialog header="{{ 'EIM.LABEL_01001' | translate }}" modal="true" position="absolute" width="700" [height]="data[DialogName.PASSWORD_CHANGE].headerHeight"
+		[name]="DialogName.PASSWORD_CHANGE"
+		[visible]="display[DialogName.PASSWORD_CHANGE]"
+		[enableMaximize]="false"
+		[trimcloseBottonFlg]="data[DialogName.PASSWORD_CHANGE].trimcloseBottonFlg"
+		(close)="display[DialogName.PASSWORD_CHANGE] = false;">
+		<eim-password-change [authenticationService]="data[DialogName.PASSWORD_CHANGE].authenticationService"
+		[notesMessage]="data[DialogName.PASSWORD_CHANGE].notesMessage">
+		</eim-password-change>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.USER_MULTI_SELECTOR]">
+	<eim-dialog header="{{ 'EIM.LABEL_01000' | translate }}" modal="true" width="1076" height="500"
+      [name]="DialogName.USER_MULTI_SELECTOR"
+      [visible]="display[DialogName.USER_MULTI_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.USER_MULTI_SELECTOR] = false;">
+    	<eim-multiple-selector
+    		[componentService]="userMultipleSelectorComponentService"
+			[columns]="[
+		 			{field: 'code', headerName: 'EIM.LABEL_02001' | translate, width: 100, suppressFilter: true},
+		 			{field: 'name', headerName: 'EIM.LABEL_02002' | translate, width: 100, suppressFilter: true},
+		 			{field: 'groupNames', headerName: 'EIM.LABEL_02003' | translate, tooltipField: 'groupNames', width: 145, suppressFilter: true},
+		 			{field: 'roleNames', headerName: 'EIM.LABEL_02004' | translate, tooltipField: 'roleNames', width: 145, suppressFilter: true}
+			]"
+			[selectedData]="data[DialogName.USER_MULTI_SELECTOR].selectedData">
+			<eim-user-selector
+				[disableUserFilter]="data[DialogName.USER_MULTI_SELECTOR].disableUserFilter"
+				[systemUserFilter]="data[DialogName.USER_MULTI_SELECTOR].systemUserFilter"
+				[parentObjId]="data[DialogName.USER_MULTI_SELECTOR].parentObjId"
+				[multiple]="true"></eim-user-selector>
+		</eim-multiple-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.MASTER_SINGLE_SELECTOR]">
+	<eim-dialog [header]="data[DialogName.MASTER_SINGLE_SELECTOR].header" modal="true" width="700" height="500"
+      [name]="DialogName.MASTER_SINGLE_SELECTOR"
+      [visible]="display[DialogName.MASTER_SINGLE_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.MASTER_SINGLE_SELECTOR] = false;">
+		<eim-master-single-selector
+				[multiple]="false"
+				[searchMasterDisplayConfig]="data[DialogName.MASTER_SINGLE_SELECTOR].searchMasterDisplayConfig"></eim-master-single-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.MASTER_MULTIPLE_SELECTOR]">
+	<eim-dialog [header]="data[DialogName.MASTER_MULTIPLE_SELECTOR].header" modal="true" width="1000" height="500"
+      [name]="DialogName.MASTER_MULTIPLE_SELECTOR"
+      [visible]="display[DialogName.MASTER_MULTIPLE_SELECTOR]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.MASTER_MULTIPLE_SELECTOR] = false;">
+    <eim-multiple-selector
+    	[componentService]="masterMultipleSelectorComponentService"
+			[selectedData]="data[DialogName.MASTER_MULTIPLE_SELECTOR].selectedData">
+			<eim-master-single-selector
+					[multiple]="true"
+					[searchMasterDisplayConfig]="data[DialogName.MASTER_MULTIPLE_SELECTOR].searchMasterDisplayConfig"></eim-master-single-selector>
+		</eim-multiple-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.VERSION_DISPLAY]">
+	<eim-dialog header="{{ 'EIM.LABEL_01004' | translate }}" modal="true" position="absolute" width="300" height="200"
+		[name]="DialogName.VERSION_DISPLAY"
+		[visible]="display[DialogName.VERSION_DISPLAY]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.VERSION_DISPLAY] = false;">
+		<eim-version-display [version]="data[DialogName.VERSION_DISPLAY].version">
+		</eim-version-display>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_CREATOR]">
+	<eim-dialog header="{{ 'EIM.LABEL_03054' | translate }}" modal="true" width="900" height="600"
+		[name]="DialogName.PUBLIC_NOTIFICATION_TEMPLATE_CREATOR"
+		[visible]="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_CREATOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_CREATOR] = false;">
+		<eim-public-notification-template-creator></eim-public-notification-template-creator>
+	</eim-dialog>
+</ng-container>
+  
+<ng-container *ngIf="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER]">
+	<eim-dialog header="{{ 'EIM.LABEL_03055' | translate }}" modal="true" width="900" height="600"
+		[name]="DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER"
+		[visible]="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER] = false;">
+		<eim-public-notification-template-updater
+			[templateId]="data[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER].templateId"
+			[templateName]="data[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER].templateName"
+			[destination]="data[DialogName.PUBLIC_NOTIFICATION_TEMPLATE_UPDATER].destination">
+		</eim-public-notification-template-updater>
+	</eim-dialog>
+</ng-container>

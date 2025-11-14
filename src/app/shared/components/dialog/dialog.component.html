@@ -1,0 +1,64 @@
+<p-dialog #dialog class="eim-dialog" showEffect="fade" resizable="true" appendTo="body"
+	[draggable]="!isMaximizeMode"
+	[resizable]="enableResizable && !isMaximizeMode"
+	[(visible)]="visible"
+	[modal]="modal === 'true'"
+	[width]="width"
+	[height]="height"
+	[style]="{width: width + 'px', height: height + 'px'}"
+	[closable]="false"
+	[minWidth]="minWidth"
+	[minHeight]="minHeight"
+	(onHide)="onClickClose($event);"
+	[transitionOptions]="'0ms'"
+	[styleClass]="styleClass"
+	>
+	<ng-template pTemplate="header" (dblclick)="onDblClick($event)">
+		<div class="eim-dialog-header-container">
+			<div style="float: right;">
+				<a *ngIf="!trimcloseBottonFlg" #headerClose href="javascript:void(0)" role="button" class="eim-dialog-header headerClose"
+						(click)="onClickClose($event)" (mousedown)="suppressDragging($event)">
+					<span class="fa fa-fw fa-close"></span>
+				</a>
+				<a *ngIf="enableMaximize && !isMaximizeMode" href="javascript:void(0)" role="button" class="eim-dialog-header"
+						(click)="onClickMaximize($event)"(mousedown)="suppressDragging($event)">
+					<span class="fa fa-fw fa-window-maximize"></span>
+				</a>
+				<a *ngIf="enableMaximize && isMaximizeMode" href="javascript:void(0)" role="button" class="eim-dialog-header"
+						(click)="onClickRestore($event)" (mousedown)="suppressDragging($event)">
+					<span class="fa fa-fw fa-window-restore"></span>
+				</a>
+			</div>
+			<div style="white-space: nowrap;">{{header}}</div>
+		</div>
+	</ng-template>
+
+	<div class="eim-dialog-container" [style.max-height]="containerHeight">
+		<div class="eim-dialog-contents"  [ngStyle]="{'max-height': contentMaxHeight ? contentMaxHeight + 'px' : null}" #dialogContext (mousedown)="suppressDragging($event)">
+			<ng-content></ng-content>
+		</div>
+		<div class="eim-dialog-footer">
+			<ng-content select="footer" #footer></ng-content>
+			<div style="display: inline;">
+				<button *ngIf="content && !content.disabled && canSelect()" pButton
+						class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.selectable()" (click)="content.select()" icon="fa fa-check" label="{{ 'EIM.LABEL_03006' | translate }}"></button>
+				<button *ngIf="content && !content.disabled && canApply()" pButton
+						class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.applicable()" (click)="content.apply();" icon="fa fa-check" label="{{ 'EIM.LABEL_03001' | translate }}"></button>
+				<button *ngIf="content && !content.disabled && canExecute()" pButton class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.executable()" (click)="content.execute();" icon="fa fa-check" label="{{ 'EIM.LABEL_03002' | translate }}"></button>
+				<button *ngIf="content && !content.disabled && canDelete()" pButton
+						class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.deletable()" (click)="content.delete();" icon="fa fa-minus" label="{{ 'EIM.LABEL_03003' | translate }}"></button>
+				<button *ngIf="content && !content.disabled && canUpdate()" pButton
+						class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.updatable()" (click)="content.update();" icon="fa fa-check" label="{{ 'EIM.LABEL_03004' | translate }}"></button>
+				<button *ngIf="content && !content.disabled && canCreate()" pButton
+						class="p-button-primary eim-right-alignment-button" type="button"
+						[disabled]="!content.creatable()" (click)="content.create();" icon="fa fa-check" label="{{ 'EIM.LABEL_03005' | translate }}"></button>
+				<button *ngIf="!trimcloseBottonFlg" #footerClose pButton type="button" class="p-button-secondary footerClose" style="margin-right: 0px; margin-left: 5px" (click)="onClickClose($event);" icon="fa fa-remove" label="{{ 'EIM.LABEL_03000' | translate }}"></button>
+			</div>
+		</div>
+	</div>
+</p-dialog>

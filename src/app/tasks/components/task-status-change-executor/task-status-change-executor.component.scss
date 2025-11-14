@@ -1,0 +1,8 @@
+.mail-condition {
+	display: flex;
+	vertical-align: middle;
+}
+/* ラジオボタン用*/
+::ng-deep eim-task-status-change-executor eim-radio-button {
+	display: block;
+}

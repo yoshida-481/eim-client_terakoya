@@ -1,0 +1,26 @@
+<div style="height: 100%;">
+	<form #classAttributeTypeInheritanceAndRelationUpdatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off" (ngSubmit)="onClickFilter()">
+		<div style="width: 100%; height: 95%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<div class="eim-form-input" style="width: 100%; display: flex;">
+						<input pInputText name="filterString" type="text" pInputText [(ngModel)]="filterString" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+						<button pButton type="button" icon="eim-icon-filter"  severity="info" class="icon-only-button" style="margin-left: 5px; float: right;"
+							pTooltip="{{ 'EIM.LABEL_03031' | translate }}" [disabled]="false" (click)="onClickFilter()"></button>
+					</div>
+				</div>
+			</div>
+			<div class="eim-form-item">
+				<div class="eim-form-input" style="width: 200px; padding-left: 91px;">
+					<eim-checkbox name="allInheritanceCheck" value="true" binary="true" label="{{ 'EIM.LABEL_03032' | translate }}" [(ngModel)]="allInheritanceCheck" (onChange)="onChangeAllInheritanceCheck($event)"></eim-checkbox>
+				</div>
+				<div class="eim-form-input" style="width: 200px; padding-left: 91px;">
+					<eim-checkbox name="allRelatiionCheck" value="true" binary="true" label="{{ 'EIM.LABEL_03032' | translate }}" [(ngModel)]="allRelatiionCheck" (onChange)="onChangeAllRelationCheck($event)"></eim-checkbox>
+				</div>
+			</div>
+			<div class="eim-flexible-height">
+				<eim-data-grid #classAttributeTypeInheritanceAndRelationUpdatorDataGrid style="height: 100%;" [multiple]="false"></eim-data-grid>
+			</div>
+		</div>
+	</form>
+</div>

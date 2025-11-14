@@ -1,0 +1,5 @@
+.p-root-container {
+	display: inline-flex;
+	vertical-align: bottom;
+    align-items: center;
+}

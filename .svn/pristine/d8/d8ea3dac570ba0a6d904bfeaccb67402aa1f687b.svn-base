@@ -1,0 +1,14 @@
+<div eim-vertical-container style="height: 100%;">
+	<div class="eim-data-grid-menu">
+		<eim-menubar [model]="menuItems"></eim-menubar>
+	</div>
+	<div class="eim-flexible-height" style="width: 100%; margin-bottom: 5px;">
+		<eim-data-grid #documentList [contextMenuItems]="contextMenuItems"
+		(selected)="onSelect($event)" (onNodeSelect)="onNodeSelectEmit($event)"></eim-data-grid>
+	</div>
+	<div style="width: 100%; height: 200px;">
+		<eim-contents-approve-workflow-diagram #workflowDiagram
+				[componentService]="contentsApproveWorkflowDiagramComponentService"
+				(statusTypeChanged)="onStatusTypeChanged($event)"></eim-contents-approve-workflow-diagram>
+	</div>
+</div>

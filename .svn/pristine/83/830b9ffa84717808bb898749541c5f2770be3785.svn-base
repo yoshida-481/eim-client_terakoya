@@ -1,0 +1,19 @@
+<div style="height: 100%; width: 100%;" eim-vertical-container>
+
+	<div class="eim-menu-box eim-menu-box-objecteditor">
+		<eim-menubar [model]="menuItems"></eim-menubar>
+	</div>
+	<div *ngIf="!isTreeDataGrid" class="eim-flexible-height">
+		<eim-data-grid #objectList
+				[contextMenuItems]="contextMenu"
+				[equals]="equals"
+				(selected)="onSelectObject()">
+		</eim-data-grid>
+	</div>
+	<div *ngIf="isTreeDataGrid" class="eim-flexible-height">
+		<eim-tree-data-grid #objectList [contextMenuItems]="contextMenu"
+			enableOpenOnSelect="true" [multiple]="true" [rowDeselection]="true"
+			(selected)="onSelectObject()" (unSelected)="onSelectObject()" (contextmenu)="onSelectObject()">
+		</eim-tree-data-grid>
+	</div>
+</div>

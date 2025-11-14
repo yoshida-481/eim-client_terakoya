@@ -1,0 +1,99 @@
+<div class="eim-form-search">
+	<form #searchForm="ngForm" class="eim-form-wide" style="margin-top: 10px;" (ngSubmit)="onSearch($event)" autocomplete="off" novalidate>
+		<div class="eim-form-search-items">
+			<label class="eim-form-label eim-form-search-item-label" style="margin-top: 10px;white-space: nowrap;">{{ 'EIM_FORMS.LABEL_02020' | translate }}</label>
+			<div style="width:100%; padding-right: 10px; min-width: 298px">
+				<eim-text-search-input-form-item [(ngModel)]="info.condition.keyword" [form]="searchForm.form" [label]="" name="keyword" maxlength="80"></eim-text-search-input-form-item>
+			</div>
+			<div class="eim-form-item eim-form-search-item-right">
+				<div style="width: 100%; white-space: nowrap;">
+					<eim-checkbox name="contents" value="true" [(ngModel)]="info.condition.contents" binary="true" label="{{ 'EIM_FORMS.LABEL_03020' | translate }}"></eim-checkbox>
+				</div>
+			</div>
+
+			<div *ngIf="searchTarget.length > 0">
+				<label class="eim-form-label eim-form-search-item-label" style="white-space: nowrap;">{{ 'EIM_FORMS.LABEL_02021' | translate }}</label>
+				<div class="eim-form-item eim-form-search-item">
+					<div style="width: 100%;min-width: 276px; margin-right: 2px">
+						<p-select name="searchTargets" appendTo="body" class="eim-form-input-multi-dropdown" [options]="searchTarget" [(ngModel)]="info.selectTarget" [style]="{'width': '100%', 'margin-left': '0px', 'padding-top': '2px','padding-bottom': '1px','background-color': '#ffffcc', 'border-radius': '0px'}" (onChange)="onChangeSearchTarget()"></p-select>
+					</div>
+				</div>
+			</div>
+
+			<div *ngFor="let basicLayout of info.selectConfig.basicCondition; let i = index;">
+				<div *ngIf="basicLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_STRING" style="margin-top: 12px">
+					<div class="wrapper">
+						<eim-text-search-input-form-item [(ngModel)]="info.condition[basicLayout.fieldName]" [form]="searchForm.form" [name]="basicLayout.fieldName" [label]="basicLayout.label" [inputType]="'text'" [maxlength]="127" style="width: 100%; min-width: 203px;"></eim-text-search-input-form-item>
+						<eim-combo-box-search-input-form-item [form]="searchForm.form" [name]="basicLayout.fieldName  + 'CondValue'" [dirty]="dirty" [(ngModel)]="info.condition[basicLayout.fieldName + 'CondValue']" [options]="selectString"></eim-combo-box-search-input-form-item>
+					</div>
+				</div>
+				<div *ngIf="basicLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_DOUBLE" style="margin-top: 12px">
+					<div class="wrapper">
+						<eim-text-search-input-form-item [(ngModel)]="info.condition[basicLayout.fieldName]" [form]="searchForm.form" [name]="basicLayout.fieldName" [label]="basicLayout.label" [inputType]="'number'" [maxlength]="17" style="width: 100%; min-width: 203px;"></eim-text-search-input-form-item>
+						<eim-combo-box-search-input-form-item [form]="searchForm.form" [name]="basicLayout.fieldName  + 'CondValue'" [dirty]="dirty" [(ngModel)]="info.condition[basicLayout.fieldName + 'CondValue']" [options]="selectLong"></eim-combo-box-search-input-form-item>
+					</div>
+				</div>
+				<div *ngIf="basicLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_DATE_SCOPE" style="margin-top: 12px">
+						<eim-calendar-search-input-form-item [form]="searchForm.form" [name]="basicLayout.fieldName" [label]="basicLayout.label"
+							[dirty]="dirty" [(ngModel)]="info.condition[basicLayout.fieldName]" style="width: 100%">
+						</eim-calendar-search-input-form-item>
+				</div>
+				<div *ngIf="basicLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_LONG_FLAG" style="margin-top: 12px">
+					<eim-check-box-search-input-form-item [form]="searchForm.form" [name]="basicLayout.fieldName" [label]="basicLayout.label" [dirty]="dirty" [(ngModel)]="info.condition[basicLayout.fieldName]" style="width: 100%">
+					</eim-check-box-search-input-form-item>
+				</div>
+				<div *ngIf="basicLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_LONG_SCOPE" style="margin-top: 12px; min-width: 298px">
+					<div class="wrapper">
+						<eim-long-range-search-input-form-item [(ngModel)]="info.condition[basicLayout.fieldName]" [form]="searchForm.form" [name]="basicLayout.fieldName" [label]="basicLayout.label" [maxlength]="9" style="width: 100%"></eim-long-range-search-input-form-item>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="info.selectConfig.detailCondition.length > 0">
+				<div class="eim-form-item" style="margin-top: 12px">
+					<div class="wrapper border">
+						<label class="eim-form-label eim-form-search-item-label" style="width: 100%;white-space: nowrap;">{{ 'EIM_FORMS.LABEL_02022' | translate }}</label>
+						<div style="white-space: nowrap;">
+							<eim-checkbox name="useDetailFlg" [(ngModel)]="info.useDetailFlg" label="{{ 'EIM_FORMS.LABEL_03021' | translate }}" binary="true"></eim-checkbox>
+						</div>
+					</div>
+				</div>
+				<p class="border"> </p>
+			</div>
+			<div *ngIf="info.useDetailFlg">
+				<div *ngFor="let detailLayout of info.selectConfig.detailCondition; let i = index;">
+					<div *ngIf="detailLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_STRING" style="margin-top: 12px">
+						<div class="wrapper">
+							<eim-text-search-input-form-item [(ngModel)]="info.condition[detailLayout.fieldName]" [form]="searchForm.form" [name]="detailLayout.fieldName" [label]="detailLayout.label" [inputType]="'text'" [maxlength]="127" style="width: 100%; min-width: 203px;"></eim-text-search-input-form-item>
+							<eim-combo-box-search-input-form-item [form]="searchForm.form" [name]="detailLayout.fieldName  + 'CondValue'" [dirty]="dirty" [(ngModel)]="info.condition[detailLayout.fieldName + 'CondValue']" [options]="selectString"></eim-combo-box-search-input-form-item>
+						</div>
+					</div>
+					<div *ngIf="detailLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_DOUBLE" style="margin-top: 12px">
+						<div class="wrapper">
+							<eim-text-search-input-form-item [(ngModel)]="info.condition[detailLayout.fieldName]" [form]="searchForm.form" [name]="detailLayout.fieldName" [label]="detailLayout.label" [inputType]="'number'" [maxlength]="17" style="width: 100%; min-width: 203px;"></eim-text-search-input-form-item>
+							<eim-combo-box-search-input-form-item [form]="searchForm.form" [name]="detailLayout.fieldName  + 'CondValue'" [dirty]="dirty" [(ngModel)]="info.condition[detailLayout.fieldName + 'CondValue']" [options]="selectLong"></eim-combo-box-search-input-form-item>
+						</div>
+					</div>
+					<div *ngIf="detailLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_DATE_SCOPE" style="margin-top: 12px">
+						<eim-calendar-search-input-form-item [form]="searchForm.form" [name]="detailLayout.fieldName" [label]="detailLayout.label"
+								[dirty]="dirty" [(ngModel)]="info.condition[detailLayout.fieldName]" style="width: 100%">
+						</eim-calendar-search-input-form-item>
+					</div>
+		 			<div *ngIf="detailLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_LONG_FLAG" style="margin-top: 12px">
+						<eim-check-box-search-input-form-item [form]="searchForm.form" [name]="detailLayout.fieldName" [label]="detailLayout.label" [dirty]="dirty" [(ngModel)]="info.condition[detailLayout.fieldName]">
+						</eim-check-box-search-input-form-item>
+					</div>
+					<div *ngIf="detailLayout.searchControlId == Const.FORM_SEARCH_CONDITION_CONTROLE_LONG_SCOPE" style="margin-top: 12px; min-width: 298px">
+						<eim-long-range-search-input-form-item [(ngModel)]="info.condition[detailLayout.fieldName]" [form]="searchForm.form" [name]="detailLayout.fieldName" [label]="detailLayout.label" [maxlength]="9" style="width: 100%"></eim-long-range-search-input-form-item>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eim-form-search-footer">
+			<div style="margin-left: auto; margin-top: 10px; margin-right: 5px;">
+				<button pButton label="{{ 'EIM.LABEL_03007' | translate }}" icon="eim-icon-search" class="eim-right-alignment-button eim-contents-search-btn p-button-primary" (click)="onSearch($event)"></button>
+				<button pButton class="eim-right-alignment-button p-button-secondary" label="{{ 'EIM.LABEL_03009' | translate }}" (click)="onClear($event)"></button>
+			</div>
+		</div>
+	</form>
+</div>

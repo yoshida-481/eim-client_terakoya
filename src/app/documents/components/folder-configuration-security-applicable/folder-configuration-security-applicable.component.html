@@ -1,0 +1,28 @@
+<div class="eim-form-item" style="width:100%; margin-top: 0px; margin-bottom: 0px;">
+	<label class="eim-form-label" style="width: 30%;">{{ 'EIM_DOCUMENTS.LABEL_02115' | translate }}</label>
+	<div class="eim-form-input">
+		<eim-radio-button name="radioBtn" label="{{ 'EIM.LABEL_02044' | translate }}" [value]="true" (onClick)="onRadioButtonChange($event)" [(ngModel)]="isLimitSecurity" checked="isLimitSecurity === true" [disabled]="isDisabledLimitBtn"></eim-radio-button>
+		<eim-radio-button name="radioBtn" label="{{ 'EIM.LABEL_02045' | translate }}" [value]="false" (onClick)="onRadioButtonChange($event)" [(ngModel)]="isLimitSecurity" checked="isLimitSecurity === false" [disabled]="isDisabledLimitBtn"></eim-radio-button>
+	</div>
+</div>
+<form [formGroup]="securityForm" style="height: 100%;" autocomplete="off" novalidate>
+	<div eim-vertical-container style="height: 100%;">
+		<div class="eim-form-item">
+			<!-- フォルダ構成管理セキュリティ -->
+			<label class="eim-form-label" style="width: 30%;">{{ 'EIM_DOCUMENTS.LABEL_02003' | translate }}</label>
+			<div class="eim-form-input" style="display: flex;">
+				<input [ngClass]="(isLimitSecurity && canApplied && isWorkSpace) === true ? 'eim-form-input-applied' : ''" type="text" pInputText id="secName"
+				 name="secName" [formControl]="securityForm.controls['secName']" style="width: 100%;" required="true"/>
+				<button pButton type="button" severity="info" class="icon-only-button" pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03023' | translate }}" [disabled]="isDisabledSearchBtn"
+					(click)="onClickSelectSecurity($event)" icon="fa-fw fa fa-external-link" style="float: right; margin-left: 5px;">
+				</button>
+			</div>
+		</div>
+
+		<div class="security-selector-item" style="height: 83%">
+			<eim-security-selector #accessEntry
+				[content]="content" [displaySearch]="false" [blockFlag]="!isLimitSecurity" [entryNameWidth]="entryNameWidth">
+			</eim-security-selector>
+		</div>
+	</div>
+</form>

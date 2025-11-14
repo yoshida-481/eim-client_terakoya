@@ -1,0 +1,151 @@
+<!-- 数値型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 1 && !multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[maxlength]="numberMaxLength" [pattern]="numberPattern"
+	[multiple]="multiple" [(ngModel)]="longValue">
+</eim-text-input-form-item>
+
+<!-- 文字列型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 2 && !multiple && (uiControlType == 'uIControlTextInput' || uiControlType == null) && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[maxlength]="stringMaxLength" [required]="required"
+	[multiple]="multiple" [(ngModel)]="stringInputValue">
+</eim-text-input-form-item>
+
+<!-- 文字列型(複数行) -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 2 && !multiple && uiControlType == 'uIControlTextArea' && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[maxlength]="stringMaxLength" [required]="required"
+	[multiple]="multiple" [(ngModel)]="stringAreaValue">
+</eim-text-area-input-form-item>
+
+<!-- 日付型 -->
+<eim-calendar-input-form-item *ngIf="valTypeId == 3 && !multiple && !inputRule && uiControlType == null"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[multiple]="multiple" [(ngModel)]="dateValue">
+</eim-calendar-input-form-item>
+
+<!-- テキスト型(リッチテキストも含む) -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 4 && uiControlType == null && !multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[required]="required"
+	[multiple]="multiple" [(ngModel)]="textValue">
+</eim-text-area-input-form-item>
+
+<!-- 実数型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 5 && !multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[maxlength]="realMaxLength" [pattern]="realPattern"
+	[multiple]="multiple" [(ngModel)]="realValue">
+</eim-text-input-form-item>
+
+<!-- コード型 -->
+<eim-combo-box-input-form-item *ngIf="valTypeId == 8 && (uiControlType == 'uIControlComboBox' || uiControlType == 'uIControlRadioButton') && !multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [(ngModel)]="codeValue"
+	[multiple]="multiple" [options]="codeItems">
+</eim-combo-box-input-form-item>
+
+<!-- 以下複数用 -->
+<!-- 数値型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 1 && multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[maxlength]="numberMaxLength" [pattern]="numberPattern"
+	[multiple]="multiple" [(ngModel)]="multiLongValue">
+</eim-text-input-form-item>
+
+<!-- 文字列型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 2 && multiple && (uiControlType == 'uIControlTextInput' || uiControlType == null) && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[maxlength]="stringMaxLength" [required]="required"
+	[multiple]="multiple" [(ngModel)]="multiStringInputValue">
+</eim-text-input-form-item>
+
+<!-- 文字列型(複数行) -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 2 && multiple && uiControlType == 'uIControlTextArea' && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[maxlength]="stringMaxLength" [required]="required"
+	[multiple]="multiple" [(ngModel)]="multiStringAreaValue">
+</eim-text-area-input-form-item>
+
+<!-- 日付型 -->
+<eim-calendar-input-form-item *ngIf="valTypeId == 3 && multiple && !inputRule && uiControlType == null"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[multiple]="multiple" [(ngModel)]="multiDateValue">
+</eim-calendar-input-form-item>
+
+<!-- テキスト型(汎用) -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 4 && uiControlType == null && multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[required]="required"
+	[multiple]="multiple" [(ngModel)]="multiTextValue">
+</eim-text-area-input-form-item>
+
+<!-- 実数型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 5 && multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[maxlength]="realMaxLength" [pattern]="realPattern"
+	[multiple]="multiple" [(ngModel)]="multiRealValue">
+</eim-text-input-form-item>
+
+<!-- コード型 -->
+<eim-combo-box-input-form-item *ngIf="valTypeId == 8 && (uiControlType == 'uIControlComboBox' || uiControlType == 'uIControlCheckBox') && multiple && !inputRule"
+	[name]="name" [form]="form" [label]="label" [(ngModel)]="multiCodeValue"
+	[multiple]="multiple" [options]="codeItems">
+</eim-combo-box-input-form-item>
+
+<!-- ユーザ型 -->
+<div *ngIf="valTypeId == 7 && uiControlType == 'uIControlSearchField' && !inputRule">
+	<div class="eim-form-item">
+		<label  class="eim-form-label">{{label}}</label>
+		<div  class="eim-form-input">
+			<p-select name="name" [options]="userItems" [(ngModel)]="userValue[0]" appendTo="body" [style]="{'width': '100%'}"
+			(onChange)="onUserChange($event)"></p-select>
+		</div>
+	</div>
+</div>
+
+<!-- 非活性条件の入力値用のダミーを生成 -->
+<!-- 日付型(文書・帳票) -->
+<eim-calendar-input-form-item *ngIf="valTypeId == 3 && !inputRule && uiControlType == 'uIControlDateField'"
+	[name]="name" [form]="form" [label]="label" [required]="required"
+	[disabled]="true" [multiple]="multiple" [(ngModel)]="dummy">
+</eim-calendar-input-form-item>
+
+<!-- テキスト型(文書・帳票) -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 4 && (uiControlType == 'uIControlTextArea' || uiControlType == 'uIControlRichText') && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[required]="required"
+	[disabled]="true" [multiple]="false" [(ngModel)]="dummy">
+</eim-text-area-input-form-item>
+
+<!-- オブジェクト型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 6 && !inputRule"
+	[name]="name" [form]="form" [label]="label"
+	[disabled]="true" [multiple]="false" [(ngModel)]="dummy">
+</eim-text-input-form-item>
+
+<!-- ユーザ型(汎用) -->
+<eim-text-input-form-item *ngIf="valTypeId == 7 && uiControlType == null && !inputRule"
+	[name]="name" [form]="form" [label]="label" [(ngModel)]="dummy"
+	[disabled]="true" [multiple]="false">
+</eim-text-input-form-item>
+
+<!-- コード型(汎用) -->
+<eim-combo-box-input-form-item *ngIf="valTypeId == 8 && uiControlType == null && !inputRule"
+	[name]="name" [form]="form" [label]="label" [(ngModel)]="dummy"
+	[disabled]="true" [multiple]="false" [ngModel]="selectedCode" [options]="codeItems">
+</eim-combo-box-input-form-item>
+
+<!-- リスト定義(文書) -->
+<div *ngIf="inputRule">
+	<div class="eim-form-item">
+		<label  class="eim-form-label">{{label}}</label>
+		<div  class="eim-form-input">
+			<p-select name="name" [disabled]="true" [options]="dummy" [(ngModel)]="dummy" appendTo="body" [style]="{'width': '100%'}"></p-select>
+		</div>
+	</div>
+</div>
+
+
+
+

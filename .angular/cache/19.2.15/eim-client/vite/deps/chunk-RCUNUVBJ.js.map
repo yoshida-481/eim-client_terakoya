@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/rxjs/dist/esm5/internal/operators/finalize.js"],
+  "sourcesContent": ["import { operate } from '../util/lift';\nexport function finalize(callback) {\n  return operate(function (source, subscriber) {\n    try {\n      source.subscribe(subscriber);\n    } finally {\n      subscriber.add(callback);\n    }\n  });\n}\n"],
+  "mappings": ";;;;;AACO,SAAS,SAAS,UAAU;AACjC,SAAO,QAAQ,SAAU,QAAQ,YAAY;AAC3C,QAAI;AACF,aAAO,UAAU,UAAU;AAAA,IAC7B,UAAE;AACA,iBAAW,IAAI,QAAQ;AAAA,IACzB;AAAA,EACF,CAAC;AACH;",
+  "names": []
+}

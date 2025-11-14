@@ -1,0 +1,11 @@
+<div class="eim-ui-widget">
+	<div id="cy" #cy (mouseleave)="onMouseOut($event)"></div>
+	<label class="eim-diagram-title">{{info.diagramName}}</label>
+	<div class="eim-diagram-action">
+		<button pButton type="button" severity="info" class="icon-only-button" [disabled]="disableButtons" icon="fa fa-arrows" (click)="onClickFit()" pTooltip="{{ 'EIM.LABEL_03012' | translate }}"></button>
+		<button pButton type="button" severity="info" class="icon-only-button" [disabled]="disableButtons" icon="fa fa-search-plus" (click)="onClickZoom(0.5)" pTooltip="{{ 'EIM.LABEL_03013' | translate }}"></button>
+		<button pButton type="button" severity="info" class="icon-only-button" [disabled]="disableButtons" icon="fa fa-search-minus" (click)="onClickZoom(-0.4)" pTooltip="{{ 'EIM.LABEL_03014' | translate }}"></button>
+	</div>
+	<span id="offsetWidthCheck" style="visibility: hidden;position:absolute;white-space:nowrap;font-size: 10px"></span>
+</div>
+<p-contextMenu *ngIf="showContextMenu" [target]="cy" [model]="contextMenuItems" appendTo="body"></p-contextMenu>

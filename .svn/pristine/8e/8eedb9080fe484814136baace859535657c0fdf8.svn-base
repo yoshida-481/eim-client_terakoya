@@ -1,0 +1,476 @@
+div.container {
+  overflow: hidden;
+}
+div.clear {
+  clear: both;
+}
+::ng-deep .p-menubar-root-list {
+  white-space: nowrap;
+}
+::ng-deep .p-menubar-submenu-icon {
+  margin-left: 6px;
+}
+
+/* ==========================================================================
+   preview add Sample
+   ========================================================================== */
+::ng-deep .test-preview-image-div {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start ;
+	overflow-y: scroll;
+}
+
+::ng-deep .thumbnails-image-visible {
+	width: 100%;
+	/* TODO:ここの2%増やすと画面外に行く */
+	height: 98%; 
+}
+
+::ng-deep .thumbnails-image-hidden {
+	width: 0%;
+	height: 0%; 
+}
+
+::ng-deep .test-component-visible {
+	width: 100%;
+	height: 100%; 
+}
+
+::ng-deep .test-component-hidden {
+	width: 0%;
+	height: 0%; 
+}
+
+::ng-deep .test-preview-wait-div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+::ng-deep .test-image-div {
+	width: 300px;
+	height: 200px;
+	margin-left: 10px;
+	margin-top: 5px;
+	border: 2px solid black;
+	/* pointer-events:none; */
+	/* user-select: none; */
+}
+
+::ng-deep .test-image-text-div {
+	text-align: center;
+}
+
+/* ==========================================================================
+   パンくず
+   ========================================================================== */
+/*
+::ng-deep .document-main .ui-breadcrumb ul li:first-child {
+	visibility: hidden;
+	width: 0px;
+}
+*/
+::ng-deep .p-breadcrumb a {
+	color: #555555;
+}
+
+::ng-deep .p-breadcrumb a span {
+	/*text-decoration: underline;*/
+	/* 半角スペースをそのまま表示する */
+	white-space: pre;
+}
+
+/* ==========================================================================
+   PrimeNG MenuBar
+   ========================================================================== */
+::ng-deep .eim-document-main-left-area, ::ng-deep .eim-document-main-right-area-document-list {
+	overflow-y: hidden!important;
+}
+
+::ng-deep .eim-menu-box-document .p-menubar {
+	width: 100%;
+	background:linear-gradient(to bottom, #005CEB, #005CCC);
+}
+
+::ng-deep .eim-menu-box .p-menubar {
+	padding: 0px;
+	border-radius: 0;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link {
+	display: block;
+	color: white !important;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon {
+	color: white !important;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	color: white !important;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	color: white !important;
+	font-size: 12px;
+	margin-left: 0.5rem;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-submenu > .p-menubar-item > .p-menubar-item-content > a.p-menubar-item-link {
+	padding: 3px;
+}
+/* 2021.12.24 新規*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-submenu > .p-menubar-item > .p-menubar-item-content > a.p-menubar-item-link > .p-menubar-item-icon {
+	color: #555555;
+}
+
+/* 2021.12.24 削除(新規スタイルに移行)
+::ng-deep .eim-menu-box a.p-menubar-item-link.ui-corner-all {
+	padding: 3px;
+	color: #ffffff;
+} */
+/* 2021.12.24 削除(新規スタイルに移行)
+::ng-deep .eim-menu-box .p-menubar .p-submenu a.p-menubar-item-link.ui-corner-all {
+	padding: 3px;
+	color: #555555;
+} */
+
+::ng-deep .eim-menu-box .p-menubar p-menubarsub .p-menubar-item-link .p-menubar-item-icon {
+  display: flex;
+}
+/* 2021.12.24 削除(新規スタイルに移行)
+::ng-deep .eim-menu-box .p-menubar .p-submenu .p-menubar-item-link .p-menubar-item-icon {
+  display: inline-block;
+} */
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list .p-menubar-item {
+	text-align: center;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-submenu {
+	background: #ffffff;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-submenu .p-menubar-item {
+	text-align: left!important;
+}
+
+::ng-deep .eim-menu-box p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon {
+	margin: auto;
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+::ng-deep .eim-menu-box p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	vertical-align: bottom;
+	line-height: 1em;
+}
+
+::ng-deep .eim-menu-box p-menubarsub > .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	vertical-align: bottom;
+}
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item {
+	margin: 0px;
+}
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item .p-menubar-item-link {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item .p-menubar-submenu {
+	padding: 0px;
+}
+::ng-deep	.p-menubar .p-menubar-end {
+	padding: 0px;
+}
+/* ==========================================================================
+   PrimeNG アコーディオン
+   ========================================================================== */
+::ng-deep eim-document-main .p-accordion {
+	height: calc(100%);
+	background-color: #FFFFFF;
+}
+
+::ng-deep eim-document-main .p-accordion .p-accordionheader {
+	border-radius: 0;
+	margin-top: 1px;
+}
+
+/* 2021.12.27 新規 */
+::ng-deep eim-document-main .p-accordion .p-accordionheader .p-accordionheader-toggle-icon {
+	width: 7px !important;
+	height: 7px !important;
+	font-size: 8px;
+	margin-right: 0.5rem;
+}
+
+::ng-deep eim-document-main .p-accordion .p-accordionpanel-active {
+	height: calc(100% - 63px);
+}
+
+::ng-deep eim-document-main .p-accordion .visibleAccordion_x2 .p-accordion-tab-active {
+	border: none;
+	height: calc(100% - 33px);
+}
+
+::ng-deep eim-document-main .p-accordion .visibleAccordion_x3 .p-accordion-tab-active {
+	border: none;
+	height: calc(100% - 63px);
+}
+
+::ng-deep eim-document-main .p-accordion .visibleAccordion_x4 .p-accordion-tab-active {
+	border: none;
+	height: calc(100% - 93px);
+}
+
+::ng-deep eim-document-main .p-accordion .p-accordionpanel-active .p-accordioncontent {
+	height: calc(100% - 30px);
+}
+
+::ng-deep eim-document-main .p-accordion .p-accordionpanel-active .p-accordioncontent-content {
+	height: calc(100%);
+}
+
+::ng-deep eim-document-main .p-accordion .p-disabled {
+	opacity: 1.0;
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel p-tree .p-tree.p-component {
+	border: none;
+	padding: 3px;
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel .p-accordionheader {
+	border: 0.5px solid #d6d6d6;
+}
+
+/** アコーディオンタブ */
+::ng-deep eim-document-main p-accordion p-accordion-panel .p-accordionheader {
+	/** 高さを固定しないとフォントサイズ変更でズレるため */
+	height: 14px;
+	display: flex;
+	align-items: center;
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel div.p-accordionheader {
+	text-decoration: none;
+	width: 100%;
+	white-space: nowrap;
+}
+
+/* 2021.12.27 新規 */
+::ng-deep eim-document-main p-accordion p-accordion-panel div.p-accordionheader  {
+	border: none !important;
+}
+
+/** アコーディオン内のツリーノード(高さが低くなるのでheightを設定) */
+::ng-deep eim-document-main .p-tree .p-tree-node-selectable.p-tree-node-content {
+	height: 19px;
+}
+
+/** ワークスペースアコーディオン */
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-workspace div.p-accordionheader .fa-caret-right:before {
+	content: "\f1c0";
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-workspace div.p-accordionheader .fa-caret-down:before {
+	content: "\f1c0";
+}
+
+/** 検索アコーディオン */
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-search div.p-accordionheader .fa-caret-right:before {
+	content: "\f110";
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-search div.p-accordionheader .fa-caret-down:before {
+	content: "\f110";
+}
+
+/** 回付状況アコーディオン */
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-circulation-situation div.p-accordionheader .fa-caret-right:before {
+	content: "\f110";
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-circulation-situation div.p-accordionheader .fa-caret-down:before {
+	content: "\f110";
+}
+
+/** 属性ツリービューアコーディオン */
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-attribute-tree-view div.p-accordion-header .fa-caret-right:before {
+	content: "\f1b3";
+}
+
+::ng-deep eim-document-main p-accordion p-accordion-panel.eim-document-main-attribute-tree-view div.p-accordion-header .fa-caret-down:before {
+	content: "\f1b3";
+}
+
+/** メインメニューのトップメニューアイテムのマウスオーバー */
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-icon {
+	color: #005CEB !important;
+}
+
+/** メインメニューのトップメニューアイテムのマウスオーバー */
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-item-label {
+	color: #005CEB !important;
+}
+
+/** メインメニューのトップメニューアイテムのマウスオーバー時 */
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list > .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link > .p-menubar-submenu-icon {
+	color: #005CEB !important;
+}
+
+/** メインメニューのメニューアイテムのアクティブ時*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item-active.p-menubar-item > .p-menubar-item-content > .p-menubar-item-link {
+	background: #a8e8fd !important;
+	border-radius: 0px;
+}
+
+/** メインメニューのメニューアイテムのマウスオーバー時*/
+::ng-deep .eim-menu-box .p-menubar .p-menubar-item .p-menubar-item-link:hover {
+	background: #a8e8fd !important;
+	border-radius: 0px;
+}
+
+/** マウスオーバー、クリックなし */
+/* ::ng-deep .p-menubar-submenu {
+	color: #333333;
+} */
+
+::ng-deep .eim-menu-box .p-menubar .p-menubar-root-list>.p-menubar-item {
+	border-right: thin solid #dddddd;
+	border-radius: 0px;
+}
+::ng-deep .p-menubar-submenu-icon {
+	margin-left: 0px;
+}
+
+::ng-deep a.p-menubar-item-link {
+  min-width: 100px;
+}
+
+/* ==========================================================================
+   ファイルドラッグ
+   ========================================================================== */
+:host p-panel ::ng-deep .p-panel.p-component {
+  border-style: none;
+}
+
+:host p-panel ::ng-deep .p-panel-header {
+  display: none;
+}
+
+:host p-panel ::ng-deep .p-panel {
+  height: 100%;
+}
+
+:host p-panel ::ng-deep .p-panel .p-panel-content-container.ng-trigger-panelContent {
+  height: 100%;
+}
+
+:host p-panel ::ng-deep .p-panel-content {
+  height: 100%;
+  padding: 0;
+}
+
+:host p-panel ::ng-deep .p-blockui {
+  background-color: rgba(255, 255, 255, 0.7);
+  opacity: 1;
+}
+
+:host p-panel.drag-enter ::ng-deep .p-blockui div {
+  opacity: 0.7;
+}
+
+p-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+:host p-panel ::ng-deep .p-panel .p-panel-header {
+  padding-right: 5px;
+}
+
+/* ==========================================================================
+   右ペイン部
+========================================================================== */
+::ng-deep .eim-document-main-right-area .eim-document-main-right-area-document-list .p-panel-content {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	height: 100%;
+}
+::ng-deep .eim-document-main-right-area .eim-document-main-right-area-document-list .p-blockui {
+	z-index: 10;
+}
+
+/* ==========================================================================
+   ヘッダー部
+========================================================================== */
+
+.header-bar {
+	display: flex;
+	height: calc(3em + 2px);
+	min-height: 30px;
+	align-items: center;
+	background-color: white;
+}
+
+.header-bar-left{
+	flex:1;
+	min-width: 0;
+	overflow:hidden;
+	height: 100%;
+}
+
+.header-bar-right{
+	flex-shrink: 0;
+	white-space: nowrap;
+	margin-left: 10px;
+}
+
+.header-bar-breadcrumb{
+	display: flex;
+	height: 100%;
+}
+
+::ng-deep .header-bar-breadcrumb .p-breadcrumb{
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+
+::ng-deep .header-bar-breadcrumb .p-breadcrumb ul{
+	flex-wrap: wrap;
+}
+
+/** サムネイルサイズ切り替えボタン*/
+::ng-deep .thumbnail-size-btn .p-togglebutton{
+    width: unset;
+}
+
+/* ==========================================================================
+   コンテンツ部
+========================================================================== */
+.eim-document-main-contents {
+	min-height: 0;
+}
+
+.eim-document-main-box-eim-file-drag-block-ui {
+	position: absolute;
+	top: calc(50% - 4em);
+	left: calc(50% - 15em);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 30em;
+	height: 8em;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	color: white;
+}

@@ -1,0 +1,18 @@
+<div style="height: 100%;" eim-vertical-container>
+	<div *ngIf="displayAccordionNum === 1" class="eim-flexible-height">
+		<eim-tree #singleGroupContentsTree (selected)="onSelectGroupTreeNode($event)"></eim-tree>
+	</div>
+	<div *ngIf="displayAccordionNum === 0" class="eim-form-item">
+		<label class="eim-form-label" >{{ 'EIM_ADMINS.LABEL_02077' | translate }}</label>
+		<div style="width: 100%; padding-bottom: 10px">
+			<input name="searchGroupName" required="false" style="width: 80%; float: left; margin-right: 5px;" pInputText [(ngModel)]="searchGroupName" maxlength="{{inputMaxLength}}"/>
+			<button pButton icon="fa-fw eim-icon-search" class="p-button-primary" style="float: left;"
+				pTooltip="{{ 'EIM.LABEL_03007' | translate }}" (click)="onSearch($event)"></button>
+		</div>
+	</div>
+	<div *ngIf="displayAccordionNum === 0" class="eim-flexible-height">
+		<eim-data-grid #groupSelectDataGrid class="eim-group-list" [equals]="userGroupRoleDataGridEquals" (selected)="onSelectedGroup($event)"
+			[contextMenuItems]="groupContextMenuItems" (contextmenu)="onContextMenuGroup($event)"[multiple]="false">
+		</eim-data-grid>
+	</div>
+</div>

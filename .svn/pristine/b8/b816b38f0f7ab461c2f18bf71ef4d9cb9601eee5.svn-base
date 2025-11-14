@@ -1,0 +1,11 @@
+<div style="height: 100%;">
+	<eim-form-list-column-multiple-selector #rightPane
+			[selectedData]="selectedData"
+			[defaultColumns]="defaultColumns">
+		<eim-form-list-column-single-selector #leftPane
+				[data]="allColumns"
+				[multiple]="true"
+				style="height: 100%;">
+		</eim-form-list-column-single-selector>
+	</eim-form-list-column-multiple-selector>
+</div>

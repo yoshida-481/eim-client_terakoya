@@ -1,0 +1,42 @@
+/* 2022.03 新規 */
+::ng-deep eim-workspace-administrator-item .eim-form-item .p-autocomplete.p-component ul.p-autocomplete-input-multiple {
+	display: block;
+	padding: 0px 3px;
+	pointer-events: auto;
+}
+
+::ng-deep eim-workspace-administrator-item .eim-form-item .p-autocomplete.p-component ul.p-autocomplete-input-multiple li.p-autocomplete-chip-item {
+	display: inline-flex;
+	background: #0085FF;
+	color: #E3F1FF;
+	margin-top: 3px;
+	margin-right: 3px;
+	border-radius: 1px;
+	border-color: #0085FF;
+	border-width: 0.1px;
+	padding: 1.5px 6px;
+}
+/* 2022.03 新規 */
+::ng-deep eim-workspace-administrator-item .eim-form-item .p-autocomplete.p-component ul.p-autocomplete-input-multiple li.p-autocomplete-chip-item i {
+	pointer-events: auto;
+}
+/* 2022.03 新規 */
+::ng-deep eim-workspace-administrator-item .eim-form-item .p-autocomplete.p-component ul.p-autocomplete-input-multiple li.p-autocomplete-chip-item span {
+	font-family: "メイリオ", "Meiryo UI", "sans-serif";
+}
+
+::ng-deep .eim-form-input-selected-list .eim-workspace-administrator-item-list .p-autocomplete-input-multiple {
+	background-color: #ffffff!important;
+	color: #555555!important;
+	height: 70px;
+	overflow: auto;
+}
+
+::ng-deep .eim-form-input-selected-list .eim-workspace-administrator-item-list-disabled .p-autocomplete-input-multiple {
+	background-color: #eeeeee!important;
+}
+
+.eim-workspace-administrator-item-delete {
+	color: #E3F1FF;
+	cursor: pointer !important;
+}

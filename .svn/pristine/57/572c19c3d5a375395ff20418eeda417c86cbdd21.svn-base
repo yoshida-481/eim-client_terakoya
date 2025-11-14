@@ -1,0 +1,8 @@
+<div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
+	<form #ngForm="ngForm" class="eim-form-wide" style="height: 100%;" autocomplete="off" novalidate>
+		<eim-form #propertyForm [form]="ngForm.form">
+		</eim-form>
+		<eim-form #processForm [form]="ngForm.form">
+		</eim-form>
+	</form>
+</div>

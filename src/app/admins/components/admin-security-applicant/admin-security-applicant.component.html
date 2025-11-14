@@ -1,0 +1,19 @@
+<form [formGroup]="securityForm" style="height: 100%;" autocomplete="off" novalidate>
+	<div eim-vertical-container style="height: 100%;">
+		<div class="eim-form-item">
+			<!-- セキュリティ -->
+			<label class="eim-form-label eim-form-label-required" style="width: 30%;">{{ 'EIM_ADMINS.LABEL_02015' | translate }}</label>
+			<div class="eim-form-input eim-form-input-selected-list" style="display: flex;">
+				<input type="text" pInputText id="secName" name="secName"
+					[formControl]="securityForm.controls['secName']" style="width: 100%;" required="true"/>
+				<button pButton type="button" class="p-button-info icon-only-button" pTooltip="{{ 'EIM_ADMINS.LABEL_03014' | translate }}"
+					(click)="onShowAdminSecuritySelector($event)" icon="fa-fw fa fa-external-link" style="float: right; margin-left: 5px;">
+				</button>
+			</div>
+		</div>
+		<div class="eim-flexible-height">
+			<eim-admin-security-selector #accessEntry [adminAppId]="adminAppId"
+				[displaySearch]="false" [entryNameWidth]="entryNameWidth"></eim-admin-security-selector>
+		</div>
+	</div>
+</form>

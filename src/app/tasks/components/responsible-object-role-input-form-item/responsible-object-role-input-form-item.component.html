@@ -1,0 +1,73 @@
+<div class="eim-form-item">
+	<label *ngIf="label" [ngClass]="{'eim-form-label': true, 'eim-form-label-required': required}">{{label}}</label>
+
+	<div class="eim-form-input eim-form-input-selected-list">
+		<span *ngIf="topMessage" [innerHTML]="topMessage"></span>
+		<div class="eim-form-input-multi-surround">
+			<div class="eim-form-input-multi">
+				<span *ngIf="leftMessage" class="eim-input-form-item-left-message" [innerHTML]="leftMessage"></span>
+				<p-autoComplete name="{{name}}" ngDefaultControl [multiple]="true" [ngClass]="{
+																					'ng-invalid': (formControls[0] ? (formControls[0].dirty && formControls[0].invalid) : false),
+																					'ng-dirty': (formControls[0] ? (formControls[0].dirty) : false),
+																					'eim-disabled': disabled,
+																					'eim-form-input-multi-input-area': !disabled}" class="eim-chips-for-selection"
+					[ngModel]="objectRoleSelectItems" [disabled]="true" [suggestions]="[]">
+					<ng-template let-objectRoleSelectItem pTemplate="selectedItem">
+						<span pTooltip="{{objectRoleSelectItem.label}}" tooltipPosition="top">{{objectRoleSelectItem.label}}</span>
+						<span *ngIf="!disabled">
+							<a href="#" style="padding-left:6px; padding-right:3px;" pTooltip="{{ 'EIM.LABEL_03003' | translate }}"
+								(click)="onClickDelete($event, objectRoleSelectItem.value.id)"><i
+									class="fa fa-times fa-fw eim-master-input-form-item-delete"></i></a>
+						</span>
+					</ng-template>
+				</p-autoComplete>
+				<span *ngIf="rightMessage" class="eim-input-form-item-right-message" [innerHTML]="rightMessage"></span>
+
+				<div *ngIf="!disabled" class="eim-form-input-multi-button-area-container">
+					<div *ngIf="!disabled" class="eim-form-input-multi-button-area">
+						<button pButton type="button" class="p-button-info icon-only-button eim-form-input-multi-button" icon="fa fa-external-link"
+								(click)="onClickSearch($event)" pTooltip="{{ 'EIM.LABEL_03006' | translate }}">
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span *ngIf="bottomMessage" [innerHTML]="bottomMessage"></span>
+	</div>
+</div>
+
+<!-- 役割単数選択単数画面 -->
+<ng-container *ngIf="viewDialogName === 'objectRoleSingleSelector'" novalidate>
+	<eim-dialog header="{{ 'EIM_TASKS.LABEL_01014' | translate }}" modal="true" width="350"
+		class="eim-dialog"
+		[visible]="viewDialogName === 'objectRoleSingleSelector'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-responsible-object-role-single-selector
+			[componentService]="responsibleObjectRoleSingleSelectorComponentService"
+			[selectedData]="selectedObjectRoles"
+			(selected)="onSelectedObjectRole($event)">
+		</eim-responsible-object-role-single-selector>
+	</eim-dialog>
+</ng-container>
+
+<!-- 役割複数選択単数画面 -->
+<ng-container *ngIf="viewDialogName === 'objectRoleMultipleSelector'" novalidate>
+	<eim-dialog header="{{ 'EIM_TASKS.LABEL_01014' | translate }}" modal="true" width="750"
+		class="eim-dialog"
+		[visible]="viewDialogName === 'objectRoleMultipleSelector'"
+		[enableMaximize]="false"
+		(close)="onCloseDialog()"
+	>
+		<eim-responsible-object-role-multiple-selector
+			[componentService]="responsibleObjectRoleMultipleSelectorComponentService"
+			[selectedData]="selectedObjectRoles"
+			(selected)="onSelectedObjectRole($event)">
+			<eim-responsible-object-role-single-selector
+				[componentService]="responsibleObjectRoleSingleSelectorComponentService"
+				[multiple]="true">
+			</eim-responsible-object-role-single-selector>
+		</eim-responsible-object-role-multiple-selector>
+	</eim-dialog>
+</ng-container>

@@ -1,0 +1,11 @@
+<eim-template-data-grid-single-selector #template
+		[componentService]="attributeSingleSelectorComponentService" [(condition)]="condition"
+		[multiple]="multiple">
+	<div class="eim-form-item" style="width: 100%;">
+		<label class="eim-form-label" style="width: 120px;">{{attributeNameLabel}}</label>
+		<div class="eim-form-input" style="width: calc(100% - 120px); display: block !important;">
+			<input pInputText type="text" style="width: 100%" name="attributeName" maxlength="{{inputMaxLength}}"
+				[(ngModel)]="condition.attributeName" />
+		</div>
+	</div>
+</eim-template-data-grid-single-selector>

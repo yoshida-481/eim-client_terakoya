@@ -1,0 +1,3 @@
+.changeable:disabled {
+	background-color: #ffffff;
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "ES2022",
+    "baseUrl": "",
+    "esModuleInterop": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "lib": ["es2017", "dom"],
+    "declaration": false,
+    "mapRoot": "./",
+    "outDir": "../dist/out-tsc",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": ["node"],
+    "useDefineForClassFields": false
+  }
+}

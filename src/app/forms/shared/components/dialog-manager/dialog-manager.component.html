@@ -1,0 +1,196 @@
+<ng-container *ngIf="display[DialogName.FORM_CREATOR]">
+  <eim-dialog header="{{'EIM_FORMS.LABEL_01001' | translate}}" modal="true" width="904"
+      [name]="DialogName.FORM_CREATOR"
+      [visible]="display[DialogName.FORM_CREATOR]"
+      (close)="display[DialogName.FORM_CREATOR] = false;">
+    <eim-form-creator #formCreator
+       [workspaceId]="data[DialogName.FORM_CREATOR].workspaceId"
+        [typeId]="data[DialogName.FORM_CREATOR].typeId"
+        [folderId]="data[DialogName.FORM_CREATOR].folderId"
+        [securityId]="data[DialogName.FORM_CREATOR].securityId">
+    </eim-form-creator>
+		<footer>
+			<div class="p-rtl" dir="rtl">
+				<button *ngIf="formCreator.form.status != null" pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-forward" label="{{'EIM_FORMS.LABEL_03015' | translate}}"
+						(click)="formCreator.onClickStatusChange($event, true)"
+						[disabled]="!formCreator.getValidWithoutRequired()"></button>
+				<button pButton type="button" class="p-button-secondary eim-right-alignment-button" icon="fa fa-download" label="{{'EIM_FORMS.LABEL_03018' | translate}}"
+						(click)="formCreator.onClickFormOutput($event)"
+						[disabled]="formCreator.form.id === 0"></button>
+			</div>
+		</footer>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_DETAIL]">
+  <eim-dialog header="{{'EIM_FORMS.LABEL_01001' | translate}}" modal="true" width="{{data[DialogName.FORM_DETAIL].existsWF ? 1460 : 940}}"
+      [name]="DialogName.FORM_DETAIL"
+      [visible]="display[DialogName.FORM_DETAIL]"
+      (close)="display[DialogName.FORM_DETAIL] = false;">
+    <eim-form-updator #formDetail
+       [id]="data[DialogName.FORM_DETAIL].id"
+        [workspaceId]="data[DialogName.FORM_DETAIL].workspaceId">
+    </eim-form-updator>
+		<footer>
+			<div class="p-rtl" dir="rtl">
+				<button *ngIf="formDetail.forwardEventTypeList.length > 0 && formDetail.existsApproveRole"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-forward" label="{{'EIM_FORMS.LABEL_03015' | translate}}"
+						(click)="formDetail.onClickStatusChange($event, true)"
+						[disabled]="!formDetail.getValidWithoutRequired()"></button>
+				<button *ngIf="formDetail.backwordEventTypeList.length > 0 && formDetail.existsApproveRole"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-backward" label="{{'EIM_FORMS.LABEL_03016' | translate}}"
+						(click)="formDetail.onClickStatusChange($event, false)"
+						[disabled]="!formDetail.getValidWithoutRequired()"></button>
+				<button *ngIf="formDetail.regainEventType != null"
+						pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-reply" label="{{'EIM_FORMS.LABEL_03017' | translate}}"
+						(click)="formDetail.onClickFormRegain($event)"
+						[disabled]="!formDetail.getValidWithoutRequired()"></button>
+				<button pButton type="button" class="p-button-secondary" icon="fa fa-download" label="{{'EIM_FORMS.LABEL_03018' | translate}}"
+						(click)="formDetail.onClickFormOutput($event)"></button>
+			</div>
+		</footer>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_NEW_COPY]">
+  <eim-dialog header="{{'EIM_FORMS.LABEL_01001' | translate}}" modal="true" width="904"
+      [name]="DialogName.FORM_NEW_COPY"
+      [visible]="display[DialogName.FORM_NEW_COPY]"
+      (close)="display[DialogName.FORM_NEW_COPY] = false;">
+    <eim-form-new-copy-creator #formNewCopy
+       [workspaceId]="data[DialogName.FORM_NEW_COPY].workspaceId"
+        [typeId]="data[DialogName.FORM_NEW_COPY].typeId"
+        [folderId]="data[DialogName.FORM_NEW_COPY].folderId"
+        [securityId]="data[DialogName.FORM_NEW_COPY].securityId"
+        [sourceId]="data[DialogName.FORM_NEW_COPY].sourceId">
+    </eim-form-new-copy-creator>
+		<footer>
+			<div class="p-rtl" dir="rtl">
+				<button *ngIf="formNewCopy.form.status != null" pButton type="button" class="p-button-primary eim-right-alignment-button" icon="eim-icon-forward" label="{{'EIM_FORMS.LABEL_03015' | translate}}"
+						(click)="formNewCopy.onClickStatusChange($event, true)"
+						[disabled]="!formNewCopy.getValidWithoutRequired()"></button>
+				<button pButton type="button" class="p-button-secondary eim-right-alignment-button" icon="fa fa-download" label="{{'EIM_FORMS.LABEL_03018' | translate}}"
+						(click)="formNewCopy.onClickFormOutput($event)"
+						[disabled]="formNewCopy.form.id === 0"></button>
+			</div>
+		</footer>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.STATUS_CHANGE]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01007' | translate}}" modal="true" width="1080"
+      [name]="DialogName.STATUS_CHANGE"
+      [visible]="display[DialogName.STATUS_CHANGE]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.STATUS_CHANGE] = false;">
+      <eim-status-change
+      	[form]="data[DialogName.STATUS_CHANGE].form"
+      	[workflow]="data[DialogName.STATUS_CHANGE].workflow"
+      	[eventTypeList]="data[DialogName.STATUS_CHANGE].eventTypeList">
+      </eim-status-change>
+  </eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.ENTRY_LIST]">
+	<eim-dialog [header]="data[DialogName.ENTRY_LIST].title" modal="true" width="1100"
+		[name]="DialogName.ENTRY_LIST"
+		[enableMaximize]="false"
+		[visible]="display[DialogName.ENTRY_LIST]"
+		(close)="display[DialogName.ENTRY_LIST] = false;">
+		<eim-multiple-selector #entryListMultiple
+			[componentService]="entryListMultipleSelectorComponentService"
+			[selectedData]="data[DialogName.ENTRY_LIST].selectedData"
+			[required]="!data[DialogName.ENTRY_LIST].mailFlag"
+			[leftLabel]="data[DialogName.ENTRY_LIST].leftLabel"
+			[rightLabel]="data[DialogName.ENTRY_LIST].rightLabel">
+ 			<eim-entry-list-single-selector #entryListSingle
+ 				[allColumns]="data[DialogName.ENTRY_LIST].allColumns"
+				[multiple]='true' [mailFlag]="data[DialogName.ENTRY_LIST].mailFlag">
+			</eim-entry-list-single-selector>
+		</eim-multiple-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_CSV_DOWNLOAD]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01009' | translate}}" modal="true" width="900"
+			[name]="DialogName.FORM_CSV_DOWNLOAD"
+			[visible]="display[DialogName.FORM_CSV_DOWNLOAD]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.FORM_CSV_DOWNLOAD] = false;">
+		<eim-form-csv-download
+			[criteria]="data[DialogName.FORM_CSV_DOWNLOAD].criteria">
+		</eim-form-csv-download>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.DISPLAY_COLUMN_EDITOR]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01008' | translate}}" modal="true" width="1000"
+			[name]="DialogName.DISPLAY_COLUMN_EDITOR"
+			[visible]="display[DialogName.DISPLAY_COLUMN_EDITOR]"
+			[enableMaximize]="false"
+			(close)="display[DialogName.DISPLAY_COLUMN_EDITOR] = false;">
+		<eim-display-column-editor
+				[formType]="data[DialogName.DISPLAY_COLUMN_EDITOR].formType"
+				[displayColumn]="data[DialogName.DISPLAY_COLUMN_EDITOR].displayColumn">
+		</eim-display-column-editor>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_DIVERSION_SELECTOR]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01003' | translate}}" modal="true" width="350" height="500"
+		[name]="DialogName.FORM_DIVERSION_SELECTOR"
+		[visible]="display[DialogName.FORM_DIVERSION_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.FORM_DIVERSION_SELECTOR] = false;">
+		<eim-form-workspace-tree-selector [treeComponentService]="formDiversionTreeComponentService"
+			[formWorkspaceId]="data[DialogName.FORM_DIVERSION_SELECTOR].formWorkspaceId"
+			[formTypeId]="data[DialogName.FORM_DIVERSION_SELECTOR].formTypeId"
+			[formTypeFolderId]="data[DialogName.FORM_DIVERSION_SELECTOR].formTypeFolderId"
+			[identicalTypeSelectionDisabledFlag]="false"
+			[initialSelectionFlag]="true">
+		</eim-form-workspace-tree-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_MOVE_SELECTOR]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01002' | translate}}" modal="true" width="350" height="500"
+		[name]="DialogName.FORM_MOVE_SELECTOR"
+		[visible]="display[DialogName.FORM_MOVE_SELECTOR]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.FORM_MOVE_SELECTOR] = false;">
+		<eim-form-workspace-tree-selector [treeComponentService]="formMoveTreeComponentService"
+			[formWorkspaceId]="data[DialogName.FORM_MOVE_SELECTOR].formWorkspaceId"
+			[formTypeId]="data[DialogName.FORM_MOVE_SELECTOR].formTypeId"
+			[formTypeFolderId]="data[DialogName.FORM_MOVE_SELECTOR].formTypeFolderId"
+			[identicalTypeSelectionDisabledFlag]="true"
+			[initialSelectionFlag]="false">
+		</eim-form-workspace-tree-selector>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_ACCESS_HISTORY]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01004' | translate}}" modal="true" width="700" height="500"
+		[name]="DialogName.FORM_ACCESS_HISTORY"
+		[visible]="display[DialogName.FORM_ACCESS_HISTORY]"
+		[enableMaximize]="false"
+		(close)="display[DialogName.FORM_ACCESS_HISTORY] = false;">
+		<eim-form-access-history
+			[formId]="data[DialogName.FORM_ACCESS_HISTORY].formId">
+		</eim-form-access-history>
+	</eim-dialog>
+</ng-container>
+
+<ng-container *ngIf="display[DialogName.FORM_REGAIN]">
+	<eim-dialog header="{{'EIM_FORMS.LABEL_01010' | translate}}" modal="true" width="400" height="200"
+      [name]="DialogName.FORM_REGAIN"
+      [visible]="display[DialogName.FORM_REGAIN]"
+      [enableMaximize]="false"
+      (close)="display[DialogName.FORM_REGAIN] = false;">
+      <eim-form-regain
+      	[form]="data[DialogName.FORM_REGAIN].form"
+      	[regainEventType]="data[DialogName.FORM_REGAIN].regainEventType">
+      	[dirty]="data[DialogName.FORM_REGAIN].dirty">
+      </eim-form-regain>
+  </eim-dialog>
+</ng-container>
+

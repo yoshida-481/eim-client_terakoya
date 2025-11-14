@@ -1,0 +1,17 @@
+::ng-deep .p-tree .p-tree-root-children .p-tree-node:not(.p-tree-disabled) .p-tree-node-content .p-tree-node-icon.eim-icon-workspace-color {
+	color: #848484;
+}
+::ng-deep .p-tree .p-tree-root-children .p-tree-node:not(.p-tree-disabled) .p-tree-node-content .p-tree-node-icon.eim-icon-folder-color {
+	color: #DBAD4A;
+}
+::ng-deep .p-tree .p-tree-root-children .p-tree-node:not(.p-tree-disabled) .p-tree-node-content .p-tree-node-icon.eim-icon-wf-folder-color {
+	color: rgb(121, 83, 1);
+
+}
+::ng-deep .p-tree .p-tree-root-children .p-tree-node:not(.p-tree-disabled) .p-tree-node-content .p-tree-node-icon.eim-icon-tag-color {
+	color: #426ef4;
+}
+
+::ng-deep .p-tree .p-tree-root-children .p-tree-node:not(.p-tree-disabled) .p-tree-node-content .p-tree-node-icon.eim-icon-trash-color {
+	color: #555555;
+}

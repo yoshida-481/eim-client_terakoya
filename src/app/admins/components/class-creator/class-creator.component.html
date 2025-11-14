@@ -1,0 +1,87 @@
+<div style="height: 100%;">
+	<form #classCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" *ngIf="requidFlag" style="width: 252px; min-width:252px;">{{parentLabel}}</label>
+					<label class="eim-form-label" *ngIf="!requidFlag" style="width: 252px; min-width:252px;">{{parentLabel}}</label>
+					<div class="eim-form-input" style="display: flex; overflow: hidden;" >
+						<div class="eim-form-input-default eim-form-input-for-search-and-clear">
+							<div class="eim-form-input-text-for-search-and-clear">
+								{{parentObjTypeName}}　<!-- 空白を入れないと削除時に1pxずれる -->
+							</div>
+							<div *ngIf="parentObjTypeName && !requidFlag" align="right">
+								<i class="fa fa-times" style="padding-right:5px;"  (click)="onClickDeletePrentType($event)"></i>
+							</div>
+						</div>
+						<button pButton type="button" icon="fa-fw fa fa-external-link" severity="info" class="icon-only-button" style="margin-left: 5px; float: right;"
+							pTooltip="{{ 'EIM.LABEL_03006' | translate }}"	(click)="onClickShowObjectTypeSelector($event);"
+							[disabled]="false"></button>
+					</div>
+				</div>
+
+				<ng-container *ngIf="namespaceCreatable">
+						<div class="eim-form-item">
+							<label class="eim-form-label" style="width: 252px; min-width:252px;">{{ 'EIM_ADMINS.LABEL_02064' | translate }}</label>
+							<div class="eim-form-input">
+								<p-select name="namespace" appendTo="body" [options]="namespaceItemList" placeholder="{{ 'EIM_ADMINS.LABEL_02065' | translate }}"
+										[(ngModel)]="namespace" [autoWidth]="true" [style]="{'width':'90%'}"></p-select>
+							</div>
+						</div>
+				</ng-container>
+				<div class="eim-form-item" *ngIf="definitionNameDispFlag">
+					<label class="eim-form-label eim-form-label-required" style="width: 252px; min-width:252px;">{{ 'EIM_ADMINS.LABEL_02004' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="defName" type="text" pInputText [(ngModel)]="defName" maxlength="{{inputMaxLength}}" style="width: 90%;" required="true"/>
+					</div>
+				</div>
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 252px; min-width:252px;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 90%;" required="true"/>
+					</div>
+				</div>
+
+				<div class="eim-extra-item" *ngIf="borderDispFlag">
+					<div class="eim-form-item" *ngIf="addDocDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02290' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="numberAutoCreateCheck" [(ngModel)]="numberAutoCreateCheck" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" (onChange)="numberAutoCreateChangeCheckbox($event);"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item" *ngIf="addDocDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02283' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="documentParentSequenceCheck" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" [(ngModel)]="documentParentSequenceCheck" (onChange)="documentParentSequenceChangeCheckbox($event);"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item" *ngIf="addDocDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02291' | translate }}</label>
+						<div class="eim-form-input">
+							<input name="documentFormatString" [disabled]="!numberAutoCreateCheck" type="text" pInputText [(ngModel)]="documentFormatString" maxlength="{{inputMaxLength}}" style="width: 90%;"/>
+						</div>
+					</div>
+
+					<div class="eim-form-item" *ngIf="addFormDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02287' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="nameAutoCreateCheck" [disabled]="true" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" [(ngModel)]="nameAutoCreateCheck"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item" *ngIf="addFormDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02288' | translate }}</label>
+						<div class="eim-form-input">
+							<eim-checkbox name="formParentSequenceCheck" value="true" binary="true" label="{{ 'EIM_ADMINS.LABEL_02307' | translate }}" [(ngModel)]="formParentSequenceCheck" (onChange)="formParentSequenceChangeCheckbox($event);"></eim-checkbox>
+						</div>
+					</div>
+					<div class="eim-form-item" *ngIf="addFormDispFlag">
+						<label class="eim-form-label" style="width: 252px; min-width:252px; padding-left: 5px">{{ 'EIM_ADMINS.LABEL_02291' | translate }}</label>
+						<div class="eim-form-input">
+							<input name="formFormatString" [disabled]="!nameAutoCreateCheck" type="text" pInputText [(ngModel)]="formFormatString" maxlength="{{inputMaxLength}}" style="width: 90%;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

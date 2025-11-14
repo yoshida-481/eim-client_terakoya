@@ -1,0 +1,80 @@
+@use '_variables' as *;
+@use 'tasks-theme' as *;
+
+@use 'dropdown' as *;
+@use 'tab' as *;
+@use 'input-for-selection' as *;
+@use 'chips-for-selection' as *;
+@use 'tab-panel' as *;
+@use 'tree' as *;
+@use 'data-grid' as *;
+@use 'gantt-chart' as *;
+@use 'menubar' as *;
+@use 'menubar-block' as *;
+@use 'menubar-button' as *;
+@use 'contextmenu' as *;
+@use 'activable-menu' as *;
+@use 'panel' as *;
+@use 'stretched-panel' as *;
+@use 'panel-flat' as *;
+@use 'select-button' as *;
+@use 'progress-bar-renderer' as *;
+@use 'dialog' as *;
+
+::ng-deep .eim-icon-project:before {
+	content: "\f015";
+}
+::ng-deep .eim-icon-process:before {
+	font-family: 'eim-icon' !important;
+	content: "\e917";
+}
+::ng-deep .eim-icon-task:before {
+	// content: "\f0ae";
+	content: "\f058";
+}
+
+::ng-deep eim-tasks .body {
+	background-color: $eim-background-color;
+}
+
+// 進捗率
+::ng-deep .eim-task-input-form-item-progress-rate {
+	.p-inputtext {
+		width: 50px;
+	}
+}
+
+// メモ
+::ng-deep .eim-task-input-form-item-memo {
+	height: 100%;
+	.eim-form-item {
+		height: calc(100% - (#{$eim-input-margin-top} + #{$eim-input-margin-bottom}));
+		.eim-form-input {
+			height: 100%;
+			> div {
+				height: 100%;
+				.eim-form-input-surround {
+					height: 100%;
+					.p-editor-container {
+						height: 100%;
+						.p-editor-content {
+							height: calc(100% - 27px)!important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+::ng-deep .eim-task-manager-tasks-complete {
+	background-color: rgb(211,211,211)!important
+}
+
+::ng-deep .eim-task-manager-tasks-working {
+	background-color: #a3d1ff !important;
+}
+
+::ng-deep .eim-task-manager-tasks-delay {
+	background-color: #ffa3a3 !important;
+}

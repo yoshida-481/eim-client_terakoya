@@ -1,0 +1,30 @@
+<eim-template-data-grid-single-selector #template
+		[componentService]="userSingleSelectorComponentService" [(condition)]="condition"
+		[multiple]="multiple">
+	<div *ngIf="userService.searchType === 'keyword'" class="eim-user-selector-input-keyword">
+		<div class="eim-form-item" style="width: 100%;">
+			<div class="eim-form-input" style="width: 100%; display: block !important;">
+				<input pInputText type="text" style="width: 100%;" name="keyword" maxlength="{{inputMaxLength}}"
+					[(ngModel)]="condition.keyword"/>
+			</div>
+		</div>
+	</div>
+
+	<!-- 入力欄が複数ある場合、template-data-grid-single-selector側のngFormがエンターイベントを検知できないため、keyup.enterを特例的に実装しています -->
+	<div *ngIf="userService.searchType !== 'keyword'">
+		<div class="eim-form-item" style="width: 100%;">
+			<label class="eim-form-label" style="width: 90px;">{{ 'EIM.LABEL_02001' | translate }}</label>
+			<div class="eim-form-input" style="width: calc(100% - 90px); display: block !important;">
+				<input pInputText type="text" style="width: 100%;" name="userCode" maxlength="{{inputMaxLength}}"
+					[(ngModel)]="condition.userCode" (keyup.enter)="userSingleSelectorComponentService.search(info, condition)"/>
+			</div>
+		</div>
+		<div class="eim-form-item" style="width: 100%;">
+		<label class="eim-form-label" style="width: 90px;">{{ 'EIM.LABEL_02002' | translate }}</label>
+			<div class="eim-form-input" style="width: calc(100% - 90px); display: block !important;">
+				<input pInputText type="text" style="width: 100%;" name="userName" maxlength="{{inputMaxLength}}"
+					[(ngModel)]="condition.userName" (keyup.enter)="userSingleSelectorComponentService.search(info, condition)"/>
+			</div>
+		</div>
+	</div>
+</eim-template-data-grid-single-selector>

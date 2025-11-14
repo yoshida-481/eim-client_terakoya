@@ -1,0 +1,40 @@
+<p-card class="thumbnail-creator-style" [style]="getThumbailColor()"
+[ngClass]="{'thumbnail-small': size == 'sm', 'thumbnail-large': size == 'lg', 'thumbnail-selected': selected == true}"  (click)="onThumbnailClick($event)">
+	<div class="thumbnail-img-area" #myElement>
+		<eim-checkbox [(ngModel)]="selected" [binary]="true" inputId="binary" class="thumbnail-check-box" (onChange)="onChangeSelected($event)"></eim-checkbox>
+		<div (click)="onThumbnailImageClick($event)"  class="thumbnail-img-area-sub">
+			<img *ngIf="!isWait && isGotImage" [src]="dataUrl" class="thumbnail-img" draggable="false">
+			<div *ngIf="!isWait && !isGotImage"  class="thumbnail-img-icon fa {{getIcon(data)}} fa-lg"></div>
+			<div *ngIf="isWait" class="thumbnail-img-wait">
+				<i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="color: #186ba0"></i>
+			</div>
+		</div>
+	</div>
+
+	<div style="display: flex; align-items: center; height: 36px;">
+		<div id="thumbnailObjName" class="thumbnail-name-icon fa {{getIcon(data)}} fa-lg" (click)="objNameClick($event)"></div>
+		<a *ngIf="showLink && !expiration" class="thumbnail-img-name-text" href="#" style="color: #0044CC;" (click)="objNameClick($event)" title="{{data.objName}}">{{data.objName}}</a>
+		<a *ngIf="showLink && expiration" class="thumbnail-img-name-text" href="#" style="color: #000000;" (click)="objNameClick($event)" title="{{data.objName}}">{{data.objName}}</a>
+		<span *ngIf="!showLink" href="#" class="thumbnail-img-name-text" title="{{data.objName}}">{{data.objName}}</span>
+	</div>
+
+	<div class="thumbnail-text-row">
+		<div class="thumbnail-text-left"> {{dateLabel}} </div>
+		<div class="eim-icon-user thumbnail-text-right thumbnail-modify-user-name" title="{{data.modifyUserName}}">{{data.modifyUserName}}</div>
+	</div>
+
+	<div class="thumbnail-text-row">
+    	<i *ngIf="statusIcon" class="fa {{statusIcon}} thumbnail-text-left" style="padding-right:3px;"></i>
+		<div class="thumbnail-text-right thumbnail-status-label" title="{{statusLabel}}">{{statusLabel}}</div>
+    </div>
+
+	<div class="thumbnails-button-dev">
+		<div *ngIf="publishIcon" class="fa {{publishIcon}} fa-lg" pTooltip="{{publishToolTipString}}" [style.cursor]="'pointer'" (click)="onPublishClick($event)"></div>
+		<div *ngIf="isShowWebDev" class="fa fa-pencil-square-o fa-lg" [style.color]="getColor()" [style.cursor]="disabled(data) ? 'default' : 'pointer'" (click)="onClickWebDAV($event)"></div>
+		<div *ngIf="isShowProperty" class="eim-icon-info" [style.cursor]="'pointer'" (click)="onPropertyClick($event)"></div>
+		<div #downloadButton *ngIf="isShowDownload" class=" fa fa-download" [style.cursor]="'pointer'" (click)="onDownloadClick($event)"></div>
+		<div class="fa fa-ellipsis-h fa-lg" [style.cursor]="'pointer'"(click)="onContextMenuBtnClick($event)"></div>
+	</div>
+</p-card>
+
+<p-contextMenu #downloadButtonMenu *ngIf="downloadButtonMenuItems.length > 0" [target]="downloadButton" [model]="downloadButtonMenuItems" appendTo="body"></p-contextMenu>

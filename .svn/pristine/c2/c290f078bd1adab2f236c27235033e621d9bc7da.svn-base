@@ -1,0 +1,15 @@
+<div style="height: 100%; width: 100%; display: flex;">
+	<div eim-vertical-container style="width: calc(100% - 45px); height: 100%; ">
+		<div class="eim-flexible-height">
+			<eim-data-grid class="eim-user-list" #listValueDataGrid [multiple]="false" [equals]="dataGridEquals"></eim-data-grid>
+		</div>
+	</div>
+	<div style="height: 100%; width: 45px; display: table;">
+		<div style="vertical-align: middle; float: none; display: table-cell;">
+			<button pButton class="p-button-success" type="button" pTooltip="{{ 'EIM.LABEL_03029' | translate }}" icon="fa fa-arrow-up"
+				(click)="onClickUp($event)" style="width: 30px; height: 30px; margin-left: 5px; margin-bottom: 10px;"></button>
+			<button pButton class="p-button-success" type="button" pTooltip="{{ 'EIM.LABEL_03030' | translate }}" icon="fa fa-arrow-down"
+				(click)="onClickDown($event)" style="width: 30px; height: 30px; margin-left: 5px;"></button>
+		</div>
+	</div>
+</div>

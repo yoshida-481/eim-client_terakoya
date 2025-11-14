@@ -1,0 +1,28 @@
+<!-- 数値型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 1"
+	[name]="name" [form]="form" [label]="label" [maxlength]="numberMaxLength" [pattern]="numberPattern"
+	[multiple]="multiple" [pTooltipLabelFlg]="pTooltipLabelFlg" [(ngModel)]="value">
+</eim-text-input-form-item>
+
+<!-- 文字列型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 2"
+	[name]="name" [form]="form" [label]="label" [maxlength]="stringMaxLength"
+	[multiple]="multiple" [pTooltipLabelFlg]="pTooltipLabelFlg" [(ngModel)]="value">
+</eim-text-input-form-item>
+
+<!-- 日付型 -->
+<eim-calendar-input-form-item *ngIf="valTypeId == 3"
+	[name]="name" [form]="form" [label]="label" [multiple]="multiple" [pTooltipLabelFlg]="pTooltipLabelFlg" [(ngModel)]="value">
+</eim-calendar-input-form-item>
+
+<!-- テキスト型 -->
+<eim-text-area-input-form-item *ngIf="valTypeId == 4"
+	[name]="name" [form]="form" [label]="label" [maxlength]="stringMaxLength"
+	[multiple]="multiple" [pTooltipLabelFlg]="pTooltipLabelFlg" [(ngModel)]="value">
+</eim-text-area-input-form-item>
+
+<!-- 実数型 -->
+<eim-text-input-form-item *ngIf="valTypeId == 5"
+	[name]="name" [form]="form" [label]="label" [maxlength]="realMaxLength" [pattern]="realPattern"
+	[multiple]="multiple" [pTooltipLabelFlg]="pTooltipLabelFlg" [(ngModel)]="value">
+</eim-text-input-form-item>

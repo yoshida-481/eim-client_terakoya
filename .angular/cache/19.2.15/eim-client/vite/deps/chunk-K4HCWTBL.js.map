@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/iterators.js"],
+  "sourcesContent": ["'use strict';\n\nmodule.exports = {};"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA;AAEA,WAAO,UAAU,CAAC;AAAA;AAAA;",
+  "names": []
+}

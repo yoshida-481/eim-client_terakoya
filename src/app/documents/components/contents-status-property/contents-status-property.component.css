@@ -1,0 +1,7 @@
+/* 2022.03 公開通知先参照ボタン用 */
+button {
+    border: 1px solid #2399e5;
+    color:#FFFFFF;
+    background: #2399e5;
+    padding: 3px 12px 3px 6px;
+}

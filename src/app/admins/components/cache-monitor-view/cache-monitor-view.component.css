@@ -1,0 +1,15 @@
+.forCenter {
+	margin-left: 4px;
+}
+
+.roleColumn15 {
+	width: 15%;
+}
+
+.eim-table-config {
+	height: 100%;
+}
+
+::ng-deep eim-cache-monitor-view eim-number-renderer table {
+	margin-top: -2px;
+}

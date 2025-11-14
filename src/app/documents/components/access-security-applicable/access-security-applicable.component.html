@@ -1,0 +1,19 @@
+<form [formGroup]="securityForm" style="height: 100%;" autocomplete="off" novalidate>
+	<div eim-vertical-container style="height: 100%;">
+		<div class="eim-form-item">
+			<!-- セキュリティ -->
+			<label class="eim-form-label eim-form-label-required" style="width: 30%;">{{ 'EIM_DOCUMENTS.LABEL_02003' | translate }}</label>
+			<div class="eim-form-input" style="display: flex;">
+				<input [ngClass]="canApplied ? 'eim-form-input-applied' : ''" type="text" pInputText id="secName" name="secName" [formControl]="securityForm.controls['secName']"
+					style="width: 100%;" required="true"/>
+				<button pButton type="button" severity="info" class="icon-only-button" pTooltip="{{ 'EIM_DOCUMENTS.LABEL_03023' | translate }}" [disabled]="!canApplied"
+					(click)="onClickSelectSecurity($event)" icon="fa-fw fa fa-external-link" style="float: right; margin-left: 5px;">
+				</button>
+			</div>
+		</div>
+		<div class="eim-flexible-height">
+			<eim-security-selector #accessEntry
+				[content]="content" [displaySearch]="false" [entryNameWidth]="entryNameWidth"></eim-security-selector>
+		</div>
+	</div>
+</form>

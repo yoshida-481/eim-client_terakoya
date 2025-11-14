@@ -1,0 +1,1 @@
+<eim-tree #singleRoleContentsTree (selected)="onSelectRoleTreeNode($event)"></eim-tree>

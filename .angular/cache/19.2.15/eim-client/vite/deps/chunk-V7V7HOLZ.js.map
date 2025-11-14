@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/function-bind-context.js"],
+  "sourcesContent": ["'use strict';\n\nvar uncurryThis = require('../internals/function-uncurry-this-clause');\nvar aCallable = require('../internals/a-callable');\nvar NATIVE_BIND = require('../internals/function-bind-native');\nvar bind = uncurryThis(uncurryThis.bind);\n\n// optional / simple context binding\nmodule.exports = function (fn, that) {\n  aCallable(fn);\n  return that === undefined ? fn : NATIVE_BIND ? bind(fn, that) : function /* ...args */\n  () {\n    return fn.apply(that, arguments);\n  };\n};"],
+  "mappings": ";;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,cAAc;AAClB,QAAI,YAAY;AAChB,QAAI,cAAc;AAClB,QAAI,OAAO,YAAY,YAAY,IAAI;AAGvC,WAAO,UAAU,SAAU,IAAI,MAAM;AACnC,gBAAU,EAAE;AACZ,aAAO,SAAS,SAAY,KAAK,cAAc,KAAK,IAAI,IAAI,IAAI,WAC7D;AACD,eAAO,GAAG,MAAM,MAAM,SAAS;AAAA,MACjC;AAAA,IACF;AAAA;AAAA;",
+  "names": []
+}

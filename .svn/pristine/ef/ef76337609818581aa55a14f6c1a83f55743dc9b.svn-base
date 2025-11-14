@@ -1,0 +1,6 @@
+<!-- <eim-document-main #documentMain style="height:100%;" disabledTreeInitialization="true"
+		>
+</eim-document-main> -->
+<div style="height: 100%;">
+	<eim-file-manager #documents [workspaceId]="workspaceId"></eim-file-manager>
+</div>

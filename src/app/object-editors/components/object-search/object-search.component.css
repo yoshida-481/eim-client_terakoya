@@ -1,0 +1,112 @@
+::ng-deep .eim-object-search .eim-object-search-left-panel {
+	margin-left: 0px;
+	margin-right: 3px;
+}
+
+::ng-deep .eim-object-search .eim-object-search-left-footer {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+::ng-deep .eim-object-search .eim-object-search-right-panel {
+	margin-left: 3px;
+	margin-right: 0px;
+}
+
+::ng-deep .eim-object-search .eim-form-label {
+	width: 180px!important;
+}
+
+::ng-deep .eim-object-search .eim-form-input {
+	width: calc(100% - 196px)!important;
+}
+
+::ng-deep .eim-object-search .eim-form-item > label {
+	margin-left: 10px;
+}
+
+::ng-deep .eim-object-search eim-user-input-form-item .eim-form-input {
+	overflow: hidden;
+}
+
+::ng-deep .eim-object-search eim-user-input-form-item .eim-form-input-multi-input-area  {
+	width: 100% !important;
+	overflow: hidden;
+	white-space: normal !important;
+}
+
+::ng-deep .eim-object-search eim-user-input-form-item .eim-form-input-multi-button-area {
+	width: initial !important;
+}
+
+::ng-deep .eim-object-search eim-calendar-input-form-item .eim-form-input {
+	overflow: hidden;
+}
+
+::ng-deep .eim-object-search eim-object-input-form-item .eim-form-input {
+	overflow: hidden;
+}
+
+::ng-deep .eim-object-search eim-object-input-form-item .eim-form-input-text-for-search-and-clear {
+	white-space: normal !important;
+}
+
+::ng-deep p-panel.eim-panel-attribute-list .p-panel.p-component {
+	border-style: none;
+}
+
+::ng-deep p-panel.eim-panel-attribute-list /*.ui-widget-header*/ {
+	background: transparent;
+}
+
+::ng-deep p-panel.eim-panel-attribute-list .p-panel-title {
+	color: #3F48FF;
+	white-space: nowrap;
+}
+
+::ng-deep p-panel.eim-panel-attribute-list .p-panel.p-component .p-panel-header {
+	padding-bottom: 1px;
+	border-bottom-color: #82d9ff;
+	border-width: 0 0 2px 0;
+	padding: 6px 0px 1px 0px;
+	background: transparent;
+}
+
+::ng-deep p-panel.eim-panel-attribute-list .p-panel.p-component .p-panel-content {
+	padding: 6px 0px 0px 0px;
+	border: none;
+}
+
+::ng-deep .eim-panel-attribute-list .p-panel {
+	height: 100%;
+}
+
+::ng-deep .eim-panel-attribute-list .ui-panel-content-wrapper {
+	height: calc(100% - 20px);
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+::ng-deep .eim-panel-attribute-list .p-panel-content {
+	height: 100%;
+}
+
+split-area {
+	overflow-y: hidden !important;
+}
+
+::ng-deep .attributeList{
+	border: 1px solid #D5D5D5;
+}
+
+::ng-deep .eim-icon-info{
+	padding-left: 3px;
+	color: #0d98ed;
+}
+
+.eim-object-search-footer-bottons{
+	padding-right: 2px;
+}
+
+
+

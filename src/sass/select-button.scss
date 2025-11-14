@@ -1,0 +1,35 @@
+// ==========================================================================
+//	eim-select-button
+//
+//    PrimeNGのセレクトボタン表示用スタイル
+//
+//    <p-selectButton class="eim-select-button" [options]="viewItems" [(ngModel)]="selectedView" (onChange)="onChangeView($event)"></p-selectButton>
+// ==========================================================================
+@use '_variables' as *;
+
+::ng-deep p-selectButton.eim-select-button {
+	.p-togglebutton {
+		height: $eim-button-height;
+		padding: $eim-button-padding;
+		margin: 0px;
+		.p-button-icon {
+			margin: $eim-label-icon-margin;
+			left: unset;
+		}
+
+		// .p-togglebutton-content {
+		// 	padding: 0px;
+		// }
+	}
+	.p-togglebutton.p-togglebutton-checked {
+		color: #ffffff!important;
+	}
+	.p-togglebutton.p-button-icon-only {
+		.p-button-icon {
+			margin: 0;
+		}
+	}
+
+	--p-togglebutton-checked-color: #ffffff;
+	--p-togglebutton-content-checked-background: #007AD9;
+}

@@ -1,0 +1,83 @@
+<div ng2FileDrop [uploader]="uploader" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" class="well my-drop-zone" (fileOver)="this.hasBaseDropZoneOver = $event" style="height: 100%;">
+	<form #documentForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div class="p-col-6" style="height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 5px;" eim-vertical-container>
+			<div style="margin-bottom: 10px;">
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required">{{ 'EIM_DOCUMENTS.LABEL_02001' | translate }}</label>
+					<div class="eim-form-input" >
+						<p-select name="objType" [options]="typeSelectItems" placeholder="{{ 'EIM.INFO_00002' | translate }}" required="true"
+								[(ngModel)]="selectedTypeId" (onChange)="onChangeType($event)"
+								[disabled]="state != STATE.EDITING || this.boxContentsListComponentService.copyToEIMFlag" [filter]="true" [autoWidth]="true" [style]="{'width':'calc(100% - 30px)'}"></p-select>
+						<button pButton type="button" icon="fa-fw fa fa-external-link" severity="info" class="icon-only-button" style="float: right;" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+								[disabled]="state != STATE.EDITING || this.boxContentsListComponentService.copyToEIMFlag"
+								(click)="onClickShowObjectTypeSelector($event)"></button>
+					</div>
+				</div>
+				<eim-text-input-form-item name="path" [(ngModel)]="path" label="{{ 'EIM_DOCUMENTS.LABEL_02051' | translate }}" [disabled]="true"></eim-text-input-form-item>
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required">{{ 'EIM.LABEL_02030' | translate }}</label>
+					<div class="eim-form-input eim-form-input-selected-list">
+						<input name="creator" type="text" pInputText [(ngModel)]="createUser.name" [disabled]="true" style="width: calc(100% - 30px);"/>
+						<button pButton type="button" icon="fa-fw fa fa-external-link" severity="info" class="icon-only-button" style="float: right;" pTooltip="{{ 'EIM.LABEL_03006' | translate }}"
+								(click)="onDisplayUserSelector($event)"
+								 [disabled]="state != STATE.EDITING"></button>
+					</div>
+				</div>
+			</div>
+
+			<div style="width: 100%; margin-bottom: 3px;">
+				<div style="margin-top: 3px;">
+					<div class="eim-data-grid-menu" style="display: flex;">
+						<label [ngClass]="this.boxContentsListComponentService.copyToEIMFlag ? 'eim-upload-menu-btn-box' : state != STATE.EDITING ? 'eim-upload-menu-btn-disabled': 'eim-upload-menu-btn'">
+							<i aria-hidden="true" class="fa fa-upload eim-upload-menu-btn-icon" style="margin-right: 6px;"></i>
+							<span class=" eim-upload-menu-btn-label">{{ 'EIM_DOCUMENTS.LABEL_03006' | translate }}</span>
+							<input type="file" ng2FileSelect
+									[uploader]="uploader" multiple [ngStyle]="{'display': 'none'}" [disabled]="state != STATE.EDITING || this.boxContentsListComponentService.copyToEIMFlag"/>
+						</label>
+						<eim-menubar [model]="fileMenuItems" [style]="{'padding-left': '5px', 'padding-top': '1px'}"></eim-menubar>
+					</div>
+				</div>
+			</div>
+
+			<div class="eim-flexible-height" style="width: 100%;">
+				<eim-data-grid #documentList [equals]="equalsFileList" (selected)="onSelectFile($event)"></eim-data-grid>
+			</div>
+
+			<div style="width: 100%; height: 200px;">
+				<eim-master-contents-approve-workflow-diagram #workflowDiagram (errored)="workflowDiagramErroed()"></eim-master-contents-approve-workflow-diagram>
+			</div>
+		</div>
+
+		<div class="p-col-6" style="height: 100%; padding-top: 0px; padding-right: 0px; padding-bottom: 0px;">
+			<p-tabs [value]="0">
+				<p-tablist>
+					<p-tab [value]="0">{{ 'EIM_DOCUMENTS.LABEL_02028' | translate }}</p-tab>
+				</p-tablist>
+				<p-tabpanels>
+					<p-tabpanel [value]="0" *ngIf="displayProperty" class="eim-document-creator-property-panel">
+						<div style="padding:5px; height: 100%">
+							<div style="height: calc(100% - 30px); overflow-x: hidden; overflow-y: auto;">
+								<eim-contents-attribute-list-input-form-item [form]="documentForm.form" [(attributeList)]="attributeList"
+									[(attributeTypeLayoutList)]="attributeTypeLayoutList" [disabled]="state != STATE.EDITING"
+									(attrCheckBoxClicked)="onClickAttributeCheckBox()">
+								</eim-contents-attribute-list-input-form-item>
+							</div>
+							<div style="margin-left: 17px; padding-top: 5px; display: flex;">
+								<eim-checkbox class="eim-form-item p-chk-box padding-top-set" name="allCheckFlag"
+									label="{{'EIM_DOCUMENTS.LABEL_03057' | translate}}" binary="true" [(ngModel)]="propertyAllCheckFlag"
+									(onChange)="onChangePropertyAllCheckFlag($event)">
+								</eim-checkbox>
+								<button pButton type="button" class="p-button-secondary" style="margin-left: 10px;" icon="eim-icon-copy"
+									label="{{'EIM_DOCUMENTS.LABEL_03034' | translate}}" (click)="onClickPropertyCopy($event)"
+									[disabled]="state != STATE.EDITING || propertyCopyPeastDisabled"></button>
+								<button pButton type="button" class="p-button-secondary" style="margin-left: 5px;" icon="eim-icon-paste"
+									label="{{'EIM_DOCUMENTS.LABEL_03036' | translate}}" (click)="onClickPropertyPaste($event)"
+									[disabled]="state != STATE.EDITING || propertyCopyPeastDisabled || disablePasteFlag"></button>
+							</div>
+						</div>
+					</p-tabpanel>
+				</p-tabpanels>
+			</p-tabs>
+			</div>
+	</form>
+</div>

@@ -1,0 +1,73 @@
+<div style="height: 100%;">
+	<form #attributeCreatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+		<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;" eim-vertical-container>
+			<div class="eim-attribute-detail" style="margin-bottom: 10px;">
+
+				<!-- 定義名称 -->
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 130px;">{{'EIM_ADMINS.LABEL_02004' | translate}}</label>
+					<div class="eim-form-input">
+						<input name="definitionName" type="text" required="true" pInputText [(ngModel)]="definitionName" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<!-- 名前（日本語、英語） -->
+				<div *ngFor="let lang of languages;" class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 130px;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" required="true" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<!-- データ型 -->
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 130px;">{{'EIM_ADMINS.LABEL_02005' | translate}}</label>
+					<div class="eim-form-input">
+						<p-select name="dataTypeSelectItems" [options]="dataTypeSelectItems" [(ngModel)]="dataType" appendTo="body"
+							(onChange)="onDataChange($event)" [style]="{'width': '160px'}"></p-select>
+					</div>
+				</div>
+
+				<!-- 複数値の保持 -->
+				<div class="eim-form-item">
+					<label class="eim-form-label" style="width: 130px;"></label>
+					<div class="eim-form-input">
+						<eim-checkbox name="checkMultiple" value="false" binary="true" label="{{'EIM_ADMINS.LABEL_02096' | translate}}"
+							(onChange)="onMultipleChange($event)"  [(ngModel)]="checkMultiple"></eim-checkbox>
+						<eim-checkbox name="essential" value="false" binary="true" label="{{'EIM_ADMINS.LABEL_02244' | translate}}"
+							(onChange)="onDataChange($event)" [(ngModel)]="essential"></eim-checkbox>
+					</div>
+				</div>
+
+				<!-- UIコントロール -->
+				<div class="eim-form-item">
+					<label class="eim-form-label eim-form-label-required" style="width: 130px;">{{'EIM_ADMINS.LABEL_02243' | translate}}</label>
+					<div class="eim-form-input">
+						<p-select #uiControlDropdown name="uiControlType" [options]="uiControlSelectItems" [(ngModel)]="uiControlType" appendTo="body"
+							(onChange)="onUIChange($event)" [style]="{'width': '100%'}"></p-select>
+					</div>
+				</div>
+
+				<!-- 初期値 -->
+				<div class="eim-border-box-attribute-area" style="height:100px; width:100%; overflow-y: scroll;">
+					<eim-attribute-default #default [multiple]="checkMultiple" label="{{'EIM_ADMINS.LABEL_02008' | translate}}"
+						[uiControlType]="uiControlDropdown?.selectedOption?.value"
+						[form]="attributeCreatorForm.form" [valTypeId]="dataType" [codeItems]="codeItems">
+					</eim-attribute-default>
+				</div>
+
+				<!-- コードタイプ -->
+				<div class="eim-form-item" style="padding-top: 5px;">
+					<label class="eim-form-label" style="width: 130px;">{{'EIM_ADMINS.LABEL_02007' | translate}}</label>
+					<div class="eim-form-input eim-form-input-selected-list">
+						<input name="codeType" type="text" [required]="requiredCodeTypeFlag" [disabled]="dataType != 8" pInputText [(ngModel)]="codeTypeName"
+							disabled="true" maxlength="{{inputMaxLength}}" style="width: calc(100% - 120px);" readonly/>
+						<!-- コードタイプ選択画面呼出-->
+						<button pButton icon="eim-icon-search" style="width: 30px; height: 26px;" [disabled]="dataType != 8" (click)="onCodeTypeSelect($event)"></button>
+						<button pButton label="{{ 'EIM.LABEL_03009' | translate }}" style="width: 75px;" [disabled]="dataType != 8" (click)="onClear($event)"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,115 @@
+<div style="height: 100%; overflow-y: auto">
+	<div style="width: 100%; height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px; padding-right: 10px;" eim-vertical-container>
+		<div style="margin-bottom: 10px;">
+			<form #userUpdatorForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label eim-form-label-required" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02074' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="userCode" type="text" required="true" autocomplete="off" pInputText [(ngModel)]="userCode" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02089' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="userKana" type="text" pInputText [(ngModel)]="userKana" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<div *ngFor="let lang of languages;" class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label eim-form-label-required" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02003' | translate:lang }}</label>
+					<div class="eim-form-input">
+						<input name="name_{{lang.lang}}" type="text" required="true" pInputText [(ngModel)]="nameList[lang.lang]" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+			</form>
+
+			<form #passwordForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02090' | translate }}</label>
+					<div class="eim-form-input">
+						<eim-checkbox name="userPassUpdateFlg" value="false" [(ngModel)]="userPassUpdateFlg" binary="true" label="{{ 'EIM_ADMINS.LABEL_03028' | translate }}" (onChange)="onChangeUserPassUpdate()"></eim-checkbox>
+					</div>
+				</div>
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;"></label>
+					<div class="eim-form-input">
+						<input name="userPass" type="password" required="true" autocomplete="new-password" pInputText [(ngModel)]="userPass" maxlength="{{inputMaxLength}}" style="width: 100%;" [disabled]="!userPassUpdateFlg"/>
+					</div>
+				</div>
+			</form>
+			<form #userUpdatorAttributeForm="ngForm" class="p-grid" style="width: 100%; height: 100%;" autocomplete="off">
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02076' | translate }}</label>
+					<div class="eim-form-input">
+						<input name="userMail" type="text" pInputText [(ngModel)]="userMail" maxlength="{{inputMaxLength}}" style="width: 100%;"/>
+					</div>
+				</div>
+
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02080' | translate }}</label>
+					<div class="eim-form-input">
+						<eim-radio-button name="userDisable" label="{{ 'EIM_ADMINS.LABEL_02082' | translate }}" value="0" [(ngModel)]="userDisable"></eim-radio-button>
+						<eim-radio-button name="userDisable" label="{{ 'EIM_ADMINS.LABEL_02083' | translate }}" value="1" [(ngModel)]="userDisable"></eim-radio-button>
+					</div>
+				</div>
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02091' | translate }}</label>
+					<div class="eim-form-input">
+						<p-select name="userLangSelectItems" [options]="userLangSelectItems" [(ngModel)]="userLang" [style]="{'width': '100%'}"></p-select>
+					</div>
+				</div>
+
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 35%;">{{ 'EIM_ADMINS.LABEL_02092' | translate }}</label>
+					<div *ngIf="generalFlg" class="eim-form-input">
+
+						<div *ngFor="let auth of auths; let i = index; let isLast = last;">
+							<div class="eim-form-item" style="width: 100%;">
+								<div class="eim-form-input">
+									<eim-checkbox name="{{auths[i].authId}}" binary="true" [(ngModel)]="authorityList[auths[i].authId]" label="{{ auths[i].nameList[langId] }}" [disabled]="adminCheckDisableFlg"></eim-checkbox>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div *ngIf="documentFlg || formFlg" class="eim-form-input">
+						<p-select name="userAdminSelectItems" [options]="userAdminSelectItems" [(ngModel)]="selectedAdminIdx" appendTo="body" [style]="{'width': '100%'}" (onChange)="onChangeAdminType($event)"></p-select>
+
+						<div *ngFor="let auth of auths; let i = index; let isLast = last;">
+							<div *ngIf="i % 2 == 0" class="eim-form-item">
+								<div class="eim-form-input">
+									<eim-checkbox name="{{auths[i].authId}}" binary="true" [(ngModel)]="authorityList[auths[i].authId]" label="{{ auths[i].nameList[langId] }}" [disabled]="adminCheckDisableFlg"></eim-checkbox>
+								</div>
+								<div *ngIf="!isLast" class="eim-form-input">
+									<eim-checkbox name="{{auths[i + 1].authId}}" binary="true" [(ngModel)]="authorityList[auths[i + 1].authId]" label="{{ auths[i + 1].nameList[langId] }}" [disabled]="adminCheckDisableFlg"></eim-checkbox>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="taskFlg" class="eim-form-input">
+						<div *ngFor="let auth of auths; let i = index; let isLast = last;">
+							<div *ngIf="i % 2 == 0" class="eim-form-item">
+								<div class="eim-form-input">
+									<eim-checkbox name="{{auths[i].authId}}" binary="true" [(ngModel)]="authorityList[auths[i].authId]" label="{{ auths[i].nameList[langId] }}" [disabled]="adminCheckDisableFlg"></eim-checkbox>
+								</div>
+								<div *ngIf="!isLast" class="eim-form-input">
+									<eim-checkbox name="{{auths[i + 1].authId}}" binary="true" [(ngModel)]="authorityList[auths[i + 1].authId]" label="{{ auths[i + 1].nameList[langId] }}" [disabled]="adminCheckDisableFlg"></eim-checkbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="eim-form-item" style="width: 100%;">
+					<label class="eim-form-label" style="width: 50%;"><b>{{ 'EIM_ADMINS.LABEL_02093' | translate }}</b></label>
+				</div>
+				<div class="eim-contents-user-detail-panel-outer" style="width: 100%;">
+					<eim-user-attribute-list-input-form-item
+						[(attributeList)]="attributeList" [form]="userUpdatorAttributeForm.form" [pTooltipLabelFlg]="true">
+					</eim-user-attribute-list-input-form-item>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>

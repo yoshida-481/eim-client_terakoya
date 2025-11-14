@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/array-slice.js"],
+  "sourcesContent": ["'use strict';\n\nvar uncurryThis = require('../internals/function-uncurry-this');\nmodule.exports = uncurryThis([].slice);"],
+  "mappings": ";;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,cAAc;AAClB,WAAO,UAAU,YAAY,CAAC,EAAE,KAAK;AAAA;AAAA;",
+  "names": []
+}

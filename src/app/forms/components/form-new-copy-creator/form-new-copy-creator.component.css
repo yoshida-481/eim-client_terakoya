@@ -1,0 +1,50 @@
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordio .p-accordion.p-component .p-accordionpanel .p-accordionpanel{
+    padding: 3px;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordion.p-accordion.p-component .p-accordionheader {
+	padding: 8px 6px;
+	font-weight: 400;
+	border: 1px solid #d9d9d9;
+	color: #1b1d1f;
+	text-decoration: none;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordion.p-accordion.p-component .p-accordionheader:hover {
+	border: 1px solid silver!important;
+	background: linear-gradient(to bottom, #f2f2f2, #d7d7d7);
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordion.p-accordion.p-component .p-accordionheader  {
+	text-decoration: underline;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordion.p-accordion.p-component .p-accordionheader .p-accordionheader-toggle-icon {
+	width: 7px !important;
+	height: 7px !important;
+	font-size: 8px;
+	margin-right: 0.5rem;
+}
+/* 2022.05 新規 アコーディオン用 */
+::ng-deep eim-form-new-copy-creator .eim-form-detail p-accordion.p-accordion.p-component .p-accordioncontent .p-accordioncontent-content {
+	padding-top: 3px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+::ng-deep eim-form-new-copy-creator .eim-form-detail.use-flat-type p-accordion.p-accordion.p-component .p-accordioncontent .p-accordioncontent-content {
+	padding-top: 6px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+::ng-deep eim-form-new-copy-creator .eim-form-detail .p-fieldset.p-fieldset-toggleable .p-fieldset-legend .p-fieldset-toggle-button {
+	font: inherit;
+	line-height: 1;
+}
+
+::ng-deep eim-form-new-copy-creator .eim-form-detail .p-fieldset.p-fieldset-toggleable .p-fieldset-legend button .p-fieldset-toggler .eim-filedset-icon{
+	margin-right: 0.5rem;
+	font-size: 8px;
+}

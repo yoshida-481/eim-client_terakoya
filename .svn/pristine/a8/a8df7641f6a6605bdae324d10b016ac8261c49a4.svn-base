@@ -1,0 +1,14 @@
+::ng-deep .padding-top-set eim-radio-button  {
+	padding-top:2px;
+}
+/* 2022.03 新規 */
+::ng-deep eim-contents-property > form {
+	padding: 3px;
+}
+
+::ng-deep eim-contents-property .eim-form-item {
+	margin-bottom: 0px;
+}
+::ng-deep eim-contents-property eim-contents-attribute-list-input-form-item > div:nth-last-child(1) {
+	margin-bottom: 3px;
+}

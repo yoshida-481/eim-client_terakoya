@@ -1,0 +1,27 @@
+<form #folderForm="ngForm" style="width: 100%; height: 100%;" autocomplete="off">
+	<div style="height: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;">
+		<div style="margin-bottom: 10px;">
+			<div>
+				<label class="eim-form-label">{{ 'EIM_DOCUMENTS.LABEL_02193' | translate }}</label>
+			</div>
+			<div>
+				<span class="eim-icon-checkin" style="padding: 0 3px; color: #0d98ed;"></span>
+				<label class="eim-form-label">{{ 'EIM_DOCUMENTS.LABEL_02194' | translate }}</label>
+			</div>
+			<div>
+				<span class="eim-icon-cancel" style="padding: 0 3px; color: #FF0000;"></span>
+				<label class="eim-form-label">{{ 'EIM_DOCUMENTS.LABEL_02195' | translate }}</label>
+			</div>
+			<div class="eim-form-item" style="width: 100%;">
+				<div class="eim-form-input" style="padding-left: 10px;">
+					<eim-checkbox  name="allCheckFlag" label="{{ 'EIM_DOCUMENTS.LABEL_03057' | translate }}" binary="true" [(ngModel)]="allCheckFlg" (onChange)="onChange($event)"></eim-checkbox>
+				</div>
+			</div>
+		</div>
+		<div style="height: 300px; width: 100%;">
+			<eim-data-grid #documentList
+					[multiple]="false">
+			</eim-data-grid>
+		</div>
+	</div>
+</form>

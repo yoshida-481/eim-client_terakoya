@@ -1,0 +1,17 @@
+<ng-container>
+	<p-dialog class="eim-dialog eim-progress-bar"
+		(onShow)="onShowProgressBar($event)"
+		[(visible)]="displayProgressDialog" modal="true" [closeOnEscape]="false" [closable]="false" [showHeader]="false" showEffect="fade"
+		[style]="{width: '150px'}" [transitionOptions]="'0ms'">
+	  <form autocomplete="off">
+		  <i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="color: #186ba0"></i>{{ 'EIM.LABEL_02000' | translate }}
+	  	<input id="progressBarFocusTarget" style="width: 0px;" (blur)="onBlurProgressBar($event)" style="background: transparent;border: none !important;font-size:0;"/>
+	  </form>
+	</p-dialog>
+</ng-container>
+<ng-container *ngIf="progressDialogForBackground">
+    <div class="p-component-overlay p-dialog-mask eim-wait-cursor" style="z-index:2005;opacity:0 !important"></div>
+</ng-container>
+<ng-container *ngIf="translateLoaded">
+	<router-outlet  ></router-outlet>
+</ng-container>

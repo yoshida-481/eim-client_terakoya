@@ -1,0 +1,110 @@
+// ==========================================================================
+//	eim-menubar
+//
+//    EIMMenubarComponentのスタイル
+//
+//    <eim-menubar class="eim-menubar" >
+//
+//		ボーダーをなくす場合、eim-menubar-no-borderを指定する
+//		パネルにメニューバーを配置する際に使用する
+//		<p-panel class="eim-stretched-panel eim-panel-content-fit" header="ワークスペース">
+//			<ng-template pTemplate="icons">
+//				<eim-menubar class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
+//			</ng-template>
+// 		</p-panel>
+//
+// ==========================================================================
+
+@use '_variables' as *;
+
+::ng-deep eim-menubar.eim-menubar {
+
+	// メニューアイテム配置先のヘッダ
+	> p-menubar > .p-menubar {
+		color: $eim-header-color;
+		font-weight: $eim-header-font-weight;
+		height: $eim-header-height;
+		width: $eim-header-width;
+		padding: $eim-header-padding;
+		margin: $eim-header-margin;
+		background: $eim-header-background;
+		border: $eim-header-border;
+		border-radius: $eim-header-border-radius;
+	}
+
+	.p-menubar-item-icon {
+		align-items: center;
+    	justify-content: center;
+    	display: flex;
+		margin: $eim-label-icon-margin;
+	}
+
+	// メニューアイテム
+	.p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content {
+		// 共通
+		> .p-menubar-item-link {
+			min-width: 0px;
+		}
+		// 有効（編集可）
+		> .p-menubar-item-link:not(.p-disabled) {
+			.p-menubar-item-icon, .p-menubar-item-label {
+				color: $eim-enabled-menu-item-color;
+				font-weight: $eim-enabled-menu-item-font-weight;
+			}
+			background: $eim-enabled-menu-item-background;
+			border: $eim-enabled-menu-item-border;
+			border-radius: $eim-enabled-menu-item-border-radius;
+		}
+		// 無効（編集不可）
+		> .p-menubar-item-link.p-disabled {
+			.p-menubar-item-icon, .p-menubar-item-label {
+				color: $eim-disabled-menu-item-color;
+				font-weight: $eim-disabled-menu-item-font-weight;
+			}
+			background: $eim-disabled-menu-item-background;
+			border: $eim-disabled-menu-item-border;
+			border-radius: $eim-disabled-menu-item-border-radius;
+		}
+		// マウスオーバー、有効（編集可）
+		> .p-menubar-item-link:not(.p-disabled):hover {
+			.p-menubar-item-icon, .p-menubar-item-label {
+				color: $eim-hoverd-enabled-menu-item-color;
+				font-weight: $eim-hoverd-enabled-menu-item-font-weight;
+			}
+			background: $eim-hoverd-enabled-menu-item-background;
+			border: $eim-hoverd-enabled-menu-item-border;
+			border-radius: $eim-hoverd-enabled-menu-item-border-radius;
+		}
+		// マウスオーバー、無効（編集不可）
+		> .p-menubar-item-link.p-disabled:hover {
+			.p-menubar-item-icon, .p-menubar-item-label {
+				color: $eim-hoverd-disabled-menu-item-color;
+				font-weight: $eim-hoverd-disabled-menu-item-font-weight;
+			}
+			background: $eim-hoverd-enabled-menu-item-background;
+			border: $eim-hoverd-disabled-menu-item-border;
+			border-radius: $eim-hoverd-disabled-menu-item-border-radius;
+		}
+
+	}
+
+	.p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link .p-menubar-item-icon {
+		margin: $eim-label-icon-margin;
+	}
+	.p-menubar ul {
+		gap: $eim-gap;
+	}
+
+}
+
+// ボーダー非表示のスタイル
+::ng-deep eim-menubar.eim-menubar.eim-menubar-no-border {
+	// メニューアイテム配置先のヘッダ
+	> p-menubar > .p-menubar {
+		background: transparent;
+		border: none;
+	}
+	.p-menubar .p-menubar-root-list > .p-menubar-item > .p-menubar-item-content > .p-menubar-item-link .p-menubar-item-icon {
+		margin-right: 0px;
+	}
+}

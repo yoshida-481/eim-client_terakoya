@@ -1,0 +1,21 @@
+// ==========================================================================
+//	eim-dialog
+//
+//    EIMDialogのスタイル
+//
+//    <eim-dialog class="eim-dialog"></dialog>
+//
+// ==========================================================================
+::ng-deep .eim-dialog {
+
+	.eim-dialog-container .eim-dialog-contents {
+
+		overflow-y: auto;
+
+		// 選択画面に縦スクロールが表示されないよう調整
+		.eim-panel-containing-grid .p-panel-content-container.ng-trigger-panelContent {
+			height: calc(100% - 26px);
+		}
+	}
+}
+

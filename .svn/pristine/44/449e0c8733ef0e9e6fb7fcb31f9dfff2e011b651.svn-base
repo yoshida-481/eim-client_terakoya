@@ -1,0 +1,60 @@
+.eim-p-grid {
+	width: 100%;
+	height:100%;
+	user-select: text;
+	-moz-user-select: element;
+	-webkit-user-select: element;
+	-ms-user-select: element;
+}
+
+::ng-deep .eim-data-grid-header-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+::ng-deep .ag-cell-label-container {
+	padding: 0px;
+}
+::ng-deep .ag-fresh .ag-header {
+	background-image: linear-gradient(rgb(246, 247, 249) 0%, rgb(235, 237, 240) 100%);
+}
+::ng-deep .ag-cell-edit-input {
+	border: 0px;
+	padding: 0px 0px 0px 6px;
+}
+
+
+/* テキスト選択可能可 */
+::ng-deep .ag-cell-value {
+	user-select: text;
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	-ms-user-select: text;
+}
+
+::ng-deep .ag-fresh .ag-row {
+	border-bottom: none;
+}
+
+::ng-deep .ag-fresh .ag-ltr .ag-header-group-cell {
+	text-align: center;
+}
+::ng-deep .p-contextmenu{
+	width : auto !important;
+
+}
+
+::ng-deep .p-contextmenu-item .p-contextmenu-item-link{
+	text-decoration: none !important;
+}
+
+.eim-grid-container {
+	width: 100%;
+	height: calc(100% - 20px);
+}
+.eim-data-grid-footer {
+	height: 20px;
+	background-color: #ffffff;
+	display: flex;
+}

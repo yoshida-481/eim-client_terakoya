@@ -1,0 +1,21 @@
+::ng-deep .eim-hierarchical-attribute-list-input-form-group .p-fieldset {
+	padding-right: 5px; 
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset {
+	margin-left: 0px;
+	margin-right: 0px
+}
+
+/** fieldsetの＋-アイコンを▼アイコンに変更 */
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .p-fieldset-toggler.fa-plus:before {
+	content: "\F0DA";
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .p-fieldset-toggler.fa-minus:before {
+	content: "\F0D7";
+}
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .p-fieldset-toggler {
+  width: 7px;
+  text-align: center;
+}

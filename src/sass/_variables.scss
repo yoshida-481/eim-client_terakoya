@@ -1,0 +1,402 @@
+// ==========================================================================
+//	 Global
+// ==========================================================================
+$eim-font-family: "メイリオ", "Meiryo UI", "sans-serif";
+$eim-color: #555555;
+$eim-disabled-color: #bdbbbb;
+$eim-hovered-enabled-color: #000;
+$eim-hovered-disabled-color: $eim-disabled-color;
+$eim-font-weight: normal;
+$eim-background-color: #fff;
+$eim-gap: 3px;
+
+// アイコン
+$eim-label-icon-margin: 0px 0.5rem 0px 0px;
+
+// -----------
+// 基本スタイル
+// -----------
+// 有効（編集可）
+$eim-enabled-color: $eim-color;
+$eim-enabled-font-weight: $eim-font-weight;
+$eim-enabled-background-color: $eim-background-color;
+$eim-enabled-border-width: 1px;
+$eim-enabled-border-style: solid;
+$eim-enabled-border-color: #c8c8c8;
+$eim-enabled-border-radius: 0px;
+// 無効（編集不可）
+$eim-disabled-color: $eim-disabled-color;
+$eim-disabled-font-weight: $eim-font-weight;
+$eim-disabled-background-color: $eim-enabled-background-color;
+$eim-disabled-border-width: $eim-enabled-border-width;
+$eim-disabled-border-style: $eim-enabled-border-style;
+$eim-disabled-border-color: #c8c8c8;
+$eim-disabled-border-radius: $eim-enabled-border-radius;
+// 選択
+$eim-selected-color: $eim-enabled-color;
+$eim-selected-font-weight: $eim-font-weight;
+$eim-selected-background-color: #c4eefc;
+$eim-selected-border-width: $eim-enabled-border-width;
+$eim-selected-border-style: $eim-enabled-border-style;
+$eim-selected-border-color: #c8c8c8;
+$eim-selected-border-radius: $eim-enabled-border-radius;
+// マウスオーバー、有効（編集可）
+$eim-hovered-enabled-color: $eim-hovered-enabled-color;
+$eim-hovered-enabled-font-weight: $eim-font-weight;
+$eim-hovered-enabled-background-color: #eaeaea;
+$eim-hovered-enabled-border-width: $eim-enabled-border-width;
+$eim-hovered-enabled-border-style: $eim-enabled-border-style;
+$eim-hovered-enabled-border-color: silver;
+$eim-hovered-enabled-border-radius: $eim-enabled-border-radius;
+// マウスオーバー、無効（編集不可）
+$eim-hovered-disabled-color: $eim-disabled-color;
+$eim-hovered-disabled-font-weight: $eim-disabled-font-weight;
+$eim-hovered-disabled-background-color: $eim-disabled-background-color;
+$eim-hovered-disabled-border-width: $eim-enabled-border-width;
+$eim-hovered-disabled-border-style: $eim-disabled-border-style;
+$eim-hovered-disabled-border-color: $eim-disabled-border-color;
+$eim-hovered-disabled-border-radius: $eim-disabled-border-radius;
+// マウスクリック
+$eim-clicked-border-width: $eim-enabled-border-width;
+$eim-clicked-border-style: $eim-enabled-border-style;
+$eim-clicked-border-color: #c8c8c8;
+$eim-clicked-border-radius: $eim-enabled-border-radius;
+// フォーカス
+$eim-focused-color: $eim-color;
+$eim-focused-font-weight: $eim-font-weight;
+$eim-focused-background-color: transparent;
+$eim-focused-border-width: $eim-enabled-border-width;
+$eim-focused-border-style: $eim-enabled-border-style;
+$eim-focused-border-color: #c8c8c8;
+$eim-focused-border-radius: $eim-enabled-border-radius;
+$eim-focused-box-shadow: 0 0 5px #1f89ce;
+// 検証結果無効
+$eim-invalid-border-width: $eim-enabled-border-width;
+$eim-invalid-border-style: $eim-enabled-border-style;
+$eim-invalid-border-color: #f44336;
+$eim-invalid-border-radius: $eim-enabled-border-radius;
+
+// ------
+// ボタン
+// ------
+$eim-button-height: 26px;
+$eim-button-padding: 2px 6px;
+
+// 有効（押下可）
+$eim-enabled-button-color: $eim-enabled-color;
+$eim-enabled-button-font-weight: $eim-enabled-font-weight;
+$eim-enabled-button-background: linear-gradient(to bottom, #F0F1F1, #E5E5E5);
+$eim-enabled-button-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-enabled-button-border-radius: 3px;
+
+// マウスオーバー、有効（編集可）
+$eim-hovered-enabled-button-color: $eim-hovered-enabled-color;
+$eim-hovered-enabled-button-font-weight: $eim-hovered-enabled-font-weight;
+$eim-hovered-enabled-button-background: $eim-hovered-enabled-background-color;
+$eim-hovered-enabled-button-border: $eim-hovered-enabled-border-width $eim-hovered-enabled-border-style $eim-hovered-enabled-border-color;
+$eim-hovered-enabled-button-border-radius: $eim-enabled-button-border-radius;
+
+// フォーカス
+$eim-focused-button-color: $eim-focused-color;
+$eim-focused-button-font-weight: $eim-focused-font-weight;
+$eim-focused-button-background: $eim-focused-background-color;
+$eim-focused-button-border: $eim-focused-border-width $eim-focused-border-style $eim-focused-border-color;
+$eim-focused-button-border-radius: $eim-enabled-button-border-radius;
+
+// ------
+// 入力欄
+// ------
+$eim-input-height: 26px;
+$eim-input-margin-top: 3px;
+$eim-input-margin-right: 0px;
+$eim-input-margin-bottom: 3px;
+$eim-input-margin-left: 0px;
+
+// 有効（編集可）
+$eim-enabled-input-color: $eim-enabled-color;
+$eim-enabled-input-font-weight: $eim-enabled-font-weight;
+$eim-enabled-input-background: #ffffcc;
+$eim-enabled-input-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-enabled-input-border-radius: $eim-enabled-border-radius;
+
+// 無効（編集不可）
+$eim-disabled-input-color: $eim-disabled-color;
+$eim-disabled-input-font-weight: $eim-disabled-font-weight;
+$eim-disabled-input-background: #eeeeee;
+$eim-disabled-input-border: $eim-disabled-border-width $eim-disabled-border-style $eim-disabled-border-color;
+$eim-disabled-input-border-radius: $eim-disabled-border-radius;
+
+// 選択
+// $eim-selected-background: #007ad9;
+// $eim-selected-border-color: #007ad9;
+// $eim-selected-color: #ffffff;
+
+// マウスオーバー、有効（編集可）
+$eim-hovered-enabled-input-color: $eim-hovered-enabled-color;
+$eim-hovered-enabled-input-font-weight: $eim-hovered-enabled-font-weight;
+$eim-hovered-enabled-input-background: $eim-hovered-enabled-background-color;
+$eim-hovered-enabled-input-border: $eim-hovered-enabled-border-width $eim-hovered-enabled-border-style $eim-hovered-enabled-border-color;
+$eim-hovered-enabled-input-border-radius: $eim-hovered-enabled-border-radius;
+// マウスオーバー、無効（編集不可）
+$eim-hovered-disabled-input-color: $eim-hovered-disabled-color;
+$eim-hovered-disabled-input-font-weight: $eim-hovered-disabled-font-weight;
+$eim-hovered-disabled-input-background: $eim-hovered-disabled-background-color;
+$eim-hovered-disabled-input-border: $eim-hovered-disabled-border-width $eim-hovered-disabled-border-style $eim-hovered-disabled-border-color;
+$eim-hovered-disabled-input-border-radius: $eim-hovered-disabled-border-radius;
+
+// マウスクリック
+$eim-clicked-input-border: $eim-clicked-border-width $eim-clicked-border-style $eim-clicked-border-color;
+
+// 検証結果無効
+$eim-invalid-input-border: $eim-invalid-border-width $eim-invalid-border-style $eim-invalid-border-color;
+$eim-invalid-input-border-radius: $eim-invalid-border-radius;
+
+// 選択可能
+$eim-selectabled-input-background: $eim-background-color;
+
+::ng-deep .p-inputtext {
+	font-family: $eim-font-family;
+}
+
+// --------
+// ヘッダ
+// --------
+$eim-header-color: $eim-color;
+$eim-header-font-weight: $eim-font-weight;
+$eim-header-height: 26px;
+$eim-header-width: auto;
+$eim-header-padding: 2px 4px;
+$eim-header-margin: 0px;
+$eim-header-background: #f4f4f4; // linear-gradient(rgb(246, 247, 249) 0%, rgb(235, 237, 240) 100%);
+$eim-header-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-header-border-radius: $eim-enabled-border-radius;
+$eim-header-row-separator-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color; // 行の上下のボーダー
+$eim-header-cell-separator-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;// セルの左右のボーダー
+
+// --------
+// 行
+// --------
+$eim-row-color: $eim-color;
+$eim-row-font-weight: $eim-font-weight;
+$eim-row-height: $eim-header-height;
+$eim-row-separator-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;// 行の上下のボーダー
+// 選択
+$eim-selected-row-color: $eim-selected-color;
+$eim-selected-row-font-weight: $eim-selected-font-weight;
+$eim-selected-row-background: $eim-selected-background-color;
+// マウスオーバー、有効（編集可）
+$eim-hovered-enabled-row-color: $eim-hovered-enabled-color;
+$eim-hovered-enabled-row-font-weight: $eim-hovered-enabled-font-weight;
+$eim-hovered-enabled-row-background: $eim-hovered-enabled-background-color;
+
+// --------
+// セル
+// --------
+$eim-cell-separator-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;// セルの左右のボーダー
+$eim-cell-padding: 2px;
+
+// --------
+// コンテント
+// --------
+$eim-content-color: $eim-color;
+$eim-content-font-weight: $eim-font-weight;
+$eim-content-height: auto;
+$eim-content-width: auto;
+$eim-content-padding: 2px 4px;
+$eim-content-margin: 0px;
+$eim-content-background: $eim-background-color;
+$eim-content-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-content-border-radius: $eim-enabled-border-radius;
+
+// --------
+// テーブル
+// --------
+$eim-table-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-table-border-radius: $eim-enabled-border-radius;
+
+// ヘッダ
+$eim-table-header-color: $eim-header-color;
+$eim-table-header-font-weight: $eim-header-font-weight;
+$eim-table-header-height: $eim-header-height;
+$eim-table-header-width: $eim-header-width;
+$eim-table-header-background: $eim-header-background;
+$eim-table-header-row-separator-border: $eim-header-row-separator-border;
+$eim-table-header-cell-separator-border: $eim-header-cell-separator-border;
+
+// 行
+$eim-table-row-color: $eim-row-color;
+$eim-table-row-font-weight: $eim-row-font-weight;
+$eim-table-row-height: $eim-row-height;
+$eim-table-row-renderer-height: $eim-table-row-height - 4px;
+$eim-table-even-row-background: #f6f6f6;
+$eim-table-odd-row-background: $eim-background-color;
+$eim-table-row-separator-border: none; //$eim-row-separator-border;
+// セル
+$eim-table-cell-separator-border: $eim-cell-separator-border;
+
+// 行 選択
+$eim-selected-table-row-color:$eim-selected-row-color;
+$eim-selected-table-row-font-weight: $eim-selected-row-font-weight;
+$eim-selected-table-row-background: $eim-selected-row-background;
+
+// 行 マウスオーバー、有効（編集可）
+$eim-hovered-enabled-table-row-color:$eim-hovered-enabled-row-color;
+$eim-hovered-enabled-table-row-font-weight: $eim-hovered-enabled-row-font-weight;
+$eim-hovered-enabled-table-row-background: $eim-hovered-enabled-row-background;
+
+// フッター
+$eim-table-footer-height: $eim-header-height; // フッター1行分の高さ
+
+// --------
+// ツリー
+// --------
+$eim-tree-color: $eim-color;
+$eim-tree-font-weight: $eim-font-weight;
+$eim-tree-height: 100%;
+$eim-tree-width: 100%;
+$eim-tree-background: $eim-background-color;
+$eim-tree-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+$eim-tree-border-radius: $eim-enabled-border-radius;
+$eim-tree-level-width: 16px; // 1階層毎の空白の幅
+$eim-tree-toggle-button-width: 12px!important;
+$eim-tree-toggle-button-height: 12px!important;
+
+// 行
+$eim-tree-row-color: $eim-row-color;
+$eim-tree-row-font-weight: $eim-row-font-weight;
+$eim-tree-row-height: $eim-row-height;
+
+// 行 選択
+$eim-selected-tree-row-color:$eim-selected-row-color;
+$eim-selected-tree-row-font-weight: $eim-selected-row-font-weight;
+$eim-selected-tree-row-background: $eim-selected-background-color;
+
+// 行 マウスオーバー、有効（編集可）
+$eim-hovered-enabled-tree-row-color: $eim-hovered-enabled-row-color;
+$eim-hovered-enabled-tree-row-font-weight: $eim-hovered-enabled-row-font-weight;
+$eim-hovered-enabled-tree-row-background: $eim-hovered-enabled-row-background;
+
+// -------------
+// ガントチャート
+// -------------
+$eim-gantt-chart-left-width: 500px;
+$eim-gantt-chart-task-group-bar-background-color: #dfdfdf;
+$eim-gantt-chart-task-bar-complete-background-color: #9acd32;
+$eim-gantt-chart-task-bar-border: $eim-enabled-border-width $eim-enabled-border-style $eim-enabled-border-color;
+
+// ヘッダ
+$eim-gantt-chart-header-day-column-width: 50px;
+$eim-gantt-chart-header-weekend-background: #fde5e5;
+
+// タスクバー
+$eim-gantt-chart-task-bar-background: #d3d3d3;
+$eim-gantt-chart-task-bar-opacity: 1;
+$eim-gantt-chart-task-bar-border: 1px solid $eim-enabled-border-color;
+
+$eim-gantt-chart-task-bar-complete-background: $eim-gantt-chart-task-bar-complete-background-color;
+$eim-gantt-chart-task-bar-complete-opacity: 1;
+
+$eim-gantt-chart-header-weekend-background: rgb(253, 229, 229, .5);
+
+// タスクグループバー
+$eim-gantt-chart-task-group-bar-background: $eim-gantt-chart-task-group-bar-background-color;
+
+$eim-gantt-chart-task-group-bar-complete-background: $eim-gantt-chart-task-bar-complete-background-color;
+
+// --------
+// パネル
+// --------
+// ヘッダ
+$eim-panel-header-color: $eim-header-color;
+$eim-panel-header-font-weight: $eim-header-font-weight;
+$eim-panel-header-height: $eim-header-height;
+$eim-panel-header-width: $eim-header-width;
+$eim-panel-header-padding: $eim-header-padding;
+$eim-panel-header-margin: $eim-header-margin;
+$eim-panel-header-background: $eim-header-background;
+$eim-panel-header-border: $eim-header-border;
+$eim-panel-header-border-radius: $eim-header-border-radius;
+
+// コンテント
+$eim-panel-content-color: $eim-content-color;
+$eim-panel-content-font-weight: $eim-content-font-weight;
+$eim-panel-content-height: $eim-content-height;
+$eim-panel-content-width: $eim-content-width;
+$eim-panel-content-padding: $eim-content-padding;
+$eim-panel-content-margin: $eim-content-margin;
+$eim-panel-content-background: $eim-content-background;
+$eim-panel-content-border: $eim-content-border;
+$eim-panel-content-border-radius: $eim-content-border-radius;
+
+// --------
+// ラッパー
+// --------
+// @mixin eim-header-wrapper {
+// 	height: $eim-header-height;
+// 	background: $eim-header-background;
+// 	padding: $eim-header-padding;
+// }
+
+// ---------------
+// メニューアイテム
+// ---------------
+// 有効（編集可）
+$eim-enabled-menu-item-color: $eim-color;
+$eim-enabled-menu-item-font-weight: $eim-font-weight;
+$eim-enabled-menu-item-background: transparent;
+$eim-enabled-menu-item-border: none;
+$eim-enabled-menu-item-border-radius: $eim-enabled-border-radius;
+// 無効（編集不可）
+$eim-disabled-menu-item-color: $eim-disabled-color;
+$eim-disabled-menu-item-font-weight: $eim-font-weight;
+$eim-disabled-menu-item-background: $eim-enabled-menu-item-background;
+$eim-disabled-menu-item-border: $eim-enabled-menu-item-border;
+$eim-disabled-menu-item-border-radius: $eim-disabled-border-radius;
+// マウスオーバー、有効（編集可）
+$eim-hoverd-enabled-menu-item-color: $eim-hovered-enabled-color;
+$eim-hoverd-enabled-menu-item-font-weight: $eim-hovered-enabled-font-weight;
+$eim-hoverd-enabled-menu-item-background: $eim-hovered-enabled-background-color;
+$eim-hoverd-enabled-menu-item-border: $eim-enabled-menu-item-border;
+$eim-hoverd-enabled-menu-item-border-radius: $eim-hovered-enabled-border-radius;
+// マウスオーバー、無効（編集不可）
+$eim-hoverd-disabled-menu-item-color: $eim-hovered-disabled-color;
+$eim-hoverd-disabled-menu-item-font-weight: $eim-hovered-disabled-font-weight;
+$eim-hoverd-disabled-menu-item-background: $eim-hovered-disabled-background-color;
+$eim-hoverd-disabled-menu-item-border: $eim-disabled-menu-item-border;
+$eim-hoverd-disabled-menu-item-border-radius: $eim-hovered-disabled-border-radius;
+// フォーカス
+$eim-focused-menu-item-color: $eim-focused-color;
+$eim-focused-menu-item-font-weight: $eim-focused-font-weight;
+$eim-focused-menu-item-background: $eim-focused-background-color;
+$eim-focused-menu-item-border: $eim-focused-border-width $eim-focused-border-style $eim-focused-border-color;
+$eim-focused-menu-item-border-radius: $eim-focused-border-radius;
+
+// ==========================================================================
+//	 eim-menubar-block
+// ==========================================================================
+
+// 通常時
+$eim-menubar-block-background: linear-gradient(to bottom, #2e9633, #257929);
+$eim-menubar-block-color: #ffffff;
+
+// マウスオーバー時
+$eim-menubar-block-hover-background-color: #d1fcb6;
+$eim-menubar-block-hover-color: #1d6120;
+
+// ==========================================================================
+//	 メディアクエリ
+// ==========================================================================
+$breakpoints: (
+  'xs': (min-width: 0),
+  'sm': (min-width: 576px),
+  'md': (min-width: 768px),
+  'lg': (min-width: 992px),
+  'xl': (min-width: 1200px),
+  'xxl': (min-width: 1400px)
+) !default;
+
+@mixin responsive($breakpoint) {
+	@media screen and #{inspect(map-get($breakpoints, $breakpoint))} {
+		@content;
+	}
+}

@@ -1,0 +1,19 @@
+.eim-security {
+	height: 100%;
+  width: 280px;
+  padding-right: 6px;
+}
+.eim-access-entry {
+  height: 100%;
+  width: calc(100% - 280px - 280px);
+  padding-right: 6px;
+}
+.eim-access-entry-without-security {
+  height: 100%;
+  width: calc(100% - 280px);
+  padding-right: 6px;
+}
+.eim-access-role {
+  height: 100%;
+	width: 280px;
+}

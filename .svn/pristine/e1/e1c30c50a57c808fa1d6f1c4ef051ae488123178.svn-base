@@ -1,0 +1,143 @@
+::ng-deep .eim-hierarchical-attribute-list-input-form-group .ui-fieldset {
+	padding-right: 5px;
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 8px;
+}
+
+::ng-deep .p-fieldset .p-fieldset-content {
+    padding: 0.2rem 0rem;
+}
+
+/** fieldsetの＋-アイコンを▼アイコンに変更 */
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .ui-fieldset-toggler.fa-plus:before {
+	content: "\F0DA";
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .ui-fieldset-toggler.fa-minus:before {
+	content: "\F0D7";
+}
+::ng-deep .eim-hierarchical-attribute-list-input-form-group fieldset .ui-fieldset-toggler {
+  width: 7px;
+  text-align: center;
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-group eim-flat-type-attribute-input-form-item.p-col-6 {
+	float: left;
+	box-sizing: border-box;
+	padding: 0.0em;
+}
+
+::ng-deep .eim-form-wide .eim-hierarchical-attribute-list-input-form-group eim-flat-type-hierarchical-attribute-list-input-form-item .eim-form-input{
+	padding-right: 0px;
+}
+
+/** 階層なし or 1階層目 **/
+::ng-deep .eim-form-wide eim-flat-type-hierarchical-attribute-list-input-form-item .eim-form-label {
+	min-width: 130px;
+	width: 130px;
+	background: #99ccff;
+	color: #1319a6;
+}
+
+/** 2階層目 */
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-hierarchical-attribute-list-input-form-item-group .eim-form-input .eim-form-label {
+	background: #e0f1ff;
+}
+/** 3階層目 */
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-hierarchical-attribute-list-input-form-item-group .eim-hierarchical-attribute-list-input-form-item-group .eim-form-input .eim-form-label {
+	background: #ffffff;
+}
+
+::ng-deep .eim-form-wide .use-flat-type .eim-form-input {
+	width: calc(100% - 120px);
+}
+
+::ng-deep .eim-form-wide eim-flat-type-hierarchical-attribute-list-input-form-item .eim-form-input {
+	width: calc(100% - 120px);
+}
+
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item p-datepicker .ui-calendar .ui-inputtext {
+	width: calc(100% - 24px);
+}
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .ui-g-6 {
+	padding-right: 8px;
+}
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .ui-g-6:nth-child(2n) {
+	padding-right: 0px;
+}
+
+/** ユーザ選択 */
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item eim-user-input-form-item .eim-form-input-multi-input-area {
+	width: calc(100% - 24px);
+}
+
+.eim-hierarchical-attribute-list-input-form-item-line {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.eim-hierarchical-attribute-list-input-form-item-line .eim-hierarchical-attribute-list-input-form-item-line:nth-child(1) {
+	margin-top: 0px;
+}
+.eim-hierarchical-attribute-list-input-form-item-line .eim-hierarchical-attribute-list-input-form-item-line:nth-last-child(1) {
+	margin-bottom: 0px;
+}
+
+/** 入力項目の上下の余白を取り除く */
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-container .eim-form-item {
+	margin-top: 0px;
+	margin-bottom: 4px;
+}
+
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-container:nth-last-child(1) :not(.eim-flat-type-hierarchical-attribute-input-form-item-two-columns-container)>eim-flat-type-attribute-input-form-item .eim-form-item {
+	margin-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-two-columns-container:nth-last-child(1) .eim-form-item {
+	margin-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-two-columns-container:nth-last-child(2) .eim-form-item {
+	margin-bottom: 0px;
+}
+
+::ng-deep eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-two-columns-container:nth-child(odd) .eim-form-item {
+	margin-right: 5px;
+}
+
+::ng-deep  .eim-form-item.use-flat-type {
+	margin-top: 0px;
+	margin-bottom: 4px;
+}
+
+::ng-deep .p-col-6 eim-flat-type-hierarchical-attribute-list-input-form-item .eim-flat-type-hierarchical-attribute-input-form-item-container:nth-last-child(1) :not(.eim-flat-type-hierarchical-attribute-input-form-item-two-columns-container)>eim-flat-type-attribute-input-form-item .eim-form-item {
+	margin-bottom: 4px;
+}
+
+::ng-deep .p-fieldset.p-fieldset-toggleable .p-fieldset-legend{
+	background: linear-gradient(to bottom, #f2f2f2, #d7d7d7);
+}
+
+::ng-deep .p-fieldset.p-fieldset-toggleable .p-fieldset-legend button {
+	font-weight: 400;
+	text-decoration: none;
+	padding: 8px 1rem;
+}
+
+
+::ng-deep .eim-form-detail .p-fieldset, .p-fieldset .p-fieldset-legend {
+	padding: 0em 0.5em;
+	margin-bottom: 5px;
+}
+
+::ng-deep .eim-flat-type-hierarchical-attribute-list-input-form-item .p-fieldset.p-fieldset-toggleable .p-fieldset-legend button .p-fieldset-toggler .pi {
+	font-weight: 400;
+}
+
+::ng-deep .eim-hierarchical-attribute-list-input-form-item .ng-star-inserted{
+	padding-top: 4px;
+}
+

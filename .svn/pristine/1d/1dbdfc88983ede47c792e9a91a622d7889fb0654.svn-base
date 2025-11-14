@@ -1,0 +1,11 @@
+<label *ngIf="label" [ngClass]="{'eim-form-label': true}" style="margin-left: 10px;white-space: nowrap;">{{label}}</label>
+<div class="eim-form-item">
+	<ng-container *ngIf="value">
+		<div class="eim-form-input" style="width: 100%; margin-left: 10px;">
+			<input name="{{name}}" pInputText style="width:100%;min-width:100px;"
+				[type]="inputType" [(ngModel)]="value[0]" [disabled]="disabled" [maxlength]="maxlength"
+				[ngClass]="{'ng-invalid': (formControl ? (formControl.dirty && formControl.invalid) : false), 'ng-dirty': (formControl ? formControl.dirty : true)}"
+				(change)="onChange($event, 0)"/>
+		</div>
+	</ng-container>
+</div>

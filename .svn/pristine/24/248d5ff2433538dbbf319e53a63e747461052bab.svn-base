@@ -1,0 +1,10 @@
+<eim-template-data-grid-single-selector #template
+		[componentService]="taskTemplateDocumentSingleSelectorComponentService" [(condition)]="condition"
+		[multiple]="multiple" [filterFlag]="true">
+	<div style="width: 100%;">
+		<div class="eim-form-item">
+			<input name="keyword" type="text" pInputText [(ngModel)]="condition.keyword" maxlength="{{inputMaxLength}}" class="p-inputtext ui-corner-all eim-form-input-default p-component" style="width: 100%;"/>
+		</div>
+		<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ 'EIM_FORMS.LABEL_02023' | translate }}{{searchTargetLabel}}</div>
+	</div>
+</eim-template-data-grid-single-selector>

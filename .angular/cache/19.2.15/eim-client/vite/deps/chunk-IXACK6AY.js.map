@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/same-value.js"],
+  "sourcesContent": ["'use strict';\n\n// `SameValue` abstract operation\n// https://tc39.es/ecma262/#sec-samevalue\n// eslint-disable-next-line es/no-object-is -- safe\nmodule.exports = Object.is || function is(x, y) {\n  // eslint-disable-next-line no-self-compare -- NaN check\n  return x === y ? x !== 0 || 1 / x === 1 / y : x !== x && y !== y;\n};"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA;AAKA,WAAO,UAAU,OAAO,MAAM,SAAS,GAAG,GAAG,GAAG;AAE9C,aAAO,MAAM,IAAI,MAAM,KAAK,IAAI,MAAM,IAAI,IAAI,MAAM,KAAK,MAAM;AAAA,IACjE;AAAA;AAAA;",
+  "names": []
+}

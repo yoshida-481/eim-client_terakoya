@@ -1,0 +1,16 @@
+{
+	"tasks.version": "@VERSION@",
+	"tasks.documentsHttpService.contextRoot": "http://localhost:4200/eim",
+	"tasks.ganttChart.defaultFormatItem.value": "month",
+	"tasks.projectProgressIdToResourceId": {
+		"0": "EIM_TASKS.LABEL_02069",
+		"1": "EIM_TASKS.LABEL_02070",
+		"2": "EIM_TASKS.LABEL_02071",
+		"3": "EIM_TASKS.LABEL_02072"
+	},
+	"tasks.processProgressRateToResourceId": {
+		"0": "EIM_TASKS.LABEL_02073",
+		"99": "EIM_TASKS.LABEL_02074",
+		"100": "EIM_TASKS.LABEL_02071"
+	}
+}

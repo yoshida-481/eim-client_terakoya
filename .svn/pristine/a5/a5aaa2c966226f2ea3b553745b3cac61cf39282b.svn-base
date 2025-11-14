@@ -1,0 +1,3 @@
+:host ::ng-deep div.ui-tabview.ui-widget.ui-widget-content.ui-corner-all.ui-tabview-top {
+	height: calc(100% - 35px) !important;
+}

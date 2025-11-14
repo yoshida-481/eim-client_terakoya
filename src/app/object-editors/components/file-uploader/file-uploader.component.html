@@ -1,0 +1,13 @@
+<div eim-vertical-container style="height: 100%; width: 100%; padding-top: 0px; padding-left: 0px; padding-bottom: 0px;">
+	<div class="eim-data-grid-menu" style ="width: 100%; text-align:left">
+		<div class="eim-data-grid-menu" style="margin-left: 5px;margin-bottom:4px;text-align:right;width: calc(100% - 5px);">
+			<eim-menubar [model]="formatListMenu"></eim-menubar>
+		</div>
+		<input *ngIf="inputElementCreate" #elementInputFile type="file" ng2FileSelect
+			[uploader]="uploader" [ngStyle]="{'display': 'none'}"/>
+	</div>
+	<div class="eim-flexible-height" style="width: 100%;">
+		<eim-data-grid #fileUploaderDataGrid [equals]="equals" [multiple]="false" [contextMenuItems]="formatListMenu" (selected)="onSelectFormat()">
+		</eim-data-grid>
+	</div>
+</div>
