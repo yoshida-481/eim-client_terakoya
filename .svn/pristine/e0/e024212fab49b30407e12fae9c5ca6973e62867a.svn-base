@@ -1,3 +1,0 @@
-<ng-container *ngFor="let item of inputFormItems">
-	<eim-input-form-item-resolver [form]="form" [inputFormItem]="item" [inputFormItemComponentServices]="inputFormItemComponentServices"></eim-input-form-item-resolver>
-</ng-container>

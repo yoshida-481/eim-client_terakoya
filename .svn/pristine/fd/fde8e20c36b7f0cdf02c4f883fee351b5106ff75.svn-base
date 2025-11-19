@@ -1,5 +1,0 @@
-::ng-deep eim-project-member-mail-send-executor form {
-	display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100%;
-}

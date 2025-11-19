@@ -1,3 +1,0 @@
-<div style="padding-bottom: 5px; height: calc(100% - 20px)" >
-	<eim-tree #documentTypeTree [contextMenuItems]="contentsTreeMenuItems" (selected)="onSelectFolderTreeNode($event)"></eim-tree>
-</div>

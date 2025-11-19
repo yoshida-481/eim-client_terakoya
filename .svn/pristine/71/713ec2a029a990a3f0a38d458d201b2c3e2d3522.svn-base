@@ -1,4 +1,0 @@
-
-::ng-deep .p-menubar-item .p-menubar-item-link{
-	text-decoration: none !important;
-}
