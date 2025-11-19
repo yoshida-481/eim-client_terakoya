@@ -52,10 +52,6 @@ export class EIMNameRendererComponent implements OnInit, AgRendererComponent {
 	public params: any;
 	public label: string;
 
-	public typeName: string;
-
-	public userDisable: string;
-
 	/**
 	 * コンストラクタです.
 	 */
@@ -80,8 +76,6 @@ export class EIMNameRendererComponent implements OnInit, AgRendererComponent {
 	agInit(params: any): void {
 		this.params = params;
 		this.label = this.getLabel(params.data, params.colDef.field);
-		this.userDisable = params.data.userDisable;
-		this.typeName = params.data.typeName;
 	}
 
 	/**

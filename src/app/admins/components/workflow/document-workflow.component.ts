@@ -17,6 +17,7 @@ import { EIMHierarchicalDomainService } from 'app/shared/services/hierarchical-d
 import { EIMWorkflowUneditMailMethodListComponent } from 'app/admins/shared/components/renderer/workflow-unedit-mail-method-list-renderer.component';
 import { EIMMessageService, EIMMessageType } from 'app/shared/services/message.service';
 import { EIMEntryTypeRendererComponent } from 'app/admins/shared/components/renderer/entry-type-renderer.component';
+import { EIMNameRendererComponent } from 'app/shared/components/renderer/name-renderer.component';
 import { EIMServerConfigService } from 'app/shared/services/server-config.service';
 import { EIMAdminsConstantService } from 'app/admins/shared/services/admins-constant.service';
 import { EIMAdminsCacheService } from 'app/admins/shared/services/admins-cache.service';
@@ -247,7 +248,7 @@ export class EIMDocumentWorkflowComponent extends EIMWorkflowComponent implement
 			// タイプ
 			columns2.push({ field: 'entryType', headerName: this.translateService.instant('EIM.LABEL_02019'), width: 180, cellRendererFramework: EIMEntryTypeRendererComponent, suppressFilter: true });
 			// 名前
-			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 330, suppressFilter: true });
+			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 330, cellRendererFramework: EIMNameRendererComponent, suppressFilter: true });
 			this.assignDataGrid.setColumns(columns2);
 
 		});

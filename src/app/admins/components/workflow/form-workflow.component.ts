@@ -24,6 +24,7 @@ import { EIMTreeDataGridColumn, EIMTreeDataGridComponent } from 'app/shared/comp
 import { EIMAttributeTypeDTO } from 'app/admins/shared/dtos/attribute-type.dto';
 import { EIMWorkflowMailMethodListComponent } from 'app/admins/shared/components/renderer/workflow-mail-method-list-renderer.component';
 import { EIMEntryTypeRendererComponent } from 'app/admins/shared/components/renderer/entry-type-renderer.component';
+import { EIMNameRendererComponent } from 'app/shared/components/renderer/name-renderer.component';
 import { EIMWorkflowMailMethodListComponentService } from 'app/admins/shared/components/renderer/workflow-mail-method-list-renderer.component.service';
 import { EIMTreeNode } from 'app/shared/components/tree/tree.component.service';
 import { EIMEntryService } from 'app/shared/services/apis/entry.service';
@@ -215,7 +216,7 @@ export class EIMFormWorkflowComponent extends EIMWorkflowComponent implements Af
 			// タイプ
 			columns2.push({ field: 'entryType', headerName: this.translateService.instant('EIM.LABEL_02019'), width: 130, cellRendererFramework: EIMEntryTypeRendererComponent, suppressFilter: true });
 			// 名前
-			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 220, suppressFilter: true });
+			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 220, cellRendererFramework: EIMNameRendererComponent, suppressFilter: true });
 			this.assignDataGrid.setColumns(columns2);
 
 			// イベント優先先設定

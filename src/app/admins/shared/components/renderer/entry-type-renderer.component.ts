@@ -13,7 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
     selector: 'eim-entry-type-renderer',
     template: `
     <div align="left" style="height: 100%; display: flex; align-items: center;">
-			<span *ngIf="value === 'user'">{{ 'EIM.LABEL_02017' | translate }}</span>
+			<span *ngIf="value === 'user' && isUserDisabled" style="color: silver;">{{ 'EIM.LABEL_02017' | translate }}</span>
+			<span *ngIf="value === 'user' && !isUserDisabled">{{ 'EIM.LABEL_02017' | translate }}</span>
 			<span *ngIf="value === 'group'">{{ 'EIM.LABEL_02003' | translate }}</span>
 			<span *ngIf="value === 'role'">{{ 'EIM.LABEL_02004' | translate }}</span>
 			<span *ngIf="value === 'compGroup'">{{ 'EIM.LABEL_02018' | translate }}</span>
@@ -32,6 +33,9 @@ export class EIMEntryTypeRendererComponent implements AgRendererComponent {
 	/** 必須フラグ */
 	public value: string;
 
+	/** ユーザーが無効かどうか */
+	public isUserDisabled: boolean = false;
+
 	/**
 	 * コンストラクタです.
 	 */
@@ -47,6 +51,10 @@ export class EIMEntryTypeRendererComponent implements AgRendererComponent {
 	agInit(params: any): void {
 		this.params = params;
 		this.value = this.params.data[this.params.colDef.field];
+		// ユーザーの場合、無効フラグをチェック
+		if (this.value === 'user' || this.value === 'USER' || this.value === '1') {
+			this.isUserDisabled = (this.params.data.userDisable === 'on' || this.params.data.userDisable === '1');
+		}
 	}
 
 	/**

@@ -101,34 +101,78 @@ export class EIMStatusTypeDomain {
 				if (Array.isArray(json.asEntryList.asEntry)) {
 					for (let i = 0; i < json.asEntryList.asEntry.length; i++) {
 						if ( json.asEntryList.asEntry[i].attr ) {
-							let asEntry = {
+							let asEntry: any = {
 									entryId: json.asEntryList.asEntry[i].attr.id,
 									entryName: json.asEntryList.asEntry[i].attr.name,
 									entryType: json.asEntryList.asEntry[i].attr.type,
 							}
+							// ユーザーの場合、無効フラグを設定
+							if (json.asEntryList.asEntry[i].attr.type === 'USER' || json.asEntryList.asEntry[i].attr.type === '1' || json.asEntryList.asEntry[i].attr.type === 'user') {
+								asEntry.entryTypeId = EIMConstantService.ENTRY_TYPE_USER;
+								asEntry.typeName = 'user';
+								let disable = json.asEntryList.asEntry[i].attr.disable;
+								if (disable !== undefined && disable !== null) {
+									asEntry.userDisable = (disable === '1' || disable === 1 || disable === 'on') ? 'on' : 'off';
+								} else {
+									asEntry.userDisable = 'off';
+								}
+							}
 							this.asEntryList.push(asEntry);
 						} else {
-							let asEntry = {
+							let asEntry: any = {
 									entryId: Number(json.asEntryList.asEntry[i].id),
 									entryName: json.asEntryList.asEntry[i].name,
 									entryType: json.asEntryList.asEntry[i].type,
+							}
+							// ユーザーの場合、無効フラグを設定
+							if (json.asEntryList.asEntry[i].type === 'USER' || json.asEntryList.asEntry[i].type === '1' || json.asEntryList.asEntry[i].type === 'user') {
+								asEntry.entryTypeId = EIMConstantService.ENTRY_TYPE_USER;
+								asEntry.typeName = 'user';
+								let disable = json.asEntryList.asEntry[i].disable;
+								if (disable !== undefined && disable !== null) {
+									asEntry.userDisable = (disable === '1' || disable === 1 || disable === 'on') ? 'on' : 'off';
+								} else {
+									asEntry.userDisable = 'off';
+								}
 							}
 							this.asEntryList.push(asEntry);
 						}
 					}
 				} else {
 					if (json.asEntryList.asEntry && json.asEntryList.asEntry.attr ) {
-						let asEntry = {
+						let asEntry: any = {
 									entryId: Number(json.asEntryList.asEntry.attr.id),
 									entryName: json.asEntryList.asEntry.attr.name,
 									entryType: json.asEntryList.asEntry.attr.type,
 							}
-							this.asEntryList.push(asEntry);
+						// ユーザーの場合、無効フラグを設定
+						if (json.asEntryList.asEntry.attr.type === 'USER' || json.asEntryList.asEntry.attr.type === '1' || json.asEntryList.asEntry.attr.type === 'user') {
+							asEntry.entryTypeId = EIMConstantService.ENTRY_TYPE_USER;
+							asEntry.typeName = 'user';
+							let disable = json.asEntryList.asEntry.attr.disable;
+							if (disable !== undefined && disable !== null) {
+								asEntry.userDisable = (disable === '1' || disable === 1 || disable === 'on') ? 'on' : 'off';
+							} else {
+								asEntry.userDisable = 'off';
+							}
+						}
+						this.asEntryList.push(asEntry);
 					} else if (json.asEntryList.asEntry) {
-						let asEntry = {
+						let asEntry: any = {
 								entryId: Number(json.asEntryList.asEntry.id),
 								entryName: json.asEntryList.asEntry.name,
 								entryType: json.asEntryList.asEntry.type,
+						}
+						// ユーザーの場合、無効フラグを設定
+						if (json.asEntryList.asEntry.type === 'USER' || json.asEntryList.asEntry.type === '1' || json.asEntryList.asEntry.type === 'user') {
+							asEntry.entryTypeId = EIMConstantService.ENTRY_TYPE_USER;
+							asEntry.typeName = 'user';
+							let disable = json.asEntryList.asEntry.disable;
+							if (disable !== undefined && disable !== null) {
+								asEntry.userDisable = (disable === '1' || disable === 1 || disable === 'on') ? 'on' : 'off';
+							} else {
+								asEntry.userDisable = 'off';
+							}
 						}
 						this.asEntryList.push(asEntry);
 

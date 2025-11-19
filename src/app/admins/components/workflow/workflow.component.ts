@@ -22,6 +22,7 @@ import { EIMAdminsConstantService } from 'app/admins/shared/services/admins-cons
 import { EIMWorkflowMailMethodListComponent, } from 'app/admins/shared/components/renderer/workflow-mail-method-list-renderer.component';
 import { EIMEntryTypeRendererComponent } from 'app/admins/shared/components/renderer/entry-type-renderer.component';
 import { EIMAdminNameRendererComponent } from 'app/admins/shared/components/renderer/admin-name-renderer.component';
+import { EIMNameRendererComponent } from 'app/shared/components/renderer/name-renderer.component';
 import { EIMMessageService, EIMMessageType } from 'app/shared/services/message.service';
 import { EIMAdminsCacheService } from 'app/admins/shared/services/admins-cache.service';
 import { EIMAttributeTypeDTO } from 'app/admins/shared/dtos/attribute-type.dto';
@@ -698,7 +699,7 @@ export class EIMWorkflowComponent implements EIMAdminMainComponent, OnInit, Afte
 			// タイプ
 			columns2.push({ field: 'entryType', headerName: this.translateService.instant('EIM.LABEL_02019'), width: 130, cellRendererFramework: EIMEntryTypeRendererComponent, suppressFilter: true });
 			// 名前
-			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 220, suppressFilter: true });
+			columns2.push({ field: 'entryName', headerName: this.translateService.instant('EIM.LABEL_02002'), width: 220, cellRendererFramework: EIMNameRendererComponent, suppressFilter: true });
 			this.assignDataGrid.setColumns(columns2);
 
 			// イベント優先先設定
