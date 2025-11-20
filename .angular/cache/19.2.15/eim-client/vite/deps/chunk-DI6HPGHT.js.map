@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/core-js/modules/es.math.to-string-tag.js"],
-  "sourcesContent": ["'use strict';\n\nvar setToStringTag = require('../internals/set-to-string-tag');\n\n// Math[@@toStringTag] property\n// https://tc39.es/ecma262/#sec-math-@@tostringtag\nsetToStringTag(Math, 'Math', true);"],
-  "mappings": ";;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,iBAAiB;AAIrB,mBAAe,MAAM,QAAQ,IAAI;AAAA;AAAA;",
-  "names": []
-}

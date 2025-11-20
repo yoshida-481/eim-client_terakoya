@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/core-js/internals/object-to-string.js", "../../../../../../node_modules/core-js/modules/es.object.to-string.js"],
-  "sourcesContent": ["'use strict';\n\nvar TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');\nvar classof = require('../internals/classof');\n\n// `Object.prototype.toString` method implementation\n// https://tc39.es/ecma262/#sec-object.prototype.tostring\nmodule.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {\n  return '[object ' + classof(this) + ']';\n};", "'use strict';\n\nvar TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');\nvar defineBuiltIn = require('../internals/define-built-in');\nvar toString = require('../internals/object-to-string');\n\n// `Object.prototype.toString` method\n// https://tc39.es/ecma262/#sec-object.prototype.tostring\nif (!TO_STRING_TAG_SUPPORT) {\n  defineBuiltIn(Object.prototype, 'toString', toString, {\n    unsafe: true\n  });\n}"],
-  "mappings": ";;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,wBAAwB;AAC5B,QAAI,UAAU;AAId,WAAO,UAAU,wBAAwB,CAAC,EAAE,WAAW,SAAS,WAAW;AACzE,aAAO,aAAa,QAAQ,IAAI,IAAI;AAAA,IACtC;AAAA;AAAA;;;ACTA;AAAA;AAAA;AAEA,QAAI,wBAAwB;AAC5B,QAAI,gBAAgB;AACpB,QAAI,WAAW;AAIf,QAAI,CAAC,uBAAuB;AAC1B,oBAAc,OAAO,WAAW,YAAY,UAAU;AAAA,QACpD,QAAQ;AAAA,MACV,CAAC;AAAA,IACH;AAAA;AAAA;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/core-js/internals/environment-webkit-version.js"],
-  "sourcesContent": ["'use strict';\n\nvar userAgent = require('../internals/environment-user-agent');\nvar webkit = userAgent.match(/AppleWebKit\\/(\\d+)\\./);\nmodule.exports = !!webkit && +webkit[1];"],
-  "mappings": ";;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,YAAY;AAChB,QAAI,SAAS,UAAU,MAAM,sBAAsB;AACnD,WAAO,UAAU,CAAC,CAAC,UAAU,CAAC,OAAO,CAAC;AAAA;AAAA;",
-  "names": []
-}

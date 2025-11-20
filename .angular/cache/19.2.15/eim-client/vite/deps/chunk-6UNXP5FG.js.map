@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/core-js/internals/string-repeat.js"],
-  "sourcesContent": ["'use strict';\n\nvar toIntegerOrInfinity = require('../internals/to-integer-or-infinity');\nvar toString = require('../internals/to-string');\nvar requireObjectCoercible = require('../internals/require-object-coercible');\nvar $RangeError = RangeError;\n\n// `String.prototype.repeat` method implementation\n// https://tc39.es/ecma262/#sec-string.prototype.repeat\nmodule.exports = function repeat(count) {\n  var str = toString(requireObjectCoercible(this));\n  var result = '';\n  var n = toIntegerOrInfinity(count);\n  if (n < 0 || n === Infinity) throw new $RangeError('Wrong number of repetitions');\n  for (; n > 0; (n >>>= 1) && (str += str)) if (n & 1) result += str;\n  return result;\n};"],
-  "mappings": ";;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,sBAAsB;AAC1B,QAAI,WAAW;AACf,QAAI,yBAAyB;AAC7B,QAAI,cAAc;AAIlB,WAAO,UAAU,SAAS,OAAO,OAAO;AACtC,UAAI,MAAM,SAAS,uBAAuB,IAAI,CAAC;AAC/C,UAAI,SAAS;AACb,UAAI,IAAI,oBAAoB,KAAK;AACjC,UAAI,IAAI,KAAK,MAAM,SAAU,OAAM,IAAI,YAAY,6BAA6B;AAChF,aAAO,IAAI,IAAI,OAAO,OAAO,OAAO,KAAM,KAAI,IAAI,EAAG,WAAU;AAC/D,aAAO;AAAA,IACT;AAAA;AAAA;",
-  "names": []
-}
