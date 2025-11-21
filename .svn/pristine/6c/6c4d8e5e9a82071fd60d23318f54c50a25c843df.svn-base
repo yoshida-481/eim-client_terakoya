@@ -1,7 +1,0 @@
-<p-panel class="eim-stretched-panel" header="{{headerTitle}}">
-	<ng-template pTemplate="icons">
-		<eim-menubar #menu class="eim-menubar eim-menubar-no-border" [model]="menuItems"></eim-menubar>
-	</ng-template>
-
-	<ng-template #container></ng-template>
-</p-panel>

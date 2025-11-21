@@ -1,6 +1,0 @@
-<div eim-vertical-container style="height: 100%;">
-	<div class="eim-flexible-height">
-		<eim-data-grid #mailTypeList [multiple]="multiple" [equals]="dataGridEquals">
-		</eim-data-grid>
-	</div>
-</div>

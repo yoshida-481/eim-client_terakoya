@@ -1,7 +1,0 @@
-::ng-deep eim-file-uploader a.p-menubar-item-link/*.ui-corner-all*/ {
-	text-align: center;
-}
-
-::ng-deep eim-file-uploader .p-menubar {
-	display: table-cell;
-}

@@ -1,4 +1,0 @@
-<form #ngForm="ngForm" class="eim-form-wide" style="height: 100%; overflow-y: auto; overflow-x: hidden;" autocomplete="off" novalidate>
-	<eim-task-form #taskForm [form]="ngForm.form">
-	</eim-task-form>
-</form>

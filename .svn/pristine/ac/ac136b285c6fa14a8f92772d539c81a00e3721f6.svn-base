@@ -1,3 +1,0 @@
-<eim-object-list #objectList
-		[isTreeDataGrid]="true" [tagType]="tabType"
-		(invalidated)="onInvalidatedObjectList($event)"></eim-object-list>

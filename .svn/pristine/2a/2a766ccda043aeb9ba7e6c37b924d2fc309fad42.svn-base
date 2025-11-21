@@ -1,5 +1,0 @@
-::ng-deep eim-project-master-manager {
-	.eim-panel-flat {
-		height: 100%;
-	}
-}

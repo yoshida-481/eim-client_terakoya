@@ -1,9 +1,0 @@
-<div class="eim-version-display">
-	<div class="eim-version-display-detail">
-		<img [src]="logoSrc" class="logo-icon">
-		
-		<div style="padding-left: 20px;">
-			<p>Version: {{versionLabel}}</p>
-		</div>
-	</div>
-</div>
