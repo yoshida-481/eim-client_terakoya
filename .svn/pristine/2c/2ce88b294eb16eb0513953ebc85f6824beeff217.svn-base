@@ -1,1 +1,0 @@
-<eim-tree #classContentsTree [contextMenuItems]="contentsTreeMenuItems" (selected)="onSelectFolderTreeNode($event)"></eim-tree>

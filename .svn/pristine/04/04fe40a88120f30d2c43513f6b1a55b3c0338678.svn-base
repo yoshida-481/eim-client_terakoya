@@ -1,6 +1,0 @@
-.eim-master-input-form-item-delete {
-	color: #E3F1FF;
-	cursor: pointer !important;
-	pointer-events: auto;
-}
-

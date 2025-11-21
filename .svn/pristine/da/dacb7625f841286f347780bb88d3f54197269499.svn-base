@@ -1,9 +1,0 @@
-eim-radio-button 
-{
-	padding-left: 28px;
-}
-
-eim-checkbox
-{
-	padding-left: 28px;
-}
