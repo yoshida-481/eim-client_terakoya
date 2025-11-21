@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/modules/es.parse-int.js", "../../../../../../node_modules/core-js/es/parse-int.js"],
+  "sourcesContent": ["'use strict';\n\nvar $ = require('../internals/export');\nvar $parseInt = require('../internals/number-parse-int');\n\n// `parseInt` method\n// https://tc39.es/ecma262/#sec-parseint-string-radix\n$({\n  global: true,\n  forced: parseInt !== $parseInt\n}, {\n  parseInt: $parseInt\n});", "'use strict';\n\nrequire('../modules/es.parse-int');\nvar path = require('../internals/path');\nmodule.exports = path.parseInt;"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,IAAI;AACR,QAAI,YAAY;AAIhB,MAAE;AAAA,MACA,QAAQ;AAAA,MACR,QAAQ,aAAa;AAAA,IACvB,GAAG;AAAA,MACD,UAAU;AAAA,IACZ,CAAC;AAAA;AAAA;;;ACZD;AAAA;AAEA;AACA,QAAI,OAAO;AACX,WAAO,UAAU,KAAK;AAAA;AAAA;",
+  "names": []
+}

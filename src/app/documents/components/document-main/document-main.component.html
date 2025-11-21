@@ -112,9 +112,10 @@
 							</div>
 						</p-blockUI>
 						<p-panel #eimContents
-								(drop)="boxFileDragging ? onDropFile($event) : null" (dragover)="onDragOver($event)" 
+								(drop)="boxFileDragging ? onDropBoxFile($event) : onDrop($event)" (dragover)="onDragOver($event)" 
 								(dragenter)="onDragEnter($event)" (dragleave)="onDragLeave($event)" 
-								[class.drag-enter]="fileDragEnterTarget">
+  								[class.drag-enter]="fileDragEnterTarget"
+								[ngClass]="{'eim-document-main-file-dragging': isFileDragging}">
 							<div class="header-bar">
 								<div class="header-bar-left">
 									<p-breadcrumb class="header-bar-breadcrumb" [model]="breadcrumbItems"></p-breadcrumb>
@@ -122,7 +123,7 @@
 
 								<div class="header-bar-right" *ngIf="info.accordionActiveIndex === 0">
 									<!-- ワークスペース用 リスト／サムネイル 表示切替 -->
-									<p-selectButton class="eim-select-btn" 
+									<p-selectButton class="eim-select-btn" [unselectable]="false" [allowEmpty]="false"
 										[options]="workspaceDisplayTypes" [(ngModel)]="selectedWorkspaceDisplayTypeId" (onChange)="snippetWorkspaceChangeClick()"></p-selectButton>
 
 									<p-toggleButton 
@@ -135,7 +136,7 @@
 								</div>
 								<div class="header-bar-right" *ngIf="info.accordionActiveIndex === 1">
 									<!-- 検索用 本文抜粋／リスト／サムネイル 表示切替 -->
-									<p-selectButton class="eim-select-btn"
+									<p-selectButton class="eim-select-btn"  [unselectable]="false" [allowEmpty]="false"
 										[options]="displayTypes" [(ngModel)]="selectedDisplayTypeId" (onChange)="snippetChangeClick($event)"></p-selectButton>
 
 									<p-toggleButton 
@@ -170,8 +171,7 @@
 									</eim-thumbnail-viewer>
 								</div>
 
-								<div id="dataGridDiv" style="height: 100%;"
-										ng2FileDrop [uploader]="uploader" [ngClass]="{'eim-file-dragging': isFileDragging}" (fileOver)="this.isFileDragging = $event">
+								<div id="dataGridDiv" style="height: 100%;">
 									<eim-data-grid #contentsList 
 										[componentService]="contentsListComponentService"
 										[contextMenuItems]="info.contentsListMenuItems"

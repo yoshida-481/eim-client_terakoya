@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/a-constructor.js"],
+  "sourcesContent": ["'use strict';\n\nvar isConstructor = require('../internals/is-constructor');\nvar tryToString = require('../internals/try-to-string');\nvar $TypeError = TypeError;\n\n// `Assert: IsConstructor(argument) is true`\nmodule.exports = function (argument) {\n  if (isConstructor(argument)) return argument;\n  throw new $TypeError(tryToString(argument) + ' is not a constructor');\n};"],
+  "mappings": ";;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,gBAAgB;AACpB,QAAI,cAAc;AAClB,QAAI,aAAa;AAGjB,WAAO,UAAU,SAAU,UAAU;AACnC,UAAI,cAAc,QAAQ,EAAG,QAAO;AACpC,YAAM,IAAI,WAAW,YAAY,QAAQ,IAAI,uBAAuB;AAAA,IACtE;AAAA;AAAA;",
+  "names": []
+}

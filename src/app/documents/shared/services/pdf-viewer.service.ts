@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core'
-import * as pdfjsLib from 'pdfjs-dist'
-import { environment } from '../../../../environments/environment';
+import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
+
 @Injectable({
 	providedIn: 'root'
 })
 export class PdfViewerService {
 	constructor(){
-        pdfjsLib.GlobalWorkerOptions.workerSrc = environment.baseURL + 'src/assets/pdfjs/pdf.worker.js'
+		GlobalWorkerOptions.workerSrc = new URL('src/assets/pdfjs/pdf.worker.min.mjs', import.meta.url).toString();
 	}
 
 	async getDocumentFrom(blob:Blob){
 		const arrayBuffer = await blob.arrayBuffer();
-		return await pdfjsLib.getDocument({data:arrayBuffer}).promise;
+		return await getDocument({data:arrayBuffer}).promise;
 	}
 }

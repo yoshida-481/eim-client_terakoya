@@ -1,4 +1,4 @@
-import {	Component, IterableDiffers, Input, ViewContainerRef, TemplateRef, Inject, LOCALE_ID, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import {	Component, IterableDiffers, Input, ViewContainerRef, TemplateRef, Inject, LOCALE_ID, ViewChild, ViewChildren, QueryList, ElementRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +32,7 @@ import { EIMDateService } from 'app/shared/services/date.service';
     ],
     standalone: false
 })
-export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent {
+export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent  implements OnInit {
 
 	@ViewChildren('calendar')
 	public calendar: QueryList<ElementRef>;
@@ -110,7 +110,6 @@ export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent
 		}
 
 		super.writeValue(value);
-		this.addValidators(this.dateValidatorFn());
 
 		// 時分秒を初期化
 		if (!this.showTime) {
@@ -139,6 +138,14 @@ export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent
 	// ----------------------------------------
 	// イベントハンドラ
 	// ----------------------------------------
+	/**
+	 * 入力値初期化後のイベントハンドラ
+	 */
+	ngOnInit(): void {
+
+		this.addValidators(this.dateValidatorFn());
+	}
+
 	/**
 	 * プラスクリック時のハンドラです。
 	 * 該当入力行の直下に新しい入力行を挿入します。
@@ -417,15 +424,19 @@ export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent
 			}
 
 			for (let i = 0; i < this.value.length; i++) {
-				if (this.value[i] !== null && this.value[i] !== '' && this.formControls[0].value === '') {
+
+				// this.formControlsのみnullの場合
+				if (this.value[i] !== null && this.value[i] !== '' && (this.formControls[i].value === null || this.formControls[i].value === '')) {
 					return true;
 				}
 
-				if ((this.value[i] === null || this.value[i] === '' ) && this.formControls[0].value !== '') {
+				// this.valueのみnullの場合
+				if ((this.value[i] === null || this.value[i] === '' ) && this.formControls[i].value !== null && this.formControls[i].value !== '') {
 					return true;
 				}
 
-				if ((this.value[i] === null || this.value[i] === '' ) && this.formControls[0].value === '') {
+				// どちらもnullの場合
+				if ((this.value[i] === null || this.value[i] === '' ) && (this.formControls[i].value === null || this.formControls[i].value === '')) {
 					continue;
 				}
 
@@ -461,6 +472,12 @@ export class EIMCalendarInputFormItemComponent extends EIMInputFormItemComponent
 			}
 
 			let ef: ElementRef = this.calendar.toArray()[index];
+			if (!ef) {
+				// 初期表示時に複数値が存在する場合は、まだ２件目以降のコンポーネントが表示されておらず、
+				// efが空になるため、スキップする。
+				return null;
+			}
+
 			const activeElement: any = ef['el'].nativeElement?.children?.[0]?.children?.[0];
 			let nowValue = activeElement?.value;
 

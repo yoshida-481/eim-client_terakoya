@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/object-get-own-property-names-external.js"],
+  "sourcesContent": ["'use strict';\n\n/* eslint-disable es/no-object-getownpropertynames -- safe */\nvar classof = require('../internals/classof-raw');\nvar toIndexedObject = require('../internals/to-indexed-object');\nvar $getOwnPropertyNames = require('../internals/object-get-own-property-names').f;\nvar arraySlice = require('../internals/array-slice');\nvar windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [];\nvar getWindowNames = function (it) {\n  try {\n    return $getOwnPropertyNames(it);\n  } catch (error) {\n    return arraySlice(windowNames);\n  }\n};\n\n// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window\nmodule.exports.f = function getOwnPropertyNames(it) {\n  return windowNames && classof(it) === 'Window' ? getWindowNames(it) : $getOwnPropertyNames(toIndexedObject(it));\n};"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;AAAA;AAGA,QAAI,UAAU;AACd,QAAI,kBAAkB;AACtB,QAAI,uBAAuB,wCAAsD;AACjF,QAAI,aAAa;AACjB,QAAI,cAAc,OAAO,UAAU,YAAY,UAAU,OAAO,sBAAsB,OAAO,oBAAoB,MAAM,IAAI,CAAC;AAC5H,QAAI,iBAAiB,SAAU,IAAI;AACjC,UAAI;AACF,eAAO,qBAAqB,EAAE;AAAA,MAChC,SAAS,OAAO;AACd,eAAO,WAAW,WAAW;AAAA,MAC/B;AAAA,IACF;AAGA,WAAO,QAAQ,IAAI,SAAS,oBAAoB,IAAI;AAClD,aAAO,eAAe,QAAQ,EAAE,MAAM,WAAW,eAAe,EAAE,IAAI,qBAAqB,gBAAgB,EAAE,CAAC;AAAA,IAChH;AAAA;AAAA;",
+  "names": []
+}

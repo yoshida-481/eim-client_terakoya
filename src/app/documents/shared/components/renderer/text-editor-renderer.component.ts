@@ -68,6 +68,13 @@ export class EIMTextEditorRendererComponent implements ICellEditorAngularComp, A
 		if (35 <= keyCode && keyCode <= 40) {
 			event.stopPropagation();
 		}
+		else if (event.key === 'Enter') {
+			this.params.stopEditing();
+		}
+		else if (event.key === 'Escape') {
+			this.inputValue = this.params.value;
+			this.params.stopEditing(true);
+		}
 	}
 
 	/**

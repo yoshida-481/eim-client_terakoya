@@ -16,6 +16,7 @@
 	--eim-button-padding: 2px 6px;
 	--eim-drawer-header-padding: 0.857rem 1rem;
 
+	
 	/* PrimeNG */
 	--p-semantic-primary-50: #c4eefc;
 }
@@ -2179,15 +2180,63 @@ eim-checkbox .p-checkbox:not(.p-disabled) > .p-checkbox-box:hover {
 	 ========================================================================== */
 .eim-theme {
 	--p-drawer-content-padding: 0px!important;
-	--p-drawer-header-padding: var(--eim-drawer-header-padding);/* remだとうまく値が反映されない。pxは繁栄される*/
+	--p-drawer-header-padding: var(--eim-drawer-header-padding);/* remだとうまく値が反映されない。pxは反映される*/
 }
 
+/* ==========================================================================
+	 ページネーター
+	 ========================================================================== */
+.eim-theme {
+	--p-paginator-background : #F4F4F4;
+	--p-paginator-nav-button-selected-background: #007ad9;
+	--p-paginator-nav-button-selected-color: #ffffff;
+	--p-paginator-nav-button-hover-background: #e0e0e0;
+    --p-paginator-nav-button-hover-color: #333333;
+	--p-paginator-border-radius: 3px;/* primeNG12相当 */
+	--p-paginator-nav-button-border-radius: 0px;/* primeNG12相当 */
+	--p-paginator-gap: 0px;/* primeNG12相当 */
+	--p-paginator-padding: 0px;/* primeNG12相当 */
+	--p-paginator-nav-button-width:2.357rem;/* primeNG12相当 */
+    --p-paginator-nav-button-height:2.357rem;/* primeNG12相当 */
+}
 
+.p-paginator {
+  	border: solid 1px #C8C8C8;
+	--p-icon-size: 12px;
+}
+
+.p-paginator .p-paginator-pages > button {
+	font-size: 1rem !important;
+}
+
+.p-paginator .p-paginator-pages > button.p-disabled {
+	color:#848484;
+}
+
+.p-paginator > button.p-disabled {
+	color:#848484;
+}
+
+.p-paginator .p-paginator-rpp-dropdown {
+	--p-select-background: #ffffff;
+	--p-select-disabled-background: #eeeeee;
+	height: var(--p-paginator-nav-button-height);
+	min-width: 37.7px;/* primeNG12相当 */
+	margin-left: 0.5rem;/* primeNG12相当 */
+	margin-right: 0.5rem;/* primeNG12相当 */
+}
+
+.p-paginator .p-select:not(.p-disabled).p-focus {
+	box-shadow: 0 0 5px #1f89ce;
+}
 /* ==========================================================================
 	 ドラッグ＆ドロップ
 	 ========================================================================== */
+.eim-theme {
+	--eim-file-dragging-border: dotted 2px red;
+}
 .eim-file-dragging { 
-	border: dotted 2px red; 
+	border: var(--eim-file-dragging-border); 
 }
 
 /* ==========================================================================

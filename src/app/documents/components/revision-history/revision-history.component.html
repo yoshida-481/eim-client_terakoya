@@ -3,7 +3,8 @@
 		<as-split-area [size]="40" style="height: 100%;">
 			<div style="height: 100%; width: 100%; padding-right: 3px;" eim-vertical-container>
 				<div style="margin-bottom: 2px;">
-					<p-selectButton class="eim-select-btn" [options]="displayTypes" [(ngModel)]="selectedDisplayTypeId" (onChange)="onChangeDisplayType($event)">
+					<p-selectButton class="eim-select-btn" [options]="displayTypes" [(ngModel)]="selectedDisplayTypeId" (onChange)="onChangeDisplayType($event)"
+					 [unselectable]="false" [allowEmpty]="false">
 					</p-selectButton>
 					<eim-checkbox name="link" label="{{'EIM_DOCUMENTS.LABEL_02202' | translate}}"
 						binary="true" [(ngModel)]="linkDisplayFlag" (click)="onChangeLinkDisplayFlag($event)" [style]="{'margin-left': '10px'}">

@@ -936,10 +936,19 @@ export class EIMDataGridComponent implements OnInit, OnChanges, DoCheck, OnDestr
 
 		this.noSupportTreeView();
 
-		this.info.gridApi.applyTransaction({ add: data });
-		this.info.rowCount += (data != null ? data.length : 0);
-		// サムネイル用に更新
-		this.info.data = this.componentService.getData(this.info);
+		const action = () => {
+			this.info.gridApi.applyTransaction({ add: data });
+			this.info.rowCount += (data != null ? data.length : 0);
+			// サムネイル用に更新
+			this.info.data = this.componentService.getData(this.info);
+		}
+
+		if (this.info.gridApi) {
+			action();
+		}
+		else {
+			this.info.pendingActions.push(action);
+		}
 	}
 
 	/**
@@ -949,10 +958,19 @@ export class EIMDataGridComponent implements OnInit, OnChanges, DoCheck, OnDestr
 	 */
 	public addRowDataToIndex(data: any[], index: number): void {
 
-		this.info.gridApi.applyTransaction({ add: data, addIndex: index });
-		this.info.rowCount += (data != null ? data.length : 0);
-		// サムネイル用に更新
-		this.info.data = this.componentService.getData(this.info);
+		const action = () => {
+			this.info.gridApi.applyTransaction({ add: data, addIndex: index });
+			this.info.rowCount += (data != null ? data.length : 0);
+			// サムネイル用に更新
+			this.info.data = this.componentService.getData(this.info);
+		}
+
+		if (this.info.gridApi) {
+			action();
+		}
+		else {
+			this.info.pendingActions.push(action);
+		}
 	}
 
 	/**

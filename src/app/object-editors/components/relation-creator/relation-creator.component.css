@@ -1,3 +1,5 @@
-.changeable:disabled {
+.eim-relation-creator-disable-input {
 	background-color: #ffffff;
+	box-shadow: none !important;
+	border-color: var(--p-inputtext-border-color) !important;
 }

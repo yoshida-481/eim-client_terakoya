@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/modules/es.reflect.to-string-tag.js"],
+  "sourcesContent": ["'use strict';\n\nvar $ = require('../internals/export');\nvar globalThis = require('../internals/global-this');\nvar setToStringTag = require('../internals/set-to-string-tag');\n$({\n  global: true\n}, {\n  Reflect: {}\n});\n\n// Reflect[@@toStringTag] property\n// https://tc39.es/ecma262/#sec-reflect-@@tostringtag\nsetToStringTag(globalThis.Reflect, 'Reflect', true);"],
+  "mappings": ";;;;;;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,IAAI;AACR,QAAI,aAAa;AACjB,QAAI,iBAAiB;AACrB,MAAE;AAAA,MACA,QAAQ;AAAA,IACV,GAAG;AAAA,MACD,SAAS,CAAC;AAAA,IACZ,CAAC;AAID,mBAAe,WAAW,SAAS,WAAW,IAAI;AAAA;AAAA;",
+  "names": []
+}

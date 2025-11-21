@@ -442,7 +442,6 @@ export class EIMFormUpdatorComponent implements OnInit, EIMUpdatable {
 	}
 
 	onExpandCurrentAccordion(event: any, isOpen: boolean): void {
-		console.log('■■■ event', event.index);
 		if (event.index != 1) {
 			return;
 		}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/get-iterator-direct.js"],
+  "sourcesContent": ["'use strict';\n\n// `GetIteratorDirect(obj)` abstract operation\n// https://tc39.es/ecma262/#sec-getiteratordirect\nmodule.exports = function (obj) {\n  return {\n    iterator: obj,\n    next: obj.next,\n    done: false\n  };\n};"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA;AAIA,WAAO,UAAU,SAAU,KAAK;AAC9B,aAAO;AAAA,QACL,UAAU;AAAA,QACV,MAAM,IAAI;AAAA,QACV,MAAM;AAAA,MACR;AAAA,IACF;AAAA;AAAA;",
+  "names": []
+}

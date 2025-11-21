@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/core-js/internals/path.js"],
+  "sourcesContent": ["'use strict';\n\nvar globalThis = require('../internals/global-this');\nmodule.exports = globalThis;"],
+  "mappings": ";;;;;;;;AAAA;AAAA;AAAA;AAEA,QAAI,aAAa;AACjB,WAAO,UAAU;AAAA;AAAA;",
+  "names": []
+}

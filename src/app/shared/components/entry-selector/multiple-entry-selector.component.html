@@ -3,17 +3,17 @@
 	<div style="width: calc(50% - 20px); height: 100%;">
 		<p-tabs #entryTabView [value]="selectedTab()" (valueChange)="onChangeTab($event)">
 			<p-tablist>
-				<p-tab [value]="0">{{ 'EIM.LABEL_02017' | translate }}</p-tab>
-				<p-tab [value]="1" *ngIf="selectTarget.group">{{ 'EIM.LABEL_02003' | translate }}</p-tab>
-				<p-tab [value]="2" *ngIf="selectTarget.role">{{ 'EIM.LABEL_02004' | translate }}</p-tab>
-				<p-tab [value]="3" *ngIf="selectTarget.compGroup">{{ 'EIM.LABEL_02018' | translate }}</p-tab>
-				<p-tab [value]="4" *ngIf="selectTarget.userDefGroup">{{ 'EIM.LABEL_02043' | translate }}</p-tab>
-				<p-tab [value]="5" *ngIf="selectTarget.system">{{ 'EIM.LABEL_02055' | translate }}</p-tab>
-				<p-tab [value]="6" *ngIf="selectTarget.template">{{ 'EIM.LABEL_03057' | translate }}</p-tab>
-				<p-tab [value]="7" *ngIf="selectTarget.objectRole">{{ 'EIM.LABEL_02054' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_USER">{{ 'EIM.LABEL_02017' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_GROUP" *ngIf="selectTarget.group">{{ 'EIM.LABEL_02003' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_ROLE" *ngIf="selectTarget.role">{{ 'EIM.LABEL_02004' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_COMPLEX_GROUP" *ngIf="selectTarget.compGroup">{{ 'EIM.LABEL_02018' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_USER_DEF_GROUP" *ngIf="selectTarget.userDefGroup">{{ 'EIM.LABEL_02043' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_SYSTEM" *ngIf="selectTarget.system">{{ 'EIM.LABEL_02055' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_TEMPLATE" *ngIf="selectTarget.template">{{ 'EIM.LABEL_03057' | translate }}</p-tab>
+				<p-tab [value]="tabIndexConst.TAB_INDEX_OBJECT_ROLE" *ngIf="selectTarget.objectRole">{{ 'EIM.LABEL_02054' | translate }}</p-tab>
 			</p-tablist>
 			<p-tabpanels>
-				<p-tabpanel [value]="0">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_USER">
 					<div style="padding:5px; height: 100%; height: 100%">
 						<form style="height: 100%; margin-top: -2px;" (ngSubmit)="onClickUserSearh($event)" autocomplete="off">
 							<div eim-vertical-container adjustedValue="-2" style="height: 100%;">
@@ -35,7 +35,7 @@
 						</form>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="1">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_GROUP">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 50%">
 							<eim-tree #groupTree [componentService]="treeComponentService"
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="2">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_ROLE">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 50%">
 							<eim-tree #roleTree [componentService]="treeComponentService"
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="3">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_COMPLEX_GROUP">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 50%">
 							<eim-tree #complexGroupTree [componentService]="treeComponentService"
@@ -71,21 +71,21 @@
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="4">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_USER_DEF_GROUP">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 100%">
 							<eim-data-grid class="eim-user-list" #userDefGroupListGrid [equals]="defaultEquals"></eim-data-grid>
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="5">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_SYSTEM">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 100%">
 							<eim-data-grid class="eim-user-list" #systemFuncListGrid [equals]="defaultEquals"></eim-data-grid>
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="6">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_TEMPLATE">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div eim-vertical-container style="height: 100%;">
 							<div class="eim-data-grid-menu">
@@ -104,7 +104,7 @@
 						</div>
 					</div>
 				</p-tabpanel>
-				<p-tabpanel [value]="7">
+				<p-tabpanel [value]="tabIndexConst.TAB_INDEX_OBJECT_ROLE">
 					<div style="padding:5px; width: 100%; height: 100%">
 						<div style="height: 100%">
 							<eim-data-grid class="eim-user-list" #objectRoleListGrid [equals]="defaultEquals"></eim-data-grid>
