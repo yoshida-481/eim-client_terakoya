@@ -1,7 +1,0 @@
-<span class="eim-form">
-	<ng-container *ngFor="let item of inputFormItems">
-		<eim-input-form-item-resolver class="eim-input-form-item-resolver" [ngClass]="item.styleClass" [form]="form" [inputFormItem]="item" [inputFormItemComponentServices]="inputFormItemComponentServices"
-			(changed)="onChange($event)"
-		></eim-input-form-item-resolver>
-	</ng-container>
-</span>

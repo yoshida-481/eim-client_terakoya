@@ -1,6 +1,0 @@
-<div class="p-root-container">
-	<p-checkbox [name]="name" [inputId]="inputId" [disabled]="disabled" [binary]="binary" [value]="value"
-		(onChange)="onChangeHandler($event)" (onBlur)="onTouched()" [(ngModel)]="innerValue">
-	</p-checkbox>
-	<label class="p-checkbox-label" [for]="inputId">{{ label }}</label>
-</div>

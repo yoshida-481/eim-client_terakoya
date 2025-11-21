@@ -1,6 +1,0 @@
-<div style="height: calc(100% - 30px);">
-	<div class="eim-data-grid-menu" style="display: flex;">
-		<eim-menubar [model]="compareListMenu"></eim-menubar>
-	</div>
-	<eim-data-grid #compareFileList [contextMenuItems]="compareListMenu" (changed)="onChangeDataGrid($event)"></eim-data-grid>
-</div>

@@ -1,3 +1,0 @@
-:host ::ng-deep .eim-document-attribute-list-creator-color-picker .p-colorpicker-panel {
-	position: static;
-}

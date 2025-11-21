@@ -1,3 +1,0 @@
-::ng-deep eim-combo-box-input-form-item div.eim-form-input-surround p-select {
-    width: 100%;
-}

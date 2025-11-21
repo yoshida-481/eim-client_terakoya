@@ -1,3 +1,0 @@
-<div style="height: 100%;">
-	<eim-data-grid #checkoutGrid></eim-data-grid>
-</div>

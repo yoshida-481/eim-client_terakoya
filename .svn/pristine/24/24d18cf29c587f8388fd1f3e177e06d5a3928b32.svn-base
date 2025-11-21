@@ -1,8 +1,0 @@
-<div class="eim-form-item" style="margin-left: 10px;">
-	<ng-container *ngIf="value">
-		<div class="eim-form-input" style="white-space: nowrap;">
-			<eim-checkbox name="{{name}}" [(ngModel)]="checkValue" label="{{label}}" (onChange)="onChange($event, 0)" binary="true"></eim-checkbox>
-		</div>
-	</ng-container>
-</div>
-

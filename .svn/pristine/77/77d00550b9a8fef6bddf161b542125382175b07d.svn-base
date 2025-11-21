@@ -1,3 +1,0 @@
-<ng-container *ngIf="initialized">
-	<eim-box-contents-list *ngIf="accountSelected" [loginUser]="loginUser" [selectedData]="selectedData" (closeBox)="closeBox()" (clickCopyToEIM)="onClickCopyToEIM($event)"></eim-box-contents-list>
-</ng-container>
