@@ -61,7 +61,10 @@ export interface EIMSearchResult {
     standalone: false
 })
 export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComponent, EIMSelectable, OnInit {
-	selectedTab = signal(0); // 初期タブインデックス
+	// テンプレートから参照できるようにする
+	readonly tabIndexConst = tabIndexConst;
+	// 選択されているタブ
+	selectedTab = signal(tabIndexConst.TAB_INDEX_USER); // 初期タブインデックス
 	private initData = [];
 
 	/** 選択可能タブとなる対象指定 */
@@ -150,7 +153,6 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 	/** ユーザ検索条件 */
 	public keyword: string = null;
 	public disabled = false;
-	public tabIdx: string[] = [];
 	/** 選択ボタン押下可否 */
 	public selectableFlg = false;
 	/** 入力最大数 */
@@ -301,26 +303,26 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 			}
 		});
 		this.selectTarget = select;
-		this.tabIdx = idx;
 
-
-		if (!this.tabIdx || this.tabIdx.length === 0) {
+		if (!idx || idx.length === 0) {
 			return;
 		}
 
-		if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_GROUP) {
+		this.selectedTab.set(idx[0]);
+
+		if (idx[0] === tabIndexConst.TAB_INDEX_GROUP) {
 			this.showGroup();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_ROLE) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_ROLE) {
 			this.showRole();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
 			this.showCompGroup();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
 			this.showUserDefGroup();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_SYSTEM) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_SYSTEM) {
 			this.showSystemFunc();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_TEMPLATE) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_TEMPLATE) {
 			this.showTemplate();
-		} else if (this.tabIdx[0] === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
+		} else if (idx[0] === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
 			this.showObjectRole();
 		}
 	}
@@ -332,21 +334,21 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 	onChangeTab(event: any): void {
 		this.selectedTab.set(event);
 
-		if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_GROUP) {
+		if (event === tabIndexConst.TAB_INDEX_GROUP) {
 			this.showGroup();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_ROLE) {
+		} else if (event === tabIndexConst.TAB_INDEX_ROLE) {
 			this.showRole();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
+		} else if (event === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
 			this.showCompGroup();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
+		} else if (event === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
 			this.showUserDefGroup();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_SYSTEM) {
+		} else if (event === tabIndexConst.TAB_INDEX_SYSTEM) {
 			this.showSystemFunc();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_USER) {
+		} else if (event === tabIndexConst.TAB_INDEX_USER) {
 			this.userListGridFilter();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_TEMPLATE) {
+		} else if (event === tabIndexConst.TAB_INDEX_TEMPLATE) {
 			this.showTemplate();
-		} else if (this.tabIdx[event] === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
+		} else if (event === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
 			this.showObjectRole();
 		}
 	}
@@ -595,37 +597,38 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 	onSelectEntryAdd(event: any): void {
 		// 追加対象エントリ
 		let addEntrys: any[] = [];
-		if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_USER) {
+		const selectedTab = this.selectedTab();
+		if (selectedTab === tabIndexConst.TAB_INDEX_USER) {
 			// ユーザリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.userListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_GROUP) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_GROUP) {
 			// グループツリー
 			addEntrys = addEntrys.concat(this.getSelectedEntryByTree(this.groupTree));
 			// グループユーザリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.groupUserListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_ROLE) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_ROLE) {
 			// ロールツリー
 			addEntrys = addEntrys.concat(this.getSelectedEntryByTree(this.roleTree));
 			// ロールユーザリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.roleUserListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_COMPLEX_GROUP) {
 			// 複合グループツリー
 			addEntrys = addEntrys.concat(this.getSelectedEntryByTree(this.complexGroupTree));
 			// 複合グループユーザリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.complexGroupUserListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_USER_DEF_GROUP) {
 			// ユーザ定義グループリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.userDefGroupListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_SYSTEM) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_SYSTEM) {
 			// システム処理リスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.systemFuncListGrid));
 
-		} else if (this.getSelectedTabIndex() === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
+		} else if (selectedTab === tabIndexConst.TAB_INDEX_OBJECT_ROLE) {
 			// オブジェクトロールリスト
 			addEntrys = addEntrys.concat(this.getSelectedEntryByGrid(this.objectRoleListGrid));
 
@@ -919,14 +922,6 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 	}
 
 	/**
-	 * 選択タブインデックスを取得します.
-	 * @return 選択タブインデックス
-	 */
-	private getSelectedTabIndex(): string {
-		return this.tabIdx[this.selectedTab()];
-	}
-
-	/**
 	 * 選択されたタブのユーザ一覧に削除データを選択する.
 	 * @param selectedData 選択データ
 	 */
@@ -947,7 +942,7 @@ export class EIMMultipleEntrySelectorComponent implements AfterViewInit, EIMComp
 	private getCurrUserDataGrid(): EIMDataGridComponent {
 		let searchResultDataGrid: EIMDataGridComponent;
 
-		switch (this.getSelectedTabIndex()) {
+		switch (this.selectedTab()) {
 			case tabIndexConst.TAB_INDEX_USER:
 				searchResultDataGrid = this.userListGrid;
 				break;

@@ -1,4 +1,4 @@
-<div style="height: 100%;" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+<div style="height: 100%;">
 	<eim-header #header class="header" [user]="user" [(font-size)]="fontSize" [version]="version" (changeFontSize)="onChangeFontSize($event)" [authenticationService]="documentAuthenticationService"></eim-header>
 	<div class="body">
 		<eim-document-main #documentMain (shownDialog)="setShowDialogId($event)" style="height:100%;"

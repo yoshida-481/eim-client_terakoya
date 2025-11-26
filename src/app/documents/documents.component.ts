@@ -7,8 +7,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { ConfirmationService } from "primeng/api";
 import { ToastModule } from "primeng/toast";
 
-import { FileItem, FileUploader } from "ng2-file-upload";
-
 import {
 	EIMDocumentsUserService,
 	EIMSessionInformation,
@@ -96,15 +94,6 @@ export class EIMDocumentsComponent implements OnInit {
 	/** ダウンロードPublicドキュメントオブジェクトID */
 	public downloadPublicFileObjId: number;
 
-	/** ファイルアップローダ */
-	public uploader: FileUploader = new FileUploader({
-		url:"",
-		queueLimit: 500, // 最大500件に設定
-	});
-
-	/** ファイルリスト */
-	public addFileList: File[] = [];
-
 	constructor(
 		protected activatedRoute: ActivatedRoute,
 		protected translateService: TranslateService,
@@ -135,42 +124,6 @@ export class EIMDocumentsComponent implements OnInit {
 	 * 入力値初期化後のイベントハンドラです.
 	 */
 	ngOnInit(): void {
-		/**
-		 * ファイル追加イベントハンドラ
-		 */
-		this.uploader.onAfterAddingAll = (fileItems: FileItem[]) => {
-			let isEmpty = false;
-			this.addFileList = [];
-			console.log(fileItems.length);
-			for (let i = 0; i < fileItems.length; i++) {
-				let fileItem: FileItem = fileItems[i];
-
-				console.log(fileItem);
-				if (fileItem.file.size > 0) {
-					// キューのファイルアイテムをリストに追加する
-					this.addFileList.push(fileItem._file);
-				} else {
-					isEmpty = true;
-				}
-			}
-			// キューをクリアする
-			this.uploader.clearQueue();
-
-			if (isEmpty && this.addFileList.length == 0) {
-				this.messageService.show(
-					EIMMessageType.error,
-					this.translateService.instant("EIM_DOCUMENTS.ERROR_00011")
-				);
-				return;
-			} else if (isEmpty && this.addFileList.length > 0) {
-				this.messageService.showGrowl(
-					this.translateService.instant("EIM_DOCUMENTS.INFO_00018")
-				);
-			}
-
-			// ドロップファイル実行
-			this.dropFileService.doDropFile(this.addFileList);
-		};
 
 		// 処理待ちポップアップ表示
 		this.userService.getSessionUser().subscribe((data) => {
@@ -209,150 +162,6 @@ export class EIMDocumentsComponent implements OnInit {
 		});
 
 		this.title.setTitle(EIMDocumentsConstantService.WINDOW_TITLE);
-	}
-
-	/**
-	 * ファイルドロップハンドラ
-	 * @param event イベント
-	 */
-	public onDragOver(event: DragEvent) {
-		event.preventDefault();
-		event.stopPropagation();
-	}
-
-	/**
-	 * ファイルドロップハンドラ
-	 * @param event イベント
-	 */
-	public async onDrop(event: DragEvent) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		if (event.dataTransfer?.items) {
-			const addFileList = [];
-			const fileProcessList: Promise<void>[] = [];
-
-			// ファイル処理の完了を待つPromise
-			const processPromise = this.handleFileDrop(
-				event,
-				addFileList,
-				fileProcessList
-			);
-
-			await processPromise;
-		}
-	}
-
-	/**
-	 * ドロップされたファイル処理を行う
-	 * @param event イベント
-	 * @param addFileList 見つかったファイル・フォルダの情報
-	 * @param fileProcessList 見つかったファイルの処理Process
-	 */
-	private async handleFileDrop(
-		event: DragEvent,
-		addFileList: any[],
-		fileProcessList: Promise<void>[]
-	) {
-		const items = event.dataTransfer.items;
-
-		// ドロップされたアイテムを処理
-		const rootPromises = Array.from(items).map((item) => {
-			const entry = item.webkitGetAsEntry();
-			if (entry) {
-				return this.addFileInfo(addFileList, fileProcessList, entry);
-			}
-			return Promise.resolve();
-		});
-
-		// すべてのアイテム処理が完了するまで待機
-		await Promise.all(rootPromises);
-		await Promise.all(fileProcessList);
-
-		// ファイルドロップの後処理
-		this.dropFileService.doDropFile(addFileList);
-	}
-
-	/**
-	 * ファイル情報の取得
-	 * @param fileList 見つかったファイル・フォルダの情報
-	 * @param fileProcessList 見つかったファイルの処理Process
-	 * @param item 検索中のインスタンス
-	 * @param path 検索中のパス
-	 */
-	private async addFileInfo(
-		fileList: any[],
-		fileProcessList: Promise<void>[],
-		item: any,
-		path: string = ""
-	) {
-		if (item.isFile) {
-			// ファイルの場合はファイル処理を追加
-			const process = this.getFile(item).then((file) => {
-				fileList.push({ isFile: true, fullPath: item.fullPath, file });
-			});
-			fileProcessList.push(process);
-		} else if (item.isDirectory) {
-			// ディレクトリの場合、情報を追加
-			fileList.push({ isFile: false, fullPath: item.fullPath });
-			const dirReader = item.createReader();
-
-			// サブディレクトリのエントリを読み込むPromise
-			const entries = await this.readDirectoryEntries(dirReader);
-
-			// サブディレクトリの処理を非同期で行う
-			const subDirPromises: Promise<void>[] = entries.map((entry) =>
-				this.addFileInfo(
-					fileList,
-					fileProcessList,
-					entry,
-					path + item.name + "/"
-				)
-			);
-
-			// サブディレクトリの処理完了を待機
-			await Promise.all(subDirPromises);
-		}
-	}
-
-	/**
-	 * ディレクトリ内のエントリを読み込む
-	 * @param dirReader ディレクトリリーダー
-	 * @returns エントリのリスト
-	 */
-	private async readDirectoryEntries(dirReader: any): Promise<any[]> {
-		const allEntries: any[] = [];
-
-		// 非同期でディレクトリのエントリを再帰的に読み込む
-		await new Promise<void>((resolve) => {
-			const readNext = () => {
-				dirReader.readEntries((results) => {
-					if (!results.length) {
-						resolve();
-					} else {
-						allEntries.push(...results);
-						readNext();
-					}
-				});
-			};
-			readNext();
-		});
-
-		return allEntries;
-	}
-	/**
-	 * ファイルインスタンスの取得
-	 * @param item ファイル情報
-	 */
-	private getFile(item: any): Promise<File> {
-		return new Promise((resolve, reject) => {
-			item.file(
-				(file: File) => {
-					resolve(file);
-				},
-				(error: any) => reject(error)
-			);
-		});
 	}
 
 	/**

@@ -366,6 +366,7 @@ import { EIMRadioButtonComponent } from 'app/shared/components/radio-button/radi
 		EIMSelectableSecuritySelectorComponent,
 		EIMTagAllocationApplicantComponent,
 		EIMMasterContentsApproveWorkflowDiagramComponent,
+		EIMPdfViewerComponent,
 	],
 
 	providers: [

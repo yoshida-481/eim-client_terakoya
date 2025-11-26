@@ -79,7 +79,6 @@ import { EIMThumbnailViewerComponent } from '../thumbnail-viewer/thumbnail-viewe
 import { EIMDialogSharedManagerComponent } from 'app/shared/components/dialog-shared-manager/dialog-shared-manager.component';
 import { EIMUserDomain } from 'app/shared/domains/entity/user.domain';
 import { EIMDocumentsUserService } from 'app/documents/shared/services/apis/documents-user.service';
-import { FileItem, FileUploader } from 'ng2-file-upload';
 
 import { EIMBoxContentsListComponentService } from "../box-contents-list/box-contents-list.component.service";
 import { EIMBoxFileDragComponentService } from "../box-file-drag/box-file-drag.component.service";
@@ -314,12 +313,6 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	private destroy$ = new Subject();
 
 	//
-	// メニューの定義
-	//
-	/** テーブルメニュー */
-	private tableMenuItems: EIMMenuItem[] = [];
-
-	//
 	// メインメニュー（機能毎）
 	//
 	/** メインメニュー 新規 */
@@ -344,7 +337,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'Property', icon: 'eim-icon-list'};
 	/** メインメニュー 表示 */
 	private menulistView: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03040', name: 'View', icon: 'eim-icon-table', items: this.tableMenuItems };
+		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03040', name: 'View', icon: 'eim-icon-table'};
 	/** メインメニュー マイスペース */
 	private menulistMyspace: EIMMenuItem =
 		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03082', name: 'Myspace', icon: 'fa fa-star'};
@@ -799,12 +792,6 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** ユーザ別Box連携利用許可設定 */
 	public boxUserInteg = false;
-
-	/** ファイルアップローダ */
-	public uploader: FileUploader = new FileUploader({url:""});
-
-	/** ファイルリスト */
-	public addFileList: File[] = [];
 
 	/** ファイルドラッグ中かどうか */
 	public isFileDragging = false;
@@ -1669,37 +1656,6 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			});
 		}
 
-		/**
-		 * ファイル追加イベントハンドラ
-		 */
-		this.uploader.onAfterAddingAll = (fileItems: FileItem[]) => {
-
-			let isEmpty = false;
-			this.addFileList = [];
-
-			for (let i = 0; i < fileItems.length; i++) {
-				let fileItem: FileItem = fileItems[i];
-				if (fileItem.file.size > 0) {
-					// キューのファイルアイテムをリストに追加する
-					this.addFileList.push(fileItem._file);
-				} else {
-					isEmpty = true;
-				}
-			}
-			// キューをクリアする
-			this.uploader.clearQueue();
-
-			if (isEmpty && this.addFileList.length == 0) {
-				this.messageService.show(EIMMessageType.error, this.translateService.instant('EIM_DOCUMENTS.ERROR_00011'));
-				return;
-			} else if (isEmpty && this.addFileList.length > 0) {
-				this.messageService.showGrowl(this.translateService.instant('EIM_DOCUMENTS.INFO_00018'));
-			}
-
-			// ドロップファイル実行
-			this.dropFileService.doDropFile(this.addFileList);
-		};
-
 		// アコーディオンタブのスタイルClass名を初期化
 		this.initializeAccordionTabClass();
 		/**
@@ -1715,7 +1671,6 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			this.fileDragEnterTarget = undefined;
 		});
 	}
-	selectedFile: FileItem[] = [];
 		
 	/**
 	 * EIMへ公開ボタン押下イベントハンドラ
@@ -3138,10 +3093,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (this.menuItemTableConfig.label === '') {
 			this.menuItemTableConfig.label = this.translateService.instant(this.menuItemTableConfig.rKey);
 		}
-		this.tableMenuItems.splice(0, this.tableMenuItems.length);						// 初期化
-		this.tableMenuItems.push(this.menuItemTableConfig);										// テーブル管理メニュー追加
-		this.tableMenuItems.push(this.menuItemSeparator);											// セパレータ追加
-		Array.prototype.push.apply(this.tableMenuItems, userTableMenuItems);	// ユーザテーブルメニューリスト追加
+		const newTableMenuItems = [];
+		newTableMenuItems.push(this.menuItemTableConfig);										// テーブル管理メニュー追加
+		newTableMenuItems.push(this.menuItemSeparator);											// セパレータ追加
+		Array.prototype.push.apply(newTableMenuItems, userTableMenuItems);	// ユーザテーブルメニューリスト追加
+
 		// Box表示メニュー追加
 		this.boxIntegration = this.serverConfigService.boxIntegrationFlg;
 		this.boxUserInteg = this.serverConfigService.boxUserIntegFlg;
@@ -3151,8 +3107,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				this.menuItemShowBox.label = this.info.isDisplayingBox ?
 						this.translateService.instant('EIM_DOCUMENTS.LABEL_03123') : this.translateService.instant('EIM_DOCUMENTS.LABEL_03124');
 			}
-			this.tableMenuItems.push(this.menuItemSeparator);										// セパレータ追加
-			this.tableMenuItems.push(this.menuItemShowBox);											// Box表示メニュー追加
+			newTableMenuItems.push(this.menuItemSeparator);										// セパレータ追加
+			newTableMenuItems.push(this.menuItemShowBox);											// Box表示メニュー追加
 		}
 
 		// アコーディオン内のコンポーネントを初期化
@@ -3175,6 +3131,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 					break;
 			}
 		}
+		this.menulistView.items = newTableMenuItems;
 	}
 
 	/**
@@ -3947,12 +3904,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		}
 	}
 	/**
-	 * ファイルドロップ時のイベントハンドラです.
+	 * Boxファイルドロップ時のイベントハンドラです.
 	 * @param event イベント
 	 */
-	onDropFile(event: DragEvent) {
+	onDropBoxFile(event: DragEvent) {
 		event.stopPropagation();
 		event.preventDefault();
+		this.isFileDragging = false;
 
 		const userAgent = window.navigator.userAgent;
 		const isIE = userAgent.indexOf('Trident/') >= 0;
@@ -3980,6 +3938,30 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * 外部からの物理フォルダ/ファイルドロップハンドラ
+	 * @param event イベント
+	 */
+	public async onDrop(event: DragEvent) {
+		event.preventDefault();
+		event.stopPropagation();
+		this.isFileDragging = false;
+
+		if (event.dataTransfer?.items) {
+			const addFileList = [];
+			const fileProcessList: Promise<void>[] = [];
+
+			// ファイル処理の完了を待つPromise
+			const processPromise = this.handleFileDrop(
+				event,
+				addFileList,
+				fileProcessList
+			);
+
+			await processPromise;
+		}
+	}
+
+	/**
 	 * ドラッグポインタがコンテンツリストに入っている時のイベントハンドラです.
 	 * @param event イベント
 	 */
@@ -4003,6 +3985,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 */
 	onDragEnter(event: DragEvent) {
 		this.fileDragEnterTarget = event.target;
+		this.isFileDragging = this.info.accordionActiveIndex === accordionIndex.WORKSPACE ? true : false;
 		event.stopPropagation();
 		event.preventDefault();
 	}
@@ -4018,6 +4001,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			event.preventDefault();
 			this.fileDragEnterTarget = undefined;
 		}
+		this.isFileDragging = false;
 	}
 
 	/**
@@ -4353,4 +4337,118 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		this.accordionTabClass = 'visibleAccordion_x' + visibleAccordionCount;
 		
 	}
+	
+	/**
+	 * ドロップされたファイル処理を行う
+	 * @param event イベント
+	 * @param addFileList 見つかったファイル・フォルダの情報
+	 * @param fileProcessList 見つかったファイルの処理Process
+	 */
+	private async handleFileDrop(
+		event: DragEvent,
+		addFileList: any[],
+		fileProcessList: Promise<void>[]
+	) {
+		const items = event.dataTransfer.items;
+
+		// ドロップされたアイテムを処理
+		const rootPromises = Array.from(items).map((item) => {
+			const entry = item.webkitGetAsEntry();
+			if (entry) {
+				return this.addFileInfo(addFileList, fileProcessList, entry);
+			}
+			return Promise.resolve();
+		});
+
+		// すべてのアイテム処理が完了するまで待機
+		await Promise.all(rootPromises);
+		await Promise.all(fileProcessList);
+
+		// ファイルドロップの後処理
+		this.dropFileService.doDropFile(addFileList);
+	}
+
+	/**
+	 * ファイル情報の取得
+	 * @param fileList 見つかったファイル・フォルダの情報
+	 * @param fileProcessList 見つかったファイルの処理Process
+	 * @param item 検索中のインスタンス
+	 * @param path 検索中のパス
+	 */
+	private async addFileInfo(
+		fileList: any[],
+		fileProcessList: Promise<void>[],
+		item: any,
+		path: string = ""
+	) {
+		if (item.isFile) {
+			// ファイルの場合はファイル処理を追加
+			const process = this.getFile(item).then((file) => {
+				fileList.push({ isFile: true, fullPath: item.fullPath, file });
+			});
+			fileProcessList.push(process);
+		} else if (item.isDirectory) {
+			// ディレクトリの場合、情報を追加
+			fileList.push({ isFile: false, fullPath: item.fullPath });
+			const dirReader = item.createReader();
+
+			// サブディレクトリのエントリを読み込むPromise
+			const entries = await this.readDirectoryEntries(dirReader);
+
+			// サブディレクトリの処理を非同期で行う
+			const subDirPromises: Promise<void>[] = entries.map((entry) =>
+				this.addFileInfo(
+					fileList,
+					fileProcessList,
+					entry,
+					path + item.name + "/"
+				)
+			);
+
+			// サブディレクトリの処理完了を待機
+			await Promise.all(subDirPromises);
+		}
+	}
+
+	/**
+	 * ディレクトリ内のエントリを読み込む
+	 * @param dirReader ディレクトリリーダー
+	 * @returns エントリのリスト
+	 */
+	private async readDirectoryEntries(dirReader: any): Promise<any[]> {
+		const allEntries: any[] = [];
+
+		// 非同期でディレクトリのエントリを再帰的に読み込む
+		await new Promise<void>((resolve) => {
+			const readNext = () => {
+				dirReader.readEntries((results) => {
+					if (!results.length) {
+						resolve();
+					} else {
+						allEntries.push(...results);
+						readNext();
+					}
+				});
+			};
+			readNext();
+		});
+
+		return allEntries;
+	}
+	/**
+	 * ファイルインスタンスの取得
+	 * @param item ファイル情報
+	 */
+	private getFile(item: any): Promise<File> {
+		return new Promise((resolve, reject) => {
+			item.file(
+				(file: File) => {
+					resolve(file);
+				},
+				(error: any) => reject(error)
+			);
+		});
+	}
+
+
 }

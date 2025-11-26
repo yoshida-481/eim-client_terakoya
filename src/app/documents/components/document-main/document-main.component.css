@@ -11,6 +11,10 @@ div.clear {
   margin-left: 6px;
 }
 
+::ng-deep .eim-document-main-file-dragging > .p-panel {
+    border: var(--eim-file-dragging-border)!important;
+}
+
 /* ==========================================================================
    preview add Sample
    ========================================================================== */

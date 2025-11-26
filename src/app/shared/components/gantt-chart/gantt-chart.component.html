@@ -1,13 +1,15 @@
 <div [ngClass]="selectedView === 'chart' ? 'eim-gantt-chart-view-chart': 'eim-gantt-chart-view-grid'"
 		style="height:100%; width: 100%; display: grid; grid-template-rows: auto 1fr;">
 	<div style="position: relative;">
-		<p-selectButton class="eim-select-button" [options]="viewItems" [(ngModel)]="selectedView" (onChange)="onChangeView($event)">
+		<p-selectButton class="eim-select-button" [options]="viewItems" [(ngModel)]="selectedView" (onChange)="onChangeView($event)"  
+						[unselectable]="false" [allowEmpty]="false">
 			<ng-template #item let-item>
 				<i [class]="item.icon" style="font-style: normal;"></i>
 			</ng-template>			
 		</p-selectButton>
 		<span class="eim-gantt-chart-format-select-button" style="position: absolute;">
-			<p-selectButton class="eim-select-button" [options]="formatItems" [(ngModel)]="selectedFormat" (onChange)="onChangeFormat($event)"></p-selectButton>
+			<p-selectButton class="eim-select-button" [options]="formatItems" [(ngModel)]="selectedFormat" (onChange)="onChangeFormat($event)" 
+							[unselectable]="false" [allowEmpty]="false"></p-selectButton>
 		</span>
 	</div>
 	<!-- ガントチャート -->

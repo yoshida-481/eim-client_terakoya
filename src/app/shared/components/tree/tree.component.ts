@@ -755,15 +755,15 @@ export class EIMTreeComponent implements OnInit, OnChanges, DoCheck, EIMHierarch
 			countFunc(workspaceTreeNode, info);
 		}
 
-		let element = this.getScrollTargetElement();
-
-		// 選択行のインデックス番号/全体件数で割合を求める
-		let ratio: number = Math.max((info.targetIndex - 1) / info.count, 0);
-		// ツリー表示領域の高さ*割合でスクロール位置を求める
-		let scrollPos: number = element.scrollHeight * ratio;
-
 		// スクロール位置を設定する
 		window.setTimeout(() => {
+			let element = this.getScrollTargetElement();
+
+			// 選択行のインデックス番号/全体件数で割合を求める
+			let ratio: number = Math.max((info.targetIndex - 1) / info.count, 0);
+			// ツリー表示領域の高さ*割合でスクロール位置を求める
+			let scrollPos: number = element.scrollHeight * ratio;
+
 			element.scrollTop = scrollPos;
 		});
 	}
