@@ -580,6 +580,8 @@
 		"ERROR_00135": "Can not download public file",
 		"ERROR_00136": "Drag and drop of files is not possible.",
 		
+		"INFO_DRAG_DROP_MOVE_COMPLETE": "Move completed.",
+		
 		"DOCUMENT": "Document",
 		"GENERAL_DOCUMENT": "General document",
 		"FOLDER": "Folder",

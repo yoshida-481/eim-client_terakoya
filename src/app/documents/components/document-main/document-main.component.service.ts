@@ -1401,8 +1401,9 @@ export class EIMDocumentMainComponentService {
 	 * @param info コンポーネント情報
 	 * @param parentData 選択データの親データ
 	 * @param selectedData 選択データ
+	 * @param completeMessage 完了メッセージ（省略時はデフォルトメッセージを使用）
 	 */
-	public paste(info: EIMDocumentMainComponentInfo, parentData: any, selectedData: any[]): void {
+	public paste(info: EIMDocumentMainComponentInfo, parentData: any, selectedData: any[], completeMessage?: string): void {
 		let parentIds: number[] = new Array();
 		let pasteTypes: string[] = new Array();
 		let isDocumentLinks: boolean[] = new Array();
@@ -1427,7 +1428,8 @@ export class EIMDocumentMainComponentService {
 					}
 
 					// 画面に反映
-					this.complete(info, {createdData: createdData, deletedData: data}, this.translateService.instant('EIM_DOCUMENTS.INFO_00014'));
+					const message = completeMessage || this.translateService.instant('EIM_DOCUMENTS.INFO_00014');
+					this.complete(info, {createdData: createdData, deletedData: data}, message);
 
 					// 切り取りの場合
 					if (info.pasteSourceObj.pasteType == 'CUT') {

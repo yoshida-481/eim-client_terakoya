@@ -4219,11 +4219,12 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			return;
 		}
 		
-		// 貼り付け処理を実行
+		// 貼り付け処理を実行（ドラッグ&ドロップの場合は「移動が完了しました。」を表示）
 		this.contentsMainComponentService.paste(
 			this.info,
 			parentData,
-			draggedItems
+			draggedItems,
+			this.translateService.instant('EIM_DOCUMENTS.INFO_DRAG_DROP_MOVE_COMPLETE')
 		);
 	}
 

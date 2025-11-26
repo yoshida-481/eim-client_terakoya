@@ -580,6 +580,8 @@
 		"ERROR_00135": "ダウンロード可能な公開ファイルがありません",
 		"ERROR_00136": "ファイルのドラッグ&ドロップはできません。",
 
+		"INFO_DRAG_DROP_MOVE_COMPLETE": "移動が完了しました。",
+
 		"DOCUMENT": "ドキュメント",
 		"GENERAL_DOCUMENT": "一般ドキュメント",
 		"FOLDER": "フォルダ",
