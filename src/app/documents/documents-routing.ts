@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { EIMDocumentsComponent } from './documents.component';
 import { EIMDocumentLoginComponent } from './components/login/login.component';
 import { EIMDocumentAuthenticationGuard } from './shared/guards/authentication.guard';
-import { EIMDocumentsPdfViewerComponent } from './components/documents-pdf-viewer/documents-pdf-viewer.component';
+import { EIMDocumentsPdfViewerComponent } from './documents-pdf-viewer.component';
 import { EIMDocumentAuthenticationService } from './shared/services/apis/authentication.service';
 import { EIMDocumentsCacheService } from './shared/services/documents-cache.service';
 import { EIMDocumentsUserService } from './shared/services/apis/documents-user.service';

@@ -1,20 +1,19 @@
 import {
-  require_function_bind
-} from "./chunk-LF7IXTHJ.js";
-import {
   require_es_reflect_to_string_tag
 } from "./chunk-KKS5COGJ.js";
+import {
+  require_freezing,
+  require_object_is_extensible
+} from "./chunk-GPYUX3T7.js";
+import {
+  require_function_bind
+} from "./chunk-LF7IXTHJ.js";
 import {
   require_a_constructor
 } from "./chunk-RWQHAGJX.js";
 import {
   require_function_apply
 } from "./chunk-MPAR7FPC.js";
-import {
-  require_freezing,
-  require_object_is_extensible
-} from "./chunk-GPYUX3T7.js";
-import "./chunk-ZMV7AIVQ.js";
 import {
   require_correct_prototype_getter,
   require_object_get_prototype_of
@@ -30,6 +29,7 @@ import {
   require_a_possible_prototype,
   require_object_set_prototype_of
 } from "./chunk-LJACIHUK.js";
+import "./chunk-ZMV7AIVQ.js";
 import "./chunk-OW7VFTLO.js";
 import {
   require_path

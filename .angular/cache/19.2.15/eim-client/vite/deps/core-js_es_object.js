@@ -1,16 +1,27 @@
 import {
+  require_same_value
+} from "./chunk-IXACK6AY.js";
+import {
   require_es_json_to_string_tag,
   require_es_symbol
-} from "./chunk-JOL3OR4M.js";
+} from "./chunk-R7VD7TGB.js";
 import {
   require_es_reflect_to_string_tag
 } from "./chunk-KKS5COGJ.js";
 import {
+  require_internal_metadata
+} from "./chunk-TZWIGHWK.js";
+import {
+  require_object_get_own_property_names_external
+} from "./chunk-GYN7VWKI.js";
+import {
+  require_array_buffer_non_extensible,
+  require_freezing,
+  require_object_is_extensible
+} from "./chunk-GPYUX3T7.js";
+import {
   require_es_math_to_string_tag
 } from "./chunk-DI6HPGHT.js";
-import {
-  require_same_value
-} from "./chunk-IXACK6AY.js";
 import {
   require_environment_webkit_version
 } from "./chunk-DBDY7KDW.js";
@@ -19,30 +30,15 @@ import {
 } from "./chunk-45DNTKU3.js";
 import "./chunk-MPAR7FPC.js";
 import {
-  require_internal_metadata
-} from "./chunk-YGYPGFD2.js";
-import {
-  require_array_buffer_non_extensible,
-  require_freezing,
-  require_object_is_extensible
-} from "./chunk-GPYUX3T7.js";
-import {
-  require_object_get_own_property_names_external
-} from "./chunk-GYN7VWKI.js";
-import {
   require_iterate
-} from "./chunk-3DNXURTP.js";
-import "./chunk-V7V7HOLZ.js";
-import "./chunk-ZMV7AIVQ.js";
-import {
-  require_define_built_in_accessor
-} from "./chunk-XIS6K74X.js";
+} from "./chunk-DUMORR7H.js";
 import "./chunk-K4HCWTBL.js";
+import "./chunk-V7V7HOLZ.js";
+import "./chunk-IP7WRSH3.js";
 import {
   require_correct_prototype_getter,
   require_object_get_prototype_of
 } from "./chunk-KTBTE3ID.js";
-import "./chunk-IP7WRSH3.js";
 import {
   require_es_object_to_string
 } from "./chunk-W5WTIVVC.js";
@@ -56,6 +52,10 @@ import {
   require_is_possible_prototype,
   require_object_set_prototype_of
 } from "./chunk-LJACIHUK.js";
+import {
+  require_define_built_in_accessor
+} from "./chunk-XIS6K74X.js";
+import "./chunk-ZMV7AIVQ.js";
 import "./chunk-L2Q7U5JX.js";
 import "./chunk-OW7VFTLO.js";
 import {
