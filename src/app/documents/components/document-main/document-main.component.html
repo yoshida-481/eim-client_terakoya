@@ -171,7 +171,8 @@
 								</div>
 
 								<div id="dataGridDiv" style="height: 100%;"
-										ng2FileDrop [uploader]="uploader" [ngClass]="{'eim-file-dragging': isFileDragging}" (fileOver)="this.isFileDragging = $event">
+										ng2FileDrop [uploader]="uploader" [ngClass]="{'eim-file-dragging': isFileDragging}" (fileOver)="this.isFileDragging = $event"
+										(dragover)="onGridRowDragOver($event)" (dragleave)="onGridRowDragLeave($event)" (drop)="onGridRowDrop($event)">
 									<eim-data-grid #contentsList 
 										[componentService]="contentsListComponentService"
 										[contextMenuItems]="info.contentsListMenuItems"

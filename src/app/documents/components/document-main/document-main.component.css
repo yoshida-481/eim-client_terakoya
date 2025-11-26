@@ -474,3 +474,13 @@ p-header {
 	border-radius: 8px;
 	color: white;
 }
+
+/* ==========================================================================
+   ドラッグ&ドロップハイライト
+   ========================================================================== */
+/* グリッド行のドロップターゲットハイライト */
+::ng-deep .eim-drag-drop-target {
+	background-color: #e3f2fd !important;
+	border: 2px dashed #2196F3 !important;
+	border-radius: 4px;
+}

@@ -3211,7 +3211,15 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			editable: (params) => {return this.isCellEditable === true},
 			headerClass: 'eim-editable-column-header',
 			cellRendererParams: {
-				draggableToBoxArea: true
+				draggableToBoxArea: true,
+				getParentData: () => {
+					// ワークスペースアコーディオンの場合のみ親データを返す
+					if (this.info.accordionActiveIndex === accordionIndex.WORKSPACE) {
+						const selectedData = this.contentsTree.getSelectedData();
+						return selectedData && selectedData.length > 0 ? selectedData[0] : null;
+					}
+					return null;
+				}
 			}
 		});
 
@@ -3283,7 +3291,15 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			cellRendererFramework: EIMObjectNameRendererComponent, cellEditorFramework: EIMTextEditorRendererComponent, editable: true,
 			headerClass: 'eim-editable-column-header',
 			cellRendererParams: {
-				draggableToBoxArea: true
+				draggableToBoxArea: true,
+				getParentData: () => {
+					// ワークスペースアコーディオンの場合のみ親データを返す
+					if (this.info.accordionActiveIndex === accordionIndex.WORKSPACE) {
+						const selectedData = this.contentsTree.getSelectedData();
+						return selectedData && selectedData.length > 0 ? selectedData[0] : null;
+					}
+					return null;
+				}
 			}
 		});
 
@@ -3968,6 +3984,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 * @param event イベント
 	 */
 	onDragOver(event: DragEvent) {
+		// ワークスペース内移動用のデータが存在する場合は、グリッド行のドラッグオーバー処理に委譲
+		// dragoverイベントではgetDataが使えないため、typesを確認
+		if (event.dataTransfer?.types && event.dataTransfer.types.includes('application/x-eim-workspace-drag')) {
+			// グリッド行のドラッグオーバー処理はonGridRowDragOverで処理される
+			return;
+		}
+		
 		if (event.preventDefault) {
 			event.preventDefault();
 		}
@@ -3995,6 +4018,242 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			event.preventDefault();
 			this.fileDragEnterTarget = undefined;
 		}
+	}
+
+	/**
+	 * グリッド行のドラッグオーバーイベント
+	 * @param event ドラッグイベント
+	 */
+	public onGridRowDragOver(event: DragEvent): void {
+		// ファイルドロップの場合は既存処理に委譲
+		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
+			return;
+		}
+		
+		// ワークスペース内移動用のデータが存在するかチェック
+		// dragoverイベントではgetDataが使えないため、typesを確認
+		if (!event.dataTransfer?.types || !event.dataTransfer.types.includes('application/x-eim-workspace-drag')) {
+			return;
+		}
+		
+		event.preventDefault();
+		event.stopPropagation();
+		
+		// まず既存のハイライトをすべてクリア
+		this.clearDropTargetHighlight();
+		
+		// ドロップ可能な行をハイライト
+		const rowElement = this.getRowElementFromEvent(event);
+		if (rowElement) {
+			const rowIndex = parseInt(rowElement.getAttribute('row-index') || '-1');
+			if (rowIndex >= 0 && this.contentsList && this.contentsList.info && this.contentsList.info.gridApi) {
+				const rowNode = this.contentsList.info.gridApi.getDisplayedRowAtIndex(rowIndex);
+				
+				if (rowNode && this.isDroppableTarget(rowNode.data)) {
+					event.dataTransfer!.dropEffect = 'move';
+					rowElement.classList.add('eim-drag-drop-target');
+				} else {
+					event.dataTransfer!.dropEffect = 'none';
+				}
+			}
+		}
+	}
+
+	/**
+	 * グリッド行からドラッグが離れた時のイベント
+	 * @param event ドラッグイベント
+	 */
+	public onGridRowDragLeave(event: DragEvent): void {
+		// ファイルドロップの場合は既存処理に委譲
+		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
+			return;
+		}
+		
+		// ワークスペース内移動用のデータが存在するかチェック
+		if (!event.dataTransfer?.types || !event.dataTransfer.types.includes('application/x-eim-workspace-drag')) {
+			return;
+		}
+		
+		// 実際にグリッドから外れた時のみハイライトをクリア
+		// dragleaveイベントは子要素間の移動でも発火するため、relatedTargetをチェック
+		const relatedTarget = event.relatedTarget as HTMLElement;
+		const currentTarget = event.currentTarget as HTMLElement;
+		
+		// relatedTargetがnull、またはcurrentTargetの外側にある場合のみクリア
+		if (!relatedTarget || !currentTarget.contains(relatedTarget)) {
+			this.clearDropTargetHighlight();
+		}
+	}
+
+	/**
+	 * グリッド行へのドロップイベント
+	 * @param event ドロップイベント
+	 */
+	public onGridRowDrop(event: DragEvent): void {
+		// ファイルドロップの場合は既存処理に委譲
+		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
+			return;
+		}
+		
+		event.preventDefault();
+		event.stopPropagation();
+		
+		// ワークスペース内移動用のデータを取得
+		const jsonData = event.dataTransfer?.getData('application/x-eim-workspace-drag');
+		if (!jsonData) {
+			this.clearDropTargetHighlight();
+			return;
+		}
+		
+		try {
+			const dragInfo = JSON.parse(jsonData);
+			if (!dragInfo || !dragInfo.data) {
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			// ドロップ位置の行を取得
+			const rowElement = this.getRowElementFromEvent(event);
+			if (!rowElement) {
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			const rowIndex = parseInt(rowElement.getAttribute('row-index') || '-1');
+			if (rowIndex < 0 || !this.contentsList || !this.contentsList.info || !this.contentsList.info.gridApi) {
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			const rowNode = this.contentsList.info.gridApi.getDisplayedRowAtIndex(rowIndex);
+			if (!rowNode) {
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			const dropTargetData = rowNode.data;
+			
+			// ドロップ先の検証
+			if (!this.isDroppableTarget(dropTargetData)) {
+				this.messageService.show(
+					EIMMessageType.error,
+					this.translateService.instant('EIM_DOCUMENTS.ERROR_00005')
+				);
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			// 同じアイテムへのドロップは無視
+			const draggedData = Array.isArray(dragInfo.data) ? dragInfo.data[0] : dragInfo.data;
+			if (draggedData.objId === dropTargetData.objId) {
+				this.clearDropTargetHighlight();
+				return;
+			}
+			
+			// ドラッグ&ドロップ処理を実行
+			this.executeDragDrop(dragInfo.data, dropTargetData, dragInfo.dragType || 'workspace-internal');
+			
+			this.clearDropTargetHighlight();
+			
+		} catch (error) {
+			console.error('Grid Drag&Drop error:', error);
+			this.clearDropTargetHighlight();
+		}
+	}
+
+	/**
+	 * 統合ドラッグ&ドロップ処理メソッド
+	 * @param draggedData ドラッグされたデータ
+	 * @param dropTargetData ドロップ先データ
+	 * @param dragType ドラッグタイプ（'workspace-internal' | 'workspace-cross'）
+	 */
+	private executeDragDrop(draggedData: any, dropTargetData: any, dragType: string = 'workspace-internal'): void {
+		// 元の親フォルダを取得
+		// 現在の実装ではワークスペース内移動のみをサポート
+		const treeSelectedData = this.contentsTree.getSelectedData();
+		const originalParent = treeSelectedData && treeSelectedData.length > 0 ? treeSelectedData[0] : null;
+		
+		if (!originalParent) {
+			this.messageService.show(
+				EIMMessageType.error,
+				this.translateService.instant('EIM_DOCUMENTS.ERROR_00005')
+			);
+			return;
+		}
+		
+		// ドラッグされたアイテムを配列に統一
+		const draggedItems = Array.isArray(draggedData) ? draggedData : [draggedData];
+		const parentData = dropTargetData;
+		
+		// cutバリデーションを先に実行
+		const cutValidationResult = this.contentsMainComponentService.validation(
+			'cut',
+			this.info,
+			originalParent,
+			draggedItems,
+			true
+		);
+		
+		if (!cutValidationResult) {
+			return;
+		}
+		
+		// cut処理を実行（切り取り情報を保存）
+		// 注意: cutメソッドは非同期処理を含むが、同期的にsavePasteSourceObjを実行する
+		// 既存の実装パターンに従う
+		this.contentsMainComponentService.cut(this.info, originalParent, draggedItems);
+		
+		// cut実行後、pasteバリデーションを実行
+		// pasteバリデーションはinfo.pasteSourceObjが設定されている必要がある
+		const pasteValidationResult = this.contentsMainComponentService.validation(
+			'paste',
+			this.info,
+			parentData,
+			draggedItems,
+			true
+		);
+		
+		if (!pasteValidationResult) {
+			// バリデーション失敗時は切り取り情報をクリア
+			this.contentsMainComponentService.clearPasteSourceObj(this.info);
+			return;
+		}
+		
+		// 貼り付け処理を実行
+		this.contentsMainComponentService.paste(
+			this.info,
+			parentData,
+			draggedItems
+		);
+	}
+
+	/**
+	 * ドロップ可能なターゲットかチェック
+	 * @param data ターゲットデータ
+	 * @returns ドロップ可能な場合true
+	 */
+	private isDroppableTarget(data: any): boolean {
+		return data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER ||
+			   data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE;
+	}
+
+	/**
+	 * イベントから行要素を取得
+	 * @param event ドラッグイベント
+	 * @returns 行要素
+	 */
+	private getRowElementFromEvent(event: DragEvent): HTMLElement | null {
+		const element = event.target as HTMLElement;
+		const rowElement = element.closest('.ag-row');
+		return rowElement as HTMLElement;
+	}
+
+	/**
+	 * ドロップターゲットのハイライトをクリア
+	 */
+	private clearDropTargetHighlight(): void {
+		const highlightedRows = document.querySelectorAll('.eim-drag-drop-target');
+		highlightedRows.forEach(row => row.classList.remove('eim-drag-drop-target'));
 	}
 	
 	/**

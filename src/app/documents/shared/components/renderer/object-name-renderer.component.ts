@@ -25,8 +25,8 @@ import { EIMDialogManagerComponentService } from '../dialog-manager/dialog-manag
     selector: 'eim-object-name-renderer',
     template: `
 		<div style="height: 100%; display: flex; align-items: center;" [draggable]="fileDraggable"
-				(dragstart)="fileDraggable && onDragStart($event)"
-				(dragend)="fileDraggable && onDragEnd($event)"
+				(dragstart)="onDragStart($event)"
+				(dragend)="onDragEnd($event)"
 				[class.fileDraggable]="fileDraggable">
 			<div *ngIf="fileDraggable">
 				<i class="pi pi-ellipsis-v"></i>
@@ -141,7 +141,32 @@ export class EIMObjectNameRendererComponent implements AgRendererComponent, OnIn
 			}
 		}
 
-		// Box連携用
+		// ワークスペース内移動用のドラッグ機能を有効化
+		// ワークスペースアコーディオンが表示されている場合、ファイル、フォルダ、タグをドラッグ可能にする
+		if (this.params.colDef.cellRendererParams && 
+			this.params.colDef.cellRendererParams.hasOwnProperty('getParentData')) {
+			// getParentDataを呼び出して、ワークスペースアコーディオンがアクティブかどうかを確認
+			// nullが返される場合は検索アコーディオンなど、ワークスペース以外のアコーディオン
+			try {
+				const parentData = this.params.colDef.cellRendererParams.getParentData();
+				// parentDataがnullでない場合、またはgetParentDataが存在する場合はワークスペース内移動が可能
+				// （agInitの時点では親が選択されていない可能性があるため、getParentDataの存在のみでも有効化）
+				const isDraggableItem = 
+					this.params.data.isDocument === true || 
+					this.params.data.isDocument === 'true' ||
+					this.params.data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER ||
+					this.params.data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_TAG;
+				
+				if (isDraggableItem) {
+					this.fileDraggable = true;
+				}
+			} catch (error) {
+				// getParentDataの呼び出しでエラーが発生した場合は無視
+				console.error('Error calling getParentData:', error);
+			}
+		}
+		
+		// Box連携用（ワークスペース内移動と併用可能）
 		if (this.serverConfigService.boxIntegrationFlg && this.serverConfigService.boxUserIntegFlg) {
 			const boxAreaState = this.documentSessionStorageService.getBoxAreaState();
 
@@ -149,10 +174,10 @@ export class EIMObjectNameRendererComponent implements AgRendererComponent, OnIn
 					this.params.colDef.cellRendererParams.hasOwnProperty('draggableToBoxArea') &&
 					boxAreaState.isDisplayingBox &&
 					(this.params.data.isDocument === true || this.params.data.isDocument === 'true')) {
-				// ドラッグアイコンを表示するかしないか
-				this.fileDraggable = this.params.colDef.cellRendererParams.draggableToBoxArea;
-			} else {
-				this.fileDraggable = false;
+				// Box連携用のドラッグも有効化（既にtrueの場合はそのまま）
+				if (!this.fileDraggable) {
+					this.fileDraggable = this.params.colDef.cellRendererParams.draggableToBoxArea;
+				}
 			}
 		}
 
@@ -210,26 +235,124 @@ export class EIMObjectNameRendererComponent implements AgRendererComponent, OnIn
 	 * @param event イベント
 	 */
 	onDragStart(event: DragEvent) {
-		const context: EIMDataGridComponent = this.params.context;
-		const selectedData = context.getSelectedData();
-		const find = selectedData.find((sel) => sel === this.params.data);
-		const draggableData = (find ? selectedData : [this.params.data])
-			.filter((data) => data.isDocument === true || data.isDocument === 'true');
-		const dragData = draggableData
-			.map((data) => ({
-				objId: Number(data.objId),
-				objName: String(data.objName),
-				...(data.publicFileName !== undefined && {
-					publicFileName: String(data.publicFileName),
-			}),
-			statusTypeKind: String(data.statusTypeKind),
-			readOnly: String(data.readOnly),
-			icon: this.getIcon(data),
-	}));
-		if (!find || selectedData.length !== draggableData.length) {
-			context.select(draggableData);
+		// fileDraggableがfalseの場合は処理を中断
+		if (!this.fileDraggable) {
+			event.preventDefault();
+			return;
 		}
-		this.boxFileDragComponentService.dragStart(event, dragData);
+
+		try {
+			if (!event.dataTransfer) {
+				console.error('onDragStart: event.dataTransfer is null');
+				event.preventDefault();
+				return;
+			}
+
+			const context: EIMDataGridComponent = this.params.context;
+			const selectedData = context.getSelectedData();
+			const find = selectedData.find((sel) => sel === this.params.data);
+			
+			// ドラッグ可能なデータを取得（ファイル、フォルダ、タグ）
+			const draggableData = (find ? selectedData : [this.params.data])
+				.filter((data) => 
+					data.isDocument === true || 
+					data.isDocument === 'true' ||
+					data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER ||
+					data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_TAG
+				);
+			
+			if (draggableData.length === 0) {
+				event.preventDefault();
+				return;
+			}
+			
+			// Box連携用のドラッグデータ（ファイルのみ）
+			const boxDraggableData = draggableData
+				.filter((data) => data.isDocument === true || data.isDocument === 'true')
+				.map((data) => ({
+					objId: Number(data.objId),
+					objName: String(data.objName),
+					...(data.publicFileName !== undefined && {
+						publicFileName: String(data.publicFileName),
+					}),
+					statusTypeKind: String(data.statusTypeKind),
+					readOnly: String(data.readOnly),
+					icon: this.getIcon(data),
+				}));
+			
+			// ワークスペース内移動用のドラッグデータを準備
+			// 現在選択されている親フォルダを取得
+			let currentParent: any = null;
+			try {
+				if (this.params.colDef.cellRendererParams && 
+					this.params.colDef.cellRendererParams.getParentData) {
+					currentParent = this.params.colDef.cellRendererParams.getParentData();
+					// 循環参照を避けるため、必要なプロパティのみを抽出
+					if (currentParent) {
+						currentParent = {
+							objId: currentParent.objId,
+							objName: currentParent.objName,
+							objTypeName: currentParent.objTypeName
+						};
+					}
+				}
+			} catch (error) {
+				console.error('onDragStart: Error getting parent data:', error);
+				// 親データの取得に失敗してもドラッグは続行
+			}
+			
+			// ワークスペース内移動用のドラッグデータを準備（循環参照を避けるため、必要なプロパティのみを抽出）
+			const dragData = draggableData.length === 1 
+				? {
+					objId: draggableData[0].objId,
+					objName: draggableData[0].objName,
+					objTypeName: draggableData[0].objTypeName,
+					isDocument: draggableData[0].isDocument,
+					isDocumentLink: draggableData[0].isDocumentLink
+				}
+				: draggableData.map((data) => ({
+					objId: data.objId,
+					objName: data.objName,
+					objTypeName: data.objTypeName,
+					isDocument: data.isDocument,
+					isDocumentLink: data.isDocumentLink
+				}));
+			
+			const dragInfo = {
+				data: dragData,
+				parentData: currentParent,
+				dragType: 'workspace-internal' // ワークスペース内移動を示す
+			};
+			
+			event.dataTransfer.effectAllowed = 'move';
+			
+			// ワークスペース内移動用のデータを設定（カスタムMIMEタイプを使用）
+			try {
+				const jsonData = JSON.stringify(dragInfo);
+				event.dataTransfer.setData('application/x-eim-workspace-drag', jsonData);
+			} catch (error) {
+				console.error('onDragStart: Error stringifying dragInfo:', error);
+				event.preventDefault();
+				return;
+			}
+			
+			// Box連携用のデータも設定（既存機能との互換性のため）
+			if (boxDraggableData.length > 0) {
+				try {
+					this.boxFileDragComponentService.dragStart(event, boxDraggableData);
+				} catch (error) {
+					console.error('onDragStart: Error in boxFileDragComponentService.dragStart:', error);
+					// Box連携のエラーは無視して続行
+				}
+			}
+			
+			if (!find || selectedData.length !== draggableData.length) {
+				context.select(draggableData);
+			}
+		} catch (error) {
+			console.error('onDragStart: Unexpected error:', error);
+			event.preventDefault();
+		}
 	}
 
 	/**
@@ -237,6 +360,15 @@ export class EIMObjectNameRendererComponent implements AgRendererComponent, OnIn
 	 * @param event イベント
 	 */
 	onDragEnd(event: DragEvent) {
-		this.boxFileDragComponentService.dragEnd(event);
+		// fileDraggableがfalseの場合は処理を中断
+		if (!this.fileDraggable) {
+			return;
+		}
+
+		try {
+			this.boxFileDragComponentService.dragEnd(event);
+		} catch (error) {
+			console.error('onDragEnd: Error in boxFileDragComponentService.dragEnd:', error);
+		}
 	}
 }

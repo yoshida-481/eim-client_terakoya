@@ -3402,7 +3402,7 @@ export class EIMDocumentMainComponentService {
 	 * 貼り付け元オブジェクト情報をクリアします.
 	 * @param info コンポーネント情報
 	 */
-	private clearPasteSourceObj(info: EIMDocumentMainComponentInfo): void {
+	public clearPasteSourceObj(info: EIMDocumentMainComponentInfo): void {
 		info.pasteSourceObj = null;
 	}
 
