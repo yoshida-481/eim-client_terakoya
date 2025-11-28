@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../../node_modules/core-js/internals/math-log10.js"],
-  "sourcesContent": ["'use strict';\n\nvar log = Math.log;\nvar LOG10E = Math.LOG10E;\n\n// eslint-disable-next-line es/no-math-log10 -- safe\nmodule.exports = Math.log10 || function log10(x) {\n  return log(x) * LOG10E;\n};"],
-  "mappings": ";;;;;AAAA;AAAA;AAAA;AAEA,QAAI,MAAM,KAAK;AACf,QAAI,SAAS,KAAK;AAGlB,WAAO,UAAU,KAAK,SAAS,SAAS,MAAM,GAAG;AAC/C,aAAO,IAAI,CAAC,IAAI;AAAA,IAClB;AAAA;AAAA;",
-  "names": []
-}
