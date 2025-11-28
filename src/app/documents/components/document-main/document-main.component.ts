@@ -86,6 +86,7 @@ import { BoxEIMFileDragComponentService, BoxEIMFileDragInfo, } from "../eim-file
 import { EIMBoxFileService } from "app/shared/services/apis/box-file.service";
 import { EIMBoxContentsListComponent } from "../box-contents-list/box-contents-list.component";
 
+import { FileUploader } from 'ng2-file-upload';
 
 export namespace accordionIndex {
 	export const WORKSPACE = 0;
@@ -163,18 +164,18 @@ namespace contextMenuDefineName {
  *      </eim-document-main>
  */
 @Component({
-    selector: 'eim-document-main',
-    templateUrl: './document-main.component.html',
-    styleUrls: ['./document-main.component.css'],
-    providers: [
-        MenubarModule,
-        BreadcrumbModule,
-        EIMDocumentMainComponentService,
-        EIMContentsTreeComponentService,
-        EIMContentsListComponentService,
-        EIMAccordionSearchComponentService
-    ],
-    standalone: false
+	selector: 'eim-document-main',
+	templateUrl: './document-main.component.html',
+	styleUrls: ['./document-main.component.css'],
+	providers: [
+		MenubarModule,
+		BreadcrumbModule,
+		EIMDocumentMainComponentService,
+		EIMContentsTreeComponentService,
+		EIMContentsListComponentService,
+		EIMAccordionSearchComponentService
+	],
+	standalone: false
 })
 export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
@@ -183,15 +184,15 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** ツリーコンポーネント */
 	@ViewChild('contentsTree', { static: true })
-		contentsTree: EIMTreeComponent;
+	contentsTree: EIMTreeComponent;
 
 	/** グリッドコンポーネント */
 	@ViewChild('contentsList', { static: true })
-		contentsList: EIMDataGridComponent;
+	contentsList: EIMDataGridComponent;
 
 	/** CSVダウンロードグリッドコンポーネント */
 	@ViewChild('csvDownloadList')
-		csvDownloadList: EIMDataGridComponent;
+	csvDownloadList: EIMDataGridComponent;
 
 	/** 属性ツリーコンポーネント */
 	@ViewChild('attrTree')
@@ -215,27 +216,27 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** サムネイルビューコンポーネント */
 	@ViewChild('thumbnailViewer', { static: false })
-		thumbnailViewer: EIMThumbnailViewerComponent;
+	thumbnailViewer: EIMThumbnailViewerComponent;
 
 	/** URLダイレクトアクセス対象オブジェクトID */
 	@Input('jumpTargetId')
-		public jumpTargetId: number;
+	public jumpTargetId: number;
 
 	/** URLダイレクトアクセス対象フォルダーフラグ */
 	@Input('isFolder')
-		public isFolder: boolean;
+	public isFolder: boolean;
 
 	/** ジャンプ対象ドキュメントリンクフラグ */
 	@Input('linkParentObjId')
-		public linkParentObjId: number;
+	public linkParentObjId: number;
 
 	/** ダウンロードPrivateドキュメントオブジェクトID */
 	@Input('downloadPrivateFileObjId')
-		public downloadPrivateFileObjId: number;
+	public downloadPrivateFileObjId: number;
 
 	/** ダウンロードPublicドキュメントオブジェクトID */
 	@Input('downloadPublicFileObjId')
-		public downloadPublicFileObjId: number;
+	public downloadPublicFileObjId: number;
 
 	/** 作成者 */
 	public createUser: EIMUserDomain;
@@ -262,20 +263,20 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** ツリーコンポーネント初期化処理無効化 */
 	@Input('disabledTreeInitialization')
-		public disabledTreeInitialization: boolean = false;
+	public disabledTreeInitialization: boolean = false;
 
 	/** オブジェクトを選択する際のコンテキストルート(http://localhost/eim) */
 	@Input() contextRootForSelectObject = null;
 
 	/** オブジェクトを選択する際のルートパス(client/#/以降) */
 	@Input() routePathForSelectObject = null;
-	
+
 	/** オブジェクトを選択する際の追加クエリパラメータ('param=value'の配列) */
 	@Input() paramsForSelectObject: string[] = null;
 
 	/** ファイルダウンロードのコンテキストルート */
 	@Input() contextRootForDownloadDocument = null;
-	
+
 	@Output() shownDialog: EventEmitter<string> = new EventEmitter<string>();
 
 	/** ツリー選択データ */
@@ -289,9 +290,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** 検索時　本文抜粋／リスト／サムネイル切替表示タイプ */
 	public displayTypes: SelectItem[] = [
-		{label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02030"), value: EIMConstantService.DISPLAY_TEXTEXCERPT}, //本文抜粋
-		{label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02031") , value: EIMConstantService.DISPLAY_LIST}, // リスト
-		{label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02223") , value: EIMConstantService.DISPLAY_THUMBNAIL} //サムネイル
+		{ label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02030"), value: EIMConstantService.DISPLAY_TEXTEXCERPT }, //本文抜粋
+		{ label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02031"), value: EIMConstantService.DISPLAY_LIST }, // リスト
+		{ label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02223"), value: EIMConstantService.DISPLAY_THUMBNAIL } //サムネイル
 	];
 
 	/** 検索時　選択されている表示タイプのID */
@@ -299,13 +300,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** 検索時　前に選択されていた表示タイプのID */
 	public preSelectedDisplayTypeId: number;
-	
+
 	/** ワークスペース時 リスト／サムネイル切替表示タイプ */
 	public workspaceDisplayTypes: SelectItem[] = [
-		{label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02031") , value: EIMConstantService.DISPLAY_LIST}, // リスト
-		{label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02223") , value: EIMConstantService.DISPLAY_THUMBNAIL} //サムネイル
+		{ label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02031"), value: EIMConstantService.DISPLAY_LIST }, // リスト
+		{ label: this.translateService.instant("EIM_DOCUMENTS.LABEL_02223"), value: EIMConstantService.DISPLAY_THUMBNAIL } //サムネイル
 	];
-	
+
 	/** ワークスペース時　選択されている表示タイプのID */
 	public selectedWorkspaceDisplayTypeId = EIMConstantService.DISPLAY_LIST;
 
@@ -317,247 +318,254 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	//
 	/** メインメニュー 新規 */
 	private menulistNew: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03025', name: 'New', icon: 'eim-icon-plus'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03025', name: 'New', icon: 'eim-icon-plus' };
 	/** メインメニュー 編集 */
 	private menulistEdit: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03026', name: 'Edit', icon: 'eim-icon-pencil'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03026', name: 'Edit', icon: 'eim-icon-pencil' };
 	/** メインメニュー 改訂 */
 	private menulistRevision: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03080', name: 'Revision', icon: 'fa fa-clone'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03080', name: 'Revision', icon: 'fa fa-clone' };
 	/** メインメニュー 検索 */
 	private menulistSearch: EIMMenuItem =
-    	{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03024', name: 'showSearch', icon: 'eim-icon-search',
-    	command: (event) => { this.invokeMethod(event, this.contentsList, 'showSearch'); }
-    };
+		{
+			label: '', rKey: 'EIM_DOCUMENTS.LABEL_03024', name: 'showSearch', icon: 'eim-icon-search',
+			command: (event) => { this.invokeMethod(event, this.contentsList, 'showSearch'); }
+		};
 	/** メインメニュー 承認/公開 */
 	private menulistApprovalRelease: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03081', name: 'ApprovalRelease', icon: 'eim-icon-thumb-up'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03081', name: 'ApprovalRelease', icon: 'eim-icon-thumb-up' };
 	/** メインメニュー プロパティ */
 	private menulistProperty: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'Property', icon: 'eim-icon-list'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'Property', icon: 'eim-icon-list' };
 	/** メインメニュー 表示 */
 	private menulistView: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03040', name: 'View', icon: 'eim-icon-table'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03040', name: 'View', icon: 'eim-icon-table' };
 	/** メインメニュー マイスペース */
 	private menulistMyspace: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03082', name: 'Myspace', icon: 'fa fa-star'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03082', name: 'Myspace', icon: 'fa fa-star' };
 	/** メインメニュー フォルダ複製 */
 	private menulistFolderReplication: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03084', name: 'folderReplication', icon: 'eim-icon-folder-tree'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03084', name: 'folderReplication', icon: 'eim-icon-folder-tree' };
 	/** メニュー ドキュメント一括 */
 	private menuItemShowLumpDocumentCreator: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03062', name: 'LumpDocumentCreator', icon: 'fa fa-files-o'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03062', name: 'LumpDocumentCreator', icon: 'fa fa-files-o' };
 	/** メニュー ダウンロード */
 	private menuItemDownload: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03095', name: 'download', icon: 'fa fa-files-o'};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03095', name: 'download', icon: 'fa fa-files-o' };
 
 	//
 	// メニュー
 	//
 	/** メニュー ドキュメント */
 	private menuItemCreateDocument: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03030', name: 'showDocumentCreator', icon: 'eim-icon-file', command: (event) => {this.invokeMethod(event, this.contentsList, 'showDocumentCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03030', name: 'showDocumentCreator', icon: 'eim-icon-file', command: (event) => { this.invokeMethod(event, this.contentsList, 'showDocumentCreator'); } };
 	/** メニュー フォルダ */
 	private menuItemCreateFolder: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03031', name: 'showFolderCreator', icon: 'eim-icon-folder', command: (event) => {this.invokeMethod(event, this.contentsList, 'showFolderCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03031', name: 'showFolderCreator', icon: 'eim-icon-folder', command: (event) => { this.invokeMethod(event, this.contentsList, 'showFolderCreator'); } };
 	/** メニュー タグ */
 	private menuItemCreateTag: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03060', name: 'showTagCreator', icon: 'fa fa-tag', command: (event) => {this.invokeMethod(event, this.contentsList, 'showTagCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03060', name: 'showTagCreator', icon: 'fa fa-tag', command: (event) => { this.invokeMethod(event, this.contentsList, 'showTagCreator'); } };
 	/** メニュー ワークスペース */
 	private menuItemCreateWorkspace: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03061', name: 'showWorkspaceCreator', icon: 'fa fa-lg eim-icon-workspace', command: (event) => {this.invokeMethod(event, this.contentsList, 'showWorkspaceCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03061', name: 'showWorkspaceCreator', icon: 'fa fa-lg eim-icon-workspace', command: (event) => { this.invokeMethod(event, this.contentsList, 'showWorkspaceCreator'); } };
 	/** メニュー ZIP展開登録 */
 	private menuItemShowZip_expansion_registration: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03128', name: 'showLumpDocumentCreator', icon: 'fa fa-files-o', command: (event) => {this.invokeMethod(event, this.contentsList, 'showLumpDocumentCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03128', name: 'showLumpDocumentCreator', icon: 'fa fa-files-o', command: (event) => { this.invokeMethod(event, this.contentsList, 'showLumpDocumentCreator'); } };
 	/** メニュー フォルダアップロード */
 	private menuItemShowLumpFolderCreator: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03127', name: 'showLumpFolderCreator', icon: 'fa fa-files-o', command: (event) => {this.invokeMethod(event, this.contentsList, 'showLumpFolderCreator'); }};
-		
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03127', name: 'showLumpFolderCreator', icon: 'fa fa-files-o', command: (event) => { this.invokeMethod(event, this.contentsList, 'showLumpFolderCreator'); } };
+
 	/** メニュー スキャン用紙 */
 	private menuItemShowCoverCreator: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03063', name: 'showCoverCreator', icon: 'eim-icon-printer', command: (event) => {this.invokeMethod(event, this.contentsList, 'showCoverCreator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03063', name: 'showCoverCreator', icon: 'eim-icon-printer', command: (event) => { this.invokeMethod(event, this.contentsList, 'showCoverCreator'); } };
 	/** メニュー チェックイン */
 	private menuItemCheckin: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03029', name: 'showCheckin', icon: 'eim-icon-checkin', command: (event) => {this.invokeMethod(event, this.contentsList, 'showCheckin'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03029', name: 'showCheckin', icon: 'eim-icon-checkin', command: (event) => { this.invokeMethod(event, this.contentsList, 'showCheckin'); } };
 	/** メニュー チェックアウト */
 	private menuItemCheckout: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03032', name: 'checkout', icon: 'eim-icon-checkout', command: (event) => {this.invokeMethod(event, this.contentsList, 'checkout'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03032', name: 'checkout', icon: 'eim-icon-checkout', command: (event) => { this.invokeMethod(event, this.contentsList, 'checkout'); } };
 	/** メニュー チェックアウト取り消し */
 	private menuItemCancelCheckout: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03033', name: 'cancelCheckout', icon: 'eim-icon-checkout_back', command: (event) => {this.invokeMethod(event, this.contentsList, 'cancelCheckout'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03033', name: 'cancelCheckout', icon: 'eim-icon-checkout_back', command: (event) => { this.invokeMethod(event, this.contentsList, 'cancelCheckout'); } };
 	/** メニュー コピー */
 	private menuItemCopy: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03034', name: 'copy', icon: 'eim-icon-copy', command: (event) => {this.invokeMethod(event, this.contentsList, 'copy'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03034', name: 'copy', icon: 'eim-icon-copy', command: (event) => { this.invokeMethod(event, this.contentsList, 'copy'); } };
 	/** メニュー ブランチコピー */
 	private menuItemCopyBranch: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03008', name: 'copyBranch', icon: 'eim-icon-branch-copy', command: (event) => {this.invokeMethod(event, this.contentsList, 'copyBranch'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03008', name: 'copyBranch', icon: 'eim-icon-branch-copy', command: (event) => { this.invokeMethod(event, this.contentsList, 'copyBranch'); } };
 	/** メニュー 切り取り */
 	private menuItemCut: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03035', name: 'cut', icon: 'eim-icon-scissors', command: (event) => {this.invokeMethod(event, this.contentsList, 'cut'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03035', name: 'cut', icon: 'eim-icon-scissors', command: (event) => { this.invokeMethod(event, this.contentsList, 'cut'); } };
 	/** メニュー 貼り付け */
 	private menuItemPaste: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03036', name: 'paste', icon: 'eim-icon-paste', command: (event) => {this.invokeMethod(event, this.contentsList, 'paste'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03036', name: 'paste', icon: 'eim-icon-paste', command: (event) => { this.invokeMethod(event, this.contentsList, 'paste'); } };
 	/** メニュー 名前の変更 */
 	private menuItemRename: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03037', name: 'rename', icon: 'eim-icon-rename', command: (event) => {this.invokeMethod(event, this.contentsList, 'rename'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03037', name: 'rename', icon: 'eim-icon-rename', command: (event) => { this.invokeMethod(event, this.contentsList, 'rename'); } };
 	/** メニュー リンク貼付け（版固定/手動） */
 	private menuItemPasteFixedLink: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03064', name: 'pasteFixedLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'pasteFixedLink'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03064', name: 'pasteFixedLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'pasteFixedLink'); } };
 	/** メニュー リンク貼付け（最新版/自動） */
 	private menuItemPasteLatestLink: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03065', name: 'pasteLatestLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'pasteLatestLink'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03065', name: 'pasteLatestLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'pasteLatestLink'); } };
 	/** メニュー リンク設定 */
 	private menuItemShowLinkUpdator: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03066', name: 'showLinkUpdator', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'showLinkUpdator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03066', name: 'showLinkUpdator', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'showLinkUpdator'); } };
 	/** メニュー リンク更新（最新リビジョン） */
 	private menuItemUpdateLatestLink: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03067', name: 'updateLatestLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'updateLatestLink'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03067', name: 'updateLatestLink', icon: 'fa fa-link fa-flip-vertical eim-icon-link-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'updateLatestLink'); } };
 	/** メニュー タグ割当て */
 	private menuItemShowAssignTag: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03068', name: 'showAssignTag', icon: 'fa fa-tag', command: (event) => {this.invokeMethod(event, this.contentsList, 'showAssignTag'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03068', name: 'showAssignTag', icon: 'fa fa-tag', command: (event) => { this.invokeMethod(event, this.contentsList, 'showAssignTag'); } };
 	/** メニュー フォルダのみ */
 	private menuItemFolderOnly: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03085', name: 'folderOnly', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'folderOnly'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03085', name: 'folderOnly', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'folderOnly'); } };
 	/** メニュー ドキュメント含む(手動更新リンクとして複製) */
 	private menuItemIncludingDocumentReplicationFixedLink: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03086', name: 'includingDocumentReplicationFixedLink', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'includingDocumentReplicationFixedLink'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03086', name: 'includingDocumentReplicationFixedLink', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'includingDocumentReplicationFixedLink'); } };
 	/** メニュー ドキュメント含む(公開時更新リンクとして複製) */
 	private menuItemIncludingDocumentReplicationLatestLink: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03087', name: 'includingDocumentReplicationLatestLink', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'includingDocumentReplicationLatestLink'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03087', name: 'includingDocumentReplicationLatestLink', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'includingDocumentReplicationLatestLink'); } };
 	/** メニュー OCR処理設定 */
 	private menuItemShowOCRSettingUpdator: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03069', name: 'showOCRSettingUpdator', icon: 'eim-icon-printer', command: (event) => {this.invokeMethod(event, this.contentsList, 'showOCRSettingUpdator'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03069', name: 'showOCRSettingUpdator', icon: 'eim-icon-printer', command: (event) => { this.invokeMethod(event, this.contentsList, 'showOCRSettingUpdator'); } };
 	/** メニュー OCR処理実行 */
 	private menuItemExecuteOCR: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03070', name: 'executeOCR', icon: 'eim-icon-printer', command: (event) => {this.invokeMethod(event, this.contentsList, 'executeOCR'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03070', name: 'executeOCR', icon: 'eim-icon-printer', command: (event) => { this.invokeMethod(event, this.contentsList, 'executeOCR'); } };
 	/** メニュー OCR処理取消 */
 	private menuItemCancelOCR: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03071', name: 'cancelOCR', icon: 'eim-icon-printer', command: (event) => {this.invokeMethod(event, this.contentsList, 'cancelOCR'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03071', name: 'cancelOCR', icon: 'eim-icon-printer', command: (event) => { this.invokeMethod(event, this.contentsList, 'cancelOCR'); } };
 	/** メニュー 公開ファイル結合 */
 	private menuItemShowPublicFileCombineExecutor: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03072', name: 'showPublicFileCombineExecutor', icon: 'eim-icon-public-file', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPublicFileCombineExecutor'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03072', name: 'showPublicFileCombineExecutor', icon: 'eim-icon-public-file', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPublicFileCombineExecutor'); } };
 	/** メニュー 結合対象に追加 */
 	private menuItemAddPublicFileCombine: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03099', name: 'addPublicFileCombine', icon: 'eim-icon-checkout', command: (event) => {this.invokeMethod(event, this.contentsList, 'addPublicFileCombine'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03099', name: 'addPublicFileCombine', icon: 'eim-icon-checkout', command: (event) => { this.invokeMethod(event, this.contentsList, 'addPublicFileCombine'); } };
 	/** メニュー 公開ファイル比較 */
 	private menuItemShowPublicFileCompareExecutor: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03073', name: 'showPublicFileCompareExecutor', icon: 'eim-icon-public-file', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPublicFileCompareExecutor'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03073', name: 'showPublicFileCompareExecutor', icon: 'eim-icon-public-file', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPublicFileCompareExecutor'); } };
 	/** メニュー 比較元ドキュメント選択 */
 	private menuItemSourceDocument: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03113', name: 'sourceDocument', icon: 'eim-icon-checkout', command: (event) => {this.invokeMethod(event, this.contentsList, 'sourceDocument'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03113', name: 'sourceDocument', icon: 'eim-icon-checkout', command: (event) => { this.invokeMethod(event, this.contentsList, 'sourceDocument'); } };
 	/** メニュー 比較先ドキュメント選択 */
 	private menuItemDestinationDocument: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03114', name: 'destinationDocument', icon: 'eim-icon-checkout', command: (event) => {this.invokeMethod(event, this.contentsList, 'destinationDocument'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03114', name: 'destinationDocument', icon: 'eim-icon-checkout', command: (event) => { this.invokeMethod(event, this.contentsList, 'destinationDocument'); } };
 	/** メニュー 公開ファイルセキュリティ設定 */
 	private menuItemShowPublicFileSecurityUpdater: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03074', name: 'showPublicFileSecurityUpdater', icon: 'eim-icon-public-file', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPublicFileSecurityUpdater'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03074', name: 'showPublicFileSecurityUpdater', icon: 'eim-icon-public-file', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPublicFileSecurityUpdater'); } };
 	/** メニュー 署名・暗号化 */
 	private menuItemShowSignAndEncryption: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03091', name: 'showSignAndEncryption', icon: 'fa fa-lock', command: (event) => {this.invokeMethod(event, this.contentsList, 'showSignAndEncryption'); }};
-		/** メニュー 削除 */
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03091', name: 'showSignAndEncryption', icon: 'fa fa-lock', command: (event) => { this.invokeMethod(event, this.contentsList, 'showSignAndEncryption'); } };
+	/** メニュー 削除 */
 	private menuItemDelete: EIMMenuItem =
-		{label: '', rKey: 'EIM.LABEL_03003', name: 'delete', icon: 'eim-icon-trash', command: (event) => {this.invokeMethod(event, this.contentsList, 'delete'); }};
+		{ label: '', rKey: 'EIM.LABEL_03003', name: 'delete', icon: 'eim-icon-trash', command: (event) => { this.invokeMethod(event, this.contentsList, 'delete'); } };
 	/** メニュー 公開 */
 	private menuItemPublic: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03022', name: 'showPublic', icon: 'fa fa-unlock', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPublic'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03022', name: 'showPublic', icon: 'fa fa-unlock', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPublic'); } };
 	/** メニュー 公開PDFの事前変換 */
 	private menuItemCreatePublicPdf: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03059', name: 'createPublicPdf', icon: 'eim-icon-pdf-menu', command: (event) => {this.invokeMethod(event, this.contentsList, 'createPublicPdf'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03059', name: 'createPublicPdf', icon: 'eim-icon-pdf-menu', command: (event) => { this.invokeMethod(event, this.contentsList, 'createPublicPdf'); } };
 	/** メニュー 公開PDFの事前設定 */
 	private menuItemPreSettingsPublicPdf: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03092', name: 'showPreSettingsPublicPdf', icon: 'eim-icon-pdf-menu', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPreSettingsPublicPdf'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03092', name: 'showPreSettingsPublicPdf', icon: 'eim-icon-pdf-menu', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPreSettingsPublicPdf'); } };
 	/** メニュー 公開取消 */
 	private menuItemPublicCancel: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03041', name: 'showPublicCancel', icon: 'fa fa-unlock-alt', command: (event) => {this.invokeMethod(event, this.contentsList, 'showPublicCancel'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03041', name: 'showPublicCancel', icon: 'fa fa-unlock-alt', command: (event) => { this.invokeMethod(event, this.contentsList, 'showPublicCancel'); } };
 	/** メニュー 承認 */
 	private menuItemApprove: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03042', name: 'doApprove', icon: 'eim-icon-thumb-up', command: (event) => {this.invokeMethod(event, this.contentsList, 'doApprove'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03042', name: 'doApprove', icon: 'eim-icon-thumb-up', command: (event) => { this.invokeMethod(event, this.contentsList, 'doApprove'); } };
 	/** メニュー 承認依頼 */
 	private menuItemRequestApprove: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03043', name: 'showRequestApprove', icon: 'fa fa-share', command: (event) => {this.invokeMethod(event, this.contentsList, 'showRequestApprove'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03043', name: 'showRequestApprove', icon: 'fa fa-share', command: (event) => { this.invokeMethod(event, this.contentsList, 'showRequestApprove'); } };
 	/** メニュー 承認依頼取消 */
 	private menuItemCancelAproveRequest: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03044', name: 'cancelAproveRequest', icon: 'fa fa-reply', command: (event) => {this.invokeMethod(event, this.contentsList, 'cancelAproveRequest'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03044', name: 'cancelAproveRequest', icon: 'fa fa-reply', command: (event) => { this.invokeMethod(event, this.contentsList, 'cancelAproveRequest'); } };
 	/** メニュー 差戻し */
 	private menuItemAssignRequestRemand: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03045', name: 'doTakeback', icon: 'fa fa-hand-stop-o', command: (event) => {this.invokeMethod(event, this.contentsList, 'doTakeback'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03045', name: 'doTakeback', icon: 'fa fa-hand-stop-o', command: (event) => { this.invokeMethod(event, this.contentsList, 'doTakeback'); } };
 	/** メニュー 取戻し */
 	private menuItemAssignRetrieve: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03046', name: 'assignRetrieve', icon: 'fa fa-recycle', command: (event) => {this.invokeMethod(event, this.contentsList, 'assignRetrieve'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03046', name: 'assignRetrieve', icon: 'fa fa-recycle', command: (event) => { this.invokeMethod(event, this.contentsList, 'assignRetrieve'); } };
 	/** メニュー 差替え */
 	private menuItemAssignReplacement: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03083', name: 'showFileReplacementExecutor', icon: 'fa fa-retweet', command: (event) => {this.invokeMethod(event, this.contentsList, 'showFileReplacementExecutor'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03083', name: 'showFileReplacementExecutor', icon: 'fa fa-retweet', command: (event) => { this.invokeMethod(event, this.contentsList, 'showFileReplacementExecutor'); } };
 	/** メニュー 処理待ち一覧 */
 	private menuItemAssignPending: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03047', name: 'assignPending', icon: 'fa fa-hourglass-half', command: (event) => {this.invokeMethod(event, this.contentsList, 'assignPending'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03047', name: 'assignPending', icon: 'fa fa-hourglass-half', command: (event) => { this.invokeMethod(event, this.contentsList, 'assignPending'); } };
 	/** メニュー プロパティ */
 	private menuItemProperty: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'showProperty', icon: 'eim-icon-list', command: (event) => {this.invokeMethod(event, this.contentsList, 'showProperty'); }};
-		/** メニュー 回付状況/履歴 */
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'showProperty', icon: 'eim-icon-list', command: (event) => { this.invokeMethod(event, this.contentsList, 'showProperty'); } };
+	/** メニュー 回付状況/履歴 */
 	private menuItemStatusProperty: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03048', name: 'showStatusProperty', icon: 'fa fa-history eim-icon-history-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'showStatusProperty'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03048', name: 'showStatusProperty', icon: 'fa fa-history eim-icon-history-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'showStatusProperty'); } };
 	/** メニュー 改訂履歴 */
 	private menuItemRevisionHistory: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03038', name: 'showRevisionHistory', icon: 'eim-icon-revision-history', command: (event) => {this.invokeMethod(event, this.contentsList, 'showRevisionHistory'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03038', name: 'showRevisionHistory', icon: 'eim-icon-revision-history', command: (event) => { this.invokeMethod(event, this.contentsList, 'showRevisionHistory'); } };
 	/** メニュー アクセス履歴 */
 	private menuItemAccessHistory: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03039', name: 'showAccessHistory', icon: 'fa fa-history eim-icon-history-color-gray', command: (event) => {this.invokeMethod(event, this.contentsList, 'showAccessHistory'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03039', name: 'showAccessHistory', icon: 'fa fa-history eim-icon-history-color-gray', command: (event) => { this.invokeMethod(event, this.contentsList, 'showAccessHistory'); } };
 	/** メニュー セキュリティ */
 	private menuItemSecurityChange: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03017', name: 'showSecurityChange', icon: 'eim-icon-security', command: (event) => {this.invokeMethod(event, this.contentsList, 'showSecurityChange'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03017', name: 'showSecurityChange', icon: 'eim-icon-security', command: (event) => { this.invokeMethod(event, this.contentsList, 'showSecurityChange'); } };
 	/** メニュー テーブル管理 */
 	private menuItemTableConfig: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03019', name: 'showTableConfig', icon: 'eim-icon-table', command: (event) => {this.invokeMethod(event, this.contentsList, 'showTableConfig'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03019', name: 'showTableConfig', icon: 'eim-icon-table', command: (event) => { this.invokeMethod(event, this.contentsList, 'showTableConfig'); } };
 	/** メニュー お気に入り一覧 */
 	private menuItemShowFavoriteList: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03076', name: 'showFavoriteList', icon: 'fa fa-star', command: (event) => {this.invokeMethod(event, this.contentsList, 'showFavoriteList'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03076', name: 'showFavoriteList', icon: 'fa fa-star', command: (event) => { this.invokeMethod(event, this.contentsList, 'showFavoriteList'); } };
 	/** メニュー お気に入りに追加 */
 	private menuItemAddFavorite: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03077', name: 'addFavorite', icon: 'eim-icon-plus', command: (event) => {this.invokeMethod(event, this.contentsList, 'addFavorite'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03077', name: 'addFavorite', icon: 'eim-icon-plus', command: (event) => { this.invokeMethod(event, this.contentsList, 'addFavorite'); } };
 	/** メニュー チェックアウト一覧 */
 	private menuItemShowCheckoutList: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03078', name: 'showCheckoutList', icon: 'eim-icon-checkout', command: (event) => {this.invokeMethod(event, this.contentsList, 'showCheckoutList'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03078', name: 'showCheckoutList', icon: 'eim-icon-checkout', command: (event) => { this.invokeMethod(event, this.contentsList, 'showCheckoutList'); } };
 	/** メニュー 公開ファイル比較結果 */
 	private menuItemShowCompareFileList: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03079', name: 'showCompareFileList', icon: 'eim-icon-table', command: (event) => {this.invokeMethod(event, this.contentsList, 'showCompareFileList'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03079', name: 'showCompareFileList', icon: 'eim-icon-table', command: (event) => { this.invokeMethod(event, this.contentsList, 'showCompareFileList'); } };
 	/** メニュー ZIPダウンロード */
 	private menuItemZipDownload: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03129', name: 'menuZipDownload', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuZipDownload'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03129', name: 'menuZipDownload', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuZipDownload'); } };
 	/** メニュー 原本ファイルダウンロード */
 	private menuItemPrivateDownload: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03131', name: 'menuPrivateDownload', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuPrivateDownload'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03131', name: 'menuPrivateDownload', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuPrivateDownload'); } };
 	/** メニュー 公開ファイルダウンロード */
 	private menuItemPublicDownload: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03130', name: 'menuPublicDownload', icon: '', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuPublicDownload'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03130', name: 'menuPublicDownload', icon: '', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuPublicDownload'); } };
 	/** メニュー URLコピーメニュー */
 	private menuItemURLCopy: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03096', name: 'menuURLCopy', icon: 'fa fa-download', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuURLCopy'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03096', name: 'menuURLCopy', icon: 'fa fa-download', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuURLCopy'); } };
 	/** メニュー URLショートカット出力 */
 	private menuItemURLShortcutOutput: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03097', name: 'menuURLShortcutOutput', icon: 'fa fa-download', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuURLShortcutOutput'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03097', name: 'menuURLShortcutOutput', icon: 'fa fa-download', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuURLShortcutOutput'); } };
 	/** メニュー アクセス履歴CSV出力 */
 	private menuItemAccessHistoryCSVOutput: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03098', name: 'menuAccessHistoryCSVOutput', icon: 'fa fa-download', command: (event) => {this.invokeMethod(event, this.contentsList, 'menuAccessHistoryCSVOutput'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03098', name: 'menuAccessHistoryCSVOutput', icon: 'fa fa-download', command: (event) => { this.invokeMethod(event, this.contentsList, 'menuAccessHistoryCSVOutput'); } };
 	/** メニュー タグに追加 */
 	private menuItemAssignTag: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03116', name: 'assignTag', icon: 'fa fa-plus-square-o', command: (event) => {this.invokeMethod(event, this.contentsList, 'assignTag'); }};
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03116', name: 'assignTag', icon: 'fa fa-plus-square-o', command: (event) => { this.invokeMethod(event, this.contentsList, 'assignTag'); } };
 	/** メニュー ワークスペース編集 */
 	private menuItemShowWorkspaceEditor: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03088', name: 'showWorkspaceEditor', icon: '',
-			command: (event) => {this.invokeMethod(event, this.contentsTree, 'showWorkspaceEditor'); }};
+		{
+			label: '', rKey: 'EIM_DOCUMENTS.LABEL_03088', name: 'showWorkspaceEditor', icon: '',
+			command: (event) => { this.invokeMethod(event, this.contentsTree, 'showWorkspaceEditor'); }
+		};
 	/** メニュー ワークスペース削除 */
 	private menuItemShowWorkspaceDelete: EIMMenuItem =
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03089', name: 'showWorkspaceDelete', icon: '',
-			command: (event) => {this.invokeMethod(event, this.contentsTree, 'showWorkspaceDelete'); }};
+		{
+			label: '', rKey: 'EIM_DOCUMENTS.LABEL_03089', name: 'showWorkspaceDelete', icon: '',
+			command: (event) => { this.invokeMethod(event, this.contentsTree, 'showWorkspaceDelete'); }
+		};
 	/** メニュー Box表示 */
 	private menuItemShowBox: EIMMenuItem =
-		{ label: '', name: 'showBox', icon: 'eim-icon-paste',
-			command: (event) => { this.invokeMethod(event, this.contentsList, 'showBox')}};
+		{
+			label: '', name: 'showBox', icon: 'eim-icon-paste',
+			command: (event) => { this.invokeMethod(event, this.contentsList, 'showBox') }
+		};
 
 	/** セパレータ */
 	private menuItemSeparator: EIMMenuItem = { separator: true };
 	/** OCRオプション直下セパレータ */
-	private menuItemOCRSeparator: EIMMenuItem = { separator: true, name: 'OCRSeparator'};
+	private menuItemOCRSeparator: EIMMenuItem = { separator: true, name: 'OCRSeparator' };
 
 	/** ツリーエリアのサイズ */
 	public splitAreaFirstSize: number;
@@ -613,130 +621,146 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	public mainMenuItems: EIMMenuItem[] = [
 		// 新規
 		Object.assign({}, this.menulistNew,
-			{ items: [
-				Object.assign({}, this.menuItemCreateDocument),
-				Object.assign({}, this.menuItemCreateFolder ),
-				Object.assign({}, this.menuItemCreateTag),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemCreateWorkspace),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowLumpDocumentCreator,
-					{ items: [
-						Object.assign({}, this.menuItemShowZip_expansion_registration),
-						Object.assign({}, this.menuItemShowLumpFolderCreator),
-					]}
-				),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowCoverCreator),
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemCreateDocument),
+					Object.assign({}, this.menuItemCreateFolder),
+					Object.assign({}, this.menuItemCreateTag),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemCreateWorkspace),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowLumpDocumentCreator,
+						{
+							items: [
+								Object.assign({}, this.menuItemShowZip_expansion_registration),
+								Object.assign({}, this.menuItemShowLumpFolderCreator),
+							]
+						}
+					),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowCoverCreator),
+				]
+			}
 		),
 		// 改訂
 		Object.assign(this.menulistRevision,
-			{ items: [
-				Object.assign({}, this.menuItemCheckout),
-				Object.assign({}, this.menuItemCancelCheckout),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemCheckin),
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemCheckout),
+					Object.assign({}, this.menuItemCancelCheckout),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemCheckin),
+				]
+			}
 		),
 		// 編集
 		Object.assign({}, this.menulistEdit,
-			{ items: [
-				Object.assign({}, this.menuItemCopy),
-				Object.assign({}, this.menuItemCopyBranch),
-				Object.assign({}, this.menuItemCut),
-				Object.assign({}, this.menuItemPaste),
-				Object.assign({}, this.menuItemRename),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemPasteFixedLink),
-				Object.assign({}, this.menuItemPasteLatestLink),
-				Object.assign({}, this.menuItemShowLinkUpdator),
-				Object.assign({}, this.menuItemUpdateLatestLink),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowAssignTag),
-				this.menuItemSeparator,
-				// フォルダ複製
-				Object.assign({}, this.menulistFolderReplication,
-					{ items: [
-						Object.assign({}, this.menuItemFolderOnly),
-						Object.assign({}, this.menuItemIncludingDocumentReplicationFixedLink),
-						Object.assign({}, this.menuItemIncludingDocumentReplicationLatestLink)
-					]}
-				),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowOCRSettingUpdator),
-				Object.assign({}, this.menuItemExecuteOCR),
-				Object.assign({}, this.menuItemCancelOCR),
-				Object.assign({}, this.menuItemOCRSeparator),
-				Object.assign({}, this.menuItemShowPublicFileCombineExecutor),
-				Object.assign({}, this.menuItemShowPublicFileCompareExecutor),
-				Object.assign({}, this.menuItemShowPublicFileSecurityUpdater),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowSignAndEncryption),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemDelete),
-				this.menuItemSeparator,
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemCopy),
+					Object.assign({}, this.menuItemCopyBranch),
+					Object.assign({}, this.menuItemCut),
+					Object.assign({}, this.menuItemPaste),
+					Object.assign({}, this.menuItemRename),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemPasteFixedLink),
+					Object.assign({}, this.menuItemPasteLatestLink),
+					Object.assign({}, this.menuItemShowLinkUpdator),
+					Object.assign({}, this.menuItemUpdateLatestLink),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowAssignTag),
+					this.menuItemSeparator,
+					// フォルダ複製
+					Object.assign({}, this.menulistFolderReplication,
+						{
+							items: [
+								Object.assign({}, this.menuItemFolderOnly),
+								Object.assign({}, this.menuItemIncludingDocumentReplicationFixedLink),
+								Object.assign({}, this.menuItemIncludingDocumentReplicationLatestLink)
+							]
+						}
+					),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowOCRSettingUpdator),
+					Object.assign({}, this.menuItemExecuteOCR),
+					Object.assign({}, this.menuItemCancelOCR),
+					Object.assign({}, this.menuItemOCRSeparator),
+					Object.assign({}, this.menuItemShowPublicFileCombineExecutor),
+					Object.assign({}, this.menuItemShowPublicFileCompareExecutor),
+					Object.assign({}, this.menuItemShowPublicFileSecurityUpdater),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowSignAndEncryption),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemDelete),
+					this.menuItemSeparator,
+				]
+			}
 		),
-    	// 検索
+		// 検索
 		Object.assign(this.menulistSearch),
 		// 承認/公開
 		Object.assign(this.menulistApprovalRelease,
-			{ items: [
-				Object.assign({}, this.menuItemRequestApprove),
-				Object.assign({}, this.menuItemCancelAproveRequest),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemApprove),
-				Object.assign({}, this.menuItemAssignRequestRemand),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemPublic),
-				Object.assign({}, this.menuItemCreatePublicPdf), // 公開PDFの事前変換
-				Object.assign({}, this.menuItemPreSettingsPublicPdf), // 公開PDFの事前設定
-				Object.assign({}, this.menuItemPublicCancel),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemAssignRetrieve),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemAssignReplacement), // 差替え
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemAssignPending), // 処理待ち一覧
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemRequestApprove),
+					Object.assign({}, this.menuItemCancelAproveRequest),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemApprove),
+					Object.assign({}, this.menuItemAssignRequestRemand),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemPublic),
+					Object.assign({}, this.menuItemCreatePublicPdf), // 公開PDFの事前変換
+					Object.assign({}, this.menuItemPreSettingsPublicPdf), // 公開PDFの事前設定
+					Object.assign({}, this.menuItemPublicCancel),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemAssignRetrieve),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemAssignReplacement), // 差替え
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemAssignPending), // 処理待ち一覧
+				]
+			}
 		),
 		// プロパティ
 		Object.assign(this.menulistProperty,
-			{ items: [
-				Object.assign({}, this.menuItemProperty),
-				Object.assign({}, this.menuItemSecurityChange),
-				Object.assign({}, this.menuItemRevisionHistory),
-				Object.assign({}, this.menuItemAccessHistory),
-				Object.assign({}, this.menuItemStatusProperty),
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemProperty),
+					Object.assign({}, this.menuItemSecurityChange),
+					Object.assign({}, this.menuItemRevisionHistory),
+					Object.assign({}, this.menuItemAccessHistory),
+					Object.assign({}, this.menuItemStatusProperty),
+				]
+			}
 		),
 		// 表示
 		Object.assign(this.menulistView),
 		// マイスペース
 		Object.assign(this.menulistMyspace,
-			{ items: [
-				Object.assign({}, this.menuItemShowFavoriteList),
-				Object.assign({}, this.menuItemAddFavorite),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowCheckoutList),
-				this.menuItemSeparator,
-				Object.assign({}, this.menuItemShowCompareFileList),
-			]}
+			{
+				items: [
+					Object.assign({}, this.menuItemShowFavoriteList),
+					Object.assign({}, this.menuItemAddFavorite),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowCheckoutList),
+					this.menuItemSeparator,
+					Object.assign({}, this.menuItemShowCompareFileList),
+				]
+			}
 		),
 	];
 
 	/** コンテンツツリーコンテキストメニュー */
 	public contentsTreeMenuItems: EIMMenuItem[] = [
 		// プロパティ
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'showProperty', icon: 'eim-icon-list', command: (event) => {this.invokeMethod(event, this.contentsTree, 'showProperty'); }},
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03007', name: 'showProperty', icon: 'eim-icon-list', command: (event) => { this.invokeMethod(event, this.contentsTree, 'showProperty'); } },
 		Object.assign({}, this.menuItemSeparator),
 		// セキュリティ
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03017', name: 'showSecurityChange', icon: 'eim-icon-security', command: (event) => {this.invokeMethod(event, this.contentsTree, 'showSecurityChange'); }},
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03017', name: 'showSecurityChange', icon: 'eim-icon-security', command: (event) => { this.invokeMethod(event, this.contentsTree, 'showSecurityChange'); } },
 		// ワークスペース編集
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03088', name: 'showWorkspaceEditor', icon: '', command: (event) => {this.invokeMethod(event, this.contentsTree, 'showWorkspaceEditor'); }},
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03088', name: 'showWorkspaceEditor', icon: '', command: (event) => { this.invokeMethod(event, this.contentsTree, 'showWorkspaceEditor'); } },
 		// ワークスペース削除
-		{label: '', rKey: 'EIM_DOCUMENTS.LABEL_03089', name: 'showWorkspaceDelete', icon: '', command: (event) => {this.invokeMethod(event, this.contentsTree, 'showWorkspaceDelete'); }}
+		{ label: '', rKey: 'EIM_DOCUMENTS.LABEL_03089', name: 'showWorkspaceDelete', icon: '', command: (event) => { this.invokeMethod(event, this.contentsTree, 'showWorkspaceDelete'); } }
 	];
 
 	/**
@@ -745,7 +769,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	private documentContentsListMenuItems: EIMMenuItem[] = [
 		// 0件の場合datagrid側でコンテキストメニューを非表示にするフラグを立てるが、
 		// コンテキストメニューはサーバーの設定を読み込むため、初期処理時にはダミーを設定しておく
-		{label: 'dummy', rKey: 'dummy', name: 'dummy', icon: '', command: null },
+		{ label: 'dummy', rKey: 'dummy', name: 'dummy', icon: '', command: null },
 	];
 	/** アコーディオン検索　右クリックメニュー */
 	private accordionSearchContentsListMenuItems: EIMMenuItem[] = [];
@@ -796,6 +820,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	/** ファイルドラッグ中かどうか */
 	public isFileDragging = false;
 
+	/** ファイルアップローダー */
+	public uploader: FileUploader = new FileUploader({ url: "" });
+
 	/** URLダイレクトアクセス後のグリッド選択対象オブジェクトID */
 	private selectedObjIdAfterContentsAccess: number;
 
@@ -844,11 +871,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 	/** アコーディオン間の情報保持用変数 */
 	private accordionListInfo: any[] = [
-		{state: null, columns: null, },
-		{state: null, columns: null, searchExecuted: false, },
-		{state: null, columns: null, searchExecuted: false, },
-		{state: null, columns: null, },
-		{state: null}
+		{ state: null, columns: null, },
+		{ state: null, columns: null, searchExecuted: false, },
+		{ state: null, columns: null, searchExecuted: false, },
+		{ state: null, columns: null, },
+		{ state: null }
 	];
 
 	/**
@@ -1016,7 +1043,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 						} else {
 							if (boxDocumentRegisterFlag) {
 								info.contentsList.updateDocumentRowData([data]);
-								this.eimBoxContentsListComponentService.copyToEIMFlag = false;							
+								this.eimBoxContentsListComponentService.copyToEIMFlag = false;
 							} else {
 								info.contentsList.addRowData([data]);
 							}
@@ -1044,13 +1071,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 					}
 				}
 
-				if(this.selectedWorkspaceDisplayTypeId == EIMConstantService.DISPLAY_THUMBNAIL){
+				if (this.selectedWorkspaceDisplayTypeId == EIMConstantService.DISPLAY_THUMBNAIL) {
 					this.reloadService.doReload();
 				}
 			},
 			// アコーディオン選択インデックス
 			accordionActiveIndex: accordionIndex.WORKSPACE,
-			isThumbnailsVisible:false,
+			isThumbnailsVisible: false,
 			// コンテンツリストのコンテキストメニュー
 			contentsListMenuItems: this.documentContentsListMenuItems,
 			normalContentsListMenuItems: this.documentContentsListMenuItems,
@@ -1064,8 +1091,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			thumbnailDownloadButtonMenuItems: this.thumbnailDownloadButtonMenuItems,
 			thumbnailDirectMenuButtonItems: this.thumbnailDirectMenuButtonItems,
 			checkTargetDialogId: '',
-			onChangeAccordionTab: (event) => {this.onChangeAccordionTab(event)},
-			changeDialogId: (dialogId, checkTargetUpdate) => {this.changeDialogId(dialogId, checkTargetUpdate)},
+			onChangeAccordionTab: (event) => { this.onChangeAccordionTab(event) },
+			changeDialogId: (dialogId, checkTargetUpdate) => { this.changeDialogId(dialogId, checkTargetUpdate) },
 		};
 
 		// TranslateServiceでリソースが利用可能かどうかを判定する
@@ -1081,7 +1108,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		 * 最新の情報に更新イベントハンドラ.
 		 * @param event イベント
 		 */
-		this.reloadServiceReload = this.reloadService.reload.subscribe( (event: any) => {
+		this.reloadServiceReload = this.reloadService.reload.subscribe((event: any) => {
 
 			// ツリー初期化対象外（他のコンポーネントの子コンポーネントとして表示している場合）の場合は何もしない
 			if (this.disabledTreeInitialization) {
@@ -1096,18 +1123,18 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				let treeSelectedData: any = this.contentsTree.getSelectedData()[0];
 				// グリッド選択状態
 				let selectionTargetRows: any[] = [];
-				this.contentsList.getSelectedData().forEach( (data: any) => {
-					selectionTargetRows.push({objId: data.objId, isDocumentLink: data.isDocumentLink});
+				this.contentsList.getSelectedData().forEach((data: any) => {
+					selectionTargetRows.push({ objId: data.objId, isDocumentLink: data.isDocumentLink });
 				});
 
 				let objId: number = treeSelectedData ? treeSelectedData.objId : null;
 				this.contentsTreeComponentService.updateLatest(this.contentsTree.info, objId, selectionTargetRows, this.contentsTree.initialized, this.contentsTree.selected);
-			}	else if (this.info.accordionActiveIndex === accordionIndex.SEARCH) {
+			} else if (this.info.accordionActiveIndex === accordionIndex.SEARCH) {
 				if (this.accordionListInfo[accordionIndex.SEARCH].searchExecuted) {
 					this.accordionListInfo[accordionIndex.SEARCH].searchExecuted = true;
 					this.accordionSearch.onSearch();
 				}
-			}	else if (this.info.accordionActiveIndex === accordionIndex.CIRCULATION_SITUATION) {
+			} else if (this.info.accordionActiveIndex === accordionIndex.CIRCULATION_SITUATION) {
 				if (this.accordionListInfo[accordionIndex.CIRCULATION_SITUATION].searchExecuted) {
 					this.accordionListInfo[accordionIndex.CIRCULATION_SITUATION].searchExecuted = true;
 					this.circulation.search();
@@ -1117,8 +1144,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				let treeSelectedData: any = this.attrTree.getSelectedData()[0];
 				// グリッド選択状態
 				let gridSelectionRows: any[] = [];
-				this.contentsList.getSelectedData().forEach( (data: any) => {
-					gridSelectionRows.push({attrTreeId: data.attrTreeId, attrTreeValues: data.attrTreeValues});
+				this.contentsList.getSelectedData().forEach((data: any) => {
+					gridSelectionRows.push({ attrTreeId: data.attrTreeId, attrTreeValues: data.attrTreeValues });
 				});
 
 				let selectedNode;
@@ -1141,7 +1168,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		 * ドロップファイルイベントハンドラ.
 		 * @param event イベント
 		 */
-		this.dropFileServiceDropFile = this.dropFileService.dropFile.subscribe( (files: any[]) => {
+		this.dropFileServiceDropFile = this.dropFileService.dropFile.subscribe((files: any[]) => {
 			if (this.info.accordionActiveIndex === accordionIndex.SEARCH) {
 				return;
 			}
@@ -1149,9 +1176,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 			const isExistFolder = files.some(item => (!item.isFile));
 
-			if(!isExistFolder){ // ドキュメント登録ウィンドウ
-				const fileList = files.map(item =>{
-					if(item.isFile){
+			if (!isExistFolder) { // ドキュメント登録ウィンドウ
+				const fileList = files.map(item => {
+					if (item.isFile) {
 						return item.file;
 					}
 				});
@@ -1159,23 +1186,23 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				// バリデーション エラーの場合はドキュメント登録ウィンドウを開かない
 				let parentData: any[] = this.contentsTree.getSelectedData();
 				let result: boolean = this.contentsMainComponentService.validation('showDocumentCreator', this.info, parentData, null, true);
-				if (!result) {return};
+				if (!result) { return };
 
-					for (let i = 0; i < fileList.length; i++) {
-						let file: File = fileList[i];
+				for (let i = 0; i < fileList.length; i++) {
+					let file: File = fileList[i];
 					this.info.addFileList.push(file);
 				}
 
 				// ドキュメント登録ウィンドウを開く
 				this.invokeMethod(null, this.contentsList, 'showDocumentCreator');
 			}
-			else{
+			else {
 				// フォルダアップロードウィンドウ
 				this.info.addFileList = files.filter((item) => {
 					const isOneLevel = (item.fullPath.match(/\//g) || []).length === 1;
 					return !(isOneLevel && item.file);
 				});
-				
+
 				this.invokeMethod(null, this.contentsList, 'showLumpFolderCreator');
 			}
 
@@ -1186,39 +1213,39 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		 * セッションタイムアウトイベントハンドラ.
 		 * @param message メッセージ
 		 */
-		this.sessionTimeoutServiceSessionTimeout =  this.sessionTimeoutService.sessionTimeout
-			.subscribe( (message: string) => {
+		this.sessionTimeoutServiceSessionTimeout = this.sessionTimeoutService.sessionTimeout
+			.subscribe((message: string) => {
 				this.messageService.show(EIMMessageType.error, message,
 					() => {
-					// キャッシュをクリアする
-					this.documentsCacheService.clearAll();
-					// SSOログインした場合は画面を再読み込みする
-					const isSso = this.sessionStorageService.get(EIMConstantService.SESSIONSTORAGE_SUBSYSTEM_NAME,
-						EIMConstantService.SESSIONSTORAGE_KEY_SSO);
-					this.sessionStorageService.removeItem(EIMConstantService.SESSIONSTORAGE_SUBSYSTEM_NAME,
-						EIMConstantService.SESSIONSTORAGE_KEY_SSO);
-					if (isSso) {
-						window.location.reload();
-						return;
-					}
-					// ログイン画面に遷移する
-					this.authenticationService.goToLogin();
+						// キャッシュをクリアする
+						this.documentsCacheService.clearAll();
+						// SSOログインした場合は画面を再読み込みする
+						const isSso = this.sessionStorageService.get(EIMConstantService.SESSIONSTORAGE_SUBSYSTEM_NAME,
+							EIMConstantService.SESSIONSTORAGE_KEY_SSO);
+						this.sessionStorageService.removeItem(EIMConstantService.SESSIONSTORAGE_SUBSYSTEM_NAME,
+							EIMConstantService.SESSIONSTORAGE_KEY_SSO);
+						if (isSso) {
+							window.location.reload();
+							return;
+						}
+						// ログイン画面に遷移する
+						this.authenticationService.goToLogin();
+					});
 			});
-		});
 
 		/**
 		 * 言語変更イベントハンドラ.
 		 * @param event イベント
 		 */
-		this.translateServiceOnLangChange = this.translateService.onLangChange.subscribe( (event: LangChangeEvent) => {
+		this.translateServiceOnLangChange = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
 			this.refreshMenuItemLabel();
 		});
 
 		// ページクリック完了サブスクリプション
-		this.pageClickCompleted = accordionSearchRendererComponentService.pageClicked.subscribe((params: any) => {this.pageClicked(params); });
+		this.pageClickCompleted = accordionSearchRendererComponentService.pageClicked.subscribe((params: any) => { this.pageClicked(params); });
 
 		// ページクリック完了サブスクリプション
-		this.pageClickCompleted2 = pageRendererComponentService.pageClicked.subscribe((params: any) => {this.pageClicked(params); });
+		this.pageClickCompleted2 = pageRendererComponentService.pageClicked.subscribe((params: any) => { this.pageClicked(params); });
 	}
 
 	// ----------------------------------------
@@ -1252,28 +1279,28 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				// メニューアイテムの名称と同名のオプションの有効判定
 				menuItem.visible = this.isVisibleCheckOption(menuItem.name);
 				// メインメニューのメニューアイテムの表示&非表示の切替
-				if(isMainMenuItems){
+				if (isMainMenuItems) {
 					for (let j = 0; j < mainMenuItemList.length; j++) {
-						if(menuItem.name === mainMenuItemList[j].itemEnName){
-							if(mainMenuItemList[j].visible === false){
+						if (menuItem.name === mainMenuItemList[j].itemEnName) {
+							if (mainMenuItemList[j].visible === false) {
 								menuItem.visible = false;
 							}
 						}
 					}
 				}
 				if (menuItem.items && menuItem.items.length > 0) {
-					changeVisible(menuItem.items,isMainMenuItems);
+					changeVisible(menuItem.items, isMainMenuItems);
 				}
 			}
 			// 連続しているセパレータを非表示
 			let separatorCount = 0;
 			for (let i = 0; i < menuItems.length; i++) {
 				// 表示セパレータの場合
-				if (menuItems[i].visible === true && menuItems[i].separator &&  menuItems[i].separator === true) {
+				if (menuItems[i].visible === true && menuItems[i].separator && menuItems[i].separator === true) {
 					separatorCount++;
 					// 連続している場合は非表示
 					if (separatorCount > 1) {
-						menuItems[i] = {visible: false};
+						menuItems[i] = { visible: false };
 					}
 					continue;
 				}
@@ -1325,12 +1352,12 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				return false;
 			}
 			return (obj1.attrTreeValues
-							&& JSON.stringify(obj1.attrTreeValues) === JSON.stringify(obj2.attrTreeValues))
-					|| (obj1.objId
-							&& Number(obj1.objId) === Number(obj2.objId));
+				&& JSON.stringify(obj1.attrTreeValues) === JSON.stringify(obj2.attrTreeValues))
+				|| (obj1.objId
+					&& Number(obj1.objId) === Number(obj2.objId));
 		}
 		return (Number(obj1.objId) === Number(obj2.objId)
-							&& obj1.isDocumentLink === obj2.isDocumentLink);
+			&& obj1.isDocumentLink === obj2.isDocumentLink);
 	}
 
 	/**
@@ -1343,14 +1370,14 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		this.userService.getSessionUser().subscribe(data => {
 			// TODO
 			let user = data.loginUser;
-				if (Number(user.approveDocument) > 0 && user.isPopupExists == true) {
-					this.messageService.show(EIMMessageType.confirm,
-					this.translateService.instant('EIM_DOCUMENTS.CONFIRM_00013' , {value: Number(user.approveDocument)}) ,
+			if (Number(user.approveDocument) > 0 && user.isPopupExists == true) {
+				this.messageService.show(EIMMessageType.confirm,
+					this.translateService.instant('EIM_DOCUMENTS.CONFIRM_00013', { value: Number(user.approveDocument) }),
 					() => {
 						this.info.functionType = EIMConstantService.EVENT_FUNCTION_TYPE_WAIT;
-						this.contentsMainComponentService.showApprove(this.info , null , [] );
+						this.contentsMainComponentService.showApprove(this.info, null, []);
 					});
-				}
+			}
 
 			// サーバの設定ファイルの値を格納
 			this.serverConfigService.setConfigValue(data.configKeyValue);
@@ -1454,7 +1481,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		this.documentSessionStorageService.removeMainComponentInfoForPageReload();
 
 		// セッションを保持している間は前回表示モードで初期表示
-		if(info){
+		if (info) {
 			this.selectedWorkspaceDisplayTypeId = this.documentSessionStorageService.getWorkspaceDisplayType();
 			this.documentSessionStorageService.setWorkspaceDisplayType(this.selectedWorkspaceDisplayTypeId);
 
@@ -1469,9 +1496,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		// URLダイレクトアクセス
 		if (this.jumpTargetId) {
 			this.contentsTreeSelectedData = [{
-					objId: this.jumpTargetId,
-					isFolder: this.isFolder,
-					linkParentObjId: this.linkParentObjId,
+				objId: this.jumpTargetId,
+				isFolder: this.isFolder,
+				linkParentObjId: this.linkParentObjId,
 			}];
 		} else {
 			// アコーディオンを直前の状態に戻す
@@ -1512,15 +1539,15 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		/**
 		 * 対象コンテンツにジャンプする.
 		 */
-		this.contentsMainComponentService.contentsAccess$.subscribe( (data) => {
-				this.contentsTreeComponentService.contentsAccess(this.contentsTree.info, data, true, this.contentsTree.initialized, this.contentsTree.selected);
-			}
+		this.contentsMainComponentService.contentsAccess$.subscribe((data) => {
+			this.contentsTreeComponentService.contentsAccess(this.contentsTree.info, data, true, this.contentsTree.initialized, this.contentsTree.selected);
+		}
 		);
 
 		/**
 		 * 対象コンテンツを選択する.
 		 */
-		this.contentsMainComponentService.onSelect$.subscribe( (data) => {
+		this.contentsMainComponentService.onSelect$.subscribe((data) => {
 			this.contentsTreeComponentService.existsObject(this.contentsTree.info.data, data).subscribe((exist) => {
 				if (exist) {
 					this.contentsTreeComponentService.contentsAccess(this.contentsTree.info, data, false, this.contentsTree.initialized, this.contentsTree.selected);
@@ -1533,19 +1560,19 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		/**
 		 * テーブル読み込み完了イベントハンドラ
 		 */
-		this.contentsTableServiceLoadCompleted = this.contentsTableService.loadCompleted.subscribe( (event: any) => {
+		this.contentsTableServiceLoadCompleted = this.contentsTableService.loadCompleted.subscribe((event: any) => {
 			this.accordionSearch.customAttributeItems = [];
 
 			for (let i = 0; i < event.columns.length; i++) {
 				if (event.columns[i].headerName === this.translateService.instant('EIM_DOCUMENTS.LABEL_02214')) {
-					Object.assign(event.columns[i], {type: EIMDataGridColumnType.number});
+					Object.assign(event.columns[i], { type: EIMDataGridColumnType.number });
 					event.columns[i].valueGetter = null;
 					event.columns[i].cellRendererFramework = null;
 				}
 				if (event.columns[i].type === EIMDataGridColumnType.date || event.columns[i].type === EIMDataGridColumnType.dateTime) {
 					event.columns[i].comparator = this.dateService.dateComparator;
 				}
-				this.accordionSearch.customAttributeItems.push({attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type});
+				this.accordionSearch.customAttributeItems.push({ attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type });
 			}
 
 			this.setTableMenuAndColumn(event.menuItems, event.columns);
@@ -1554,19 +1581,19 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		/**
 		 * テーブル選択完了イベントハンドラ
 		 */
-		this.contentsTableServiceSelectTableCompleted = this.contentsTableService.selectTableCompleted.subscribe( (event: any) => {
+		this.contentsTableServiceSelectTableCompleted = this.contentsTableService.selectTableCompleted.subscribe((event: any) => {
 			this.accordionSearch.customAttributeItems = [];
 
 			for (let i = 0; i < event.columns.length; i++) {
 				if (event.columns[i].headerName === this.translateService.instant('EIM_DOCUMENTS.LABEL_02214')) {
-					Object.assign(event.columns[i], {type: EIMDataGridColumnType.number});
+					Object.assign(event.columns[i], { type: EIMDataGridColumnType.number });
 					event.columns[i].valueGetter = null;
 					event.columns[i].cellRendererFramework = null;
 				}
 				if (event.columns[i].type === EIMDataGridColumnType.date || event.columns[i].type === EIMDataGridColumnType.dateTime) {
 					event.columns[i].comparator = this.dateService.dateComparator;
 				}
-				this.accordionSearch.customAttributeItems.push({attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type});
+				this.accordionSearch.customAttributeItems.push({ attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type });
 			}
 			if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				// 本文抜粋選択時
@@ -1574,7 +1601,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			} else if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				// リスト選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForList = this.accordionListInfo[accordionIndex.SEARCH].state;
-			} else { 
+			} else {
 				// サムネイル選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail = this.accordionListInfo[accordionIndex.SEARCH].state;
 			}
@@ -1584,19 +1611,19 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		/**
 		 * テーブル更新完了イベントハンドラ
 		 */
-		this.contentsTableServiceUpdateTableCompleted = this.contentsTableService.updateTableCompleted.subscribe( (event: any) => {
+		this.contentsTableServiceUpdateTableCompleted = this.contentsTableService.updateTableCompleted.subscribe((event: any) => {
 			this.accordionSearch.customAttributeItems = [];
 
 			for (let i = 0; i < event.columns.length; i++) {
 				if (event.columns[i].headerName === this.translateService.instant('EIM_DOCUMENTS.LABEL_02214')) {
-					Object.assign(event.columns[i], {type: EIMDataGridColumnType.number});
+					Object.assign(event.columns[i], { type: EIMDataGridColumnType.number });
 					event.columns[i].valueGetter = null;
 					event.columns[i].cellRendererFramework = null;
 				}
 				if (event.columns[i].type === EIMDataGridColumnType.date || event.columns[i].type === EIMDataGridColumnType.dateTime) {
 					event.columns[i].comparator = this.dateService.dateComparator;
 				}
-				this.accordionSearch.customAttributeItems.push({attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type});
+				this.accordionSearch.customAttributeItems.push({ attType: event.columns[i].field, attName: event.columns[i].headerName, dataType: event.columns[i].type });
 			}
 			if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				// 本文抜粋選択時
@@ -1604,7 +1631,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			} else if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				// リスト選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForList = this.accordionListInfo[accordionIndex.SEARCH].state;
-			} else { 
+			} else {
 				// サムネイル選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail = this.accordionListInfo[accordionIndex.SEARCH].state;
 			}
@@ -1616,7 +1643,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			this.placeRendererComponentServicePlaceClicked = this.placeRendererComponentService.placeClicked.subscribe((data: any) => {
 				// アコーディオンを変更
 				if (this.info.accordionActiveIndex !== accordionIndex.WORKSPACE) {
-					this.onChangeAccordionTab({index: accordionIndex.WORKSPACE});
+					this.onChangeAccordionTab({ index: accordionIndex.WORKSPACE });
 				}
 				// コンテンツアクセス
 				this.contentsTreeComponentService.contentsAccess(this.contentsTree.info, data, true, this.contentsTree.initialized, this.contentsTree.selected);
@@ -1628,7 +1655,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			this.propertyJumpTargetClicked = this.contentsPropertyComponentService.jumpTargetClicked.subscribe((data: any) => {
 				// アコーディオンを変更
 				if (this.info.accordionActiveIndex !== accordionIndex.WORKSPACE) {
-					this.onChangeAccordionTab({index: accordionIndex.WORKSPACE});
+					this.onChangeAccordionTab({ index: accordionIndex.WORKSPACE });
 				}
 				let isPlace = true;
 				if (data.isFolder === true) {
@@ -1643,7 +1670,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (!this.propertyUpdeted) {
 			this.propertyUpdeted = this.contentsPropertyComponentService.updated.subscribe((data: any) => {
 				data[0].isDocumentLink = false;
-				this.contentsMainComponentService.complete(this.info, {updatedData: data}, this.translateService.instant('EIM_DOCUMENTS.INFO_00002'), false, null);
+				this.contentsMainComponentService.complete(this.info, { updatedData: data }, this.translateService.instant('EIM_DOCUMENTS.INFO_00002'), false, null);
 
 				// ツリー更新
 				let seravice = <EIMContentsTreeComponentService>this.info.contentsTree.componentService;
@@ -1671,14 +1698,14 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			this.fileDragEnterTarget = undefined;
 		});
 	}
-		
+
 	/**
 	 * EIMへ公開ボタン押下イベントハンドラ
 	 */
 	onClickCopyToEIM(selectedDataForEIM?: any[]) {
 		this.documentCreatorConfirmation(selectedDataForEIM);
 	}
-	
+
 	/**
 	 * ドキュメント登録確認ダイアログ表示
 	 */
@@ -1736,9 +1763,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (!this.placeRendererComponentServicePlaceClicked.closed) { this.placeRendererComponentServicePlaceClicked.unsubscribe(); }
 		if (!this.propertyJumpTargetClicked.closed) { this.propertyJumpTargetClicked.unsubscribe(); }
 		if (!this.propertyUpdeted.closed) { this.propertyUpdeted.unsubscribe(); }
-		if (!this.pageClickCompleted.closed) {this.pageClickCompleted.unsubscribe(); }
-		if (!this.pageClickCompleted2.closed) {this.pageClickCompleted2.unsubscribe(); }
-		if (this.dragStarted && !this.dragStarted.closed) {this.dragStarted.unsubscribe(); }
+		if (!this.pageClickCompleted.closed) { this.pageClickCompleted.unsubscribe(); }
+		if (!this.pageClickCompleted2.closed) { this.pageClickCompleted2.unsubscribe(); }
+		if (this.dragStarted && !this.dragStarted.closed) { this.dragStarted.unsubscribe(); }
 		if (this.dragEnded && !this.dragEnded.closed) { this.dragEnded.unsubscribe(); }
 
 		// 購読を解除する
@@ -1779,8 +1806,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			// 検索実行
 			this.accordionListInfo[accordionIndex.SEARCH].searchExecuted = true;
 			this.contentsList.initialize({
-				accordionActiveIndex: this.info.accordionActiveIndex, params: event.params, 
-				accordionSearch: this.accordionSearch, destroy$: this.destroy$}, true);
+				accordionActiveIndex: this.info.accordionActiveIndex, params: event.params,
+				accordionSearch: this.accordionSearch, destroy$: this.destroy$
+			}, true);
 		}
 
 	}
@@ -1790,8 +1818,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		// 検索実行
 		this.accordionListInfo[accordionIndex.CIRCULATION_SITUATION].searchExecuted = true;
 		this.contentsList.initialize({
-			accordionActiveIndex: this.info.accordionActiveIndex, params: event.params, 
-			circulation: this.circulation, destroy$: this.destroy$}, true);
+			accordionActiveIndex: this.info.accordionActiveIndex, params: event.params,
+			circulation: this.circulation, destroy$: this.destroy$
+		}, true);
 	}
 
 	/** アコーディオン検索の検索条件のクリアを実行します. */
@@ -1831,7 +1860,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			// パンくず・パスをクリアする
 			this.setBreadcrumbItemsAndPath();
 			// 選択状態クリア
-			this.contentsList.select([],false);
+			this.contentsList.select([], false);
 			// コンテンツグリッド
 			this.contentsList.setData([]);
 		} else {
@@ -1856,15 +1885,16 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			}
 
 			// 選択状態クリア
-			this.contentsList.select([],false);
+			this.contentsList.select([], false);
 
 			// コンテンツ一覧を更新する
 			this.contentsList.initialize({
-					noupdate: false, accordionActiveIndex: this.info.accordionActiveIndex,
-					selectedTreeNode: treeNode, selectionTargetRows: selectionTargetRows,
-					targetDocumentLink: targetDocumentLink,
-					eventDateTime: event.eventDateTime ? event.eventDateTime : new Date(),
-					destroy$: this.destroy$}, true);
+				noupdate: false, accordionActiveIndex: this.info.accordionActiveIndex,
+				selectedTreeNode: treeNode, selectionTargetRows: selectionTargetRows,
+				targetDocumentLink: targetDocumentLink,
+				eventDateTime: event.eventDateTime ? event.eventDateTime : new Date(),
+				destroy$: this.destroy$
+			}, true);
 		}
 	}
 
@@ -1898,10 +1928,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 			// コンテンツ一覧を更新する
 			this.contentsList.initialize({
-					accordionActiveIndex: this.info.accordionActiveIndex, contentsList: this.contentsList,
-					selectedTreeNode: attributTtreeNode,
-					eventDateTime: event.eventDateTime ? event.eventDateTime : new Date(),
-					destroy$: this.destroy$}, true);
+				accordionActiveIndex: this.info.accordionActiveIndex, contentsList: this.contentsList,
+				selectedTreeNode: attributTtreeNode,
+				eventDateTime: event.eventDateTime ? event.eventDateTime : new Date(),
+				destroy$: this.destroy$
+			}, true);
 			this.attrTree.expand(rootTreeNode, true);
 		}
 	}
@@ -1925,8 +1956,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (!treeNode.isSearch) {
 			// コンテンツ一覧を更新する
 			this.contentsList.initialize({
-				accordionActiveIndex: this.info.accordionActiveIndex, selectedTreeNode: treeNode, 
-				noUpdate: true, destroy$: this.destroy$}, true);
+				accordionActiveIndex: this.info.accordionActiveIndex, selectedTreeNode: treeNode,
+				noUpdate: true, destroy$: this.destroy$
+			}, true);
 		}
 	}
 
@@ -1940,8 +1972,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (!attributetreeNode.isSearch) {
 			// コンテンツ一覧を更新する
 			this.contentsList.initialize({
-				selectedTreeNode: attributetreeNode, noUpdate: true, 
-				accordionActiveIndex: this.info.accordionActiveIndex, destroy$: this.destroy$}, true);
+				selectedTreeNode: attributetreeNode, noUpdate: true,
+				accordionActiveIndex: this.info.accordionActiveIndex, destroy$: this.destroy$
+			}, true);
 		}
 	}
 
@@ -1952,14 +1985,14 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	public onSelectFolderGridItem(treeNode: any): void {
 		if (this.info.accordionActiveIndex === accordionIndex.WORKSPACE) {
 			// ワークスペースアコーディオンの場合
-			let node: EIMFolderTreeNode = { objId: Number(treeNode.objId)};
+			let node: EIMFolderTreeNode = { objId: Number(treeNode.objId) };
 			node['targetpath'] = this.info.contentsListPath;
 			this.contentsTree.select([node], true);
 		} else if (this.info.accordionActiveIndex === accordionIndex.CIRCULATION_SITUATION
-					|| this.info.accordionActiveIndex === accordionIndex.SEARCH) {
+			|| this.info.accordionActiveIndex === accordionIndex.SEARCH) {
 			// 検索アコーディオンまたは回付状況アコーディオンの場合
-			this.onChangeAccordionTab({index: accordionIndex.WORKSPACE});
-			let node: EIMFolderTreeNode = { objId: Number(treeNode.objId)};
+			this.onChangeAccordionTab({ index: accordionIndex.WORKSPACE });
+			let node: EIMFolderTreeNode = { objId: Number(treeNode.objId) };
 			this.contentsTreeComponentService.existsObject(this.contentsTree.info.data, node).subscribe((exist) => {
 				if (exist) {
 					this.contentsTreeComponentService.contentsAccess(this.contentsTree.info, node, false, this.contentsTree.initialized, this.contentsTree.selected);
@@ -1970,7 +2003,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 		} else if (this.info.accordionActiveIndex === accordionIndex.ATTRIBUTE_TREE) {
 			// 属性ツリービューアコーディオンの場合
-			let node: EIMAttributeTreeNode = { attrTreeId: treeNode.attrTreeId, attrTreeValues: treeNode.attrTreeValues, value: treeNode.value};
+			let node: EIMAttributeTreeNode = { attrTreeId: treeNode.attrTreeId, attrTreeValues: treeNode.attrTreeValues, value: treeNode.value };
 			this.attributeTreeComponentService.selectNode(this.attrTree, node, true);
 		}
 	}
@@ -2009,7 +2042,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 					let folderItem = data[i];
 					let tn: EIMFolderTreeNode = this.contentsTreeComponentService.convertRowDataToEIMFolderTreeNode(folderItem)
 					// ワークスペース固有ごみ箱のプロパティをセットする
-					if(folderItem.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE_TRASH_CAN){
+					if (folderItem.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE_TRASH_CAN) {
 						folderItem.isTrash = 'true';
 						tn.leaf = true;
 						tn.isBranch = false;
@@ -2019,7 +2052,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 						|| folderItem.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER
 						|| folderItem.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_TAG
 						|| folderItem.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE_TRASH_CAN) {
-							childFolderItems.push(tn);
+						childFolderItems.push(tn);
 					}
 				}
 				this.contentsTree.setChildren(treeNode, childFolderItems);
@@ -2092,7 +2125,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			parentData = this.contentsTree.getSelectedData()[0];
 		} else if (this.info.accordionActiveIndex === accordionIndex.ATTRIBUTE_TREE) {
 			// アコーディオン：属性ツリービューを表示している場合
-			parentData =  this.attrTree.getSelectedData()[0];
+			parentData = this.attrTree.getSelectedData()[0];
 		}
 		let selectedData: any[] = [event.data];
 		this.contentsMainComponentService.invokeMethod('showProperty', this.info, parentData, selectedData);
@@ -2139,7 +2172,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 						if (res.value.root.workspaceAuth.attr.flag === this.FLAG_TRUE) {
 							workspaceEditMenu.disabled = false;
 						}
-				});
+					});
 			}
 		});
 	}
@@ -2147,11 +2180,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	/**
 	 * カレントviewを取得
 	 */
-	private getCurrentView(){
-		let target :EIMListComponent<any> = null;
-		if(this.info.isThumbnailsVisible){
+	private getCurrentView() {
+		let target: EIMListComponent<any> = null;
+		if (this.info.isThumbnailsVisible) {
 			target = this.thumbnailViewer;
-		}else{
+		} else {
 			target = this.contentsList;
 		};
 		return target;
@@ -2170,7 +2203,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				parentData = this.contentsTree.getSelectedData();
 			} else if (this.info.accordionActiveIndex === accordionIndex.ATTRIBUTE_TREE) {
 				// アコーディオン：属性ツリービューを表示している場合
-				parentData =  this.attrTree.getSelectedData();
+				parentData = this.attrTree.getSelectedData();
 			}
 			let selectedData: any[];
 
@@ -2188,42 +2221,42 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		});
 	}
 
-    /**
-     * サムネイルのダウンロードボタンクリックイベントハンドラ.
-     * PrimNGのコンテキストメニュー表示前に呼び出されるので
-     * メニューアイテムの活性非活性制御を行う
-     */
-    public onThumbnailDownloadMenu(event: MouseEvent): void { 
-        window.setTimeout(() => {
-            let parentData = this.contentsTree.getSelectedData();
-            const selectedData = this.contentsList.getSelectedData();
+	/**
+	 * サムネイルのダウンロードボタンクリックイベントハンドラ.
+	 * PrimNGのコンテキストメニュー表示前に呼び出されるので
+	 * メニューアイテムの活性非活性制御を行う
+	 */
+	public onThumbnailDownloadMenu(event: MouseEvent): void {
+		window.setTimeout(() => {
+			let parentData = this.contentsTree.getSelectedData();
+			const selectedData = this.contentsList.getSelectedData();
 
-            this.validationMenuItems(parentData, selectedData, this.info.thumbnailDownloadButtonMenuItems);
-        });
-    }
-    /**
-     * メニューアイテムの活性非活性制御を行う
-     */
-    private validationMenuItems(parentData: {}, selectedData: any[], menuItems: any[]) {
-        for (let i = 0; i < menuItems.length; i++) {
-            let menuItem: EIMMenuItem = menuItems[i];
-            let result: boolean = this.contentsMainComponentService.validation(menuItem.name, this.info, parentData, selectedData);
-            if (result) {
-                menuItem.disabled = false;
-            } else {
-                menuItem.disabled = true;
-            }
-        }
-    }
+			this.validationMenuItems(parentData, selectedData, this.info.thumbnailDownloadButtonMenuItems);
+		});
+	}
+	/**
+	 * メニューアイテムの活性非活性制御を行う
+	 */
+	private validationMenuItems(parentData: {}, selectedData: any[], menuItems: any[]) {
+		for (let i = 0; i < menuItems.length; i++) {
+			let menuItem: EIMMenuItem = menuItems[i];
+			let result: boolean = this.contentsMainComponentService.validation(menuItem.name, this.info, parentData, selectedData);
+			if (result) {
+				menuItem.disabled = false;
+			} else {
+				menuItem.disabled = true;
+			}
+		}
+	}
 
 	/**
 	 * 選択行のセルクリックイベントハンドラ
 	 * @param event イベント
 	 */
 	public onSelectedRowCellClicked(event: any): void {
-		if (!this.isCellEditing 
-				&& event.data.objTypeName !== EIMDocumentsConstantService.OBJECT_TYPE_ATTRIBUTE 
-				&& event.colDef.field === 'objName') {
+		if (!this.isCellEditing
+			&& event.data.objTypeName !== EIMDocumentsConstantService.OBJECT_TYPE_ATTRIBUTE
+			&& event.colDef.field === 'objName') {
 			this.isCellEditable = this.doRename();
 		}
 	}
@@ -2307,7 +2340,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 * @param event イベント
 	 */
 	public onCellEditingStarted(event: any): void {
-		
+
 		// セル編集中フラグをON
 		this.isCellEditing = true;
 
@@ -2323,7 +2356,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 * @param event イベント
 	 */
 	public onCellEditingStopped(event: any): void {
-		
+
 		// セル編集中フラグをOFF
 		this.isCellEditing = false;
 		this.isCellEditable = false;
@@ -2350,21 +2383,21 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			// フォルダの場合問い合わせを行う
 			if (event.data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER) {
 				this.contentsService.getRenameInfo(event.data.objId)
-				.subscribe(
-					(object: any) => {
-						if (Number(object.attr.nameAllocate) === this.FLAG_OFF) {
-							this.executeRename(event, postProc);
-						} else {
-							this.messageService.show(EIMMessageType.error, this.translateService.instant('EIM_DOCUMENTS.ERROR_00112'));
+					.subscribe(
+						(object: any) => {
+							if (Number(object.attr.nameAllocate) === this.FLAG_OFF) {
+								this.executeRename(event, postProc);
+							} else {
+								this.messageService.show(EIMMessageType.error, this.translateService.instant('EIM_DOCUMENTS.ERROR_00112'));
+								this.revertBeforeRename(event.data);
+								postProc();
+							}
+						},
+						(err: any) => {
+							// エラーの場合、改名前に戻す
 							this.revertBeforeRename(event.data);
-							postProc();
-						}
-					},
-					(err: any) => {
-					// エラーの場合、改名前に戻す
-					this.revertBeforeRename(event.data);
-					},
-				);
+						},
+					);
 			} else {
 				this.executeRename(event, postProc);
 			}
@@ -2398,7 +2431,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			} else if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				// リスト選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForList = this.accordionListInfo[accordionIndex.SEARCH].state;
-			} else { 
+			} else {
 				// サムネイル選択時
 				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail = this.accordionListInfo[accordionIndex.SEARCH].state;
 			}
@@ -2419,9 +2452,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		switch (this.info.accordionActiveIndex) {
 			case accordionIndex.WORKSPACE: {
 
-				if(this.selectedWorkspaceDisplayTypeId == EIMConstantService.DISPLAY_THUMBNAIL){
+				if (this.selectedWorkspaceDisplayTypeId == EIMConstantService.DISPLAY_THUMBNAIL) {
 					this.thumbnailON();
-				}else{
+				} else {
 					this.thumbnailOFF();
 				}
 				// ワークスペース
@@ -2441,13 +2474,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 					} else {
 						this.contentsList.setState(this.assignCommonState(state, this.accordionListInfo[COMMON_STATE].state));
 					}
-					this.contentsList.setColumns(this.accordionListInfo[event. index].columns);
+					this.contentsList.setColumns(this.accordionListInfo[event.index].columns);
 				} else {
 					this.contentsList.setData([]);
 					if (!this.accordionListInfo[COMMON_STATE].state) {
 						// ワークスペースタブと属性ツリータブ選択時は、右ペインの一覧表示のカラム情報を共通にする
-						this.contentsList.setColumns(this.accordionListInfo[event. index].columns ?? []);
-						this.setContentsInitState(event. index);
+						this.contentsList.setColumns(this.accordionListInfo[event.index].columns ?? []);
+						this.setContentsInitState(event.index);
 					} else {
 						this.contentsList.setState(this.assignCommonState({}, this.accordionListInfo[COMMON_STATE].state));
 					}
@@ -2520,7 +2553,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				} else {
 					this.contentsList.setData([]);
 					this.contentsList.setColumns(this.accordionListInfo[event.index].columns ?? []);
-					this.setContentsInitState(event. index);
+					this.setContentsInitState(event.index);
 					this.circulation.init();
 				}
 
@@ -2548,7 +2581,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 						this.setContentsInitState(event.index);
 						this.contentsList.setData([]);
 					} else {
-						this.contentsList.setState(this.assignCommonState({data: []}, this.accordionListInfo[COMMON_STATE].state));
+						this.contentsList.setState(this.assignCommonState({ data: [] }, this.accordionListInfo[COMMON_STATE].state));
 					}
 
 					// 属性一覧検索実行
@@ -2582,7 +2615,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		let folderReplicationIndex: number;
 		// フォルダ複製サブメニュー
 		let menulistFolderReplicationSubMenus: EIMMenuItem[] = [];
-		
+
 		// ダウンロードメニュー有無
 		let existsMenulistDownload = false;
 		let downloadMenuIndex: number;
@@ -2608,8 +2641,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			}
 			// サブメニューは退避
 			if (contextMenuItemList[i].itemJpName === contextMenuDefineName.FOLDER_ONLY
-			|| contextMenuItemList[i].itemJpName === contextMenuDefineName.WITH_DOCUMENT_AS_LINK_MANUAL
-			|| contextMenuItemList[i].itemJpName === contextMenuDefineName.WITH_DOCUMENT_AS_LINK_AUTO) {
+				|| contextMenuItemList[i].itemJpName === contextMenuDefineName.WITH_DOCUMENT_AS_LINK_MANUAL
+				|| contextMenuItemList[i].itemJpName === contextMenuDefineName.WITH_DOCUMENT_AS_LINK_AUTO) {
 				menulistFolderReplicationSubMenus.push(workspaceGridContextMenuMap.get(contextMenuItemList[i].itemJpName));
 				continue;
 			}
@@ -2622,8 +2655,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			}
 			// ダウンロード系サブメニューは退避
 			if (contextMenuItemList[i].itemJpName === contextMenuDefineName.DOWNLOAD_ZIP
-			|| contextMenuItemList[i].itemJpName === contextMenuDefineName.DOWNLOAD_PRIVATE
-			|| contextMenuItemList[i].itemJpName === contextMenuDefineName.DOWNLOAD_PUBLIC) {
+				|| contextMenuItemList[i].itemJpName === contextMenuDefineName.DOWNLOAD_PRIVATE
+				|| contextMenuItemList[i].itemJpName === contextMenuDefineName.DOWNLOAD_PUBLIC) {
 				menulistDownloadSubMeus.push(workspaceGridContextMenuMap.get(contextMenuItemList[i].itemJpName));
 				continue;
 			}
@@ -2670,18 +2703,18 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		// フォルダツリー複製メニュー
 		// 親あり、且つサブメニューありだったら追加
 		if (existsMenulistFolderReplication && menulistFolderReplicationSubMenus.length > 0) {
-			this.documentContentsListMenuItems.splice(folderReplicationIndex, 0, Object.assign({}, this.menulistFolderReplication, { items: menulistFolderReplicationSubMenus}));
+			this.documentContentsListMenuItems.splice(folderReplicationIndex, 0, Object.assign({}, this.menulistFolderReplication, { items: menulistFolderReplicationSubMenus }));
 		}
 
 		// ダウンロードメニュー
 		// 親あり、且つサブメニューありだったら追加
 		if (existsMenulistDownload && menulistDownloadSubMeus.length > 0) {
-			this.documentContentsListMenuItems.splice(downloadMenuIndex, 0, Object.assign({}, this.menuItemDownload, { items: menulistDownloadSubMeus}));
+			this.documentContentsListMenuItems.splice(downloadMenuIndex, 0, Object.assign({}, this.menuItemDownload, { items: menulistDownloadSubMeus }));
 		}
 
 
 		if (errMenu !== '') {
-			this.messageService.show(EIMMessageType.info, this.translateService.instant('EIM_DOCUMENTS.ERROR_00062',  {value: errMenu}));
+			this.messageService.show(EIMMessageType.info, this.translateService.instant('EIM_DOCUMENTS.ERROR_00062', { value: errMenu }));
 		}
 
 		// ドキュメント一覧　右クリックメニュー
@@ -2750,13 +2783,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	/**
 	 * 全文チェック時イベントハンドラ
 	 */
-	public contentsClick(){
+	public contentsClick() {
 		// 「本文抜粋」表示に切り替える
-		if(this.selectedDisplayTypeId !== EIMConstantService.DISPLAY_TEXTEXCERPT){
+		if (this.selectedDisplayTypeId !== EIMConstantService.DISPLAY_TEXTEXCERPT) {
 			this.selectedDisplayTypeId = EIMConstantService.DISPLAY_TEXTEXCERPT;
 			this.searchSkipFlg = true;
 			this.snippetChangeClick();
-			if(this.contentsListComponentService.listModeList || this.contentsListComponentService.thumbnailModeList){
+			if (this.contentsListComponentService.listModeList || this.contentsListComponentService.thumbnailModeList) {
 				this.contentsList.setData([]);
 			}
 			this.searchSkipFlg = false;
@@ -2791,7 +2824,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		this.documentSessionStorageService.setSearchDisplayType(this.selectedDisplayTypeId);
 
 		// カラムを取得
-		if (this.info.accordionActiveIndex === accordionIndex.SEARCH 
+		if (this.info.accordionActiveIndex === accordionIndex.SEARCH
 			&& this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 			// 本文抜粋選択時
 			if (this.accordionListInfo[accordionIndex.SEARCH].state) {
@@ -2799,13 +2832,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			} else {
 				this.accordionListInfo[accordionIndex.SEARCH].columns = this.createAccordionSearchColumnsForTextExcerpt();
 			}
-			if(this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_LIST){
+			if (this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_LIST) {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForList = oldState;
 			} else {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail = oldState;
 				this.thumbnailOFF();
 			}
-		} else if(this.info.accordionActiveIndex === accordionIndex.SEARCH &&
+		} else if (this.info.accordionActiveIndex === accordionIndex.SEARCH &&
 			this.selectedDisplayTypeId === EIMConstantService.DISPLAY_LIST) {
 			// リスト選択時
 			let commonColumns = this.createAccordionSearchColumnsForList();
@@ -2815,7 +2848,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			} else {
 				this.accordionListInfo[accordionIndex.SEARCH].columns = commonColumns.concat(tableColumns);
 			}
-			if(this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT){
+			if (this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForTextExcerpt = oldState;
 			} else {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail = oldState;
@@ -2824,7 +2857,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		} else {
 			// サムネイル選択時
 			this.accordionListInfo[accordionIndex.SEARCH].columns = this.createAccordionSearchColumnsForThumbnail();
-			if(this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT){
+			if (this.preSelectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForTextExcerpt = oldState;
 			} else {
 				this.accordionListInfo[accordionIndex.SEARCH].stateForList = oldState;
@@ -2848,52 +2881,52 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		// どの表示タイプにもデータが保持されていない場合はデータのセットを行わない
 		if (!(this.contentsListComponentService.textExcerptModeList?.length) &&
 			!(this.contentsListComponentService.listModeList?.length) &&
-			!(this.contentsListComponentService.thumbnailModeList?.length)){
+			!(this.contentsListComponentService.thumbnailModeList?.length)) {
 			return;
 		}
 
 		// 本文抜粋選択時
-		if (this.info.accordionActiveIndex === accordionIndex.SEARCH 
+		if (this.info.accordionActiveIndex === accordionIndex.SEARCH
 			&& this.selectedDisplayTypeId === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 			//「全文を含む」チェック押下時			
-			if(this.searchSkipFlg === true){
+			if (this.searchSkipFlg === true) {
 				return;
-			// 本文抜粋で検索が行われておらずリストまたはサムネイルで検索が行われている場合に再検索
-			} else if(this.contentsListComponentService.textExcerptModeList.length === 0 
-					&& (this.contentsListComponentService.listModeList.length !== 0 
-					|| this.contentsListComponentService.thumbnailModeList.length !== 0)){
+				// 本文抜粋で検索が行われておらずリストまたはサムネイルで検索が行われている場合に再検索
+			} else if (this.contentsListComponentService.textExcerptModeList.length === 0
+				&& (this.contentsListComponentService.listModeList.length !== 0
+					|| this.contentsListComponentService.thumbnailModeList.length !== 0)) {
 				this.accordionSearch.onClickSearchAtSnippetBtn();
-			// それ以外の場合は保持しているデータをセット
+				// それ以外の場合は保持しているデータをセット
 			} else {
-				this.accordionListInfo[accordionIndex.SEARCH].stateForTextExcerpt.data = this.contentsListComponentService.textExcerptModeList; 
+				this.accordionListInfo[accordionIndex.SEARCH].stateForTextExcerpt.data = this.contentsListComponentService.textExcerptModeList;
 				this.contentsList.setState(this.accordionListInfo[accordionIndex.SEARCH].stateForTextExcerpt);
 			}
-		// リスト選択時
-		} else if (this.info.accordionActiveIndex === accordionIndex.SEARCH 
-			&& this.selectedDisplayTypeId === EIMConstantService.DISPLAY_LIST){
+			// リスト選択時
+		} else if (this.info.accordionActiveIndex === accordionIndex.SEARCH
+			&& this.selectedDisplayTypeId === EIMConstantService.DISPLAY_LIST) {
 			// リストで検索が行われておらず本文抜粋またはサムネイルで検索が行われている場合に再検索
-			if(this.contentsListComponentService.listModeList.length === 0 
-				&& (this.contentsListComponentService.textExcerptModeList.length !== 0 
-				|| this.contentsListComponentService.thumbnailModeList.length !== 0)){
+			if (this.contentsListComponentService.listModeList.length === 0
+				&& (this.contentsListComponentService.textExcerptModeList.length !== 0
+					|| this.contentsListComponentService.thumbnailModeList.length !== 0)) {
 				this.accordionSearch.onClickSearchAtSnippetBtn();
-			// それ以外の場合は保持しているデータをセット
+				// それ以外の場合は保持しているデータをセット
 			} else {
-				this.accordionListInfo[accordionIndex.SEARCH].stateForList.data = this.contentsListComponentService.listModeList; 
+				this.accordionListInfo[accordionIndex.SEARCH].stateForList.data = this.contentsListComponentService.listModeList;
 				this.contentsList.setState(this.accordionListInfo[accordionIndex.SEARCH].stateForList);
 			}
 		}
 		// サムネイル選択時
 		else {
 			// サムネイルで検索が行われておらず本文抜粋またはリストで検索が行われている場合に再検索
-			if((this.contentsListComponentService.thumbnailModeList.length === 0 
-				&& (this.contentsListComponentService.textExcerptModeList.length !== 0 
-				|| this.contentsListComponentService.listModeList.length !== 0))){
+			if ((this.contentsListComponentService.thumbnailModeList.length === 0
+				&& (this.contentsListComponentService.textExcerptModeList.length !== 0
+					|| this.contentsListComponentService.listModeList.length !== 0))) {
 				this.contentsList.setData([]);
 				this.accordionSearch.onClickSearchAtSnippetBtn();
-			// それ以外の場合は保持しているデータをセット
+				// それ以外の場合は保持しているデータをセット
 			} else {
-				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail.data 
-				= this.contentsListComponentService.thumbnailModeList;
+				this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail.data
+					= this.contentsListComponentService.thumbnailModeList;
 				this.contentsList.setState(this.accordionListInfo[accordionIndex.SEARCH].stateForThumbnail);
 			}
 		}
@@ -3004,12 +3037,12 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		}
 
 		if (this.info.accordionActiveIndex === accordionIndex.WORKSPACE) {
-			if(this.selectedWorkspaceDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL){
+			if (this.selectedWorkspaceDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL) {
 				this.thumbnailON();
 			}
 		}
 		else if (this.info.accordionActiveIndex === accordionIndex.SEARCH) {
-			if(this.selectedDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL){
+			if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL) {
 				this.thumbnailON();
 			}
 		}
@@ -3019,7 +3052,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (this.documentSessionStorageService.getSearchDisplayType() === EIMConstantService.DISPLAY_TEXTEXCERPT) {
 			// 固定カラムを追加
 			Array.prototype.push.apply(searchColumns, this.createAccordionSearchColumnsForTextExcerpt());
-		} else if(this.documentSessionStorageService.getSearchDisplayType() === EIMConstantService.DISPLAY_LIST) {
+		} else if (this.documentSessionStorageService.getSearchDisplayType() === EIMConstantService.DISPLAY_LIST) {
 			// 固定カラムを追加
 			Array.prototype.push.apply(searchColumns, this.createAccordionSearchColumnsForList());
 			// 選択テーブルのカラムを追加
@@ -3058,7 +3091,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 					this.contentsList.setState(this.accordionListInfo[this.info.accordionActiveIndex].stateForTextExcerpt);
 					isInitColums = true;
 				}
-			} else if(this.selectedDisplayTypeId === EIMConstantService.DISPLAY_LIST) {
+			} else if (this.selectedDisplayTypeId === EIMConstantService.DISPLAY_LIST) {
 				if (this.accordionListInfo[this.info.accordionActiveIndex].stateForList) {
 					this.contentsList.setState(this.accordionListInfo[this.info.accordionActiveIndex].stateForList);
 					isInitColums = true;
@@ -3077,8 +3110,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		} else {
 			this.contentsList.setColumns(this.accordionListInfo[this.info.accordionActiveIndex].columns);
 		}
-		
-		
+
+
 
 		// メニュー初期化の為、nameを設定する
 		for (let i = 0; i < userTableMenuItems.length; i++) {
@@ -3105,7 +3138,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			if (this.menuItemShowBox.label === '') {
 				// メニューラベル初期化
 				this.menuItemShowBox.label = this.info.isDisplayingBox ?
-						this.translateService.instant('EIM_DOCUMENTS.LABEL_03123') : this.translateService.instant('EIM_DOCUMENTS.LABEL_03124');
+					this.translateService.instant('EIM_DOCUMENTS.LABEL_03123') : this.translateService.instant('EIM_DOCUMENTS.LABEL_03124');
 			}
 			newTableMenuItems.push(this.menuItemSeparator);										// セパレータ追加
 			newTableMenuItems.push(this.menuItemShowBox);											// Box表示メニュー追加
@@ -3144,28 +3177,33 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 		// 署名・暗号化がONの場合のみ表示
 		if (this.serverConfigService.signatureAndEncryptionFlag) {
-			columns.push({field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true ,
-				comparator: EIMSignEncryptionRendererComponent.comparator});
+			columns.push({
+				field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true,
+				comparator: EIMSignEncryptionRendererComponent.comparator
+			});
 		}
 
 		// 公開
-		columns.push({field: 'public', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70,
-			cellRendererFramework: EIMPublicFileRendererComponent, valueGetter: this.publicFileRendererComponentService.valueGetter,suppressSorting: true, suppressFilter: true});
+		columns.push({
+			field: 'public', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70,
+			cellRendererFramework: EIMPublicFileRendererComponent, valueGetter: this.publicFileRendererComponentService.valueGetter, suppressSorting: true, suppressFilter: true
+		});
 
 		// 編集
 		if (this.webDAVService.enable()) {
-			columns.push({field: 'edit', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02058'), width: 70, cellRendererFramework: EIMDirectEditingRendererComponent, suppressSorting: true, suppressFilter: true});
+			columns.push({ field: 'edit', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02058'), width: 70, cellRendererFramework: EIMDirectEditingRendererComponent, suppressSorting: true, suppressFilter: true });
 		}
 
 		// 自動採番がONの場合のみ表示
 		if (this.serverConfigService.enableAutomaticNumbering) {
-			columns.push({field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text});
+			columns.push({ field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text });
 		}
 
 		// 名前
-		columns.push({field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 300,
-			cellRendererFramework: EIMObjectNameRendererComponent, cellEditorFramework: EIMTextEditorRendererComponent, 
-			editable: (params) => {return this.isCellEditable === true},
+		columns.push({
+			field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 300,
+			cellRendererFramework: EIMObjectNameRendererComponent, cellEditorFramework: EIMTextEditorRendererComponent,
+			editable: (params) => { return this.isCellEditable === true },
 			headerClass: 'eim-editable-column-header',
 			cellRendererParams: {
 				draggableToBoxArea: true,
@@ -3181,12 +3219,14 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		});
 
 		// 履歴
-		columns.push({field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
+		columns.push({
+			field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
 			cellRendererFramework: EIMHistoryRendererComponent,
 		});
 
 		// ステータス
-		columns.push({field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'),
+		columns.push({
+			field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'),
 			cellRendererFramework: EIMStatusRendererComponent,
 			valueGetter: this.statusRendererComponentService.valueGetter
 		});
@@ -3201,10 +3241,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	private createAccordionSearchColumnsForTextExcerpt(): EIMDataGridColumn[] {
 		let columns: EIMDataGridColumn[] = [];
 
-		columns.push({field: 'column', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02144'), width: 1000, suppressSorting  : true,
+		columns.push({
+			field: 'column', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02144'), width: 1000, suppressSorting: true,
 			cellRendererFramework: EIMAccordionSearchRendererComponent,
 			cellRendererParams: {
-				customAttributeItems:this.accordionSearch.customAttributeItems
+				customAttributeItems: this.accordionSearch.customAttributeItems
 			}
 		});
 
@@ -3214,37 +3255,43 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 * アコーディオン検索グリッドの固定カラムを生成します（リスト）.
 	 * @return グリッドカラムリスト
 	 */
-	 private createAccordionSearchColumnsForList(): EIMDataGridColumn[] {
+	private createAccordionSearchColumnsForList(): EIMDataGridColumn[] {
 
 		let columns: EIMDataGridColumn[] = [];
 
 		// 署名・暗号化がONの場合のみ表示
 		if (this.serverConfigService.signatureAndEncryptionFlag) {
-			columns.push({field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true ,
-				comparator: EIMSignEncryptionRendererComponent.comparator});
+			columns.push({
+				field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true,
+				comparator: EIMSignEncryptionRendererComponent.comparator
+			});
 		}
 
 		// 公開
-		columns.push({field: 'public', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70,
-			cellRendererFramework: EIMPublicFileRendererComponent, valueGetter: this.publicFileRendererComponentService.valueGetter,suppressSorting: true, suppressFilter: true});
+		columns.push({
+			field: 'public', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70,
+			cellRendererFramework: EIMPublicFileRendererComponent, valueGetter: this.publicFileRendererComponentService.valueGetter, suppressSorting: true, suppressFilter: true
+		});
 
 		// 編集
 		if (this.webDAVService.enable()) {
-			columns.push({field: 'edit', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02058'), width: 70, cellRendererFramework: EIMDirectEditingRendererComponent, suppressSorting: true, suppressFilter: true});
+			columns.push({ field: 'edit', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02058'), width: 70, cellRendererFramework: EIMDirectEditingRendererComponent, suppressSorting: true, suppressFilter: true });
 		}
 
 		// ページ
-		columns.push({field: 'page', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02097'), width: 70, suppressSorting: true, suppressFilter: true,
+		columns.push({
+			field: 'page', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02097'), width: 70, suppressSorting: true, suppressFilter: true,
 			cellRendererFramework: EIMPageRendererComponent
 		});
 
 		// 自動採番がONの場合のみ表示
 		if (this.serverConfigService.enableAutomaticNumbering) {
-			columns.push({field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text});
+			columns.push({ field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text });
 		}
 
 		// 名前
-		columns.push({field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 300,
+		columns.push({
+			field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 300,
 			cellRendererFramework: EIMObjectNameRendererComponent, cellEditorFramework: EIMTextEditorRendererComponent, editable: true,
 			headerClass: 'eim-editable-column-header',
 			cellRendererParams: {
@@ -3261,18 +3308,21 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		});
 
 		// 履歴
-		columns.push({field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
+		columns.push({
+			field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
 			cellRendererFramework: EIMHistoryRendererComponent,
 		});
 
 		// ステータス
-		columns.push({field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'),
+		columns.push({
+			field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'),
 			cellRendererFramework: EIMStatusRendererComponent,
 			valueGetter: this.statusRendererComponentService.valueGetter
 		});
 
 		// 場所
-		columns.push({field: 'path', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02038'), width: 270, cellRendererFramework: EIMPlaceRendererComponent,
+		columns.push({
+			field: 'path', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02038'), width: 270, cellRendererFramework: EIMPlaceRendererComponent,
 		});
 
 		return columns;
@@ -3295,46 +3345,57 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 
 		// 署名・暗号化がONの場合のみ表示
 		if (this.serverConfigService.signatureAndEncryptionFlag) {
-			columns.push({field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true ,
-				comparator: EIMSignEncryptionRendererComponent.comparator });
+			columns.push({
+				field: 'signencr', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02141'), width: 75, cellRendererFramework: EIMSignEncryptionRendererComponent, suppressFilter: true,
+				comparator: EIMSignEncryptionRendererComponent.comparator
+			});
 		}
 		// 公開
-		columns.push({field: 'a', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70, cellRendererFramework: EIMPublicFileRendererComponent,
-		valueGetter: this.publicFileRendererComponentService.valueGetter, suppressSorting: true, suppressFilter: true});
+		columns.push({
+			field: 'a', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02036'), width: 70, cellRendererFramework: EIMPublicFileRendererComponent,
+			valueGetter: this.publicFileRendererComponentService.valueGetter, suppressSorting: true, suppressFilter: true
+		});
 
 		// 自動採番がONの場合のみ表示
 		if (this.serverConfigService.enableAutomaticNumbering) {
-			columns.push({field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text});
+			columns.push({ field: 'number', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02098'), width: 120, type: EIMDataGridColumnType.text });
 		}
 
 		// 名前
-		columns.push({field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 270, cellRendererFramework: EIMObjectNameRendererComponent
+		columns.push({
+			field: 'objName', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02000'), width: 270, cellRendererFramework: EIMObjectNameRendererComponent
 		});
 
 		// 履歴
-		columns.push({field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
+		columns.push({
+			field: 'rev', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02037'), width: 70, type: EIMDataGridColumnType.number,
 			cellRendererFramework: EIMHistoryRendererComponent,
 		});
 
 		// 承認依頼者
-		columns.push({field: 'requestUser', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02120'), width: 120, type: EIMDataGridColumnType.text,
+		columns.push({
+			field: 'requestUser', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02120'), width: 120, type: EIMDataGridColumnType.text,
 		});
 
 		// 承認依頼日時
-		columns.push({field: 'requestDate', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02134'), width: 165, type: EIMDataGridColumnType.dateTime, comparator: this.dateService.dateComparator
+		columns.push({
+			field: 'requestDate', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02134'), width: 165, type: EIMDataGridColumnType.dateTime, comparator: this.dateService.dateComparator
 		});
 
 		// ステータス
-		columns.push({field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'), width: 220, cellRendererFramework: EIMStatusRendererComponent,
+		columns.push({
+			field: 'statusTypeName', headerName: this.translateService.instant('EIM.LABEL_02029'), width: 220, cellRendererFramework: EIMStatusRendererComponent,
 			valueGetter: this.statusRendererComponentService.valueGetter
 		});
 
 		// 承認者
-		columns.push({field: 'nextApprover', cellRendererFramework: EIMTooltipRendererComponent, headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02122'), width: 120, type: EIMDataGridColumnType.text,
+		columns.push({
+			field: 'nextApprover', cellRendererFramework: EIMTooltipRendererComponent, headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02122'), width: 120, type: EIMDataGridColumnType.text,
 		});
 
 		// 場所
-		columns.push({field: 'path', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02038'), width: 270, cellRendererFramework: EIMPlaceRendererComponent,
+		columns.push({
+			field: 'path', headerName: this.translateService.instant('EIM_DOCUMENTS.LABEL_02038'), width: 270, cellRendererFramework: EIMPlaceRendererComponent,
 		});
 
 		return columns;
@@ -3353,7 +3414,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			tempPreObjName = coverString + tempPreObjName + '.pdf';
 		}
 
-		this.contentsList.info.gridApi.forEachNode( function (node) {
+		this.contentsList.info.gridApi.forEachNode(function (node) {
 			if (node.data.objId === data.objId) {
 				node.data.objName = tempPreObjName;
 			}
@@ -3443,11 +3504,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		this.thumbnailDirectMenuButtonItems = newthumbnailDirectMenuButtonItems;
 	}
 
-		/**
-	 * 対象のオプションメニューは表示可能かどうかを返却します.
-	 * @param オプションメニュー名称
-	 * @return 表示可能かどうか
-	 */
+	/**
+ * 対象のオプションメニューは表示可能かどうかを返却します.
+ * @param オプションメニュー名称
+ * @return 表示可能かどうか
+ */
 	private isVisibleCheckOption(menuName: string): boolean {
 		// 公開取消の場合
 		if (menuName === 'showPublicCancel') {
@@ -3488,14 +3549,14 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (menuName === 'showPublicFileSecurityUpdater') {
 			return this.serverConfigService.pdfOutputConf;
 		}
-		
+
 		return true;
 	}
 
 	/**
 	 * メインメニューを初期化します
 	 */
-	private initMainMenu(menuItems: EIMMenuItem[], info: EIMDocumentMainComponentInfo, isSelectTag: boolean ): EIMMenuItem[] {
+	private initMainMenu(menuItems: EIMMenuItem[], info: EIMDocumentMainComponentInfo, isSelectTag: boolean): EIMMenuItem[] {
 		// 状態を設定/ 選択アコーディオン：0...ワークスペース、1...検索、2...回付状況確認、3...属性ツリービュー
 		let stateId = info.accordionActiveIndex;
 		if (isSelectTag) {
@@ -3570,8 +3631,8 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		let check = false;
 		let checkParent: (treeNode: any) => void = (parent: any) => {
 			if (typeof parent.objTypeName !== 'undefined') {
-					// objNameがタグの場合
-				if (parent.objTypeName  === EIMDocumentsConstantService.OBJECT_TYPE_TAG) {
+				// objNameがタグの場合
+				if (parent.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_TAG) {
 					check = true;
 				}
 			}
@@ -3658,7 +3719,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	/**
 	 * アコーディオン検索グリッド右クリックメニューのマップを返す.
 	 */
-	 private getAccordionSearchGridContextMenuMap(): Map<string, EIMMenuItem> {
+	private getAccordionSearchGridContextMenuMap(): Map<string, EIMMenuItem> {
 		return new Map([
 			[contextMenuDefineName.PROPERTIES, this.menuItemProperty], // プロパティ
 			[contextMenuDefineName.REVISION_LOG, this.menuItemRevisionHistory], // 改訂履歴
@@ -3774,7 +3835,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				// エラーの場合、改名前に戻す
 				this.revertBeforeRename(event.data);
 			}, () => {
-		});
+			});
 	}
 
 	/**
@@ -3835,7 +3896,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			if (colState && colState.length
 				&& colState.length === columns.length
 				&& colState.every(cst => columns.some(column => column.field === cst.colId))) {
-					this.contentsList.setColumnState(colState);
+				this.contentsList.setColumnState(colState);
 			}
 			if (sortState && sortState.length
 				&& sortState.every(sst => columns.some(column => column.field === sst.colId))) {
@@ -3972,7 +4033,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			// グリッド行のドラッグオーバー処理はonGridRowDragOverで処理される
 			return;
 		}
-		
+
 		if (event.preventDefault) {
 			event.preventDefault();
 		}
@@ -4013,26 +4074,26 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
 			return;
 		}
-		
+
 		// ワークスペース内移動用のデータが存在するかチェック
 		// dragoverイベントではgetDataが使えないため、typesを確認
 		if (!event.dataTransfer?.types || !event.dataTransfer.types.includes('application/x-eim-workspace-drag')) {
 			return;
 		}
-		
+
 		event.preventDefault();
 		event.stopPropagation();
-		
+
 		// まず既存のハイライトをすべてクリア
 		this.clearDropTargetHighlight();
-		
+
 		// ドロップ可能な行をハイライト
 		const rowElement = this.getRowElementFromEvent(event);
 		if (rowElement) {
 			const rowIndex = parseInt(rowElement.getAttribute('row-index') || '-1');
 			if (rowIndex >= 0 && this.contentsList && this.contentsList.info && this.contentsList.info.gridApi) {
 				const rowNode = this.contentsList.info.gridApi.getDisplayedRowAtIndex(rowIndex);
-				
+
 				if (rowNode && this.isDroppableTarget(rowNode.data)) {
 					event.dataTransfer!.dropEffect = 'move';
 					rowElement.classList.add('eim-drag-drop-target');
@@ -4052,17 +4113,17 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
 			return;
 		}
-		
+
 		// ワークスペース内移動用のデータが存在するかチェック
 		if (!event.dataTransfer?.types || !event.dataTransfer.types.includes('application/x-eim-workspace-drag')) {
 			return;
 		}
-		
+
 		// 実際にグリッドから外れた時のみハイライトをクリア
 		// dragleaveイベントは子要素間の移動でも発火するため、relatedTargetをチェック
 		const relatedTarget = event.relatedTarget as HTMLElement;
 		const currentTarget = event.currentTarget as HTMLElement;
-		
+
 		// relatedTargetがnull、またはcurrentTargetの外側にある場合のみクリア
 		if (!relatedTarget || !currentTarget.contains(relatedTarget)) {
 			this.clearDropTargetHighlight();
@@ -4078,45 +4139,45 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
 			return;
 		}
-		
+
 		event.preventDefault();
 		event.stopPropagation();
-		
+
 		// ワークスペース内移動用のデータを取得
 		const jsonData = event.dataTransfer?.getData('application/x-eim-workspace-drag');
 		if (!jsonData) {
 			this.clearDropTargetHighlight();
 			return;
 		}
-		
+
 		try {
 			const dragInfo = JSON.parse(jsonData);
 			if (!dragInfo || !dragInfo.data) {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			// ドロップ位置の行を取得
 			const rowElement = this.getRowElementFromEvent(event);
 			if (!rowElement) {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			const rowIndex = parseInt(rowElement.getAttribute('row-index') || '-1');
 			if (rowIndex < 0 || !this.contentsList || !this.contentsList.info || !this.contentsList.info.gridApi) {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			const rowNode = this.contentsList.info.gridApi.getDisplayedRowAtIndex(rowIndex);
 			if (!rowNode) {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			const dropTargetData = rowNode.data;
-			
+
 			// ドロップ先の検証
 			if (!this.isDroppableTarget(dropTargetData)) {
 				this.messageService.show(
@@ -4126,19 +4187,19 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			// 同じアイテムへのドロップは無視
 			const draggedData = Array.isArray(dragInfo.data) ? dragInfo.data[0] : dragInfo.data;
 			if (draggedData.objId === dropTargetData.objId) {
 				this.clearDropTargetHighlight();
 				return;
 			}
-			
+
 			// ドラッグ&ドロップ処理を実行
 			this.executeDragDrop(dragInfo.data, dropTargetData, dragInfo.dragType || 'workspace-internal');
-			
+
 			this.clearDropTargetHighlight();
-			
+
 		} catch (error) {
 			console.error('Grid Drag&Drop error:', error);
 			this.clearDropTargetHighlight();
@@ -4156,7 +4217,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		// 現在の実装ではワークスペース内移動のみをサポート
 		const treeSelectedData = this.contentsTree.getSelectedData();
 		const originalParent = treeSelectedData && treeSelectedData.length > 0 ? treeSelectedData[0] : null;
-		
+
 		if (!originalParent) {
 			this.messageService.show(
 				EIMMessageType.error,
@@ -4164,11 +4225,11 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			);
 			return;
 		}
-		
+
 		// ドラッグされたアイテムを配列に統一
 		const draggedItems = Array.isArray(draggedData) ? draggedData : [draggedData];
 		const parentData = dropTargetData;
-		
+
 		// cutバリデーションを先に実行
 		const cutValidationResult = this.contentsMainComponentService.validation(
 			'cut',
@@ -4177,16 +4238,16 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			draggedItems,
 			true
 		);
-		
+
 		if (!cutValidationResult) {
 			return;
 		}
-		
+
 		// cut処理を実行（切り取り情報を保存）
 		// 注意: cutメソッドは非同期処理を含むが、同期的にsavePasteSourceObjを実行する
 		// 既存の実装パターンに従う
 		this.contentsMainComponentService.cut(this.info, originalParent, draggedItems);
-		
+
 		// cut実行後、pasteバリデーションを実行
 		// pasteバリデーションはinfo.pasteSourceObjが設定されている必要がある
 		const pasteValidationResult = this.contentsMainComponentService.validation(
@@ -4196,13 +4257,13 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 			draggedItems,
 			true
 		);
-		
+
 		if (!pasteValidationResult) {
 			// バリデーション失敗時は切り取り情報をクリア
 			this.contentsMainComponentService.clearPasteSourceObj(this.info);
 			return;
 		}
-		
+
 		// 貼り付け処理を実行（ドラッグ&ドロップの場合は「移動が完了しました。」を表示）
 		this.contentsMainComponentService.paste(
 			this.info,
@@ -4219,7 +4280,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 */
 	private isDroppableTarget(data: any): boolean {
 		return data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_FOLDER ||
-			   data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE;
+			data.objTypeName === EIMDocumentsConstantService.OBJECT_TYPE_WORKSPACE;
 	}
 
 	/**
@@ -4240,7 +4301,7 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		const highlightedRows = document.querySelectorAll('.eim-drag-drop-target');
 		highlightedRows.forEach(row => row.classList.remove('eim-drag-drop-target'));
 	}
-	
+
 	/**
 	 * preview off
 	 */
@@ -4266,18 +4327,18 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	/**
 	 * preview onChange
 	 */
-	snippetWorkspaceChangeClick(event: any):void {
+	snippetWorkspaceChangeClick(event: any): void {
 		this.documentSessionStorageService.setWorkspaceDisplayType(this.selectedWorkspaceDisplayTypeId);
-		if (this.selectedWorkspaceDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL){
+		if (this.selectedWorkspaceDisplayTypeId === EIMConstantService.DISPLAY_THUMBNAIL) {
 			this.thumbnailON();
-		}else{
+		} else {
 			this.thumbnailOFF();
 		}
 	}
 
 	/**
 	 * select Thumnail
-	 */	
+	 */
 	onSelectThumnail(selectedData): void {
 		this.contentsList.select(selectedData, false);
 		this.contentsMainComponentService.selectedContensHandler(this.contentsList.getSelectedData());
@@ -4289,15 +4350,15 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 	 */
 	public onInitializeThumbnail(event): void {
 		const parentData = this.contentsTree.getSelectedData();
-        for (let i = 0; i < event.menuItems.length; i++) {
-            let menuItem: EIMMenuItem = event.menuItems[i];
-            let result: boolean = this.contentsMainComponentService.validation(menuItem.name, this.info, parentData, [event.data]);
-            if (result) {
-                menuItem.disabled = false;
-            } else {
-                menuItem.disabled = true;
-            }
-        }
+		for (let i = 0; i < event.menuItems.length; i++) {
+			let menuItem: EIMMenuItem = event.menuItems[i];
+			let result: boolean = this.contentsMainComponentService.validation(menuItem.name, this.info, parentData, [event.data]);
+			if (result) {
+				menuItem.disabled = false;
+			} else {
+				menuItem.disabled = true;
+			}
+		}
 	}
 
 	/**
@@ -4335,9 +4396,9 @@ export class EIMDocumentMainComponent implements OnInit, OnDestroy {
 		}
 
 		this.accordionTabClass = 'visibleAccordion_x' + visibleAccordionCount;
-		
+
 	}
-	
+
 	/**
 	 * ドロップされたファイル処理を行う
 	 * @param event イベント
